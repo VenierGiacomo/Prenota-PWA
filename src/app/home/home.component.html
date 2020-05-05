@@ -1,0 +1,126 @@
+<div class="home">
+        <div class="side-menu">
+            <div class="menu-home">Calendario</div>
+            <div class="menu-settings" (click)='getAppoitments()'>Impostazioni</div>
+            <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
+            <!-- <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div> -->
+        </div>
+        <div class="calendar">
+            <div class="date"> 
+                <div class="current-date"> <span>{{week[0]}} - {{week[6]}} </span>  {{month}}</div>
+                <div class="today-date">Oggi</div>
+                <div class="selector-date">
+                    <div  (click)='display="week"'[class.active]='display=="week"'>Settimana</div>
+                    <div (click)='display="month"' [class.active]='display=="month"'>Mese</div>
+                </div>
+            </div>
+            <div class="calendar-table">
+                <div class="table-cont">
+                        <app-monthview *ngIf='display=="month"' ></app-monthview>
+                        <table *ngIf='display==="week"' class="fixed-table">
+                                <thead>
+                                    <tr> 
+                                        <td class="fst-col"><p class="ph">07:00</p></td>
+                                        <th>Lun<br><span>{{week[0]}}</span></th>
+                                        <th>Mar<br><span>{{week[1]}}</span></th>
+                                        <th>Mer<br><span>{{week[2]}}</span></th>
+                                        <th>Gio<br><span>{{week[3]}}</span></th>
+                                        <th>Ven<br><span>{{week[4]}}</span></th>
+                                        <th>Sab<br><span>{{week[5]}}</span></th>
+                                        <th>Dom<br><span>{{week[6]}}</span></th>
+                                    </tr>
+                                </thead>  
+                            </table>
+          
+                       
+                <div  (click)="showCoords($event)"  *ngIf='display==="week"'>
+                    <table class="autoscroll" >
+                        <tbody>
+                        <tr *ngFor="let row of rows,let row_idx = index" class="rows">
+                            <td class="fst-col"><p>{{row}}</p></td>
+                            <td *ngFor="let cell of columns,  let col_idx = index">
+                                <div *ngIf="row_idx > resp && closed > row_idx">
+                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx)" id="{{row_idx}}-{{col_idx}}" ></div>
+                                </div>
+                                 <!-- <div *ngIf="(resp >= row_idx && col == col_idx)||(row_idx >= closed && col == col_idx)">  -->
+                                    <div *ngIf="(resp >= row_idx )||(row_idx >= closed )">
+                                        <div  class="cell-blocked" ></div>
+                                    </div>
+                                </td>
+                        </tr>
+                        
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+            </div> 
+
+
+        </div>
+    </div>
+   
+
+
+<!-- Modal new appointment -->
+<div class='appointment-modal' [style.display]="point.disp" [style.left]="point.left" [style.top]="point.top">
+        <p>Nome:</p>
+        <div class="close-appointment-modal" (click)="closeModal()">
+                <img src="../assets/icons/close.svg"/>
+        </div>
+            <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
+        <p>Servizio:</p>
+            <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" [(ngModel)]="info" ></textarea>
+        <p>Durata</p>
+    <div class="time">
+        <select [(ngModel)]="time">
+                    <option value=1>15 minuti</option>
+                    <option value=2 selected >30 minuti</option>
+                    <option value=3>45 minuti</option>
+                    <option value=4>1 ora</option>
+                    <option value=5>1 ora 15 minuti</option>
+                    <option value=6>1 ora 30 minuti</option>
+                    <option value=7>1 ora 45 minuti</option>
+                    <option value=8>2 ore</option>
+
+        </select>
+    
+        <button class="single-button " (click)='addAppointment()'>Salva</button>
+    </div>
+    </div>
+
+
+<!-- big modal  -->
+<div [style.display]="bgModalDisp" class="big-modal">
+        <div class='appointment-modal appointment-modal-date'>
+                <p>Nome:</p>
+                <div class="close-appointment-modal" (click)='bgModalDisp="none"'>
+                        <img src="../assets/icons/close.svg"/>
+                </div>
+                    <input type="text" placeholder="Mario Rossi">
+                <p>Servizio:</p>
+                    <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" ></textarea>
+                <p>Data:</p>
+            
+                    <mat-form-field>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Seleziona la data"  disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker disabled="false" [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+                            [disableMinute]="disableMinute" [hideTime]="hideTime">
+                        </ngx-mat-datetime-picker>
+                    </mat-form-field>    
+                <p>Durata:</p>
+                             <select [(ngModel)]="time">
+                                         <option value=1>15 minuti</option>
+                                         <option value=2 selected >30 minuti</option>
+                                         <option value=3>45 minuti</option>
+                                         <option value=4>1 ora</option>
+                                         <option value=5>1 ora 15 minuti</option>
+                                         <option value=6>1 ora 30 minuti</option>
+                                         <option value=7>1 ora 45 minuti</option>
+                                         <option value=8>2 ore</option>       
+                             </select>
+                <button class="single-button">Salva</button>
+        </div>   
+</div>

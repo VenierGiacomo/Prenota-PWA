@@ -1,0 +1,108 @@
+
+<div class='cont'>
+    <div class="cell">
+        <div class="task task--primary">
+            <div class="task-duration">8:00-9:45</div>
+            <div class="task-details"> Taglio + colore e shampoo</div>
+            <div class="task-name"> Giacomo</div>
+        </div>
+</div>
+
+    <div class='appointment-modal'>
+        <p>Nome:</p>
+        <div class="close-appointment-modal" (click)="closeModal()">
+                <img src="../assets/icons/close.svg"/>
+        </div>
+            <input type="text" placeholder="Mario Rossi">
+        <p>Servizio:</p>
+            <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" ></textarea>
+        <p>Ora:</p>
+    <div class="time">
+        <select >
+                    <option value="volvo">07:45</option>
+                    <option value="" selected>08:00</option>
+                    <option value="fiat">08:15</option>
+                    <option value="audi">08:30</option>
+                    <option value="audi">08:45</option>
+                    <option value="audi">09:00</option>
+
+        </select> - 
+        <select >
+                <option value="volvo">07:45</option>
+                <option value="saab">08:00</option>
+                <option value="fiat">08:15</option>
+                <option value="audi">08:30</option>
+                <option value="" selected>08:45</option>
+                <option value="audi">09:00</option>
+
+        </select>
+    
+        <button class="single-button ">Salva</button>
+    </div>
+    </div>
+</div>
+
+<div class='cont-1'>
+        <div class='appointment-modal appointment-modal-date'>
+                <p>Nome:</p>
+                <div class="close-appointment-modal" (click)='bgModalDisp="none"'>
+                        <img src="../assets/icons/close.svg"/>
+                </div>
+                    <input type="text" placeholder="Mario Rossi">
+                <p>Servizio:</p>
+                    <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" ></textarea>
+                <p>Data:</p>
+            
+                    <mat-form-field>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Seleziona la data" [min]="minDate" [max]="maxDate" disabled>
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <ngx-mat-datetime-picker #picker disabled="false" [showSpinners]="showSpinners" [showSeconds]="showSeconds"
+                            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
+                            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
+                            [disableMinute]="disableMinute" [hideTime]="hideTime">
+                        </ngx-mat-datetime-picker>
+                    </mat-form-field>    
+                <p>Durata:</p>
+                             <select [(ngModel)]="time">
+                                         <option value=1>15 minuti</option>
+                                         <option value=2 selected >30 minuti</option>
+                                         <option value=3>45 minuti</option>
+                                         <option value=4>1 ora</option>
+                                         <option value=5>1 ora 15 minuti</option>
+                                         <option value=6>1 ora 30 minuti</option>
+                                         <option value=7>1 ora 45 minuti</option>
+                                         <option value=8>2 ore</option>       
+                             </select>
+                <button class="single-button">Salva</button>
+        </div>   
+
+</div>
+
+
+<!-- <div class="new-appointment-modal" >
+        <div class="top-appointment-modal">
+            <div class="title-appointment-modal">
+               {{title_text}}
+            </div>
+            <div class="close-appointment-modal" (click)="closeModal()">
+                    <img src="../assets/icons/close.svg"/>
+            </div>
+        </div>
+        <div class="body-appointment-modal">
+                <div class="name-appointment-modal">
+                    <div>
+                        Nome:
+                    </div>
+                    <input type="text" [placeholder]="placeholderName" (focus)="placeholderName=''" (blur)="placeholderName=' Inserisci nome cliente'" [(ngModel)]="nome">
+                </div>
+                <div class="info-appointment-modal">
+                        <div >
+                            Info:
+                        </div>
+                        <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" [(ngModel)]="info"></textarea>
+                </div>
+                <button class="bg-btn" *ngIf='btn_text!="Modifica"' (click)="addAppointment()">{{btn_text}}</button>
+                <button class="sm-btn" *ngIf='btn_text=="Modifica"'   (click)="addAppointment()">{{btn_text}}</button>
+                <button class="sm-btn delete_btn" *ngIf='btn_text=="Modifica"'   (click)="deleteAppointment()">Elimina</button>
+            </div>
+    </div> -->

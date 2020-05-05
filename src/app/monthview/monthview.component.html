@@ -1,0 +1,30 @@
+
+<div class="m-cont">
+<div class="m-calendar-container">
+    <div class="m-calendar-header">
+        <h1>{{month_displayed}}</h1>
+        <p>{{year}}</p>
+        <div>
+            <div (click)='pastMonth()'class='m-last'><img src="../assets/icons/last.svg"/></div>
+            <div (click)='nextMonth()'class='m-next'><img src="../assets/icons/next.svg"/></div>
+        </div>
+    </div>
+    <div class="m-calendar"><span class="m-day-name">Lun</span><span class="m-day-name">Mar</span><span class="m-day-name">Mer</span><span class="m-day-name">Gio</span><span class="m-day-name">Ven</span><span class="m-day-name">Sab</span><span class="m-day-name">Dom</span>
+        <div *ngFor='let day of last_month_days' class="m-day m-day--disabled"></div>
+        <div *ngFor='let day of current_month_days' class="m-day ">{{day}}</div>
+        <div *ngFor='let day of next_month_days' class="m-day m-day--disabled"></div>
+   
+    </div>
+</div>
+</div>
+<!-- <section class="m-task m-task--warning">Projects</section>
+        <section class="m-task m-task--danger">Design Sprint</section>
+        <section class="m-task m-task--primary">Product Checkup 1<div class="task__detail">
+                <h2>Product Checkup 1</h2>
+                <p>15-17th November</p>
+            </div>
+        </section>
+        <section class="m-task m-task--info">Product Checkup 2</section> -->
+       
+
+        

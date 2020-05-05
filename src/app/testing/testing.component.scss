@@ -1,0 +1,182 @@
+.cont{
+    width: 40vw;
+    display: inline-block;
+    height: 100vh;
+    padding: 5vh 5vw;
+    background: white;
+}
+.cont-1{
+    left:50vw;
+    top:0vh;
+    display: inline-block;
+    width: 40vw;
+    height: 100vh;
+    padding: 5vh 5vw;
+    background: lightblue;
+}
+.task {
+    // left: 5px;
+    resize:both;
+    border-left-width: 3px;
+    padding: 8px 12px;
+    margin: 5px 10px;
+    border-left-style: solid;
+    font-size: 14px;
+    position: absolute;
+   
+
+    &--primary {
+      background: #019aff;
+      border: 0;
+      border-radius: 4px;
+      grid-column: 3 / span 3;
+      grid-row: 4;
+      align-self: end;
+      color: #fff;
+      box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+    }
+    .task-duration{
+        font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .task-name{
+        right: 0vw;
+        text-align: right;
+        color: #b6e2ff;
+        font-size: 11px;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+    .task-details{
+        
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    }
+}
+// .task:hover {
+    
+//     height: 85px; /* This is the height on hover */
+// }
+
+.cell{
+    background: crimson;
+    position: relative;
+    height: 20vh;
+    width: 10vw;
+    resize:both;
+    overflow: auto;
+}
+
+.appointment-modal{
+    height: 334px;
+    width: 200px;
+    padding: 8px 20px;
+    margin: 5px 10px;
+    font-size: 16px;
+    background: #019aff;
+    border: 0;
+    border-radius: 8px;
+    grid-column: 3 / span 3;
+    grid-row: 4;
+    align-self: end;
+    color: #fff;
+    box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+
+     &-date  {
+    height: 420px !important;
+  }
+    input, textarea, p{
+        display: block;
+        border-radius: 5px;
+        border: none;
+        padding: 8px 12px;
+        
+    }
+    input{
+        color: #00468e;
+        margin: 5px 0px;
+        font-size: 14px;
+    }
+    p{
+        left: 0px;
+        display: inline-block;
+        padding: 8px 0px;
+        margin: 0px;
+    }
+    textarea{
+        color: #00468e;
+        margin: 5px 0px;
+        font-size: 14px;
+        resize: none;
+    }
+    .single-button{
+        width: 100%;
+        margin-top: 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border: none;
+        
+        background: #00468e;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        color: white;
+        transition: 600ms;
+    }
+    .single-button:hover{
+        color: #00468e;
+        background: #fff;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.3);
+        
+    }
+    select::-ms-expand {
+        display: none;
+    }
+    select{
+        display: inline-block;
+        color: #00468e;
+        margin: 15px 15px;
+        padding:  5px;
+        font-size: 14px;
+        -webkit-appearance: none;
+        -moz-appearance: none;      
+        appearance: none;
+    }
+    .time{
+        width: 100%;
+        text-align: center;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #00468e;
+        opacity: 0.7; /* Firefox */
+      }
+      
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #00468e;
+        opacity: 0.7;
+      }
+      
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #00468e;
+        opacity: 0.7;
+      }
+      .close-appointment-modal{
+        position: relative;
+        display: inline-block;
+        top:0px;
+        left: 140px;
+        img{
+            height: 15px;
+           
+        }
+
+    }
+    mat-form-field , mat-label, mat-datepicker-toggle, ngx-mat-datetime-picker,mat-datepicker-toggle, mat-datepicker{
+        input{
+            color: white;
+            margin: 5px 0px;
+            font-size: 14px;
+        }
+        color: white;
+        border: none !important;
+    }
+   
+}
