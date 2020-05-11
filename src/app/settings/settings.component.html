@@ -1,0 +1,128 @@
+<body>
+    <div class="toast" [style.display]='toast'>Modifiche salvate correttamente</div>
+    <div class="home">
+        <div class="side-menu">
+            <div class="menu-home" (click)='goHome()'>Calendario</div>
+            <div class="menu-settings">Impostazioni</div>
+            <button (click)="bgModalDisp='block'">Logout</button>
+            <!-- <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div> -->
+        </div>  
+        <div class="settings">
+            <div class="business-type">
+                <h4>Tipo di business:</h4> 
+                <select [(ngModel)]="business">
+                    <option value=0>Seleziona il tuo business </option>
+                    <option value=1>Studio medico</option>
+                    <option value=2 selected >Studio dentistico</option>
+                    <option value=3>Studio Parucchieria</option>
+                    <option value=4>Studio Estetico</option>
+                    <option value=5>Baby sitter</option>
+                    <option value=6>Fisioterapista</option>
+                    <option value=7>Psicologo</option>
+                    <option value=8>Palestra</option>
+                </select>
+                <div class="save" (click)='storeEverything()'>Salva modifiche</div>
+            </div>
+            <div class="opening-hours">
+                <!-- <div class="head-form"> -->
+                        <h4>Oraio di apertura:</h4> 
+                        <!-- <div class="save">Salva </div> -->
+                <!-- </div> -->
+                <div class="days">
+                    <div class="day">
+                        <div class="title">Lunedi:</div>
+                        <div class="time"><div *ngIf='closed_days[0]'>dalle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[0]'><div *ngIf='closed_days[0]'>alle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[1]'><div *ngIf='double_turn[0]'>e dalle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[2]'><div *ngIf='double_turn[0]'>alle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[3]'><span *ngIf='closed_days[0]'> <input type="checkbox" [checked]="double_turn[0]" (change)="double_turn[0] = !double_turn[0]">&nbsp;2 turni</span><span *ngIf='!double_turn[0]'><input type="checkbox" [checked]="!closed_days[0]" (change)="closed_days[0] = !closed_days[0]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Martedi:</div>
+                        <div class="time"><div *ngIf='closed_days[1]'>dalle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[0]'><div *ngIf='closed_days[1]'>alle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[1]'><div *ngIf='double_turn[1]'>e dalle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[2]'><div *ngIf='double_turn[1]'>alle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[3]'><span *ngIf='closed_days[1]'> <input type="checkbox" [checked]="double_turn[1]" (change)="double_turn[1] = !double_turn[1]">&nbsp;2 turni</span><span *ngIf='!double_turn[1]'><input type="checkbox" [checked]="!closed_days[1]" (change)="closed_days[1] = !closed_days[1]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Mercoledi:</div>
+                        <div class="time"><div *ngIf='closed_days[2]'>dalle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[0]'><div *ngIf='closed_days[2]'>alle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[1]'><div *ngIf='double_turn[2]'>e dalle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[2]'><div *ngIf='double_turn[2]'>alle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[3]'><span *ngIf='closed_days[2]'> <input type="checkbox" [checked]="double_turn[2]" (change)="double_turn[2] = !double_turn[2]">&nbsp;2 turni</span><span *ngIf='!double_turn[2]'><input type="checkbox" [checked]="!closed_days[2]" (change)="closed_days[2] = !closed_days[2]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Giovedi:</div>
+                        <div class="time"><div *ngIf='closed_days[3]'>dalle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[0]'><div *ngIf='closed_days[3]'>alle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[1]'><div *ngIf='double_turn[3]'>e dalle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[2]'><div *ngIf='double_turn[3]'>alle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[3]'><span *ngIf='closed_days[3]'> <input type="checkbox" [checked]="double_turn[3]" (change)="double_turn[3] = !double_turn[3]">&nbsp;2 turni</span><span *ngIf='!double_turn[3]'><input type="checkbox" [checked]="!closed_days[3]" (change)="closed_days[3] = !closed_days[3]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Venerdi:</div>
+                        <div class="time"><div *ngIf='closed_days[4]'>dalle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[0]'><div *ngIf='closed_days[4]'>alle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[1]'><div *ngIf='double_turn[4]'>e dalle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[2]'><div *ngIf='double_turn[4]'>alle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[3]'><span *ngIf='closed_days[4]'> <input type="checkbox" [checked]="double_turn[4]" (change)="double_turn[4] = !double_turn[4]">&nbsp;2 turni</span><span *ngIf='!double_turn[4]'><input type="checkbox" [checked]="!closed_days[4]" (change)="closed_days[4] = !closed_days[4]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Sabato:</div>
+                        <div class="time"><div *ngIf='closed_days[5]'>dalle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[0]'><div *ngIf='closed_days[5]'>alle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[1]'><div *ngIf='double_turn[5]'>e dalle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[2]'><div *ngIf='double_turn[5]'>alle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[3]'><span *ngIf='closed_days[5]'> <input type="checkbox" [checked]="double_turn[5]" (change)="double_turn[5] = !double_turn[5]">&nbsp;2 turni</span><span *ngIf='!double_turn[5]'><input type="checkbox" [checked]="!closed_days[5]" (change)="closed_days[5] = !closed_days[5]">&nbsp;chiuso</span></div>
+                    </div>
+                    <div class="day">
+                        <div class="title">Domenica:</div>
+                        <div class="time"><div *ngIf='closed_days[6]'>dalle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[0]'><div *ngIf='closed_days[6]'>alle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[1]'><div *ngIf='double_turn[6]'>e dalle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[2]'><div *ngIf='double_turn[6]'>alle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[3]'><span *ngIf='closed_days[6]'> <input type="checkbox" [checked]="double_turn[6]" (change)="double_turn[6] = !double_turn[6]">&nbsp;2 turni</span><span *ngIf='!double_turn[6]'><input type="checkbox" [checked]="!closed_days[6]" (change)="closed_days[6] = !closed_days[6]">&nbsp;chiuso</span></div>
+                    </div>           
+                </div>
+            </div>
+            <div class="services">
+                <h4>I tuoi servizi:</h4> 
+                <div class="service-cont">
+                    <div class=" service add-service" (click)=' displayCatalog()'>I tuoi <br> servizi</div>
+                    <div class=" service add-service">I tuoi <br> dipendenti</div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="catalog" [style.display]='catalog'>
+        <div class="close-catalog" (click)='catalog="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+            <div class="cont-table">
+                <table class="table-catalog">
+                    <thead>
+                        <tr> 
+                            <th class="corner1">Nome Servizio</th>
+                            <th>Durata</th>
+                            <th>Sesso</th>
+                            <th>Prezzo</th>
+                            <th class="corner2">Elimina</th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        <tr *ngFor='let service of catalog_list'> 
+                            <td>{{service.name}}</td>
+                            <td>{{durations[service.duration]}}</td>
+                            <td>{{sexs[service.sex]}}</td>
+                            <td>{{service.price}}€</td>
+                            <td> <button class="delete">Elimina</button></td>
+                        </tr>
+                       
+                    </tbody>
+                </table>     
+        </div>
+        <div class="cont-insert">
+                <table class="insert-table">
+                    <tbody>
+                        <tr> 
+                                <td><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name"></td>
+                                <td>
+                                    <select [(ngModel)]="duration">
+                                        <option value=1>15 min</option>
+                                        <option value=2>30 min</option>
+                                        <option value=3>45 min</option>
+                                        <option value=4>1 ora</option>
+                                        <option value=5>1 ora 15 min</option>
+                                        <option value=6>1 ora 30 min</option>
+                                        <option value=7>1 ora 45 min</option>
+                                        <option value=8>2 ore</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select [(ngModel)]="sex">
+                                        <option value=1>Donna</option>
+                                        <option value=2>Uomo</option>
+                                        <option value=3>Unisex</option>
+                                    </select>
+                                </td>
+                                <td><input class='input-price'type="numner" placeholder="prezzo" [(ngModel)]="price">€</td>
+                                <td><button  class="add-catalog" (click)='storeCatalogService()'>Aggiugni</button></td>
+                            </tr>
+                        </tbody>
+                </table>
+        </div>
+    </div>
+</body>

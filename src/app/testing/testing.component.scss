@@ -180,3 +180,187 @@
     }
    
 }
+
+.catalog{
+    position: absolute;
+    display: block;
+    top: 0 ;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    background: rgba($color: rgb(1, 28, 83), $alpha: 0.8);
+    
+}
+.cont-table{
+    margin: 20vh 15vw;
+    display: block;
+    height: 60vh;
+    width: 70vw;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: #fff;
+    overflow: auto;
+}
+
+.table-catalog{
+    border-collapse: collapse;
+    color: #0E5FFE;
+    overflow: auto;
+    border-radius: 10px;
+    width: 100%;
+    thead{
+        color: white;
+        border-radius: 10px;
+        background: #0E5FFE;
+        th{
+            background: #0E5FFE;
+           
+        }
+    }
+    td:nth-child(1), th:nth-child(1){
+        width: 20vw;
+    }
+    td:nth-child(2),  th:nth-child(2){
+        width: 12vw;
+    }
+    td:nth-child(3),  th:nth-child(3){
+        width: 8vw;
+    }
+    td:nth-child(4),  th:nth-child(4){
+        width: 8vw;
+    }
+    tr{
+        height: 40px;
+        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+    }
+    td, th{
+        text-align: center;
+        font-size: 16px;
+        border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
+    }
+    button{
+        padding: 5px;
+        border-radius: 5px;
+        margin: 0px 10px;
+        border: none;
+        font-size: 16px;
+    }
+    .modify{
+        background: #fdb44d;
+        justify-content: center;
+        color: white;
+        box-shadow: 0 10px 14px rgba(#fdb44d, 0.4);
+       
+    }
+    .delete{
+        background:#fa607e;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 10px 14px rgba(#fa607e, 0.4);
+    }
+    .corner1{
+        border-top-left-radius: 10px;
+    }
+    .corner2{
+        border-top-right-radius: 10px;
+    }
+}
+.cont-insert{
+    position: absolute;
+    top: 80vh;
+    width: 70vw;
+    left: 15vw;
+    text-align: center;
+}
+.insert-table{
+    width: 100%;
+    border-collapse: collapse;
+    color: #0E5FFE;
+    width: 100%;
+    text-align: center;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    z-index: 10;
+    background: #ffffff;
+    tr{
+        height: 40px;
+        border-top: 2px solid  #0E5FFE;
+    }
+    td{
+        text-align: center;
+        font-size: 16px;
+        border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
+    }
+    td:nth-child(1){
+        width: 20vw;
+    }
+    td:nth-child(2){
+        width: 12vw;
+    }
+    td:nth-child(3){
+        width: 8vw;
+    }
+    td:nth-child(4){
+        width: 8vw;
+    }
+    button{
+        padding: 5px;
+        border-radius: 5px;
+        margin: 0px 10px;
+        border: none;
+        font-size: 16px;
+    }
+    .add-catalog{
+        background: #0E5FFE;
+        justify-content: center;
+        color: #fff;
+        box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+       
+    }
+    .input-name{
+        border: none;
+        font-size: 16px;
+        color: #0E5FFE;
+        text-align: center;
+        width:15vw;
+
+    }
+    .input-price{
+        display: inline-block;
+        border: none;
+        text-align: right;
+        font-size: 16px;
+        color: #0E5FFE;
+        width:5vw;
+
+    }
+    select::-ms-expand {
+        display: none;
+    }
+    select{
+        text-align: center;
+        border: none;
+        color: #0E5FFE;
+        background: white;
+        font-size: 16px;
+        // -webkit-appearance: none;
+        // -moz-appearance: none;      
+        // appearance: none;
+    }
+    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+        color: #0E5FFE;
+        opacity: 0.7; /* Firefox */
+      }
+      
+      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #0E5FFE;
+        opacity: 0.7;
+      }
+      
+      ::-ms-input-placeholder { /* Microsoft Edge */
+        color: #0E5FFE;
+        opacity: 0.7;
+      }
+
+}

@@ -27,46 +27,43 @@
 </head>
 
 <body>
-    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+    <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Benvenuto</h2>
-                    <form method="POST">
+                    <h2 class="title">Benvenuto! Crea un account per iniziare</h2>
+                    <form >
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Nome</label>
-                                    <input class="input--style-4" type="text" name="first_name" placeholder="Mario">
+                                    <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Cognome</label>
-                                    <input class="input--style-4" type="text" name="last_name" placeholder="Rossi">
+                                    <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Data di nascita</label>
-                                    <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text"  plname="birthday" placeholder="gg/mm/aaaa">
-                                        <!-- <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i> -->
+                                <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Username</label>
+                                            <input class="input--style-4" [(ngModel)]="username"type="text" name="username" placeholder="MarioRossi64">
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
                             <div class="col-2">
-                                <div class="input-group">
+                                <div class="input-group" >
                                     <label class="label">Sesso</label>
                                     <div class="p-t-10">
                                         <label class="radio-container m-r-45">Uomo
-                                            <input type="radio" checked="checked" name="gender">
+                                            <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">Donna
-                                            <input type="radio" name="gender">
+                                            <input type="radio" [(ngModel)]="sex" value="w" name="gender">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -77,21 +74,31 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email" placeholder="mario.rossi@email.com">
+                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Numero di telefono</label>
-                                    <input class="input--style-4" type="text" name="phone" placeholder="3312233645">
+                                    <div class="input-group">
+                                        <label class="label">Numero di telefono</label>
+                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                    </div>
                                 </div>
-                            </div>
                         </div>
+                        <div class="row row-space">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Password</label>
+                                        <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                    </div>
+                                </div>
+                                
+                            </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Registrati</button>
                         </div>
                     </form>
                 </div>
+                <div class="bottom-login">Hai gia un' account? <a (click)='goLogin()'>Login</a></div>
             </div>
         </div>
     </div>

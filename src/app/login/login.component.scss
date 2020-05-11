@@ -1,0 +1,21 @@
+.bottom-login{
+    position: relative;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    a{
+        color: #0E5FFE;
+    }
+    a:hover{
+        color: rgb(0, 162, 255);
+    }
+}
+body{
+    background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
+    background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
+    background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
+    background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
+}
+.wrapper{
+height: 100vh;
+}

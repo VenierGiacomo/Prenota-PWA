@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 export class UserCache{
   constructor(
               public id: number,
@@ -19,102 +18,93 @@ export class ApiService {
 
 httpheader = new HttpHeaders({'Content-type':'application/json'}) //'Access-Control-Allow-Origin':'*'
 
+mailApi = 'https://mailthis.to/giacomo'
 constructor(private http: HttpClient) { }
+//Should be in store but import problems
 
-login(username, password):Observable<any>{
+newheader(){
+  var authheader = new HttpHeaders({'Content-type':'application/json','Authorization':'JWT '+ this.getToken() })
+ return authheader
+}
+storeToken(token){
+  var data={
+    "token": token,
+    "last_resfresh":  +new Date()
+  }
+  localStorage.setItem('token', JSON.stringify(data))
+}
+getToken(){
+  var storedtoken = JSON.parse(localStorage.getItem('token'));
+  var now = +new Date()
+  if ((now - storedtoken.last_resfresh)> 7200000){  // 7.200.000 it's 2 hours
+      this.refreshToken(storedtoken.token).subscribe(
+        data=>{
+          this.storeToken(data.token)
+        },
+        err => {
+          console.log(err.error,'err')
+        }
+      )
+  }
+  return storedtoken.token 
+}
+
+refreshToken(token):Observable<any>{
   var data ={
-    "username": username,
+    'token': token
+  }
+  return this.http.post(BASE_URL+'auth/refresh/', data,{headers: this.httpheader })
+}
+
+login(email, password):Observable<any>{
+  var data ={
+    "email": email,
     "password": password,
   }
   return this.http.post(BASE_URL+'auth/', data,{headers: this.httpheader })
+}
+register(first_name, last_name, username, email, sex,  phone, password):Observable<any>{
+  var data ={
+    "first_name": first_name,
+    "last_name": last_name,
+    "email": email,
+    "sex": sex,
+    "phone": phone,
+    "username": username,
+    "password": password,
+  }
+  return this.http.post(BASE_URL+'auth/register/', data,{headers: this.httpheader })
 }
 
 openHours(): Observable<any>{
         return this.http.get(BASE_URL+'closedhours/',{headers: this.httpheader})
 }
 
-bookApp(data):Observable<any>{
-    return this.http.post(BASE_URL+'bookings/', data,{headers: this.httpheader })
+bookAppointment(start, end, day, month, year,name, details):Observable<any>{
+  var data = {'start': start , 'end': end, 'day': day, 'month':month, 'year' : year,  'client_name' :name, 'details': details}
+  console.log(data)
+    return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
+getAppointments():Observable<any>{
+  return this.http.get(BASE_URL+'bookings/',{headers: this.newheader()})
+}
 
-//   users:Array<UserCache> = [];
-  
-//   constructor(private storage: Storage) { }
+createStore(store_name, address, city, zip_code, payment_method):Observable<any>{
+  var new_store ={
+    'store_name': store_name,
+    'address': address,
+    'city': city,
+    'zip_code': zip_code,
+    'payment_method': payment_method,
+  }
+  var header = new HttpHeaders({'Content-type':'application/json','Authorization':'JWT '+ this.getToken() })
+  return this.http.post(BASE_URL+'store/', new_store,{headers: this.newheader()})
+}
 
-//   addUserChache(user: UserCache): Promise<any>{
-//     return this.storage.get(USERS_KEY).then((users =>{
-//       if (!this.users){
-//         this.users.push(user)
-//         return this.storage.set(USERS_KEY,[this.users]);
-//       }
-//       else{
-//         return this.storage.set(USERS_KEY,[user]);
-//       }
-//     }))
-//   }
-
-// setUser(user:DataUser){
-//   this.storage.set(USERS_DATA,user);
-// }
-// getUser(){
-//   var user = this.storage.get(USERS_DATA);
-//   return user
-// }
-// getUserChache(): Promise<UserCache> {
-//   return this.storage.get(USERS_KEY);
-// }
-// setBonus(bonus:Bonus){
-//   this.storage.set(Bonus_DATA,bonus);
-// }
-// getBonus(){
-//   var user = this.storage.get(Bonus_DATA);
-//   return user
-
-// }
-// setcorona(corona:Bonus){
-//   this.storage.set('corona',corona);
-// }
-// corona(){
-//   var user = this.storage.get('corona');
-//   return user
-
-// }
-// deleteBonus(){
-//   this.storage.remove(Bonus_DATA)
-// }
-
-
-//   updateUserChache(user: UserCache): Promise<any>{
-//     return this.storage.get(USERS_KEY).then((users: UserCache[])=> {
-//       if(!users || users.length === 0){
-//         return null
-//       }
-//       let newUserChaches: UserCache[] = []
-//       for (let i of users){
-//         if (i.id === user.id){
-//           newUserChaches.push(user)
-//         } else {
-//           newUserChaches.push(i)
-//         }
-//       }
-//       return this.storage.set(USERS_KEY, newUserChaches);
-//     });
-//   }
-
-//   deleteUserChache(id: number): Promise<UserCache> {
-//     return this.storage.get(USERS_KEY).then((users: UserCache[])=> {
-//       if(!users || users.length === 0){
-//         return null
-//       }
-//     let toKeep: UserCache[] = []
-//     for(let i of users){
-//       if (i.id !== id){
-//         toKeep.push(i)
-//       }
-//     }
-//     return this.storage.set(USERS_KEY, toKeep);
-// });
-// }
+sendEmail(input: any) {
+  console.log('called')
+  return this.http.post(this.mailApi, input, { responseType: 'text' })
+}
 
 }

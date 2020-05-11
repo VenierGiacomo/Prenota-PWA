@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Au Register Forms by Colorlib</title>
+
+    <!-- Icons font CSS-->
+    <link href="../assets/template/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../assets/template/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="../assets/template/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../assets/template/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="../assets/template/css/main.css" rel="stylesheet" media="all">
+</head>
+
+<body>
+    <div [className]="payment=='card' ? 'page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins' : 'page-wrappe100 bg-gra-02 p-t-70 p-b-30 font-poppins'" >
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Ultimo passo!</h2>
+                    <form >
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Nome dell'attività</label>
+                                    <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="Studio Rossi">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Indirizzo</label>
+                                    <input class="input--style-4" [(ngModel)]="address" type="text" name="ship-address" placeholder="Via Garibaldi 12" autocomplete="shipping street-address">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                                <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Città</label>
+                                            <input class="input--style-4" [(ngModel)]="city"type="text" name="ship-city" required id="frmCityS" placeholder="Trieste" autocomplete="shipping locality">
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+                                            <div class="input-group">
+                                                <label class="label">Codice postale</label>
+                                                <input class="input--style-4"[(ngModel)]="zip_code" name="ship-zip" required id="frmZipS" placeholder="34120" autocomplete="shipping postal-code">
+                                            </div>
+                                        </div>
+                            
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-4">
+                                    <div class="input-group" >
+                                        <label class="label">Metodo di pagamento</label>
+                                        <div class="p-t-10">
+                                            <label class="radio-container m-r-45">Carta di credito
+                                                <input type="radio" [(ngModel)]="payment" value="card"checked="checked" name="gender">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="radio-container m-r-45">Bonifico
+                                                <input type="radio" [(ngModel)]="payment" value="iban" name="gender">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                            <label class="radio-container">Contanti
+                                                    <input type="radio" [(ngModel)]="payment" value="cash" name="gender">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                        </div>
+                                    </div>
+                                </div>
+                           
+                        </div>
+                        <div class="row row-space" *ngIf="payment=='card'">
+                                <div class="col-2">
+                                    <div class="input-group">
+                                        <label class="label">Numero di carta</label>
+                                        <input class="input--style-4 credit-card" [(ngModel)]="password" type="text" name="cardnumber" id="frmCCNum" placeholder="4242 4242 4242 4242" autocomplete="cc-number">
+                                    </div>
+                                </div>
+                                <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">Data di scadenza</label>
+                                            <input class="input--style-4" [(ngModel)]="password" type="text" name="cc-exp" id="frmCCExp"  placeholder="MM/YY" autocomplete="cc-exp">
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            <div class="row row-space"*ngIf="payment=='card'">
+                                    <div class="col-2">
+                                        <div class="input-group">
+                                            <label class="label">CVV</label>
+                                            <input class="input--style-4" [(ngModel)]="password" type="text" name="cvc" id="frmCCCVC"  placeholder="051" required autocomplete="cc-csc">
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Registrati</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery JS-->
+    <script src="../assets/template/vendor/jquery/jquery.min.js"></script>
+    
+    <script src="../assets/template/vendor/select2/select2.min.js"></script>
+    <script src="../assets/template/vendor/datepicker/moment.min.js"></script>
+    <script src="../assets/template/vendor/datepicker/daterangepicker.js"></script>
+
+    
+    <script src="../assets/template/js/global.js"></script>
+
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+
+</html>
+<!-- end document-->

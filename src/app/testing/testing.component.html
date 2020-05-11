@@ -1,4 +1,4 @@
-
+<!-- 
 <div class='cont'>
     <div class="cell">
         <div class="task task--primary">
@@ -76,7 +76,7 @@
                 <button class="single-button">Salva</button>
         </div>   
 
-</div>
+</div> -->
 
 
 <!-- <div class="new-appointment-modal" >
@@ -106,3 +106,149 @@
                 <button class="sm-btn delete_btn" *ngIf='btn_text=="Modifica"'   (click)="deleteAppointment()">Elimina</button>
             </div>
     </div> -->
+
+    <div class="catalog">
+        <div class="cont-table">
+            <table class="table-catalog">
+                <thead>
+                    <tr> 
+                        <th class="corner1">Nome Servizio</th>
+                        <th>Durata</th>
+                        <th>Prezzo</th>
+                        <th>Sesso</th>
+                        <th class="corner2">Modifica</th>
+                    </tr>
+                </thead>  
+                <tbody>
+                    <tr> 
+                        <td>Taglio + shampoo</td>
+                        <td>30 min</td>
+                        <td>Uomo</td>
+                        <td>21€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Barba</td>
+                        <td>15 min</td>
+                        <td>Uomo</td>
+                        <td>15€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Colore</td>
+                        <td>45 min</td>
+                        <td>Donna</td>
+                        <td>42€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Messa in piega</td>
+                        <td> 1 ora</td>
+                        <td>Donna</td>
+                        <td>70€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Taglio + shampoo</td>
+                        <td>30 min</td>
+                        <td>Uomo</td>
+                        <td>21€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Barba</td>
+                        <td>15 min</td>
+                        <td>Uomo</td>
+                        <td>15€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Colore</td>
+                        <td>45 min</td>
+                        <td>Donna</td>
+                        <td>42€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Messa in piega</td>
+                        <td> 1 ora</td>
+                        <td>Donna</td>
+                        <td>70€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Taglio + shampoo</td>
+                        <td>30 min</td>
+                        <td>Uomo</td>
+                        <td>21€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Barba</td>
+                        <td>15 min</td>
+                        <td>Uomo</td>
+                        <td>15€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Colore</td>
+                        <td>45 min</td>
+                        <td>Donna</td>
+                        <td>42€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Messa in piega</td>
+                        <td> 1 ora</td>
+                        <td>Donna</td>
+                        <td>70€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Taglio + shampoo</td>
+                        <td>30 min</td>
+                        <td>Uomo</td>
+                        <td>21€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                    <tr> 
+                        <td>Barba</td>
+                        <td>15 min</td>
+                        <td>Uomo</td>
+                        <td>15€</td>
+                        <td><button  class="modify">Modifica</button> <button class="delete">Elimina</button></td>
+                    </tr>
+                </tbody>
+            </table>     
+    </div>
+    <div class="cont-insert">
+            <table class="insert-table">
+                <tbody>
+                    <tr> 
+                            <td><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="nome"></td>
+                            <td>
+                                <select [(ngModel)]="time">
+                                    <option value=1>15 min</option>
+                                    <option value=2>30 min</option>
+                                    <option value=3>45 min</option>
+                                    <option value=4>1 ora</option>
+                                    <option value=5>1 ora 15 min</option>
+                                    <option value=6>1 ora 30 min</option>
+                                    <option value=7>1 ora 45 min</option>
+                                    <option value=8>2 ore</option>
+                                </select>
+                            </td>
+                            <td>
+                                <select [(ngModel)]="sex">
+                                    <option value=1>Donna</option>
+                                    <option value=2>Uomo</option>
+                                    <option value=3>Unisex</option>
+                                </select>
+                            </td>
+                            <td><input class='input-price'type="numner" placeholder="prezzo" [(ngModel)]="price">€</td>
+                            <td><button  class="add-catalog">Aggiugni</button></td>
+                        </tr>
+                    </tbody>
+            </table>
+    </div>
+</div>

@@ -1,13 +1,14 @@
+<body>
 <div class="home">
         <div class="side-menu">
             <div class="menu-home">Calendario</div>
-            <div class="menu-settings" (click)='getAppoitments()'>Impostazioni</div>
+            <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
             <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
             <!-- <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div> -->
         </div>
         <div class="calendar">
             <div class="date"> 
-                <div class="current-date"> <span>{{week[0]}} - {{week[6]}} </span>  {{month}}</div>
+                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> {{month}} <div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div>
                 <div class="today-date">Oggi</div>
                 <div class="selector-date">
                     <div  (click)='display="week"'[class.active]='display=="week"'>Settimana</div>
@@ -16,6 +17,7 @@
             </div>
             <div class="calendar-table">
                 <div class="table-cont">
+                    <div class="tabs">  <div class="tab " *ngFor='let employee of employeestab' [class.active]='employee.active' (click)="activetab(employee)"> {{employee.name}}</div> </div>
                         <app-monthview *ngIf='display=="month"' ></app-monthview>
                         <table *ngIf='display==="week"' class="fixed-table">
                                 <thead>
@@ -39,13 +41,13 @@
                         <tr *ngFor="let row of rows,let row_idx = index" class="rows">
                             <td class="fst-col"><p>{{row}}</p></td>
                             <td *ngFor="let cell of columns,  let col_idx = index">
-                                <div *ngIf="row_idx > resp && closed > row_idx">
+                                <div [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
                                     <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx)" id="{{row_idx}}-{{col_idx}}" ></div>
                                 </div>
                                  <!-- <div *ngIf="(resp >= row_idx && col == col_idx)||(row_idx >= closed && col == col_idx)">  -->
-                                    <div *ngIf="(resp >= row_idx )||(row_idx >= closed )">
+                                    <!-- <div *ngIf="openlist[col_idx][0]>= row_idx   ) && ( row_idx>= openlist[col_idx][1] )">
                                         <div  class="cell-blocked" ></div>
-                                    </div>
+                                    </div> -->
                                 </td>
                         </tr>
                         
@@ -124,3 +126,4 @@
                 <button class="single-button">Salva</button>
         </div>   
 </div>
+</body>

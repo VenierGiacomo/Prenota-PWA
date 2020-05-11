@@ -14,6 +14,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RegisterComponent } from './register/register.component';
 import { MonthviewComponent } from './monthview/monthview.component';
 import { TestingComponent } from './testing/testing.component';
+import { StoreSetupComponent } from './store-setup/store-setup.component';
+import { LandingComponent } from './landing/landing.component';
+import { LoginComponent } from './login/login.component';
+import { SettingsComponent } from './settings/settings.component';
+import { CatalogComponent } from './catalog/catalog.component';
 
 
 @NgModule({
@@ -23,6 +28,11 @@ import { TestingComponent } from './testing/testing.component';
     RegisterComponent,
     MonthviewComponent,
     TestingComponent,
+    StoreSetupComponent,
+    LandingComponent,
+    LoginComponent,
+    SettingsComponent,
+    CatalogComponent,
     
   ],
   imports: [
