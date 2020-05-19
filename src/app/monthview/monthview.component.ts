@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-monthview',
@@ -15,11 +16,17 @@ export class MonthviewComponent implements OnInit {
   last_month_days = Array(this.first_day-1).fill('*')
   current_month_days = Array(this.months_days[this.month]).fill(0).map((x,i)=>i+1);
   next_month_days = ((this.last_month_days.length+this.current_month_days.length)%7==0) ? [] : Array(7-((this.last_month_days.length+this.current_month_days.length)%7))
-
-  constructor() { }
+ list_appointments=[]
+  constructor(private api: ApiService) { }
 
   ngOnInit() {
-    
+    this.api.getMonthAppointments(this.month).subscribe(
+      data=>{
+        console.log(data) 
+      },
+      err=>{
+        console.log(err)
+      })
 
   }
 

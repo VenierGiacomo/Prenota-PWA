@@ -71,7 +71,7 @@ body {
   text-align: right;
   padding: 0.5vh 0.5vw;
   letter-spacing: 1px;
-  font-size: 12px;
+  font-size: 13px;
   box-sizing: border-box;
   color: #0E5FFE;
   position: relative;
@@ -265,4 +265,34 @@ body {
   position: relative;
   margin-right: 30vw;
   color: rgba(#0E5FFE, .7);
+}
+
+.month-app{
+  position: absolute;
+  bottom: 5px;
+  text-overflow: ellipsis;
+  display: grid;
+  grid-template-columns: 1fr 30fr;
+  span{
+    left: 0;
+    bottom: 0px;
+    margin: 0 !important;
+    display: inline-block;
+    background: #0E5FFE;
+    display: block;
+    height: 8px;
+    width: 8px;
+    border-radius: 50%;
+    align-content: end;
+  }
+  div{
+    margin: 0;
+    margin-bottom: 3px;
+    bottom: 5px;
+    padding-left: 5px;
+    width: max-content;
+    align-content: start !important;
+    font-size: 11px;
+  }
+
 }

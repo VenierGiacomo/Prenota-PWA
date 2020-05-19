@@ -75,19 +75,49 @@ register(first_name, last_name, username, email, sex,  phone, password):Observab
   }
   return this.http.post(BASE_URL+'auth/register/', data,{headers: this.httpheader })
 }
-
-openHours(): Observable<any>{
+registeremployee(first_name, last_name, username, email, sex,  phone, password):Observable<any>{
+  var data ={
+    "first_name": first_name,
+    "last_name": last_name,
+    "email": email,
+    "sex": sex,
+    "phone": phone,
+    "username": username,
+    "password": password,
+  }
+  return this.http.post(BASE_URL+'auth/register/employee/', data,{headers: this.newheader() })
+}
+getEmployees(): Observable<any>{
+  return this.http.get(BASE_URL+'employees/',{headers: this.newheader()})
+}
+getopenHours(): Observable<any>{
         return this.http.get(BASE_URL+'closedhours/',{headers: this.httpheader})
 }
+setopenHours(data): Observable<any>{
+  return this.http.post(BASE_URL+'closedhours/', data, {headers: this.newheader()})
+}
 
-bookAppointment(start, end, day, month, year,name, details):Observable<any>{
-  var data = {'start': start , 'end': end, 'day': day, 'month':month, 'year' : year,  'client_name' :name, 'details': details}
-  console.log(data)
+bookAppointment(start, end, day, month, year,name, details, employee):Observable<any>{
+  var week = this.getWeekNumber(new Date(year, month, day))
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
-getAppointments():Observable<any>{
-  return this.http.get(BASE_URL+'bookings/',{headers: this.newheader()})
+getAppointments(week):Observable<any>{
+  return this.http.get(BASE_URL+'bookings/week/'+week,{headers: this.newheader()})
+}
+getMonthAppointments(month):Observable<any>{
+  return this.http.get(BASE_URL+'bookings/month/'+month,{headers: this.newheader()})
+}
+
+updateAppointment(id, start, end, day, month, year,name, details, employee):Observable<any>{
+  var week = this.getWeekNumber(new Date(year, month, day))
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details}
+  return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
+}
+
+deleteAppointment(id):Observable<any>{
+  return this.http.delete(BASE_URL+'bookings/'+id+'/',  {headers: this.newheader()})
 }
 
 createStore(store_name, address, city, zip_code, payment_method):Observable<any>{
@@ -107,4 +137,17 @@ sendEmail(input: any) {
   return this.http.post(this.mailApi, input, { responseType: 'text' })
 }
 
+getWeekNumber(d) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay()||7));
+  // Get first day of year
+  var yearStart = +(new Date(Date.UTC(d.getUTCFullYear(),0,1)));
+  // Calculate full weeks to nearest Thursday
+  var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
+  // Return array of year and week number
+  return  weekNo
+}
 }

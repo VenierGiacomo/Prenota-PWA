@@ -18,8 +18,8 @@ import { StoreSetupComponent } from './store-setup/store-setup.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
-import { CatalogComponent } from './catalog/catalog.component';
-
+import { EmployeesComponent } from './employees/employees.component';
+import * as Hammer from 'hammerjs'
 
 @NgModule({
   declarations: [
@@ -32,7 +32,7 @@ import { CatalogComponent } from './catalog/catalog.component';
     LandingComponent,
     LoginComponent,
     SettingsComponent,
-    CatalogComponent,
+    EmployeesComponent,
     
   ],
   imports: [

@@ -1,366 +1,63 @@
-.cont{
-    width: 40vw;
-    display: inline-block;
-    height: 100vh;
-    padding: 5vh 5vw;
-    background: white;
-}
-.cont-1{
-    left:50vw;
-    top:0vh;
-    display: inline-block;
-    width: 40vw;
-    height: 100vh;
-    padding: 5vh 5vw;
-    background: lightblue;
-}
-.task {
-    // left: 5px;
-    resize:both;
-    border-left-width: 3px;
-    padding: 8px 12px;
-    margin: 5px 10px;
-    border-left-style: solid;
-    font-size: 14px;
-    position: absolute;
-   
-
-    &--primary {
-      background: #019aff;
-      border: 0;
-      border-radius: 4px;
-      grid-column: 3 / span 3;
-      grid-row: 4;
-      align-self: end;
-      color: #fff;
-      box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-    }
-    .task-duration{
-        font-size: 11px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-    .task-name{
-        right: 0vw;
-        text-align: right;
-        color: #b6e2ff;
-        font-size: 11px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-    .task-details{
-        
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    }
-}
-// .task:hover {
-    
-//     height: 85px; /* This is the height on hover */
-// }
-
-.cell{
-    background: crimson;
-    position: relative;
-    height: 20vh;
-    width: 10vw;
-    resize:both;
-    overflow: auto;
-}
-
-.appointment-modal{
-    height: 334px;
-    width: 200px;
-    padding: 8px 20px;
-    margin: 5px 10px;
-    font-size: 16px;
-    background: #019aff;
-    border: 0;
-    border-radius: 8px;
-    grid-column: 3 / span 3;
-    grid-row: 4;
-    align-self: end;
-    color: #fff;
-    box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-
-     &-date  {
-    height: 420px !important;
+/**
+ * The CSS shown here will not be introduced in the Quickstart guide, but shows
+ * how you can use CSS to style your Element's container.
+ */
+ .StripeElement {
+    box-sizing: border-box;
+  
+    height: 40px;
+  
+    padding: 10px 12px;
+  
+    border: 1px solid transparent;
+    border-radius: 4px;
+    background-color: white;
+  
+    box-shadow: 0 1px 3px 0 #e6ebf1;
+    -webkit-transition: box-shadow 150ms ease;
+    transition: box-shadow 150ms ease;
   }
-    input, textarea, p{
-        display: block;
-        border-radius: 5px;
-        border: none;
-        padding: 8px 12px;
-        
-    }
-    input{
-        color: #00468e;
-        margin: 5px 0px;
-        font-size: 14px;
-    }
-    p{
-        left: 0px;
-        display: inline-block;
-        padding: 8px 0px;
-        margin: 0px;
-    }
-    textarea{
-        color: #00468e;
-        margin: 5px 0px;
-        font-size: 14px;
-        resize: none;
-    }
-    .single-button{
-        width: 100%;
-        margin-top: 20px;
-        border-radius: 5px;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 8px 12px;
-        border: none;
-        
-        background: #00468e;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
-        color: white;
-        transition: 600ms;
-    }
-    .single-button:hover{
-        color: #00468e;
-        background: #fff;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.3);
-        
-    }
-    select::-ms-expand {
-        display: none;
-    }
-    select{
-        display: inline-block;
-        color: #00468e;
-        margin: 15px 15px;
-        padding:  5px;
-        font-size: 14px;
-        -webkit-appearance: none;
-        -moz-appearance: none;      
-        appearance: none;
-    }
-    .time{
-        width: 100%;
-        text-align: center;
-    }
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: #00468e;
-        opacity: 0.7; /* Firefox */
-      }
-      
-      :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: #00468e;
-        opacity: 0.7;
-      }
-      
-      ::-ms-input-placeholder { /* Microsoft Edge */
-        color: #00468e;
-        opacity: 0.7;
-      }
-      .close-appointment-modal{
-        position: relative;
-        display: inline-block;
-        top:0px;
-        left: 140px;
-        img{
-            height: 15px;
-           
-        }
+  
+  .StripeElement--focus {
+    box-shadow: 0 1px 3px 0 #cfd7df;
+  }
+  
+  .StripeElement--invalid {
+    border-color: #fa755a;
+  }
+  
+  .StripeElement--webkit-autofill {
+    background-color: #fefde5 !important;
+  }
 
-    }
-    mat-form-field , mat-label, mat-datepicker-toggle, ngx-mat-datetime-picker,mat-datepicker-toggle, mat-datepicker{
-        input{
-            color: white;
-            margin: 5px 0px;
-            font-size: 14px;
-        }
-        color: white;
-        border: none !important;
-    }
-   
+  /**
+* The CSS shown here will not be introduced in the Quickstart guide, but
+* shows how you can use CSS to style your Element's container.
+*/
+input,
+.StripeElement {
+  height: 40px;
+  padding: 10px 12px;
+
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
 }
 
-.catalog{
-    position: absolute;
-    display: block;
-    top: 0 ;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 10;
-    background: rgba($color: rgb(1, 28, 83), $alpha: 0.8);
-    
-}
-.cont-table{
-    margin: 20vh 15vw;
-    display: block;
-    height: 60vh;
-    width: 70vw;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    background: #fff;
-    overflow: auto;
+input:focus,
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
 }
 
-.table-catalog{
-    border-collapse: collapse;
-    color: #0E5FFE;
-    overflow: auto;
-    border-radius: 10px;
-    width: 100%;
-    thead{
-        color: white;
-        border-radius: 10px;
-        background: #0E5FFE;
-        th{
-            background: #0E5FFE;
-           
-        }
-    }
-    td:nth-child(1), th:nth-child(1){
-        width: 20vw;
-    }
-    td:nth-child(2),  th:nth-child(2){
-        width: 12vw;
-    }
-    td:nth-child(3),  th:nth-child(3){
-        width: 8vw;
-    }
-    td:nth-child(4),  th:nth-child(4){
-        width: 8vw;
-    }
-    tr{
-        height: 40px;
-        border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
-    }
-    td, th{
-        text-align: center;
-        font-size: 16px;
-        border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
-    }
-    button{
-        padding: 5px;
-        border-radius: 5px;
-        margin: 0px 10px;
-        border: none;
-        font-size: 16px;
-    }
-    .modify{
-        background: #fdb44d;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 10px 14px rgba(#fdb44d, 0.4);
-       
-    }
-    .delete{
-        background:#fa607e;
-        justify-content: center;
-        color: #fff;
-        box-shadow: 0 10px 14px rgba(#fa607e, 0.4);
-    }
-    .corner1{
-        border-top-left-radius: 10px;
-    }
-    .corner2{
-        border-top-right-radius: 10px;
-    }
+.StripeElement--invalid {
+  border-color: #fa755a;
 }
-.cont-insert{
-    position: absolute;
-    top: 80vh;
-    width: 70vw;
-    left: 15vw;
-    text-align: center;
-}
-.insert-table{
-    width: 100%;
-    border-collapse: collapse;
-    color: #0E5FFE;
-    width: 100%;
-    text-align: center;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    z-index: 10;
-    background: #ffffff;
-    tr{
-        height: 40px;
-        border-top: 2px solid  #0E5FFE;
-    }
-    td{
-        text-align: center;
-        font-size: 16px;
-        border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
-    }
-    td:nth-child(1){
-        width: 20vw;
-    }
-    td:nth-child(2){
-        width: 12vw;
-    }
-    td:nth-child(3){
-        width: 8vw;
-    }
-    td:nth-child(4){
-        width: 8vw;
-    }
-    button{
-        padding: 5px;
-        border-radius: 5px;
-        margin: 0px 10px;
-        border: none;
-        font-size: 16px;
-    }
-    .add-catalog{
-        background: #0E5FFE;
-        justify-content: center;
-        color: #fff;
-        box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-       
-    }
-    .input-name{
-        border: none;
-        font-size: 16px;
-        color: #0E5FFE;
-        text-align: center;
-        width:15vw;
 
-    }
-    .input-price{
-        display: inline-block;
-        border: none;
-        text-align: right;
-        font-size: 16px;
-        color: #0E5FFE;
-        width:5vw;
-
-    }
-    select::-ms-expand {
-        display: none;
-    }
-    select{
-        text-align: center;
-        border: none;
-        color: #0E5FFE;
-        background: white;
-        font-size: 16px;
-        // -webkit-appearance: none;
-        // -moz-appearance: none;      
-        // appearance: none;
-    }
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-        color: #0E5FFE;
-        opacity: 0.7; /* Firefox */
-      }
-      
-      :-ms-input-placeholder { /* Internet Explorer 10-11 */
-        color: #0E5FFE;
-        opacity: 0.7;
-      }
-      
-      ::-ms-input-placeholder { /* Microsoft Edge */
-        color: #0E5FFE;
-        opacity: 0.7;
-      }
-
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
 }

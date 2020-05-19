@@ -4,10 +4,12 @@ export class Appointment {
     public start: number,
     public end: number,
     public day: number,
+    public week:number,
     public month:number,
     public year:number,
     public client_name: string,
-    public details: string,){}
+    public details: string,
+    public employee: string,){}
   }
 
   export class NewCatalogService {

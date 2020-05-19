@@ -41,17 +41,17 @@
   <header id="header" class="fixed-top">
     <div class="container d-flex align-items-center">
 
-      <a href="index.html" class="logo mr-auto"><img src="../assets/butterfly/assets/img/logo.png" alt="" class="img-fluid"></a>
+      <a (click)="navigateToSection('hero')" class="logo mr-auto"><span>pre</span><span class="dark">nota</span> </a>
       <!-- Uncomment below if you prefer to use text as a logo -->
       <!-- <h1 class="logo mr-auto"><a href="index.html">Butterfly</a></h1> -->
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
-          <li class="active"><a href="index.html">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Prodotto</a></li>
-          <li><a href="#services">Prezzo</a></li>
-          <li><a href="#contact">Contattaci</a></li>
+          <li><a (click)="navigateToSection('hero')">Home</a></li>
+          <li><a (click)="navigateToSection('services')">About</a></li>
+          <li><a (click)="navigateToSection('about')">Prodotto</a></li>
+          <li><a (click)="navigateToSection('counts')">Prezzo</a></li>
+          <li><a (click)="navigateToSection('contact')">Contattaci</a></li>
           <li><button (click)='goResiter()'>Prova gratis</button></li>
 
         </ul>
@@ -68,7 +68,8 @@
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
           <h1>La più semplice agenda al mondo</h1>
           <h2><br>Aggiungi nuove prenotazioni con un solo click<br> <br>Permetti ai tuoi clienti di pronotare direttamente dall'app<br> <br>Accedi ai tuoi appuntmaenti ovunque, casa ufficio o per strada </h2>
-          <div><a (click)='goResiter()'class="btn-get-started scrollto">Provala gratuitamente</a></div>
+          <div><a class="more-info scrollto"  (click)="navigateToSection('services')">Scopri di più</a> <a (click)='goResiter()'class="btn-get-started scrollto">Provala gratuitamente</a></div>
+         
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
           <img src="../assets/butterfly/assets/img/hero-img.png" class="img-fluid" alt="">
@@ -145,14 +146,14 @@
         </div>
        
         <div class="row">
-          <div class="col-xl-12 col-lg-6 d-flex justify-content-center video-box align-items-stretch">
+          <div class="col-xl-12 d-flex justify-content-center video-box align-items-stretch">
             <img class='screen-app' src="../assets/butterfly/assets/img/ScreenLanding2.png"/>
           </div> 
 
-          <div style='text-align: center !important;' class="col-xl-12 col-lg-6 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+          <div style='text-align: center !important;' class="col-xl-12 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
             <h3>Agenda semplice e pulita</h3>
-            <p >L'obiettivo pricipale è la <b>semplicità</b>. &nbsp; L'agenda occupa più di <b>3/4</b> dello schermo. &nbsp;Per creare un appuntmaneto basta cliccare su una cella.
-              <br>Quando un cliente prenota dall'app, <b>si aggiunge in automaticamente </b>l'appuntamento al calendario
+            <p >L'obiettivo pricipale è la <b>semplicità</b>. &nbsp; L'agenda occupa tutto lo schermo. &nbsp;Per creare un appuntmaneto <b>basta un  click</b>.
+              <br>Quando un cliente prenota dall'app, <b>l'appuntaneto viene aggiunto automaticamente </b>al calendario
             </p>
           </div> 
         </div>

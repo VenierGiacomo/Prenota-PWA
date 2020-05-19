@@ -8,8 +8,8 @@
         </div>
         <div class="calendar">
             <div class="date"> 
-                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> {{month}} <div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div>
-                <div class="today-date">Oggi</div>
+                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div>{{month_name}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="today-date" (click)='goToday()'>Oggi</div>
                 <div class="selector-date">
                     <div  (click)='display="week"'[class.active]='display=="week"'>Settimana</div>
                     <div (click)='display="month"' [class.active]='display=="month"'>Mese</div>
@@ -17,7 +17,7 @@
             </div>
             <div class="calendar-table">
                 <div class="table-cont">
-                    <div class="tabs">  <div class="tab " *ngFor='let employee of employeestab' [class.active]='employee.active' (click)="activetab(employee)"> {{employee.name}}</div> </div>
+                    <div class="tabs" *ngIf='display==="week"' >  <div class="tab " *ngFor='let employee of employees' [class.active]='employee.id == selected' (click)="activetab(employee)"> {{employee.name}}</div> </div>
                         <app-monthview *ngIf='display=="month"' ></app-monthview>
                         <table *ngIf='display==="week"' class="fixed-table">
                                 <thead>
@@ -86,7 +86,11 @@
 
         </select>
     
-        <button class="single-button " (click)='addAppointment()'>Salva</button>
+        <button  *ngIf='!edit'class="single-button " (click)='addAppointment()'>Salva</button>
+        <div *ngIf='edit'>
+                <button  class="two-buttons modify-app" (click)='updateAppointment()'>Modifica</button>
+                <button  class="two-buttons delete-app" (click)='deleteAppointment()'>Cancella</button>
+        </div>
     </div>
     </div>
 

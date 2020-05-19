@@ -11,13 +11,15 @@
     </div>
     <div class="m-calendar"><span class="m-day-name">Lun</span><span class="m-day-name">Mar</span><span class="m-day-name">Mer</span><span class="m-day-name">Gio</span><span class="m-day-name">Ven</span><span class="m-day-name">Sab</span><span class="m-day-name">Dom</span>
         <div *ngFor='let day of last_month_days' class="m-day m-day--disabled"></div>
-        <div *ngFor='let day of current_month_days' class="m-day ">{{day}}</div>
+        <div *ngFor='let day of current_month_days' class="m-day ">{{day}} </div>
         <div *ngFor='let day of next_month_days' class="m-day m-day--disabled"></div>
    
     </div>
 </div>
 </div>
+
 <!-- <section class="m-task m-task--warning">Projects</section>
+    <div class='month-app'><div>4 appuntamenti</div></div>
         <section class="m-task m-task--danger">Design Sprint</section>
         <section class="m-task m-task--primary">Product Checkup 1<div class="task__detail">
                 <h2>Product Checkup 1</h2>

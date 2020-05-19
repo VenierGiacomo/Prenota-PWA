@@ -39,15 +39,16 @@ export class SettingsComponent implements OnInit {
   var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
   
   var hours = this.storage.getOpenignhours()
+  console.log(hours)
     for (let opening of hours){
       if(times[opening.wkday][0]==''){
-        times[opening.wkday][0] = this.hours[opening.open]
-        times[opening.wkday][1] = this.hours[opening.close]
+        times[opening.wkday][0] = this.hours[opening.start]
+        times[opening.wkday][1] = this.hours[opening.end]
         }
       else{
           this.double_turn[opening.wkday] = true
-          times[opening.wkday][2] = this.hours[opening.open]
-          times[opening.wkday][3] = this.hours[opening.close]
+          times[opening.wkday][2] = this.hours[opening.start]
+          times[opening.wkday][3] = this.hours[opening.end]
        
       }
     }
@@ -59,20 +60,16 @@ export class SettingsComponent implements OnInit {
       
   }
   goHome(){
-    this.router.navigateByUrl('')
+    this.router.navigateByUrl('/home')
+  }
+  goEmployees(){
+    this.router.navigateByUrl('/settings/employees')
   }
 
   storeEverything(){
-    this.toast="block"
-    setTimeout(() => {
-      this.toast="none"
-    }, 3500);
     var opentimes=[]
     this.storage.setbusinneType(this.business)
     var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
-    for (let i in times){
-
-    }
     for (let i in times){
       var openday = []
       var openday1 = []
@@ -95,15 +92,15 @@ export class SettingsComponent implements OnInit {
       if((a1<a2) && (a1*a2)>0){
         openday = [{
           "wkday": i,
-          "open": a1,
-          "close": a2
+          "start": a1,
+          "end": a2
           }]
       }
       if((b1<b2) && (b1*b2)>0){
         openday1 = [{
           "wkday": i,
-          "open": b1,
-          "close": b2
+          "start": b1,
+          "end": b2
           }]
       }
 
@@ -111,13 +108,28 @@ export class SettingsComponent implements OnInit {
         opentimes = opentimes.concat(openday1)
     }
     this.storage.setOpenignhours(opentimes)
+    this.api.setopenHours(opentimes).subscribe(
+      data=>{
+        console.log(data, 'stored ')
+        this.toast="block"
+        setTimeout(() => {
+          this.toast="none"
+        }, 3500);
+      },
+      err => {
+        console.log(err, 'error while storing')
+      }
+    )
   }
   storeCatalogService(){
     this.storage.setCatalog(this.name, this.duration, this.sex, this.price)
+    this.name=''
+    this.duration=5
+    this.sex=3 
+    this.price = ''
     setTimeout(() => {
       this.catalog_list = this.storage.getCatalog()
     }, 300);
-   
   }
   displayCatalog(){
     this.catalog = 'block'

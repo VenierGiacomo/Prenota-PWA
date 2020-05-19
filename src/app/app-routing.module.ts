@@ -8,15 +8,17 @@ import { StoreSetupComponent } from './store-setup/store-setup.component';
 import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
+import { EmployeesComponent } from './employees/employees.component';
 
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
-  {path: 'home', component: LandingComponent},
+  {path: '', component: LandingComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'settings', component: SettingsComponent},
+  {path: 'settings/employees', component: EmployeesComponent},
   {path: 'month', component: MonthviewComponent},
   {path: 'test', component: TestingComponent},
   {path: 'store/setup', component: StoreSetupComponent},
