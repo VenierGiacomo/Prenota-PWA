@@ -22,7 +22,7 @@ export class EmployeesComponent implements OnInit {
   sex_emp = 'm'
   phone = ''
   password =''
-  
+  emplo = 'none'
   double_turn=[false,false,false,false,false,false,false]
   closed_days=[true,true,true,true,true,true,true]
   lun= ['','','','']
@@ -75,7 +75,7 @@ export class EmployeesComponent implements OnInit {
       this.api.getEmployees().subscribe(
         data=>{
           this.employees = data
-          console.log(data)
+          console.log(this.employees)
         },
         err => {
           console.log(err.error,'err')
@@ -84,6 +84,18 @@ export class EmployeesComponent implements OnInit {
     }
     goHome(){
       this.router.navigateByUrl('/home')
+    }
+    deleteEmployee(employee){
+      // this.api.deleteEmployee(employee.id).subscribe(
+      //   data=>{
+      //     console.log('success')
+      //     this.getEmployees()
+      //   },
+      //   err => {
+      //     console.log(err.error,'err')
+      //   }
+      // )
+      this.storage.deleteEmployeehours(employee.employee)
     }
     goSettings(){
       this.router.navigateByUrl('/settings')
@@ -135,6 +147,7 @@ export class EmployeesComponent implements OnInit {
         }
         if((a1<a2) && (a1*a2)>0){
           openday = [{
+            "employee": this.employee,
             "wkday": i,
             "start": a1,
             "end": a2
@@ -142,6 +155,7 @@ export class EmployeesComponent implements OnInit {
         }
         if((b1<b2) && (b1*b2)>0){
           openday1 = [{
+            "employee": this.employee,
             "wkday": i,
             "start": b1,
             "end": b2
@@ -161,18 +175,44 @@ export class EmployeesComponent implements OnInit {
           }
         }
       }
-      
-    }
-    storeCatalogService(){
-      this.storage.setCatalog(this.name, this.duration, this.sex, this.price)
+  this.api.setemployeeHours(opentimes).subscribe(
+    data=>{
+      console.log(data, 'stored ')
+      this.toast="block"
       setTimeout(() => {
-        this.catalog_list = this.storage.getCatalog()
-      }, 300);
-     
+        this.toast="none"
+      }, 3500);
+    },
+    err => {
+      console.log(err, 'error while storing')
     }
+  )
+}
+      
     displayCatalog(){
       this.catalog = 'block'
       this.catalog_list = this.storage.getCatalog()
+      var empl_catalog = this.storage.getemployCatalog()
+      for (let serv of this.catalog_list){
+        for(let empl_serv of empl_catalog){
+          console.log(serv.id , empl_serv.service ,this.employee ,empl_serv.employee)
+          if( serv.id == empl_serv.service && this.employee == empl_serv.employee){
+            serv.active = true
+          }
+        }
+       
+      }
+    }
+    activate(service){
+    if (!service.active){
+      this.storage.setemployCatalog(this.employee, service.id)
+      console.log(this.storage.getemployCatalog())
+    }else{
+      this.storage.deleteemployCatalog(this.employee, service.id)
+
+    }
+    service.active = !service.active
+    
     }
     changeTimetable(){
       this.lun= ['','','','']

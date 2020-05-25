@@ -5,7 +5,7 @@ import { Appointment, NewCatalogService } from './appointment.model';
   providedIn: 'root'
 })
 export class StorageService {
-
+  nextId
   constructor() { }
   
   setbusinneType(store){
@@ -27,7 +27,6 @@ export class StorageService {
     var empl = { 'id': id, 'name':name,'timetable': timetable}
     var new_timetable:any
     var old_timetable =  this.getEmployeehours()
-    console.log( empl)
     if (old_timetable.length > 0){
       for (let employee of old_timetable){
         if(employee.id == empl.id){
@@ -50,16 +49,54 @@ export class StorageService {
     var timetable = JSON.parse(localStorage.getItem('employeehours'));
     return timetable == null ? [] : timetable;
   }
-  setCatalog(name, duration, sex, price){
-    var newservice= new NewCatalogService(name, duration, sex, price)
+  deleteEmployeehours(id){
+    var timetable = this.getEmployeehours()
+    var timetable_new = timetable.filter((employee)=> {if(employee.id != id){ return employee}})
+    localStorage.setItem('employeehours',JSON.stringify(timetable_new))
+    console.log(timetable_new, id)
+  }
+  setCatalog(name, duration, sex, price, color){
+    let services = this.getCatalog()
+    if(services.length==0){
+      this.nextId =0
+    }else {
+      let maxId = services[services.length-1].id
+      this.nextId = maxId + 1
+    }
+
+    var newservice= new NewCatalogService(this.nextId, name, duration, sex, price, color)
     let catalog = this.getCatalog()
-    console.log(catalog)
     catalog.push(newservice)
     localStorage.setItem('catalog',JSON.stringify({ 'services': catalog}))
   }
   getCatalog(){
     var catalog = JSON.parse(localStorage.getItem('catalog'));
     return catalog == null ? [] : catalog.services;
+  }
+  deleteservice(id){
+    var catalog = this.getCatalog()
+    for(let service of catalog){
+      if (service.id == id){
+        var catalog_new = catalog.filter((service_)=> {if(service_.id != id){ return service}})
+        localStorage.setItem('catalog',JSON.stringify({ 'services': catalog_new}))
+      }
+    }
+  }
+  getemployCatalog(){
+    var catalog = JSON.parse(localStorage.getItem('employeecatalog'));
+    return catalog == null ? [] : catalog.services;
+  }
+  setemployCatalog(employee, service){
+    // let services = this.getCatalog()
+    var data = {'employee': employee, 'service': service}
+    let catalog = this.getemployCatalog()
+    catalog.push(data)
+    localStorage.setItem('employeecatalog',JSON.stringify({ 'services': catalog}))
+  }
+  deleteemployCatalog(employee, service){
+    let catalog = this.getemployCatalog()
+    var catalog_new = catalog.filter((service_)=> {if(service_.employee != employee || service_.service != service){ return service}})
+    localStorage.setItem('employeecatalog',JSON.stringify({ 'services': catalog_new}))
   }
   getAppointmets(bool){
     if (bool){
@@ -71,15 +108,23 @@ export class StorageService {
       return unstoredAppointments == null ? [] : unstoredAppointments.appointments;
     }
   }
+  getAppointmet(id){
+    var appointments = this.getAllAppointmets()
+    for(let appo of appointments ){
+      if(appo.id == id){
+        return appo
+      }
+    }
+  }
   getAllAppointmets(){
     var appointments =  this.getAppointmets(true)
     var unstoredAppointments =  this.getAppointmets(false)
     var AllAppointmets = appointments.concat(unstoredAppointments)
     return AllAppointmets == null ? [] : AllAppointmets;
   }
-  addAppointmet(id, start, end,  day, month, year, name, details, employee, bool){
+  addAppointmet(id, start, end,  day, month, year, name, details, employee, service, bool){
     var week = this.getWeekNumber(new Date(year, month, day))
-    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, details, employee)
+    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, details, employee, service)
     let oldAppointments = this.getAppointmets(bool)
     oldAppointments.push(appointment)
     this.setAppointmentsStorage(oldAppointments, bool)
@@ -95,20 +140,19 @@ export class StorageService {
 deleteAppointmet(id){
   var unstored = this.getAppointmets(false)
   var unstored= unstored.filter(employee => employee.id != id)
-  console.log(unstored)
   this.setAppointmentsStorage(unstored,false)
   var stored = this.getAppointmets(true)
   stored = stored.filter(employee => employee.id != id)
-  console.log(stored)
   this.setAppointmentsStorage(stored,true)
 }
-updateAppointment(id, start, end,  day, month, year, name, details,employee, bool){
+
+updateAppointment(id, start, end,  day, month, year, name, details,employee, service, bool){
   var update =false
   var stored = this.getAppointmets(bool)
   for (let appointment of stored){
     if (appointment.id== id){
       var week = this.getWeekNumber(new Date(year, month, day))
-      appointment = new Appointment(id ,start, end,  day, week,month, year, name, details, employee)
+      appointment = new Appointment(id ,start, end,  day, week,month, year, name, details, employee, service)
       update = true
     }
   }
@@ -116,14 +160,15 @@ updateAppointment(id, start, end,  day, month, year, name, details,employee, boo
     return
   }
   else{
-    this.addAppointmet(id, start, end,  day, month, year, name, details, employee,bool)
+    this.addAppointmet(id, start, end,  day, month, year, name, details, employee, service, bool)
   }
 }
-dragUpdateAppointment(id, start, end,  day, month, year, name, details, employee){
+
+dragUpdateAppointment(id, start, end,  day, month, year, name, details, employee, service){
       this.deleteAppointmet(id)
       id =+id
       setTimeout(() => {
-        this.addAppointmet(id, start, end,  day, month, year, name, details, employee,true)
+        this.addAppointmet(id, start, end,  day, month, year, name, details, employee, service, true)
       }, 500);
      
  

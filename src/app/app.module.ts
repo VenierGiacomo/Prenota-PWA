@@ -19,7 +19,9 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { EmployeesComponent } from './employees/employees.component';
-import * as Hammer from 'hammerjs'
+import * as Hammer from 'hammerjs';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component'
 
 @NgModule({
   declarations: [
@@ -33,6 +35,8 @@ import * as Hammer from 'hammerjs'
     LoginComponent,
     SettingsComponent,
     EmployeesComponent,
+    SubscriptionComponent,
+    SepaPaymentComponent,
     
   ],
   imports: [

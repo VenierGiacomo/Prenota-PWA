@@ -9,14 +9,17 @@ export class Appointment {
     public year:number,
     public client_name: string,
     public details: string,
-    public employee: string,){}
+    public employee: string,
+    public service: string,){}
   }
 
   export class NewCatalogService {
     constructor(
+       public id: number,
        public name: string,
        public duration: number,
        public sex: number,
        public price:number,
+       public color:number,
        ){}
      }

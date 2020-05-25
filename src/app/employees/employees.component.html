@@ -39,9 +39,9 @@
                     </select>
                     <p>Clicca per selezionare un altro dipendente</p>
                 </span>
-                <div class="save" (click)='storeEverything()'>Salva modifiche</div>
+                <div class="save" (click)='storeEverything()' *ngIf='employee!=0'>Salva modifiche</div>
             </div>
-            <div class="opening-hours">
+            <div class="opening-hours" *ngIf='employee!=0'>
                 <!-- <div class="head-form"> -->
                         <h4>Orario di lavoro:</h4> 
                         <!-- <div class="save">Salva </div> -->
@@ -77,12 +77,16 @@
                     </div>           
                 </div>
             </div>
-            <div class="services">
+            <div class="services" >
                 <div class="service-cont">
-                    <div class=" service add-service" (click)=' displayCatalog()'>I tuoi <br> dipendeti</div>
-                    <div class=" service add-service" (click)='createEmployee="block"'>Aggiungi <br> dipendente</div>
+                        <div *ngIf='employee!=0'class=" service add-service" (click)='displayCatalog()'>Servizzi <br> dipendente</div>
+                        <div *ngIf='employee==0' class=" service add-service" (click)='this.emplo = "block"'>I tuoi <br> dipendenti</div>
+                        <div class=" service add-service" (click)='createEmployee="block"'>Aggiungi <br> dipendente</div>
+                       
+                    
                 </div>
             </div>
+            
         </div>
     </div>
     <div class="catalog" [style.display]='catalog'>
@@ -95,7 +99,7 @@
                             <th>Durata</th>
                             <th>Sesso</th>
                             <th>Prezzo</th>
-                            <th class="corner2">Elimina</th>
+                            <th class="corner2">Attivo</th>
                         </tr>
                     </thead>  
                     <tbody>
@@ -104,13 +108,14 @@
                             <td>{{durations[service.duration]}}</td>
                             <td>{{sexs[service.sex]}}</td>
                             <td>{{service.price}}€</td>
-                            <td> <button class="delete">Elimina</button></td>
+                            <td *ngIf='service.active' (click)='activate(service)'> <button class="active-service">Attivo</button></td>
+                            <td *ngIf='!service.active' (click)='activate(service)'> <button class="deactivated">Non attivo</button></td>
                         </tr>
                        
                     </tbody>
                 </table>     
         </div>
-        <div class="cont-insert">
+        <!-- <div class="cont-insert">
                 <table class="insert-table">
                     <tbody>
                         <tr> 
@@ -139,7 +144,7 @@
                             </tr>
                         </tbody>
                 </table>
-        </div>
+        </div> -->
     </div>
 <div class="catalog" [style.display]='createEmployee'>
         <div class="close-catalog" (click)='createEmployee="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
@@ -220,6 +225,26 @@
 </div>
 </body>
 
+<div class="catalog" [style.display]='emplo'>
+        <div class="close-catalog" (click)='emplo="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+            <div class="cont-table">
+                <table class="table-catalog">
+                    <thead>
+                        <tr> 
+                            <th class="corner1">Nome</th>
+                            <th class="corner2">Elimina</th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        <tr *ngFor='let employee of employees'> 
+                            <td>{{employee.name}}</td>
+                            <td  (click)='deleteEmployee(employee)'> <button class="delete">Elimina</button></td>
+                        </tr>
+                       
+                    </tbody>
+                </table>     
+        </div>
+    </div>
 
 <script src="../assets/template/vendor/jquery/jquery.min.js"></script>
     

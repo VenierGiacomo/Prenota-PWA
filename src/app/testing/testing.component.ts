@@ -9,7 +9,7 @@ declare var Stripe: stripe.StripeStatic;
 })
 export class TestingComponent implements OnInit {
   constructor() { }
-  amount: 1000;
+  @Input() amount: number;
   description: "nuovo stripe";
   @ViewChild('cardElement', {static: true}) cardElement: ElementRef;
   @ViewChild('paymentRequestButtonElement', {static: true}) paymentRequestButtonElement: ElementRef;
@@ -17,13 +17,12 @@ export class TestingComponent implements OnInit {
   stripe; // : stripe.Stripe;
   card;
   cardErrors;
-
+  bgcolor="#f2b3b3"
   loading = false;
   confirmation;
 
 
   ngOnInit() {
-    console.log(this.cardElement, this.paymentRequestButtonElement)
     this.stripe = Stripe('pk_test_f3m2iNJqa6UdyuD9Ey8O7ZiH00eSjJ4lEt');
     const elements = this.stripe.elements();
     this.card = elements.create('card');
@@ -70,6 +69,7 @@ export class TestingComponent implements OnInit {
       this.cardErrors = error.message;
     } else {
       // Send the token to your server.
+      console.log('pagamento andato a buon fine', source)
       this.loading = true;
       this.loading = false;
 

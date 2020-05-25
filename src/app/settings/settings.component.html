@@ -79,6 +79,7 @@
                             <th>Durata</th>
                             <th>Sesso</th>
                             <th>Prezzo</th>
+                            <th>Colore</th>
                             <th class="corner2">Elimina</th>
                         </tr>
                     </thead>  
@@ -88,7 +89,8 @@
                             <td>{{durations[service.duration]}}</td>
                             <td>{{sexs[service.sex]}}</td>
                             <td>{{service.price}}€</td>
-                            <td> <button class="delete">Elimina</button></td>
+                            <td><div class="color-serv" [style.background]='colors_list[service.color]'></div></td>
+                            <td> <button class="delete" (click)='deleteservice(service.id)'>Elimina</button></td>
                         </tr>
                        
                     </tbody>
@@ -101,14 +103,30 @@
                                 <td><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name"></td>
                                 <td>
                                     <select [(ngModel)]="duration">
-                                        <option value=1>15 min</option>
-                                        <option value=2>30 min</option>
-                                        <option value=3>45 min</option>
-                                        <option value=4>1 ora</option>
-                                        <option value=5>1 ora 15 min</option>
-                                        <option value=6>1 ora 30 min</option>
-                                        <option value=7>1 ora 45 min</option>
-                                        <option value=8>2 ore</option>
+                                        <option value=1>5 min</option>
+                                        <option value=2>10 min</option>
+                                        <option value=3>15 min</option>
+                                        <option value=4>20 min</option>
+                                        <option value=5>25 min</option>
+                                        <option value=6>30 min</option>
+                                        <option value=7>35 min</option>
+                                        <option value=8>40 ora</option>
+                                        <option value=9>45 min</option>
+                                        <option value=10>50 min</option>
+                                        <option value=11>55 min</option>
+                                        <option value=12> 1ora</option>
+                                        <option value=13> 1 ora 5 min</option>
+                                        <option value=14> 1 ora 10 min</option>
+                                        <option value=15> 1 ora 15 min</option>
+                                        <option value=16> 1 ora 20 min</option>
+                                        <option value=17> 1 ora 25 min</option>
+                                        <option value=18> 1 ora 30 min</option>
+                                        <option value=19> 1 ora 35 min</option>
+                                        <option value=20> 1 ora 40 ora</option>
+                                        <option value=21> 1 ora 45 min</option>
+                                        <option value=22> 1 ora 50 min</option>
+                                        <option value=23> 1 ora 55 min</option>
+                                        <option value=24> 2 ore</option>
                                     </select>
                                 </td>
                                 <td>
@@ -119,10 +137,24 @@
                                     </select>
                                 </td>
                                 <td><input class='input-price'type="numner" placeholder="prezzo" [(ngModel)]="price">€</td>
-                                <td><button  class="add-catalog" (click)='storeCatalogService()'>Aggiugni</button></td>
+                                <td><div class="color-serv" [style.background]='bgcolor' (click)='color_show="block"'></div></td>
+                                <td><button  class="add-catalog" (click)='storeCatalogService()'>Aggiungi</button></td>
                             </tr>
                         </tbody>
                 </table>
         </div>
     </div>
 </body>
+
+<!-- color picker -->
+
+<div class="color-picker" [style.display]='color_show'>
+    <div class="c c1" (click)='changeColor(0)'></div>
+    <div class="c c2" (click)='changeColor(1)'></div>
+    <div class="c c3" (click)='changeColor(2)'></div>
+    <div class="c c4" (click)='changeColor(3)'></div>
+    <div class="c c5" (click)='changeColor(4)'></div>
+    <div class="c c6" (click)='changeColor(5)'></div>
+    <div class="c c7" (click)='changeColor(6)'></div>
+    <div class="c c8" (click)='changeColor(7)'></div>  
+</div>

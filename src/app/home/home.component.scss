@@ -276,7 +276,6 @@ th{
 .appointment-modal{
     z-index: 100;
     position: absolute;
-    height: 334px;
     width: 200px;
     padding: 8px 20px;
     margin: 5px 10px;
@@ -288,6 +287,7 @@ th{
     grid-row: 4;
     align-self: end;
     color: #fff;
+    text-align: left;
     box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
 
      &-date  {
@@ -387,6 +387,10 @@ th{
         -webkit-appearance: none;
         -moz-appearance: none;      
         appearance: none;
+    }
+    .select_no_margin_left{
+        padding: 8px 12px !important;
+        margin:15px 0px !important;
     }
     .time{
         width: 100%;
@@ -491,14 +495,14 @@ th{
     -moz-transition: 800ms;
     -o-transition: 800ms;
     &--primary {
-      background: #019aff;
+    //   background: #019aff;
       border: 0;
       border-radius: 4px;
       grid-column: 3 / span 3;
       grid-row: 4;
       align-self: end;
       color: #fff;
-      box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+    //   box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
     }
     &--online {
         background: #0151ff;
@@ -513,7 +517,6 @@ th{
     .task-duration{
         font-size: 11px;
         margin: 0px 0px;
-        color: #00468e;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
     .task-name{
@@ -523,7 +526,6 @@ th{
         bottom: 5px;
         right:5px;
         text-align: right;
-        color: #b6e2ff;
         font-size: 11px;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
@@ -532,9 +534,47 @@ th{
         font-size: 15px;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin: 10px 0px;
+        margin: 5px 0px ;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     }
+}
+:host ::ng-deep .c{
+    &0{
+        color: #85040a !important;
+        background: #f2b3b3 !important;
+      }
+      &1{
+        color: #b63a00;
+        background: #fccbbc;
+      }
+      &2{
+        color: #9c6b00;
+        background: #fcecbe;
+      }
+      &3{
+        color: #047a10;
+        background: #c2e9d7;
+      }
+      &4{
+        color: #0954cc;
+        background: #b3e1f7;
+      }
+      &5{
+        color: #4c21a3;
+        background: #c5cbe9;
+      }
+      &6{
+        color: rgb(68, 78, 126);
+        background: #d7dbef;  
+      }
+      &7{
+        color: rgb(95, 17, 131);
+        background: #ddbde6;
+      }
+      &10000{
+        color: rgb(68, 78, 126);
+        background: #d7dbef; 
+      }
 }
 // :host ::ng-deep .task:hover {
 //     height: 85px; /* This is the height on hover */

@@ -96,10 +96,18 @@ getopenHours(): Observable<any>{
 setopenHours(data): Observable<any>{
   return this.http.post(BASE_URL+'closedhours/', data, {headers: this.newheader()})
 }
+setemployeeHours(data): Observable<any>{
+  return this.http.post(BASE_URL+'employeehours/', data, {headers: this.newheader()})
+}
+setStoreservice( name, duration, sex, price, color){
+var data = { 'name':name, 'duration':duration, 'sex':sex, 'price':price, 'color':color}
+  return this.http.post(BASE_URL+'services/', data, {headers: this.newheader()})
+}
+bookAppointment(start, end, day, month, year,name, details, employee, service):Observable<any>{
 
-bookAppointment(start, end, day, month, year,name, details, employee):Observable<any>{
+  console.log(start, end, day, month, year,name, details, employee, service)
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
@@ -110,9 +118,10 @@ getMonthAppointments(month):Observable<any>{
   return this.http.get(BASE_URL+'bookings/month/'+month,{headers: this.newheader()})
 }
 
-updateAppointment(id, start, end, day, month, year,name, details, employee):Observable<any>{
+updateAppointment(id, start, end, day, month, year,name, details, employee, service):Observable<any>{
+  console.log(id, start, end, day, month, year,name, details, employee, service, 'id, start, end, day, month, year,name, details, employee, service')
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service}
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
 
@@ -149,5 +158,8 @@ getWeekNumber(d) {
   var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
   // Return array of year and week number
   return  weekNo
+}
+deleteEmployee(id){
+  return this.http.delete(BASE_URL+'employees/'+id+'/',  {headers: this.newheader()})
 }
 }

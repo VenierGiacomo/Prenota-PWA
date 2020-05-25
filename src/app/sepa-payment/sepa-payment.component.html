@@ -1,0 +1,92 @@
+<div class="pay-cont">
+  <div class="payment-selection"> 
+    <div [class.active]='cardvisibility=="block"' (click)='swichView(1)'><img src='../assets/icons/payment-card.svg'/><p>Carta di credito</p></div>
+    <!-- <div [class.active]='paypalvisibility=="block"' (click)='swichView(2)'><img src='../assets/icons/paypal.svg'/><p>Paypal</p></div> -->
+    <div [class.active]='ibanvisibility=="block"' (click)='swichView(3)'><img src='../assets/icons/buildings.svg'/><p>IBAN</p></div>
+  </div>
+  
+        <form (submit)="handleForm($event)" [style.display]='cardvisibility'>
+
+
+          <div #cardElement>
+            <!-- A Stripe Element will be inserted here. -->
+          </div>
+        
+        
+          <!-- Used to display Element errors. -->
+          <p>{{ cardErrors }}</p>
+        
+        <div class="confirm-pay"> <button  > Iscriviti {{amount/100}}€</button></div>
+        
+        </form>
+
+      <form action="/form" method="post" id="setup-form" [style.display]='ibanvisibility'>
+          <div class="form-row inline">
+            <div class="col">
+              <label for="accountholder-name">
+              Nome completo
+              </label>
+              <input
+                id="accountholder-name"
+                name="accountholder-name"
+                placeholder="Mario Rossi"
+                required
+              />
+            </div>
+        
+            <div class="col">
+              <label for="email">
+                Email
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="mario.rossi1964@prenota.it"
+                required
+              />
+            </div>
+          </div>
+      
+          <div class="form-row">
+            <!--
+              Using a label with a for attribute that matches the ID of the
+              Element container enables the Element to automatically gain focus
+              when the customer clicks on the label.
+            -->
+            <label for="ibanElement">
+              IBAN
+            </label>
+            <div #ibanElement>
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+          </div>
+        
+          <!-- Add the client_secret from the SetupIntent as a data attribute   -->
+          <div  class='confirm-pay'>
+              <button id="submit-button"  data-secret="{CLIENT_SECRET}">
+                  Bonifico SEPA 
+                  </button>
+          </div>
+      
+        
+        <!-- Used to display form errors. -->
+        <div id="error-message" role="alert"></div>
+      
+        <!-- Display mandate acceptance text. -->
+        <div id="mandate-acceptance">
+          By providing your IBAN, you are authorizing Prenota srl and Stripe,
+          our payment service provider, to send instructions to your bank to debit
+          your account in accordance with those instructions. Subsequent payments are
+          entitled to a refund from your bank under the terms and conditions of your
+          agreement with your bank. A refund must be claimed within eight weeks
+          starting from the date on which your account was debited.
+        </div>
+      </form>
+    
+</div>
+<!-- <path d="M54.783 50H3.217A3.217 3.217 0 010 46.783V11.217A3.217 3.217 0 013.217 8h51.566A3.217 3.217 0 0158 11.217v35.566A3.217 3.217 0 0154.783 50" fill="#8798cc"></path>
+<path fill="#556180" d="M0 13h58v8H0z"></path>
+<path d="M15 26H6a1 1 0 100 2h9a1 1 0 100-2M29 27a1 1 0 00-1-1h-9a1 1 0 100 2h9a1 1 0 001-1M7 31H6a1 1 0 100 2h1a1 1 0 100-2M13 31h-2a1 1 0 100 2h2a1 1 0 100-2M18 31h-1a1 1 0 100 2h1a1 1 0 100-2M24 31h-2a1 1 0 100 2h2a1 1 0 100-2M27.29 31.29c-.181.19-.29.45-.29.71 0 .26.109.52.29.71.188.18.438.29.71.29.26 0 .519-.11.71-.29.18-.19.29-.45.29-.71 0-.26-.11-.52-.29-.71-.37-.37-1.05-.37-1.42 0" fill="#b0d3f0"></path>
+<path fill="#91bae1" d="M36 34h16v10H36z"></path>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58 58" class="dq9KjIYjYi5cLAX4PQJAL"><path d="M54.783 50H3.217A3.217 3.217 0 010 46.783V11.217A3.217 3.217 0 013.217 8h51.566A3.217 3.217 0 0158 11.217v35.566A3.217 3.217 0 0154.783 50" fill="#8798cc"><path d="M54.783 50H3.217A3.217 3.217 0 010 46.783V11.217A3.217 3.217 0 013.217 8h51.566A3.217 3.217 0 0158 11.217v35.566A3.217 3.217 0 0154.783 50" fill="#8798cc"></path></path><path fill="#556180" d="M0 13h58v8H0z"></path><path d="M15 26H6a1 1 0 100 2h9a1 1 0 100-2M29 27a1 1 0 00-1-1h-9a1 1 0 100 2h9a1 1 0 001-1M7 31H6a1 1 0 100 2h1a1 1 0 100-2M13 31h-2a1 1 0 100 2h2a1 1 0 100-2M18 31h-1a1 1 0 100 2h1a1 1 0 100-2M24 31h-2a1 1 0 100 2h2a1 1 0 100-2M27.29 31.29c-.181.19-.29.45-.29.71 0 .26.109.52.29.71.188.18.438.29.71.29.26 0 .519-.11.71-.29.18-.19.29-.45.29-.71 0-.26-.11-.52-.29-.71-.37-.37-1.05-.37-1.42 0" fill="#b0d3f0"></path><path fill="#91bae1" d="M36 34h16v10H36z"></path></svg> -->

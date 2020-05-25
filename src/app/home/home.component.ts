@@ -3,7 +3,7 @@ import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import {fromEvent, Observable, Subscription} from 'rxjs';
-
+import *  as screenfull from 'screenfull'
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
   resp:any
   display = 'week'
   col: number
+  full_screen =false
   closed: number
   placeholderName="Inserisci nome cliente"
   appointmentlist=[]
@@ -25,20 +26,24 @@ export class HomeComponent implements OnInit {
   month = new Date().getMonth()
   month_name = this.months_names[this.month]
   nome=""
-  info=""
+  info=101010
   time = 2
+  extra_desc=''
   edit= false
   bgModalDisp='none'
   title_text = "Nuovo appuntamento"
   btn_text = "Aggiungi"
   employees
+  catalog_list
   selected
+
   currentBlock= {
     row: 0,
     col: 0,
   }
   updateAppointmentId
   openlist = [[],[],[],[],[],[],[],]
+  times =["06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
   rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "24:00"]
   columns= ["Lunedi","Martedi","mercoledi","Giovedi","Venerdi","Sabato","Domenica"] 
   // grid=[]
@@ -61,16 +66,24 @@ ngOnInit() {
 
 // dispaly the closed hours
 var openinghours = this.storage.getEmployeehours()
-for (let hour of openinghours[0].timetable){
-     this.openlist[hour.wkday].push(hour.start)
-     this.openlist[hour.wkday].push(hour.end)      
-    }
+if (openinghours.length>0){
+  for (let hour of openinghours[0].timetable){
+    this.openlist[hour.wkday].push(hour.start)
+    this.openlist[hour.wkday].push(hour.end)      
+   }
+}
+
  
   setTimeout(()=>{
     this.getAppoitments()
-    this.employees = this.storage.getEmployeehours()
-    this.selected = this.employees[0].id
+    var employees = this.storage.getEmployeehours()
+    if (employees.length >0){
+      this.employees = this.storage.getEmployeehours()
+      this.selected = this.employees[0].id
+    }
+    this.catalog_list = this.storage.getCatalog()
   },500)
+
 }
 
 getWeekNumber(d) {
@@ -91,32 +104,42 @@ blockPos(row, col){
     if (this.point.disp == "none"){
         this.currentBlock.row = row 
         this.currentBlock.col =col
-        // document.getElementById(row+"-"+col).style.backgroundColor = '#a3d9f5'
+        document.getElementById(row+"-"+col).style.backgroundColor = '#a3d9f5'
     }
     else{
-      // document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
+      document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
     }
     
 
 
 }
 closeModal(){
-    // document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
+    document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
     this.point.disp = "none"
 }
 
 //Display the appointment modal in the proper place
 showCoords($event) {
   this.nome=""
-  this.info=""
+  this.extra_desc=''
+  this.info=101010
   this.time=2
   this.edit = false
   if (this.point.disp == "none"){
     var x = $event.clientX;
     var y = $event.clientY;
-if (y > 400){
-  y = y -334
-}
+var body = document.body,
+html = document.documentElement;
+
+var height = Math.max( body.scrollHeight, body.offsetHeight, 
+                       html.clientHeight, html.scrollHeight, html.offsetHeight );
+                       console.log(height, y)
+if( height-y < 432){
+    y =  height-440
+  }else{
+    y = Math.max(y -240,0)
+  }
+
     this.point={
       disp:"block",
       left: (x-260)+"px",
@@ -134,8 +157,23 @@ if (y > 400){
 }
 //Add a new appointment
 addAppointment() {
-  // document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
-  this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.week[this.currentBlock.col], this.month, this.year, this.nome , this.info)
+  document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
+  if (this.info == 10000){
+    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.week[this.currentBlock.col], this.month, this.year, this.nome , this.extra_desc, this.info)
+  }
+  else{
+   
+    var services = this.storage.getCatalog()
+    var serv
+    for(let service of services){
+      if (service.id ==  this.info){
+        serv= service
+      }
+    }
+    console.log((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], this.month, this.year, this.nome , serv.name, this.info)
+    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], this.month, this.year, this.nome , serv.name, this.info)
+  }
+  
 }
 // The next three functions allow to drag and drop the events
   allowDrop(ev) { 
@@ -146,27 +184,27 @@ addAppointment() {
     ev.dataTransfer.setData("height", ev.srcElement.scrollHeight);
     ev.dataTransfer.setData("text", ev.target.id);
   }
-  click(ev) {
-    console.log(ev)
-    console.log(this.rows)
-  }
   drop(ev) {
+    document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
     ev.preventDefault();
-    console.log(this.rows)
     var data = ev.dataTransfer.getData("text");
     var obj_height = ev.dataTransfer.getData("height");
     var id = ev.target.id
     var h1 = id.split('-')[0]-1
-    var h2 = h1 + Math.round(obj_height/60)
+    var dur = Math.round(obj_height/20)
+    var h2 = h1 + dur
     var col = id.split('-')[1]
-    if( this.rows[h1] != undefined && this.rows[h2] != undefined && ev.target.id != data  ){
-      document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${this.rows[h1]}-${this.rows[h2]}`
+    if( this.times[h1] != undefined && this.times[h2] != undefined && ev.target.id != data  ){
+      var hour1=this.rows[h1]
+      var hour2 = this.times[this.times.indexOf(hour1)+dur]
+      console.log(h2, hour1)
+      document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
       ev.target.append(document.getElementById(data));
       var appointments = this.storage.getAllAppointmets()
     for (let appointment of appointments){
       if(appointment.id ==data){
-         this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee)
-         this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee).subscribe(data =>{
+         this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee, appointment.service)
+         this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee, appointment.service).subscribe(data =>{
 console.log(data)
          },err =>{
           console.log(err)
@@ -182,113 +220,44 @@ console.log(data)
   }
 // Function that displays the stored appointments
 async getAppoitments(){
+  document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
   this.appointmentlist= []
-  var week = this.getWeekNumber(new Date(2020, 4, this.week[0]))
+  var week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
+
+  // usa un last check 10minutes per risparmiare server
   var online_data: any = await this.api.getAppointments(week).subscribe(
     data=>{
       this.appointmentlist= data
       if (this.appointmentlist.length != 0){
         for (let appo of this.appointmentlist){
-          this.point.disp="none"
-          var height = appo.end - appo.start
-          var div_height = ((height*60)-16)+'px'
-          var div = document.createElement('div');
-          div.ondragstart = this.drag
-          var self = this
-          div.onclick = function() {
-           setTimeout(() => {
-            self.nome = appo.client_name
-            self.time = appo.end-appo.start
-            self.info = appo.details
-            self.edit = true
-            self.updateAppointmentId =appo.id
-           }, 1);
-        };
-          div.draggable =true
-          div.classList.add('task','task--primary') 
-          div.id=appo.id
-          div.style.height =div_height
-          div.innerHTML = `
-                          <div class="task-duration" id=${ appo.id}>${this.rows[appo.start]}-${this.rows[appo.end]}</div>
-                          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${appo.id}>${appo.details} </div>
-                          <div class="task-name" id=${ appo.id} >${appo.client_name}</div>`;//47 is the height of the cell 16 is 2 times the verical padding (8px)
-         
-          if (this.week.indexOf(appo.day)>=0 && this.getWeekNumber(new Date(this.year, this.month, this.week[0])) == appo.week && this.selected ==appo.employee){
-          document.getElementById((appo.start+1)+"-"+this.week.indexOf(appo.day)).append(div)
-          }
-          this.storage.updateAppointment(appo.id ,appo.start, appo.end, appo.day, appo.month, appo.year, appo.client_name, appo.details, appo.employee, true)
-          
+          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name,appo.details,  appo.employee, appo.service_n,true)
         }
-       
       }
       else{console.log('empty_data')}
       this.saveNotStored()
     },
     err => {
       this.appointmentlist = this.storage.getAllAppointmets()
-      console.log(this.appointmentlist, 'no connection',err)
       for (let appo of this.appointmentlist){
-        this.point.disp="none"
-        var height = appo.end - appo.start
-        var div_height = ((height*60)-16)+'px'
-        var div = document.createElement('div');
-        div.ondragstart = this.drag
-          div.onclick = this.modifyApp
-          div.draggable =true
-          div.classList.add('task','task--primary') 
-          div.id=appo.id
-          div.style.height =div_height
-          div.innerHTML = `
-                          <div class="task-duration" id=${ appo.id}>${this.rows[appo.start]}-${this.rows[appo.end]}</div>
-                          <div class="task-details"[innerHTML]="" id=${appo.id}>${appo.details} </div>
-                          <div class="task-name" id=${ appo.id} >${appo.client_name}</div>`;//47 is the height of the cell 16 is 2 times the verical padding (8px)
-        if (this.week.indexOf(appo.day)>=0 && this.getWeekNumber(new Date(this.year, this.month, this.week[0])) == appo.week && this.selected ==appo.employee){
-          document.getElementById((appo.start+1)+"-"+this.week.indexOf(appo.day)).append(div);
-        }
+        this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
       }
      
     }
   )
 }
 // Function that stores appointments both locally and on server
-setAppoitment(start, end, day, month, year,name, details){
-  this.api.bookAppointment( start, end, day, month, year,name, details, this.selected,).subscribe(
+setAppoitment(start, end, day, month, year, client_name, details, service){
+  var week = this.getWeekNumber(new Date(year, month, this.week[0]))
+  this.point.disp="none"
+  this.api.bookAppointment( start, end, day, month, year, client_name, details, this.selected, service).subscribe(
     data=>{
-      this.point.disp="none"
-      var div = document.createElement('div');
-      var div_height = ((this.time*60)-16)+'px'
-      div.ondragstart = this.drag
-      div.onclick = this.modifyApp
-      div.draggable =true
-      div.classList.add('task','task--primary') 
-      div.id=data.id
-      div.style.height =div_height
-      div.innerHTML = `
-          <div class="task-duration">${this.rows[this.currentBlock.row-1]}-${this.rows[this.currentBlock.row+(this.time-1)]}</div>
-          <div class="task-details"[innerHTML]="">${this.info} </div>
-          <div class="task-name">${this.nome}</div>`;//47 is the height of the cell 16 is 2 times the verical padding (8px)
-      document.getElementById(this.currentBlock.row+"-"+this.currentBlock.col).append(div);
-      this.storage.addAppointmet(data.id, start, end, day, month, year,name, details, this.selected,true)
+      this.drawAppointment(data.id, start, end, details, client_name, this.selected, service, day ,week, month, year)
+      this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, details, this.selected, service, true)
     },
     err => {
-      console.log(err, 'errr')
-      this.point.disp="none"
-      var div = document.createElement('div');
-      var div_height = ((this.time*60)-16)+'px'
-      div.ondragstart = this.drag
-      div.onclick = this.modifyApp
-      div.draggable =true
-      div.classList.add('task','task--primary') 
-      div.id= new Date().getTime().toString()
-      div.style.height =div_height
-      // this.currentBlock.row+this.time-1
-      div.innerHTML = `
-          <div class="task-duration">${this.rows[this.currentBlock.row-1]}-${this.rows[this.currentBlock.row+(this.time-1)]}</div>
-          <div class="task-details"[innerHTML]="" >${this.info} </div>
-          <div class="task-name">${this.nome}</div>
-      `;//50is the height of the cell
-      document.getElementById(this.currentBlock.row+"-"+this.currentBlock.col).append(div);
-      this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,name, details, this.selected, false)
+      this.drawAppointment(new Date(), start, end, details, client_name, this.selected, service, day ,week, month, year)
+      this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,client_name, details, this.selected, service, false)
     }
   )
 }
@@ -301,18 +270,45 @@ var app
     }
 
   }
- 
- app.end =app.start + Number(this.time)
- var div_height = ((this.time*60)-16)+'px'
-  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.info, this.selected).subscribe(data =>{
-    document.getElementById(this.updateAppointmentId).getElementsByClassName('task-details')[0].innerHTML = `${this.info}`
-    document.getElementById(this.updateAppointmentId).getElementsByClassName('task-name')[0].innerHTML = `${this.nome}`
-    document.getElementById(this.updateAppointmentId).getElementsByClassName('task-duration')[0].innerHTML = `${this.rows[app.start]}-${this.rows[ app.end]}`
-    document.getElementById(this.updateAppointmentId).style.height = div_height
+  var new_service
+if(this.info !=10000){
+  var services = this.storage.getCatalog()
+  for(let service of services){
+    if(service.id == this.info){
+      new_service = service
+    }
+    
+  }
+  app.end =app.start + Number(new_service.duration)
+  var div_height = ((new_service.duration*20)-16)+'px'
+  
+  console.log(this.info)
+
+
+    this.extra_desc = new_service.name
+ }else{
+  app.end =app.start + Number(this.time)
+  var div_height = ((this.time*20)-16)+'px'
+  new_service= {color: 10000, duration: this.time } 
+ }
+  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.extra_desc, this.selected, this.info ).subscribe(data =>{
+    var element = document.getElementById(this.updateAppointmentId)
+    var hour1= this.rows[app.start]
+    var hour2 = this.times[this.times.indexOf(hour1)+Number(new_service.duration)]
+    element.getElementsByClassName('task-details')[0].innerHTML = `${data.details}`
+    element.getElementsByClassName('task-name')[0].innerHTML = `${this.nome}`
+    element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
+    element.style.height = div_height
+    // element.classList.remove(`c${app.service}`)
+    const colors = new RegExp(/c[0-9]*/, 'g');
+    element.className = element.className.replace(colors, '') 
+    element.classList.add(`c${new_service.color}`)
+
+    this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.extra_desc, this.selected, this.info)
          },err =>{
-          console.log(err)
+          console.log(err,"Siamo spiacenti. Ci sono dei problemi. Controlla la connessione")
          })
-  this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.info, this.selected)
+  
   this.closeModal()
 }
 deleteAppointment(){
@@ -479,7 +475,7 @@ goToday(){
   this.month_name= this.months_names[this.month]
   this.year = now.getFullYear()
   this.getAppoitments()
-
+  this.display="week"
 }
 saveNotStored(){
   var unstored = this.storage.getAppointmets(false)
@@ -487,7 +483,7 @@ saveNotStored(){
         console.log('trovaro unstore')
         for(let app of unstored){
           console.log(app)
-          this.api.bookAppointment( app.start, app.end, app.day, app.month, app.year, app.client_name, app.details, this.selected).subscribe(
+          this.api.bookAppointment( app.start, app.end, app.day, app.month, app.year, app.client_name, app.details, this.selected, app.service).subscribe(
             data=>{
               console.log(data, 'stored appointment')
               this.storage.deleteAppointmet(app.id)
@@ -501,22 +497,71 @@ saveNotStored(){
         }
       }
 }
-modifyApp(ev){
+drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
+  var height = end - start
+  var div_height = ((height*20)-16)+'px'
+  var div = document.createElement('div');
+  div.ondragstart = this.drag
+  var self = this
+  div.onclick = function() {
+    setTimeout(() => {
+    document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'
+    var appo: any = self.storage.getAppointmet(id)
+    console.log(appo)
+    self.nome = appo.client_name
+    self.time = appo.end-start
+    self.info = Number(appo.service)
+    self.extra_desc = appo.details
+    self.edit = true
+    self.updateAppointmentId = id
+    }, 1);
+};
+var services = this.storage.getCatalog()
+var color = 10000
+for (let service_el of services){
+  if (service_el.id == service){
+    color = service_el.color
+  }
+}
+  div.draggable =true
+  div.classList.add('task','task--primary', `c${color}`) 
+  div.id= id
+  div.style.height =div_height
+  // div.style.top = "15px"
+  var hour1=this.rows[start]
+  var hour2 = this.times[this.times.indexOf(hour1)+height]
+  div.innerHTML = `
+                  <div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+                  <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+                  <div class="task-name" id=${id} >${client_name}</div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
   
- 
-// self.goSettings()
-  console.log('porco dio', this.rows)
- 
-   
- 
-
-  // for (let appointment of this.appointmentlist){
-  //   if (appointment.id = ev.target.id){
-  //     app=appointment
-  //   }
-  // }
+  if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, this.week[0])) == week && this.selected ==employee){
+  document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+  }
   
-  // console.log(app) 
+  }   
+fullScreen(){
+  if (screenfull.isEnabled && this.full_screen ==false) {
+    screenfull.request();
+    this.full_screen =true
+  }else{
+    if (screenfull.isEnabled) {
+      this.full_screen =false
+      screenfull.exit();
+    }
+  }
+  
+} 
+displayWeek(){
+this.display ='week'
+setTimeout(() => {
+  this.getAppoitments()
+}, 1);
 
 }
+displayMonth(){
+  this.display ='month'
 }
+}
+
+

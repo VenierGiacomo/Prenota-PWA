@@ -9,6 +9,8 @@ import { LandingComponent } from './landing/landing.component';
 import { LoginComponent } from './login/login.component';
 import { SettingsComponent } from './settings/settings.component';
 import { EmployeesComponent } from './employees/employees.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 
 
 
@@ -20,8 +22,10 @@ const routes: Routes = [
   {path: 'settings', component: SettingsComponent},
   {path: 'settings/employees', component: EmployeesComponent},
   {path: 'month', component: MonthviewComponent},
+  {path: 'subscription', component: SubscriptionComponent},
   {path: 'test', component: TestingComponent},
   {path: 'store/setup', component: StoreSetupComponent},
+  {path: 'stripe', component: SepaPaymentComponent},
 ];
 
 @NgModule({

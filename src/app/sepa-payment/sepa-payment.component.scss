@@ -1,0 +1,110 @@
+/**
+* The CSS shown here will not be introduced in the Quickstart guide, but
+* shows how you can use CSS to style your Element's container.
+*/
+input,
+.StripeElement {
+
+  padding: 5px 10px;
+  color: #32325d;
+  background-color: white;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  font-size: 15px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+#email{
+  width: 110%;
+}
+input:focus,
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+.col{
+  text-align: left;
+  display: inline-block;
+  margin: 0px;
+  width: 40%;
+}
+.form-row{
+  margin: 20px;
+  label{
+    display: block;
+    padding: 5px 0px
+  }
+}
+#mandate-acceptance{
+  padding: 5px;
+  text-align: justify;
+  font-size: 11px;
+}
+
+///// my scss
+.pay-cont{
+    padding: 0px 20px 10px 20px;
+    border-radius: 15px;
+    border: 5px solid #02203c;
+    width: 40vw;
+    margin-left: 30vw;
+    background-color: #ebf3fd;
+    color: #02203c;
+  }
+  .confirm-pay{
+    width:100%;
+    text-align: center;
+    button{
+      color: #02203c;
+      border: none;
+      background: white;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      width: 16vw;
+      margin: 10px auto;
+      box-shadow: 0 5px 7px rgba(#ffffff, 0.2);
+    }
+    
+  }
+  .confirm-pay:focus{
+    button{
+      outline: none;
+    }
+
+  }
+
+  .payment-selection{
+    display: grid;
+    grid-template-columns: 1fr  1fr;
+    margin-bottom: 30px;
+    div{
+      justify-content: center;
+      align-content: center;
+      display: inline-block;
+      height: 80px;
+      text-align: center;
+      padding: 5px;
+      img{
+        height: 40px;
+      }
+      p{
+        bottom: 0px;
+      }
+    }
+    .active{
+    background: #cae0fc;
+    border-bottom: 5px solid #02203c;
+    }
+  }

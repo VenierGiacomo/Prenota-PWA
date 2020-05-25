@@ -1,18 +1,18 @@
 <body>
 <div class="home">
         <div class="side-menu">
-            <div class="menu-home">Calendario</div>
+            <div class="menu-home" >Calendario</div>
             <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
             <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
-            <!-- <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div> -->
+            <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
         </div>
         <div class="calendar">
             <div class="date"> 
                 <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div>{{month_name}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
                 <div class="today-date" (click)='goToday()'>Oggi</div>
                 <div class="selector-date">
-                    <div  (click)='display="week"'[class.active]='display=="week"'>Settimana</div>
-                    <div (click)='display="month"' [class.active]='display=="month"'>Mese</div>
+                    <div  (click)='displayWeek()'[class.active]='display=="week"'>Settimana</div>
+                    <div (click)='displayMonth()' [class.active]='display=="month"'>Mese</div>
                 </div>
             </div>
             <div class="calendar-table">
@@ -71,21 +71,44 @@
         </div>
             <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
         <p>Servizio:</p>
-            <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" [(ngModel)]="info" ></textarea>
-        <p>Durata</p>
-    <div class="time">
+        <select class='select_no_margin_left' [(ngModel)]="info" >
+                <option value=101010 selected >Seleziona servizio</option>
+                <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
+                <option value=10000 >altro</option>
+        </select>
+        <p *ngIf='info == 10000' >Descrizione:</p>
+            <textarea class="lable-appointment-modal" *ngIf='info == 10000' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
+        <p *ngIf='info == 10000'>Durata</p>
+    <div class="time" >
+        <div *ngIf='info == 10000'>
         <select [(ngModel)]="time">
-                    <option value=1>15 minuti</option>
-                    <option value=2 selected >30 minuti</option>
-                    <option value=3>45 minuti</option>
-                    <option value=4>1 ora</option>
-                    <option value=5>1 ora 15 minuti</option>
-                    <option value=6>1 ora 30 minuti</option>
-                    <option value=7>1 ora 45 minuti</option>
-                    <option value=8>2 ore</option>
+                <option value=1>5 min</option>
+                <option value=2>10 min</option>
+                <option value=3>15 min</option>
+                <option value=4>20 min</option>
+                <option value=5>25 min</option>
+                <option value=6>30 min</option>
+                <option value=7>35 min</option>
+                <option value=8>40 ora</option>
+                <option value=9>45 min</option>
+                <option value=10>50 min</option>
+                <option value=11>55 min</option>
+                <option value=12> 1ora</option>
+                <option value=13> 1 ora 5 min</option>
+                <option value=14> 1 ora 10 min</option>
+                <option value=15> 1 ora 15 min</option>
+                <option value=16> 1 ora 20 min</option>
+                <option value=17> 1 ora 25 min</option>
+                <option value=18> 1 ora 30 min</option>
+                <option value=19> 1 ora 35 min</option>
+                <option value=20> 1 ora 40 ora</option>
+                <option value=21> 1 ora 45 min</option>
+                <option value=22> 1 ora 50 min</option>
+                <option value=23> 1 ora 55 min</option>
+                <option value=24> 2 ore</option>
 
         </select>
-    
+        </div>
         <button  *ngIf='!edit'class="single-button " (click)='addAppointment()'>Salva</button>
         <div *ngIf='edit'>
                 <button  class="two-buttons modify-app" (click)='updateAppointment()'>Modifica</button>
