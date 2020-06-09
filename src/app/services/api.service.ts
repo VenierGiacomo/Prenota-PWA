@@ -9,8 +9,8 @@ export class UserCache{
               public wallet: number,
               ){}
   }
-const BASE_URL = 'http://127.0.0.1:8000/api/'
-
+const BASE_URL = 'https://giacomovenier.pythonanywhere.com/api/'
+// const BASE_URL = 'http://127.0.0.1:8000/api/'
 @Injectable({
   providedIn: 'root'
 })
@@ -36,7 +36,8 @@ storeToken(token){
 getToken(){
   var storedtoken = JSON.parse(localStorage.getItem('token'));
   var now = +new Date()
-  if ((now - storedtoken.last_resfresh)> 7200000){  // 7.200.000 it's 2 hours
+  if(storedtoken != undefined  || storedtoken != null){
+    if ((now - storedtoken.last_resfresh)> 7200000){  // 7.200.000 it's 2 hours
       this.refreshToken(storedtoken.token).subscribe(
         data=>{
           this.storeToken(data.token)
@@ -47,7 +48,9 @@ getToken(){
       )
   }
   return storedtoken.token 
+  }
 }
+  
 
 refreshToken(token):Observable<any>{
   var data ={
@@ -99,13 +102,22 @@ setopenHours(data): Observable<any>{
 setemployeeHours(data): Observable<any>{
   return this.http.post(BASE_URL+'employeehours/', data, {headers: this.newheader()})
 }
-setStoreservice( name, duration, sex, price, color){
-var data = { 'name':name, 'duration':duration, 'sex':sex, 'price':price, 'color':color}
+setStoreservice( name, duration, sex, max_n, color){
+var data = { 'name':name, 'duration':duration, 'sex':sex, 'max_n':max_n, 'color':color}
   return this.http.post(BASE_URL+'services/', data, {headers: this.newheader()})
 }
-bookAppointment(start, end, day, month, year,name, details, employee, service):Observable<any>{
+getStoreservice(id){
+  return this.http.get(BASE_URL+'services/',{headers: this.newheader(), params: {owner: id }})
+}
+setEmployeeservice(employee, service_id){
+  var data = {'employee':employee, 'service_id':service_id}
+    return this.http.post(BASE_URL+'employee/serices/', data, {headers: this.newheader()})
+}
+deleteEmployeeservice(employee, service_id){
+  return this.http.delete(BASE_URL+'employee/serices/'+employee+'/'+service_id+'/', {headers: this.newheader()})
+}
 
-  console.log(start, end, day, month, year,name, details, employee, service)
+bookAppointment(start, end, day, month, year,name, details, employee, service):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
   var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
@@ -129,13 +141,12 @@ deleteAppointment(id):Observable<any>{
   return this.http.delete(BASE_URL+'bookings/'+id+'/',  {headers: this.newheader()})
 }
 
-createStore(store_name, address, city, zip_code, payment_method):Observable<any>{
+createStore(store_name, address, city, zip_code):Observable<any>{
   var new_store ={
     'store_name': store_name,
     'address': address,
     'city': city,
     'zip_code': zip_code,
-    'payment_method': payment_method,
   }
   var header = new HttpHeaders({'Content-type':'application/json','Authorization':'JWT '+ this.getToken() })
   return this.http.post(BASE_URL+'store/', new_store,{headers: this.newheader()})
@@ -161,5 +172,8 @@ getWeekNumber(d) {
 }
 deleteEmployee(id){
   return this.http.delete(BASE_URL+'employees/'+id+'/',  {headers: this.newheader()})
+}
+deleteService(id):Observable<any>{
+  return this.http.delete(BASE_URL+'services/'+id+'/',  {headers: this.newheader()})
 }
 }

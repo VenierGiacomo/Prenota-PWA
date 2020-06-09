@@ -51,7 +51,7 @@ body {
       margin: 5px 0 0 0;
       font-size: 2vh;
       font-weight: 600;
-      color: rgba(#0E5FFE, .8);
+      color: rgba(#0061d5, .8);
     }
     
     button {
@@ -73,9 +73,8 @@ body {
   letter-spacing: 1px;
   font-size: 13px;
   box-sizing: border-box;
-  color: #0E5FFE;
+  color: #0061d5;
   position: relative;
-  pointer-events: none;
   z-index: 1;
 
   &:nth-of-type(7n + 7) {
@@ -132,7 +131,7 @@ body {
   &-name {
     font-size: 12px;
     text-transform: uppercase;
-    color: #0E5FFE;
+    color: #0061d5;
     text-align: center;
     border-bottom: 1px solid rgba(166, 168, 179, 0.3);
     line-height: 4vh;
@@ -145,6 +144,9 @@ body {
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f2f2fe' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     cursor: not-allowed;
   }
+}
+.m-day:hover{
+  background: #2cb0fc44;
 }
 
 .m-task {
@@ -255,7 +257,7 @@ body {
   display: inline;
   position: relative;
   margin-left: 30vw;
-  color: rgba(#0E5FFE, .7);
+  color: rgba(#0061d5, .7);
 }
 .m-last{
   img{
@@ -264,7 +266,7 @@ body {
   display: inline;
   position: relative;
   margin-right: 30vw;
-  color: rgba(#0E5FFE, .7);
+  color: rgba(#0061d5, .7);
 }
 
 .month-app{
@@ -278,7 +280,7 @@ body {
     bottom: 0px;
     margin: 0 !important;
     display: inline-block;
-    background: #0E5FFE;
+    background: #0061d5;
     display: block;
     height: 8px;
     width: 8px;

@@ -1,0 +1,14 @@
+[debug] [2020-06-09T11:16:26.452Z] ----------------------------------------------------------------------
+[debug] [2020-06-09T11:16:26.454Z] Command:       /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] [2020-06-09T11:16:26.454Z] CLI Version:   7.11.0
+[debug] [2020-06-09T11:16:26.454Z] Platform:      darwin
+[debug] [2020-06-09T11:16:26.454Z] Node Version:  v12.13.0
+[debug] [2020-06-09T11:16:26.459Z] Time:          Tue Jun 09 2020 13:16:26 GMT+0200 (Central European Summer Time)
+[debug] [2020-06-09T11:16:26.459Z] ----------------------------------------------------------------------
+[debug] [2020-06-09T11:16:26.459Z] 
+[debug] [2020-06-09T11:16:26.477Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-06-09T11:16:26.478Z] > authorizing via signed-in user
+[debug] [2020-06-09T11:16:26.478Z] [iam] checking project prenota-d8fae for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-06-09T11:16:26.480Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-06-09T11:16:26.480Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>

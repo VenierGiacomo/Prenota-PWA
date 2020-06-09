@@ -19,7 +19,7 @@
             <li class='pricing-feature'>App iOS e Android</li>
             <li class='pricing-feature'>Disponibile su pc e cellulare</li>
         </ul>
-        <button class='pricing-action first' (click)='selectesubscription()'> Seleziona</button>
+        <button class='pricing-action first' (click)='selectesubscription(1)'> Seleziona</button>
       </div>
       <div class='pricing-item pricing__item--featured'>
         <div class='pricing-deco second'>
@@ -42,7 +42,7 @@
           <li class='pricing-feature'>App iOS e Android</li>
           <li class='pricing-feature'>Disponibile su pc e cellulare</li>
         </ul>
-        <button class='pricing-action second' (click)='selectesubscription()'>Seleziona </button>
+        <button class='pricing-action second' (click)='selectesubscription(2)'>Seleziona </button>
       </div>
       <div class='pricing-item'>
         <div class='pricing-deco third'>
@@ -63,7 +63,7 @@
           <li class='pricing-feature'>Form di contatto</li>
           <li class='pricing-feature'>Disponibile su pc e cellulare</li>
         </ul>
-        <button class='pricing-action third' (click)='selectesubscription()'>Seleziona</button>
+        <button class='pricing-action third' (click)='selectesubscription(3)'>Seleziona</button>
       </div>
     </div>
     <app-sepa-payment *ngIf='selected' [amount]=amount></app-sepa-payment>

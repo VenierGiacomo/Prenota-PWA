@@ -20,10 +20,10 @@ export class StoreSetupComponent implements OnInit {
   }
 
 submit(){
-  this.api.createStore(this.store_name, this.address, this.city, this.zip_code, this.payment).subscribe(
+  this.api.createStore(this.store_name, this.address, this.city, this.zip_code).subscribe(
     data=>{
       console.log(data,'data')
-      this.router.navigateByUrl('store/setup')
+      this.router.navigateByUrl('home')
     },
     err => {
       console.log(err.error,'err')

@@ -18,7 +18,7 @@
             <div class="calendar-table">
                 <div class="table-cont">
                     <div class="tabs" *ngIf='display==="week"' >  <div class="tab " *ngFor='let employee of employees' [class.active]='employee.id == selected' (click)="activetab(employee)"> {{employee.name}}</div> </div>
-                        <app-monthview *ngIf='display=="month"' ></app-monthview>
+                        <app-monthview *ngIf='display=="month"' [myMethod]="myMethodFunc"></app-monthview>
                         <table *ngIf='display==="week"' class="fixed-table">
                                 <thead>
                                     <tr> 
@@ -122,35 +122,57 @@
 <div [style.display]="bgModalDisp" class="big-modal">
         <div class='appointment-modal appointment-modal-date'>
                 <p>Nome:</p>
-                <div class="close-appointment-modal" (click)='bgModalDisp="none"'>
+                <div class="close-appointment-modal" (click)="bgModalDisp='none'">
                         <img src="../assets/icons/close.svg"/>
                 </div>
-                    <input type="text" placeholder="Mario Rossi">
+                    <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
                 <p>Servizio:</p>
-                    <textarea class="lable-appointment-modal"  placeholder="Inserisci altri dettagli" ></textarea>
-                <p>Data:</p>
-            
-                    <mat-form-field>
-                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Seleziona la data"  disabled>
+                <select class='select_no_margin_left' [(ngModel)]="info" >
+                        <option value=101010 selected >Seleziona servizio</option>
+                        <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
+                        <option value=10000 >altro</option>
+                </select>
+                <mat-form-field>
+                        <input matInput [ngxMatDatetimePicker]="picker" placeholder="Seleziona la data"  [(ngModel)]="date_picker" disabled>
                         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                        <ngx-mat-datetime-picker #picker disabled="false" [showSpinners]="showSpinners" [showSeconds]="showSeconds"
-                            [stepHour]="stepHour" [stepMinute]="stepMinute" [stepSecond]="stepSecond"
-                            [touchUi]="touchUi" [color]="color" [enableMeridian]="enableMeridian" 
-                            [disableMinute]="disableMinute" [hideTime]="hideTime">
+                        <ngx-mat-datetime-picker #picker disabled="false">
                         </ngx-mat-datetime-picker>
-                    </mat-form-field>    
-                <p>Durata:</p>
-                             <select [(ngModel)]="time">
-                                         <option value=1>15 minuti</option>
-                                         <option value=2 selected >30 minuti</option>
-                                         <option value=3>45 minuti</option>
-                                         <option value=4>1 ora</option>
-                                         <option value=5>1 ora 15 minuti</option>
-                                         <option value=6>1 ora 30 minuti</option>
-                                         <option value=7>1 ora 45 minuti</option>
-                                         <option value=8>2 ore</option>       
-                             </select>
-                <button class="single-button">Salva</button>
-        </div>   
+                    </mat-form-field>   
+                <p *ngIf='info == 10000' >Descrizione:</p>
+                    <textarea class="lable-appointment-modal" *ngIf='info == 10000' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
+                <p *ngIf='info == 10000'>Durata</p>
+                <div class="time" >
+                        <div *ngIf='info == 10000'>
+                        <select [(ngModel)]="time">
+                                <option value=1>5 min</option>
+                                <option value=2>10 min</option>
+                                <option value=3>15 min</option>
+                                <option value=4>20 min</option>
+                                <option value=5>25 min</option>
+                                <option value=6>30 min</option>
+                                <option value=7>35 min</option>
+                                <option value=8>40 ora</option>
+                                <option value=9>45 min</option>
+                                <option value=10>50 min</option>
+                                <option value=11>55 min</option>
+                                <option value=12> 1ora</option>
+                                <option value=13> 1 ora 5 min</option>
+                                <option value=14> 1 ora 10 min</option>
+                                <option value=15> 1 ora 15 min</option>
+                                <option value=16> 1 ora 20 min</option>
+                                <option value=17> 1 ora 25 min</option>
+                                <option value=18> 1 ora 30 min</option>
+                                <option value=19> 1 ora 35 min</option>
+                                <option value=20> 1 ora 40 ora</option>
+                                <option value=21> 1 ora 45 min</option>
+                                <option value=22> 1 ora 50 min</option>
+                                <option value=23> 1 ora 55 min</option>
+                                <option value=24> 2 ore</option>
+                
+                        </select>
+                        </div>
+                        <button class="single-button " (click)='pickerApoointment()'>Salva</button>
+                    </div>
+            </div>   
 </div>
 </body>

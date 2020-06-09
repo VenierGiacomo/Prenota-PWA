@@ -13,6 +13,7 @@ export class HomeComponent implements OnInit {
 // private cdRef:ChangeDetectorRef
   constructor(private api: ApiService, private storage: StorageService, private router: Router) { } 
   resp:any
+  bgModalDisp='none';
   display = 'week'
   col: number
   full_screen =false
@@ -30,13 +31,12 @@ export class HomeComponent implements OnInit {
   time = 2
   extra_desc=''
   edit= false
-  bgModalDisp='none'
   title_text = "Nuovo appuntamento"
   btn_text = "Aggiungi"
   employees
   catalog_list
   selected
-
+  date_picker
   currentBlock= {
     row: 0,
     col: 0,
@@ -59,13 +59,19 @@ ngOnInit() {
   var now = new  Date()
   var today = now.getDay() -1
   var day_number = now.getDate()
+  if (today == -1){
+    today= 6
+  }
   for (let i=0;i<7;i++){
+    console.log(day_number,"-",today,"+", i)
     var day = day_number - today  + i
+    console.log(day)
     this.week.push(day)
   }
 
 // dispaly the closed hours
 var openinghours = this.storage.getEmployeehours()
+// this.storage.setHomeReference(this)
 if (openinghours.length>0){
   for (let hour of openinghours[0].timetable){
     this.openlist[hour.wkday].push(hour.start)
@@ -135,9 +141,9 @@ var height = Math.max( body.scrollHeight, body.offsetHeight,
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
                        console.log(height, y)
 if( height-y < 432){
-    y =  height-440
+    y =  height-460
   }else{
-    y = Math.max(y -240,0)
+    y = Math.max(y -260,0)
   }
 
     this.point={
@@ -170,7 +176,6 @@ addAppointment() {
         serv= service
       }
     }
-    console.log((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], this.month, this.year, this.nome , serv.name, this.info)
     this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], this.month, this.year, this.nome , serv.name, this.info)
   }
   
@@ -245,6 +250,7 @@ async getAppoitments(){
      
     }
   )
+
 }
 // Function that stores appointments both locally and on server
 setAppoitment(start, end, day, month, year, client_name, details, service){
@@ -280,7 +286,7 @@ if(this.info !=10000){
     
   }
   app.end =app.start + Number(new_service.duration)
-  var div_height = ((new_service.duration*20)-16)+'px'
+  var div_height = (new_service.duration*20)+'px'
   
   console.log(this.info)
 
@@ -288,7 +294,7 @@ if(this.info !=10000){
     this.extra_desc = new_service.name
  }else{
   app.end =app.start + Number(this.time)
-  var div_height = ((this.time*20)-16)+'px'
+  var div_height = (this.time*20)+'px'
   new_service= {color: 10000, duration: this.time } 
  }
   this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.extra_desc, this.selected, this.info ).subscribe(data =>{
@@ -462,7 +468,10 @@ activetab(employee){
 }
 
 goToday(){
-  console.log('clicked')
+  var paras = document.getElementsByClassName('task');
+  while(paras[0]) {
+    paras[0].parentNode.removeChild(paras[0]);
+  } ​
   var now = new  Date()
   this.week=[]
   var today = now.getDay() -1
@@ -474,8 +483,11 @@ goToday(){
   this.month = now.getMonth()
   this.month_name= this.months_names[this.month]
   this.year = now.getFullYear()
-  this.getAppoitments()
   this.display="week"
+  setTimeout(() => {
+    this.getAppoitments()
+  }, 50);
+  
 }
 saveNotStored(){
   var unstored = this.storage.getAppointmets(false)
@@ -499,7 +511,7 @@ saveNotStored(){
 }
 drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
   var height = end - start
-  var div_height = ((height*20)-16)+'px'
+  var div_height = (height*20)+'px'
   var div = document.createElement('div');
   div.ondragstart = this.drag
   var self = this
@@ -562,6 +574,55 @@ setTimeout(() => {
 displayMonth(){
   this.display ='month'
 }
+get myMethodFunc() {
+  return this.setWeek.bind(this);
+}
+setWeek(week, month, year){
+  this.week = week
+  this.month = month
+  this.month_name = this.months_names[month]
+  this.year = year
+  var paras = document.getElementsByClassName('task');
+  while(paras[0]) {
+    paras[0].parentNode.removeChild(paras[0]);
+  } ​
+  this.displayWeek()
+}
+pickerApoointment(){
+  var now =new Date(this.date_picker)
+  var hour:any = now.getHours()
+  var min:any = now.getMinutes()
+  var day = now.getDate()
+  var month = now.getMonth()
+  var year = now.getFullYear()
+  if (min<10){
+    min="0"+min.toString()
+  }
+  if (hour<10){
+    hour="0"+hour.toString()
+  }
+  var start = this.rows.indexOf(`${hour}:${min}`)
+  console.log(now, start, `${hour}:${min}`)
+  console.log(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
+  console.log(this.date_picker)
+  if (this.info == 10000){
+    console.log(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
+    this.setAppoitment(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
+  }
+  else{
+    var services = this.storage.getCatalog()
+    var serv
+    for(let service of services){
+      if (service.id ==  this.info){
+        serv= service
+      }
+    }
+    console.log(start, start+Number(serv.duration) , day, month, year, this.nome , serv.name, this.info)
+    this.setAppoitment(start, start+Number(serv.duration) , day, month, year, this.nome , serv.name, this.info)
+  }
+  this.bgModalDisp = 'none'
+}
+
 }
 
 

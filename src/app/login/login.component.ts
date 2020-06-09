@@ -11,6 +11,7 @@ import { StorageService } from '../services/storage.service';
 export class LoginComponent implements OnInit {
   email=''
   password=''
+  error= ''
   constructor(private router: Router, private api: ApiService, private storage: StorageService) { }
 
   ngOnInit() {
@@ -22,14 +23,14 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-
+  this.error=''
   this.api.login(this.email,this.password).subscribe(
     data=>{
-      this.api.storeToken(data.token)
-      // console.log(JSON.parse(atob(data.token.split('.')[1])))
-      this.router.navigateByUrl('')    
+      this.api.storeToken(data.token) 
+      this.router.navigateByUrl('/home')    
     },
     err => {
+      this.error = 'La password o la email che hai inserito non sono valide'
       console.log(err.error,'err')
     }
   )

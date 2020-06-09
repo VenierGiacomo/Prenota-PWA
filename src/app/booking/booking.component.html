@@ -1,0 +1,135 @@
+<div class="cont" >
+    <div class="profile">
+        <div><div class='img-cont'><img src='https://s1.dottori.it/uploads/img/68b6ab/e3/219674/b80fb6_b1084_c0d54.jpg'/></div></div>
+        <div class="info">
+            <h1>Dott. Gianfranco Stupar</h1>
+            <h5>Medico dello Sport</h5>
+            <h3>Istruzione</h3>
+            <ul>
+                <li>Laurea in <b>Medicina e Chirurgia</b> presso Università degli Studi di Trieste in data </li>
+                <li>Specializzazione in <b>Medicina dello Sport</b> presso Università degli Studi di Trieste </li>
+                <li>Specializzazione in <b>Medicina Interna</b> presso Università degli Studi di Trieste </li>
+            </ul>
+        </div>
+        <div class='about'>
+            <h1>Medicina dello sport</h1>
+            <p> Seguiamo sportivi e professionisti dello sport per un valido supporto al miglioramento delle prestazioni e al benessere.
+            Forniamo il servizio visite di idoneità agonistica e non agonistica, comprendente la modulistica per semplificare la visita.
+            </p> 
+        </div>
+        <div class='other'>
+            <h1>Nutrizione e Metabolismo</h1>
+        <p> La nostra attività è volta al continuo miglioramento del benessere, con attività di medicina interna per diagnosi e terapie 
+            relative al recupero e raggiungimento di una corretta forma fisicaniamo il servizio visite di idoneità agonistica e non agonistica, comprendente la modulistica per semplificare la visita.
+        </p> 
+         </div>
+        <div class="contacts">
+            <h1>Contatti</h1>
+            <span class="cont-contact">
+            <span><img src='../assets/icons/location_white.svg'/><p>Via Torrebianca, 28/A, Trieste</p></span>
+            <span><img src='../assets/icons/email.svg'/> <p>gianfranco.stupar@gmail.com</p></span>
+            <span><img src='../assets/icons/www.svg'/> <p>www.medicinadellosporttrieste.com</p></span>
+            </span>      
+        </div>
+    </div>
+    <div class="service">
+        <h2>Prenota ora</h2>
+        <div (mouseover)="ser='block'" (mouseout)="ser='none'">
+                <span class="services" [style.display]='ser' (mouseout)="ser='none'" (mouseover)="ser='block'">
+                        <span class="time-available" *ngFor='let service of services' (click)="selectService(service)">{{service.name}}</span>
+                </span>
+                {{selected_service}}
+        </div>
+        <div (mouseover)="cal='block'" (mouseout)="cal='none'">
+                <span class="time" [style.display]='cal' (mouseout)="cal='none'" (mouseover)="cal='block'">
+                        <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
+                        <span class="day">Lun</span>
+                        <span class="day">Mar</span>
+                        <span class="day">Mer</span>
+                        <span class="day">Gio</span>
+                        <span class="day">Ven</span>
+                        <span class="day">Sab</span>
+                        <span class="day">Dom</span>
+                        <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
+                        <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'>{{day}} </span>
+                        <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
+                     </span>
+           {{selected_date}}
+        </div>
+        <div  (mouseout)="spots='none'" (mouseover)="spots='block'">
+                {{selected_hour}}
+                <span class="bookings-time" [style.display]='spots' (mouseout)="spots='none'" (mouseover)="spots='block'">
+                        <span class="time-available" *ngFor='let spot of availableSpots' (click)="selectHour(spot.start)">{{times[spot.start]}}</span>
+                        <span *ngIf='availableSpots.length==0 && service==undefined'>Seleziona una data e un servizio</span>
+                </span>
+        </div>
+        <div class="prenota" (click)='register_form="block"'>
+               prenota
+        </div>
+    </div>
+  
+</div>
+
+<div class="cont-reg" [style.display]="register_form">
+        <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+    <div class="register-form" *ngIf="formType=='Register'">
+            <h1>prenota</h1>
+        <div class="header">
+            <div class="active">
+                Registrati
+            </div>
+            <div (click)="formType='Login'">
+                Accedi
+            </div>
+        </div>
+        <div class='inputs'>
+                <div class="row row-space">
+                        <div class="col-2-r">
+                            <div class="input-group">
+                                    <label class="label">Nome</label>
+                                    <input class="input--style-4" type="text" name="first_name" placeholder="Mario">
+                            </div>
+                        </div>
+                        <div class="col-2-r">
+                            <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4"  type="email" name="email" placeholder="mario.rossi@email.com">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Numero di telefono</label>
+                                    <input class="input--style-4" type="text" name="phone" placeholder="3312233645">
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Password</label>
+                                     <input class="input--style-4"  type="password" name="password"  placeholder="********">
+                                </div>
+                            </div>
+                        </div>
+                <div class="button-reg">  <button (click)='SendBooking("register")'>Conferma prenotazione</button></div>
+        </div> 
+    </div>
+    <div class="login-form" *ngIf="formType=='Login'"> 
+            <h1>prenota</h1>
+            <div class="header">
+                <div  (click)="formType='Register'">
+                    Registrati
+                </div>
+                <div class="active">
+                    Accedi
+                </div>
+            </div>
+            <div class='inputs'>
+            <label class="label">Email</label>
+            <input class="input--style-4"  type="email" name="email" placeholder="mario.rossi@email.com">
+            <label class="label">Password</label>
+            <input class="input--style-4"  type="password" name="password"  placeholder="********">
+                    <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
+            </div> 
+        </div>
+</div>

@@ -19,7 +19,7 @@ export class Appointment {
        public name: string,
        public duration: number,
        public sex: number,
-       public price:number,
+       public max_n:number,
        public color:number,
        ){}
      }

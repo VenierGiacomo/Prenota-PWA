@@ -11,9 +11,8 @@
     </div>
     <div class="m-calendar"><span class="m-day-name">Lun</span><span class="m-day-name">Mar</span><span class="m-day-name">Mer</span><span class="m-day-name">Gio</span><span class="m-day-name">Ven</span><span class="m-day-name">Sab</span><span class="m-day-name">Dom</span>
         <div *ngFor='let day of last_month_days' class="m-day m-day--disabled"></div>
-        <div *ngFor='let day of current_month_days' class="m-day ">{{day}} </div>
+        <div *ngFor='let day of current_month_days' class="m-day" (click)="setWeek(day)">{{day}} </div>
         <div *ngFor='let day of next_month_days' class="m-day m-day--disabled"></div>
-   
     </div>
 </div>
 </div>

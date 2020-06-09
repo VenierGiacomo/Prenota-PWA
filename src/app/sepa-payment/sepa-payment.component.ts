@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 
-declare var Stripe: stripe.StripeStatic;
+declare var Stripe;  //stripe.StripeStatic;
 @Component({
   selector: 'app-sepa-payment',
   templateUrl: './sepa-payment.component.html',

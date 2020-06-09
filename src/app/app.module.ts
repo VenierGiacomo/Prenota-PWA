@@ -21,7 +21,8 @@ import { SettingsComponent } from './settings/settings.component';
 import { EmployeesComponent } from './employees/employees.component';
 import * as Hammer from 'hammerjs';
 import { SubscriptionComponent } from './subscription/subscription.component';
-import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component'
+import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
+import { BookingComponent } from './booking/booking.component'
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component'
     EmployeesComponent,
     SubscriptionComponent,
     SepaPaymentComponent,
+    BookingComponent,
     
   ],
   imports: [

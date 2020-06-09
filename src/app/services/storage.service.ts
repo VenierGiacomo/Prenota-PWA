@@ -55,16 +55,18 @@ export class StorageService {
     localStorage.setItem('employeehours',JSON.stringify(timetable_new))
     console.log(timetable_new, id)
   }
-  setCatalog(name, duration, sex, price, color){
+  setCatalog(id, name, duration, sex, max, color){
     let services = this.getCatalog()
-    if(services.length==0){
-      this.nextId =0
-    }else {
-      let maxId = services[services.length-1].id
-      this.nextId = maxId + 1
-    }
+    // if(services.length==0){
+    //   this.nextId =0
+    // }else {
+    //   let maxId = services[services.length-1].id
+    //   this.nextId = maxId + 1
+    // }
 
-    var newservice= new NewCatalogService(this.nextId, name, duration, sex, price, color)
+    var newservice= new NewCatalogService(id, name, duration, sex, max, color)
+
+    console.log(newservice,id, name, duration, sex, max, color )
     let catalog = this.getCatalog()
     catalog.push(newservice)
     localStorage.setItem('catalog',JSON.stringify({ 'services': catalog}))

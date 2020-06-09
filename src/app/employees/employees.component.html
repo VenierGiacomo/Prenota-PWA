@@ -5,26 +5,26 @@
 
 
     <!-- Icons font CSS-->
-    <link href="../assets/template/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="../assets/template/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <!-- <link href="../assets/template/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all"> -->
+    <!-- <link href="../assets/template/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
     <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> 
 
     <!-- Vendor CSS-->
-    <link href="../assets/template/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="../assets/template/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+    <!-- <link href="../assets/template/vendor/select2/select2.min.css" rel="stylesheet" media="all"> -->
+    <!-- <link href="../assets/template/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all"> -->
 
     <!-- Main CSS-->
-    <link href="../assets/template/css/main.css" rel="stylesheet" media="all">
+    <!-- <link href="../assets/template/css/main.css" rel="stylesheet" media="all"> -->
 </head>
 <body>
-    <div class="toast" [style.display]='toast'>Modifiche salvate correttamente</div>
+    <div class="toast-s" [style.display]='toast'>Modifiche salvate correttamente</div>
     <div class="home">
         <div class="side-menu">
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
-            <button (click)="goSettings()">Indietro</button>
-            <!-- <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div> -->
+            <!-- <button (click)="goSettings()">Indietro</button> -->
+            <div class="menu-logout" (click)="goSettings()"> <img src="../assets/icons/back.svg"/> &nbsp;Indietro</div>
         </div>  
         <div class="settings">
             <div class='title-sect'>
@@ -89,7 +89,8 @@
             
         </div>
     </div>
-    <div class="catalog" [style.display]='catalog'>
+</body>
+<div class="catalog" [style.display]='catalog'>
         <div class="close-catalog" (click)='catalog="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
                 <table class="table-catalog">
@@ -98,7 +99,7 @@
                             <th class="corner1">Nome Servizio</th>
                             <th>Durata</th>
                             <th>Sesso</th>
-                            <th>Prezzo</th>
+                            <th>Max</th>
                             <th class="corner2">Attivo</th>
                         </tr>
                     </thead>  
@@ -107,7 +108,7 @@
                             <td>{{service.name}}</td>
                             <td>{{durations[service.duration]}}</td>
                             <td>{{sexs[service.sex]}}</td>
-                            <td>{{service.price}}€</td>
+                            <td>{{service.max_n}}</td>
                             <td *ngIf='service.active' (click)='activate(service)'> <button class="active-service">Attivo</button></td>
                             <td *ngIf='!service.active' (click)='activate(service)'> <button class="deactivated">Non attivo</button></td>
                         </tr>
@@ -115,36 +116,6 @@
                     </tbody>
                 </table>     
         </div>
-        <!-- <div class="cont-insert">
-                <table class="insert-table">
-                    <tbody>
-                        <tr> 
-                                <td><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name"></td>
-                                <td>
-                                    <select [(ngModel)]="duration">
-                                        <option value=1>15 min</option>
-                                        <option value=2>30 min</option>
-                                        <option value=3>45 min</option>
-                                        <option value=4>1 ora</option>
-                                        <option value=5>1 ora 15 min</option>
-                                        <option value=6>1 ora 30 min</option>
-                                        <option value=7>1 ora 45 min</option>
-                                        <option value=8>2 ore</option>
-                                    </select>
-                                </td>
-                                <td>
-                                    <select [(ngModel)]="sex_emp">
-                                        <option value=1>Donna</option>
-                                        <option value=2>Uomo</option>
-                                        <option value=3>Unisex</option>
-                                    </select>
-                                </td>
-                                <td><input class='input-price'type="numner" placeholder="prezzo" [(ngModel)]="price">€</td>
-                                <td><button  class="add-catalog" (click)='storeCatalogService()'>Aggiugni</button></td>
-                            </tr>
-                        </tbody>
-                </table>
-        </div> -->
     </div>
 <div class="catalog" [style.display]='createEmployee'>
         <div class="close-catalog" (click)='createEmployee="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
@@ -155,60 +126,60 @@
                     <h2 class="title">Crea il profilo di un nuovo dipendente</h2>
                     <form >
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-2-r">
                                 <div class="input-group">
-                                    <label class="label">Nome</label>
+                                    <div class="label">Nome</div>
                                     <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2-r">
                                 <div class="input-group">
-                                    <label class="label">Cognome</label>
+                                    <div class="label">Cognome</div>
                                     <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
-                                <div class="col-2">
+                                <div class="col-2-r">
                                         <div class="input-group">
-                                            <label class="label">Username</label>
+                                            <div class="label">Username</div>
                                             <input class="input--style-4" [(ngModel)]="username"type="text" name="username" placeholder="MarioRossi64">
                                         </div>
                                     </div>
-                            <div class="col-2">
-                                <div class="input-group" >
-                                    <label class="label">Sesso</label>
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Uomo
-                                            <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Donna
-                                            <input type="radio" [(ngModel)]="sex" value="w" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
+                                    <div class="col-2-r">
+                                        <div class="input-group" >
+                                            <label class="label">Sesso</label>
+                                            <div class="p-t-10">
+                                                <label class="radio-container m-r-45">Uomo
+                                                    <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio-container">Donna
+                                                    <input type="radio" [(ngModel)]="sex" value="w" name="gender">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
                         </div>
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-2-r">
                                 <div class="input-group">
-                                    <label class="label">Email</label>
+                                    <div class="label">Email</div>
                                     <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2-r">
                                     <div class="input-group">
-                                        <label class="label">Numero di telefono</label>
+                                        <div class="label">Numero di telefono</div>
                                         <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
                                     </div>
                                 </div>
                         </div>
                         <div class="row row-space">
-                                <div class="col-2">
+                                <div class="col-2-r">
                                     <div class="input-group">
-                                        <label class="label">Password</label>
+                                        <div class="label">Password</div>
                                         <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
                                     </div>
                                 </div>
@@ -223,8 +194,6 @@
         </div>
     </div>
 </div>
-</body>
-
 <div class="catalog" [style.display]='emplo'>
         <div class="close-catalog" (click)='emplo="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
@@ -245,6 +214,7 @@
                 </table>     
         </div>
     </div>
+
 
 <script src="../assets/template/vendor/jquery/jquery.min.js"></script>
     
