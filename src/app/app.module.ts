@@ -22,7 +22,14 @@ import { EmployeesComponent } from './employees/employees.component';
 import * as Hammer from 'hammerjs';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
-import { BookingComponent } from './booking/booking.component'
+import { BookingComponent } from './booking/booking.component';
+import { FirstpageComponent } from './firstpage/firstpage.component';
+import { HomelistingComponent } from './homelisting/homelisting.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
+
+import { FacebookModule } from 'ngx-facebook';
+
 
 @NgModule({
   declarations: [
@@ -39,6 +46,10 @@ import { BookingComponent } from './booking/booking.component'
     SubscriptionComponent,
     SepaPaymentComponent,
     BookingComponent,
+    FirstpageComponent,
+    HomelistingComponent,
+    FooterComponent,
+    HeaderComponent,
     
   ],
   imports: [
@@ -53,7 +64,8 @@ import { BookingComponent } from './booking/booking.component'
     NgxMatDatetimePickerModule,
     BrowserAnimationsModule,
     MatFormFieldModule,
-    MatInputModule 
+    MatInputModule,
+    FacebookModule.forRoot(),
   ],
   providers: [],
   exports:[

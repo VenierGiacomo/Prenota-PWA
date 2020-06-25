@@ -11,6 +11,38 @@
 @import"~assets/template/vendor/datepicker/daterangepicker.css"; 
 @import"~assets/template/css/main.css";
 
+@import"~assets/author/css/animate.css";
+@import"~assets/author/css/owl.carousel.min.css";
+@import"~assets/author/css/owl.theme.default.min.css";
+@import"~assets/author/css/magnific-popup.css";
+@import"~assets/author/css/flaticon.css";
+@import"~assets/author/css/style.css";
+@import"~assets/landing/vendors/owl-carousel/css/owl.carousel.min.css";
+@import"~assets/landing/vendors/owl-carousel/css/owl.theme.default.css";
+@import"~assets/landing/vendors/mdi/css/materialdesignicons.min.css";
+@import"~assets/landing/vendors/aos/css/aos.css";
+@import"~assets/landing/css/style.css" ;
+
+@import "~assets/listing/css/set1.css";
+
+// @font-face {
+// 	font-weight: normal;
+// 	font-style: normal;
+// 	font-family: 'feathericons';
+// 	src:url('./assets/listing/fonts/feathericons/feathericons.eot?-8is7zf');
+	// src:url('./assets/listing/fonts/feathericons/feathericons.eot?#iefix-8is7zf') format('embedded-opentype'),
+	// url('./assets/listing/fonts/feathericons/feathericons.woff?-8is7zf') format('woff'),
+	// url('./assets/listing/fonts/feathericons/feathericons.ttf?-8is7zf') format('truetype'),
+	// url('./assets/listing/fonts/feathericons/feathericons.svg?-8is7zf#feathericons') format('svg');
+// }
+
+@font-face {
+  font-family: 'simple-line-icons';
+  src: url('./assets/listing/fonts/Simple-Line-Icons.eot?v=2.4.0');
+  src: url('./assets/listing/fonts/Simple-Line-Icons.eot?v=2.4.0#iefix') format('embedded-opentype'), url('./assets/listing/fonts/Simple-Line-Icons.woff2?v=2.4.0') format('woff2'), url('./assets/listing/fonts/Simple-Line-Icons.ttf?v=2.4.0') format('truetype'), url('./assets/listing/fonts/Simple-Line-Icons.woff?v=2.4.0') format('woff'), url('./assets/listing/fonts/Simple-Line-Icons.svg?v=2.4.0#simple-line-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 @font-face {
     font-family: "Comfortaa Regular";

@@ -1,0 +1,61 @@
+
+// @import "./../../assets/listing/css/bootstrap.min.css";
+// @import "./../../assets/listing/css/simple-line-icons.css";
+// @import "./../../assets/listing/css/themify-icons.css";
+@import "./../../assets/listing/css/style.css";
+
+.header-act{
+    position: absolute;
+    display: inline-block;
+    right: 20px;
+    top: 20px;
+    height: 50px;
+    p{
+        display: inline-block;
+        line-height: 50px;
+        font-size: 16px;
+        color: #0061d5;
+        margin-right: 10px;
+        font-weight: 500;
+    }
+    span{
+        padding:15px 25px;
+        display: inline-block;
+    }
+
+
+}
+.logo-menu{
+    font-size: 28px;
+    line-height: 50px !important;
+    display: inline-block;
+    text-align: center;
+    font-family: "Comfortaa Bold";
+    color: #0061d5;
+    letter-spacing: 1px;
+    padding:0;
+}
+@media (max-width: 576px) {
+    .header-act {
+        p{
+                display: none;
+        }
+        }
+  }
+
+.categories{
+    background-image: url(./../../assets/applab/img/about/wave.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.category-block{
+background: white !important;
+}
+.category-block:hover{
+    background: #0061d5 !important;
+}
+.cat-heading{
+    text-align: center;
+    color:white!important;
+    margin-bottom: 60px;
+}

@@ -1,0 +1,38 @@
+@import"./../../assets/applab/css/style.css";
+
+.made-italy{
+position: absolute;
+bottom:10px;
+right: 30px;
+color: #0061d5;
+img{
+    height: 20px;
+    margin-top: -4px;
+}
+}
+
+.contacts{
+    margin-top: 100px;
+    width: 100vw;
+    display: block;
+    text-align: center;
+    margin-bottom: 60px;
+}
+.contact{
+    display: inline-block;
+    margin: 15px 50px 5px 50px;
+    font-size: 15px;
+    color: #0061d5;
+    img{
+        margin-right: 10px;
+        height: 20px;
+    }
+}
+.copyrights{
+    display: block;
+    margin-top:20px;
+    text-align: center;
+    width: 100vw;
+    font-size: 13px;
+    color: #0061d5;
+}

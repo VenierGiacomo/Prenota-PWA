@@ -29,7 +29,7 @@ input:focus, textarea:focus, select:focus{
 .side-menu{
     background: #0061d5;
     color: #B3D1F1;
-    font-size: 2vw;
+    font-size: 28px;
     button{
         position: relative;
         top: 44vh;
@@ -40,7 +40,8 @@ input:focus, textarea:focus, select:focus{
         margin-left: 2vw;
         border-radius: 10px;
         color: #00479D;
-        font-size: 2vw;
+        font-size: 21px;
+        cursor: pointer;
     }
     .menu-home{
         margin-right: 30px;
@@ -51,7 +52,8 @@ input:focus, textarea:focus, select:focus{
         position: relative;
         margin-top: 10vh;
         margin-left: 2vw;
-        display: block;    
+        display: block;  
+        cursor: pointer;  
     }
     .menu-settings{
         color: white;
@@ -64,6 +66,7 @@ input:focus, textarea:focus, select:focus{
         margin-top: 5vh;
         margin-left: 2vw;
         display: block;
+        cursor: pointer;
     }
     .menu-logout{
         color: white;
@@ -71,6 +74,7 @@ input:focus, textarea:focus, select:focus{
         top: 90vh;
         margin-left: 2vw;
         display: block;
+        cursor: pointer;
         img{
             margin-top: -3.5%;
             margin-left: -3.5%;
@@ -84,7 +88,7 @@ input:focus, textarea:focus, select:focus{
     min-width: 900px;
     position: relative;
     color: #00468e;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+      font-family:  'Open Sans', sans-serif !important;
     .title-sect{
         background: #fff;
         width: 100%;
@@ -92,7 +96,7 @@ input:focus, textarea:focus, select:focus{
         text-align: center;
         h1{
             text-align: center;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+              font-family:  'Open Sans', sans-serif !important;
         }
     }
     .business-type{
@@ -103,7 +107,7 @@ input:focus, textarea:focus, select:focus{
         width: 100%;
         height: 70px;
         h4{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+              font-family:  'Open Sans', sans-serif !important;
             align-self:center;
             font-size: 21px !important;
             font-weight: 600 !important;
@@ -124,7 +128,7 @@ input:focus, textarea:focus, select:focus{
                 width: 240px;
                 margin: 0px ;
                 padding:  5px;
-                font-size: 18px;
+                font-size: 16px;
                
             }
             p{
@@ -160,7 +164,7 @@ input:focus, textarea:focus, select:focus{
         width: 100%;
         height: 500px;
             h4{
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+                  font-family:  'Open Sans', sans-serif !important;
             align-self:center;
             font-size: 21px !important;
             font-weight: 600 !important;
@@ -186,7 +190,7 @@ input:focus, textarea:focus, select:focus{
                     // min-width: 1200px;
                     input{
                         display: inline-block;
-                        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+                        font-family:  'Open Sans', sans-serif !important;
                         background: #fff;
                         width: max-content;
                         color: #00468e;
@@ -225,7 +229,7 @@ input:focus, textarea:focus, select:focus{
             grid-template-columns: 1fr 1fr;
         }
         h4{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+              font-family:  'Open Sans', sans-serif !important;
             align-self:center;
             font-size: 21px !important;
             font-weight: 600 !important;
@@ -241,6 +245,8 @@ input:focus, textarea:focus, select:focus{
             justify-content: center;
             text-align: center;
             padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
         }
         .show-service{
             background: #fdb44d;
@@ -251,7 +257,7 @@ input:focus, textarea:focus, select:focus{
            
         }
         .add-service{
-            background: #0061d5;
+            background: #00479D;
             justify-content: center;
             color: #fff;
             box-shadow: 0 10px 14px rgba(#4786ff, 0.4);

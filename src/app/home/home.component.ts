@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   nome=""
   info=101010
   time = 2
+  phone=''
   extra_desc=''
   edit= false
   title_text = "Nuovo appuntamento"
@@ -36,6 +37,7 @@ export class HomeComponent implements OnInit {
   employees
   catalog_list
   selected
+  employees_list:any=[]
   date_picker
   currentBlock= {
     row: 0,
@@ -54,7 +56,7 @@ export class HomeComponent implements OnInit {
 
   }
   
-ngOnInit() {
+async ngOnInit() {
 // dispaly the appopriate days number and months
   var now = new  Date()
   var today = now.getDay() -1
@@ -63,14 +65,52 @@ ngOnInit() {
     today= 6
   }
   for (let i=0;i<7;i++){
-    console.log(day_number,"-",today,"+", i)
     var day = day_number - today  + i
-    console.log(day)
     this.week.push(day)
   }
 
 // dispaly the closed hours
-var openinghours = this.storage.getEmployeehours()
+var openinghours = await this.storage.getEmployeehours()
+if(openinghours==0){
+  this.api.getEmployees().subscribe(data=>{
+    for(let user of data){
+      this.api.getSpecificUser(user.employee).subscribe(data=>{
+        this.employees_list.push(data)
+      },err=>{
+        console.log(err)
+      })
+    }
+    setTimeout(() => {
+      this.api.getemployeeHours().subscribe(data=>{
+        for (let employee of this.employees_list){
+          let timetable =[]
+          for(let timeslot of data){
+            if(employee.id == timeslot.employee){
+              timetable.push(timeslot)
+            }
+          }
+        
+         this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
+        }
+      },err=>{
+        console.log(err)
+      })
+    }, 500);
+  },err=>{
+    console.log(err)
+  })
+}
+var x = this.storage.getCatalog()
+if(x.length==0){
+  this.api.getStoreservice().subscribe(data=>{
+    var services:any = data
+    for(let service of services){
+      this.storage.setCatalog(service.id, service.name, service.duration, service.sex, service.max_n, service.color)
+    }
+  },err=>{
+    console.log(err)
+  })
+}
 // this.storage.setHomeReference(this)
 if (openinghours.length>0){
   for (let hour of openinghours[0].timetable){
@@ -127,6 +167,7 @@ closeModal(){
 //Display the appointment modal in the proper place
 showCoords($event) {
   this.nome=""
+  this.phone=""
   this.extra_desc=''
   this.info=101010
   this.time=2
@@ -139,7 +180,6 @@ html = document.documentElement;
 
 var height = Math.max( body.scrollHeight, body.offsetHeight, 
                        html.clientHeight, html.scrollHeight, html.offsetHeight );
-                       console.log(height, y)
 if( height-y < 432){
     y =  height-460
   }else{
@@ -163,12 +203,19 @@ if( height-y < 432){
 }
 //Add a new appointment
 addAppointment() {
-  document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
-  if (this.info == 10000){
-    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.week[this.currentBlock.col], this.month, this.year, this.nome , this.extra_desc, this.info)
+  var month = this.month
+  var year = this.year
+  if(this.week[6]<this.week[this.currentBlock.col]){
+    month=(month-1)
+    if(month==-1){
+      month=11
+      year-=1
+    }
   }
-  else{
-   
+  document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
+  if (this.info == -1){
+    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.week[this.currentBlock.col], month, year, this.nome , this.phone, this.extra_desc, this.info)
+  }else{
     var services = this.storage.getCatalog()
     var serv
     for(let service of services){
@@ -176,7 +223,7 @@ addAppointment() {
         serv= service
       }
     }
-    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], this.month, this.year, this.nome , serv.name, this.info)
+    this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration) , this.week[this.currentBlock.col], month, year, this.nome , this.phone, serv.name, this.info)
   }
   
 }
@@ -202,15 +249,13 @@ addAppointment() {
     if( this.times[h1] != undefined && this.times[h2] != undefined && ev.target.id != data  ){
       var hour1=this.rows[h1]
       var hour2 = this.times[this.times.indexOf(hour1)+dur]
-      console.log(h2, hour1)
       document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
       ev.target.append(document.getElementById(data));
       var appointments = this.storage.getAllAppointmets()
     for (let appointment of appointments){
       if(appointment.id ==data){
-         this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee, appointment.service)
-         this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.details, appointment.employee, appointment.service).subscribe(data =>{
-console.log(data)
+         this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service)
+         this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service).subscribe(data =>{
          },err =>{
           console.log(err)
          })
@@ -227,7 +272,13 @@ console.log(data)
 async getAppoitments(){
   document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
   this.appointmentlist= []
-  var week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
+  var week 
+  if(this.week[6]<this.week[0]){
+    week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
+  }else{
+    week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
+  }
+ 
 
   // usa un last check 10minutes per risparmiare server
   var online_data: any = await this.api.getAppointments(week).subscribe(
@@ -236,7 +287,7 @@ async getAppoitments(){
       if (this.appointmentlist.length != 0){
         for (let appo of this.appointmentlist){
           this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
-          this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name,appo.details,  appo.employee, appo.service_n,true)
+          this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true)
         }
       }
       else{console.log('empty_data')}
@@ -253,19 +304,19 @@ async getAppoitments(){
 
 }
 // Function that stores appointments both locally and on server
-setAppoitment(start, end, day, month, year, client_name, details, service){
-  var week = this.getWeekNumber(new Date(year, month, this.week[0]))
-  this.point.disp="none"
-  this.api.bookAppointment( start, end, day, month, year, client_name, details, this.selected, service).subscribe(
-    data=>{
-      this.drawAppointment(data.id, start, end, details, client_name, this.selected, service, day ,week, month, year)
-      this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, details, this.selected, service, true)
-    },
-    err => {
-      this.drawAppointment(new Date(), start, end, details, client_name, this.selected, service, day ,week, month, year)
-      this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,client_name, details, this.selected, service, false)
-    }
-  )
+setAppoitment(start, end, day, month, year, client_name, phone, details, service){
+  var week = this.getWeekNumber(new Date(year, month, day))
+    this.point.disp="none"
+    this.api.bookAppointment( start, end, day, month, year, client_name, this.phone, details, this.selected, service).subscribe(
+      data=>{
+        this.drawAppointment(data.id, start, end, details, client_name, this.selected, service, day ,week, month-1, year)
+        this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, this.selected, service, true)
+      },
+      err => {
+        this.drawAppointment(new Date(), start, end, details, client_name, this.selected, service, day ,week, month-1, year)
+        this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,client_name, phone, details, this.selected, service, false)
+      }
+    )
 }
 updateAppointment(){
 var appointments = this.storage.getAllAppointmets()
@@ -277,7 +328,7 @@ var app
 
   }
   var new_service
-if(this.info !=10000){
+if(this.info !=-1){
   var services = this.storage.getCatalog()
   for(let service of services){
     if(service.id == this.info){
@@ -288,7 +339,6 @@ if(this.info !=10000){
   app.end =app.start + Number(new_service.duration)
   var div_height = (new_service.duration*20)+'px'
   
-  console.log(this.info)
 
 
     this.extra_desc = new_service.name
@@ -297,7 +347,7 @@ if(this.info !=10000){
   var div_height = (this.time*20)+'px'
   new_service= {color: 10000, duration: this.time } 
  }
-  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.extra_desc, this.selected, this.info ).subscribe(data =>{
+  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, this.selected, this.info ).subscribe(data =>{
     var element = document.getElementById(this.updateAppointmentId)
     var hour1= this.rows[app.start]
     var hour2 = this.times[this.times.indexOf(hour1)+Number(new_service.duration)]
@@ -310,7 +360,7 @@ if(this.info !=10000){
     element.className = element.className.replace(colors, '') 
     element.classList.add(`c${new_service.color}`)
 
-    this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.extra_desc, this.selected, this.info)
+    this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, this.selected, this.info)
          },err =>{
           console.log(err,"Siamo spiacenti. Ci sono dei problemi. Controlla la connessione")
          })
@@ -326,7 +376,6 @@ deleteAppointment(){
      })
   this.storage.deleteAppointmet(this.updateAppointmentId)
   var paras = document.getElementById(this.updateAppointmentId);
-  console.log(paras)
   paras.parentNode.removeChild(paras);
   this.closeModal()
   }
@@ -494,8 +543,7 @@ saveNotStored(){
       if (unstored.length > 0){
         console.log('trovaro unstore')
         for(let app of unstored){
-          console.log(app)
-          this.api.bookAppointment( app.start, app.end, app.day, app.month, app.year, app.client_name, app.details, this.selected, app.service).subscribe(
+          this.api.bookAppointment( app.start, app.end, app.day, app.month, app.year, app.client_name, app.phone, app.details, this.selected, app.service).subscribe(
             data=>{
               console.log(data, 'stored appointment')
               this.storage.deleteAppointmet(app.id)
@@ -515,16 +563,17 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
   var div = document.createElement('div');
   div.ondragstart = this.drag
   var self = this
+  // console.log(client_name, day ,week, month, year )
   div.onclick = function() {
     setTimeout(() => {
     document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'
     var appo: any = self.storage.getAppointmet(id)
-    console.log(appo)
     self.nome = appo.client_name
     self.time = appo.end-start
     self.info = Number(appo.service)
     self.extra_desc = appo.details
     self.edit = true
+    self.phone=appo.phone
     self.updateAppointmentId = id
     }, 1);
 };
@@ -546,8 +595,17 @@ for (let service_el of services){
                   <div class="task-duration" id=${id}>${hour1}-${hour2}</div>
                   <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
                   <div class="task-name" id=${id} >${client_name}</div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
-  
-  if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, this.week[0])) == week && this.selected ==employee){
+  if(this.week[6]<this.week[0]){1
+    if(day<7){
+      if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected ==employee){
+        document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+        }
+    }else{
+      if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month-1, day)) == week && this.selected ==employee){
+        document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+        }
+    }}
+  if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected ==employee){
   document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
   }
   
@@ -602,12 +660,8 @@ pickerApoointment(){
     hour="0"+hour.toString()
   }
   var start = this.rows.indexOf(`${hour}:${min}`)
-  console.log(now, start, `${hour}:${min}`)
-  console.log(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
-  console.log(this.date_picker)
-  if (this.info == 10000){
-    console.log(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
-    this.setAppoitment(start, start+(this.time-1), day, month, year, this.nome , this.extra_desc, this.info)
+  if (this.info == -1){
+    this.setAppoitment(start, start+(this.time-1), day, month, year, this.nome ,this.phone, this.extra_desc, this.info)
   }
   else{
     var services = this.storage.getCatalog()
@@ -617,8 +671,7 @@ pickerApoointment(){
         serv= service
       }
     }
-    console.log(start, start+Number(serv.duration) , day, month, year, this.nome , serv.name, this.info)
-    this.setAppoitment(start, start+Number(serv.duration) , day, month, year, this.nome , serv.name, this.info)
+    this.setAppoitment(start, start+Number(serv.duration) , day, month, year, this.nome , this.phone,serv.name, this.info)
   }
   this.bgModalDisp = 'none'
 }

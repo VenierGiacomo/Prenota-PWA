@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-subscription',
@@ -8,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class SubscriptionComponent implements OnInit {
 selected = false
 amount = 0
+@Input() price_SMALL
+@Input() price_MEDIUM
   constructor() { }
 
   ngOnInit() {
+      console.log(this.price_SMALL, this.price_MEDIUM)
   }
 selectesubscription(sub){
   if(sub == 1){

@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Butterfly Bootstrap Template - Index</title>
-  <meta content="" name="descriptison">
-  <meta content="" name="keywords">
 
   <!-- Favicons -->
   <link href="../assets/butterfly/assets/img/favicon.png" rel="icon">
@@ -38,37 +34,20 @@
 <body>
 
   <!-- ======= Header ======= -->
-  <header id="header" class="fixed-top">
-    <div class="container d-flex align-items-center">
-
-      <a (click)="navigateToSection('hero')" class="logo mr-auto"><span>pre</span><span class="dark">nota</span> </a>
-      <!-- Uncomment below if you prefer to use text as a logo -->
-      <!-- <h1 class="logo mr-auto"><a href="index.html">Butterfly</a></h1> -->
-
-      <nav class="nav-menu d-none d-lg-block">
-        <ul>
-          <li><a (click)="navigateToSection('hero')">Home</a></li>
-          <li><a (click)="navigateToSection('services')">About</a></li>
-          <li><a (click)="navigateToSection('about')">Prodotto</a></li>
-          <li><a (click)="navigateToSection('counts')">Prezzo</a></li>
-          <li><a (click)="navigateToSection('contact')">Contattaci</a></li>
-          <li><button (click)='goResiter()'>Prova gratis</button></li>
-
-        </ul>
-      </nav><!-- .nav-menu -->
-
-    </div>
-  </header><!-- End Header -->
-
+  <!-- <section id="header" class="d-flex align-items-center"> -->
+      <section class="head-45">
+  <app-header></app-header>
+      </section>
+<!-- </section> -->
   <!-- ======= Hero Section ======= -->
   <section id="hero" class="d-flex align-items-center">
 
     <div class="container">
       <div class="row">
         <div class="col-lg-6 pt-4 pt-lg-0 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1>La più semplice agenda al mondo</h1>
-          <h2><br>Aggiungi nuove prenotazioni con un solo click<br> <br>Permetti ai tuoi clienti di pronotare direttamente dall'app<br> <br>Accedi ai tuoi appuntmaenti ovunque, casa ufficio o per strada </h2>
-          <div><a class="more-info scrollto"  (click)="navigateToSection('services')">Scopri di più</a> <a (click)='goResiter()'class="btn-get-started scrollto">Provala gratuitamente</a></div>
+          <h1>L' agenda più semplice al mondo</h1>
+          <h2><br>Aggiungi nuove prenotazioni con un solo click.<br> <br>Permetti ai tuoi clienti di prenotare direttamente dall' app mobile o dal tuo sito.<br> <br>Gestisci i tuoi appuntamenti online, da telefono o pc. </h2>
+          <div><a class="more-info scrollto"  (click)="navigateToSection('services')">Scopri di più</a> <a (click)='goResiter()'class="btn-get-started scrollto">{{call_to_act}}</a></div>
          
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img">
@@ -84,7 +63,7 @@
       <div class="container">
 
         <div class="section-title">
-          <h2>I nostri servizi</h2>
+          <h2>Perchè usare questa agenda?</h2>
           <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
         </div>
 
@@ -93,14 +72,14 @@
             <div class="icon-box">
               <div class="icon"><i class="las la-calendar" style="color: #0061d5;"></i></div>
               <h4 class="title"><a href="">Agenda</a></h4>
-              <p class="description">La nostra funzione pricipale è essere una agenda <b>facile</b> da usare. <br> Basta un solo click per creare un appuntamento</p>
+              <p class="description">Il nostro obiettivo è offire un' agenda <b>facile</b> da usare. <br> Basta un solo click per creare un appuntamento.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6">
             <div class="icon-box">
               <div class="icon"><i class="las la-laptop" style="color: #0061d5;"></i></div>
-              <h4 class="title"><a href="">Prenotiazioni Online</a></h4>
-              <p class="description">I tuoi <b>clienti possono prenotare direttamente dall'app</b>, a qualsiasi ora e senza disturbarti <br> <br></p>
+              <h4 class="title"><a href="">Prenotazioni Online</a></h4>
+              <p class="description">I tuoi <b>clienti possono prenotare direttamente dall'app o dal tuo sito</b>, a qualsiasi ora e senza doverti contattare.</p>
             </div>
           </div>
 
@@ -108,29 +87,29 @@
             <div class="icon-box">
               <div class="icon"><i class=" las la-globe-americas" style="color: #0061d5;"></i></div>
               <h4 class="title"><a href="">Accessibile Ovunque</a></h4>
-              <p class="description">Che tu sia in ufficio, sul divano o in macchina non fa differenza. <b>Potrai sempre accedere alla tua agenda</b> dal sito o dall'app</p>
+              <p class="description">Puoi accedere alla tua agenda online <b>in qualsiasi momento</b>. Indifferentemente da dove ti trovi.<br> <br></p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6" data-wow-delay="0.1s">
             <div class="icon-box">
               <div class="icon"><i class="las la-search" style="color:#0061d5;"></i></div>
               <h4 class="title"><a href="">Trova Nuovi Clienti</a></h4>
-              <p class="description">Tu crei un profilo sulla nostra app, del marketing ce ne  occupiamo noi. <b>Ogni settimana nuovi user sull'app</b></p>
+              <p class="description">La tua presenza sulla nostra piattaforma <b>ti porterà nuovi clienti</b> che preferiscono prenotare in maniera moderna.</p>
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6" data-wow-delay="0.2s">
             <div class="icon-box">
               <div class="icon"><i class="la  la-send-o" style="color: #0061d5;"></i></div>
-              <h4 class="title"><a href="">Condivisibile</a></h4>
-              <p class="description"> <b>Condividi l'agenda</b> con i tuoi <b>dipendenti</b>, e mantienili sempre aggiornati <br> <br></p>
+              <h4 class="title"><a href="">Flessibile</a></h4>
+              <p class="description"> La nostra <b>agenda si adatta a te</b>. Che tu sia un libero professionista o che il tuo team sia numeroso, abbiamo la soluzione per te.</p>
             </div>
           </div>
           <div class="col-lg-4 col-md-6" data-wow-delay="0.2s">
             <div class="icon-box">
               <div class="icon"><i class="las la-lock" style="color: #0061d5;"></i></div>
               <h4 class="title"><a href="">Sicurezza & Privacy</a></h4>
-              <p class="description">Proteggi la tua agenda tutta la tua agenda online. I tuoi <b>dati sono salvati in modo sicuro</b> ed accessibili solo a te </p>
+              <p class="description">La tua agenda è protetta. I tuoi <b>dati sono criptati e salvati in modo sicuro</b>. Non ti capiterà più di perdere l'agenda.</p>
               
             </div>
           </div>
@@ -151,9 +130,10 @@
           </div> 
 
           <div style='text-align: center !important;' class="col-xl-12 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
-            <h3>Agenda semplice e pulita</h3>
-            <p >L'obiettivo pricipale è la <b>semplicità</b>. &nbsp; L'agenda occupa tutto lo schermo. &nbsp;Per creare un appuntmaneto <b>basta un  click</b>.
-              <br>Quando un cliente prenota dall'app, <b>l'appuntaneto viene aggiunto automaticamente </b>al calendario
+            <h3>L'agenda è semplice e pulita</h3>
+            <p> La <b>semplicità</b> è la nostra priorità.  Per creare un appuntamento ti <b>basta un click</b>.<br>
+                Quando un <b>cliente prenota dall'app</b>, l'appuntamento viene aggiunto automaticamente alla tu agenda.<br>
+                <b> Il cliente dall’app vedrà solo i tuoi posti liberi</b>, dunque non avrai bisogno di confermare la tua disponibilità o spostare appuntamenti già fissati.
             </p>
           </div> 
         </div>
@@ -163,7 +143,33 @@
     
     <!-- ======= Counts Section ======= -->
     <section id="counts" class="counts">
-      <div class="container">
+       <div class="container">
+        <div class="section-title">
+            <h2>Prezzo</h2>
+            <div  class="col-xl-12 site">
+                <p class="site">Ti serve anche un sito dal <b>design moderno e professionale</b>? </p>
+                 <div class="switch-conts">
+                <label class="switch">
+                      <input type="checkbox" [checked]="make_website" (change)="website()">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+               </div>
+        </div>
+        <app-subscription [price_SMALL]=price_SMALL [price_MEDIUM]=price_MEDIUM></app-subscription>
+        <div style='text-align: center !important;' class="col-xl-12 icon-boxes d-flex flex-column align-items-stretch justify-content-center py-5 px-lg-5">
+          <h3>Vuoi avere anche un sito professionale per te o la tua attivà?</h3>
+          <p>Sei interessato ad avere un sito dal <b>design moderno</b>, accessibile sia da computer che da cellulare? Ti offriamo <b>il prezzo più conveniente sul mercato</b>?</p>
+         <div style='text-align: center !important;' class="col-xl-12">
+        Ricevi il sito professionale a soli 10€ al mese? 
+            <label class="switch">
+                <input type="checkbox" [checked]="make_website" (change)="website()">
+                <span class="slider round"></span>
+              </label>
+         </div>
+        </div>
+       </div>
+      <!-- <div class="container">
 
         <div class="text-center title">
           <h3>Prezzo </h3>
@@ -194,7 +200,7 @@
 
         </div>
 
-      </div>
+      </div> -->
     </section>
     <!-- End Counts Section -->
 
@@ -654,12 +660,12 @@
     <!-- End Gallery Section -->
 
     <!-- ======= Contact Section ======= -->
-    <section id="contact" class="contact section-bg">
+    <section id="contact" class="contact ">
       <div class="container">
 
         <div class="section-title">
           <h2>Contattaci ora</h2>
-          <p>Sei interessato, hai un qualsiasi dubbio o solo per curiosità, trovi qui sotto i nostri contatti </p>
+          <p>Se sei interessato, hai un qualsiasi dubbio o solo per curiosità, trovi qui sotto i nostri contatti<br>Clicca sopre i numeri di telefono o la mail per contattarci</p>
         </div>
 
         <!-- <div>
@@ -670,38 +676,39 @@
 
           <div class="col-lg-4">
             <div class="info">
+            <a href="https://wa.me/393312233645"target="_blank">   
               <div class="address">
                 <i class="icofont-ui-text-chat"></i>
                 <h4>Whatsapp</h4>
                 <p>+39 331 2233645</p>
               </div>
+            </a>
 
-              <div class="email">
+              <a href="mailto:business@prenota.cc" target="_blank"> <div class="email">
                 <i class="icofont-envelope"></i>
                 <h4>Email:</h4>
-                <p>giacomo.veneir@gmail.com</p>
-              </div>
+                <p>business@prenota.cc</p>
+              </div></a>
 
-              <div class="phone">
+              <a href="tel:+393312233645" target="_blank">   <div class="phone">
                 <i class="icofont-phone"></i>
                 <h4>Chiama:</h4>
                 <p>+39 331 2233645</p>
-              </div>
+              </div></a>
 
             </div>
 
           </div>
 
           <div class="col-lg-8 mt-5 mt-lg-0">
-
-            <form action="send()" method="post" role="form" class="php-email-form">
+            <form action="https://mailthis.to/franz.stupar@gmail.com" method="POST" encType="multipart/form-data" class="php-email-form">
               <div class="form-row">
                 <div class="col-md-6 form-group">
-                  <input [(ngModel)]='name'type="text" name="name" class="form-control" id="name" placeholder="Il tuo nome" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                  <input [(ngModel)]='name'type="text" name="name" class="form-control" placeholder="Il tuo nome"/>
                   <div class="validate"></div>
                 </div>
                 <div class="col-md-6 form-group">
-                  <input [(ngModel)]='email' type="email" class="form-control" name="email" id="email" placeholder="La tua email" data-rule="email" data-msg="Please enter a valid email" />
+                  <input [(ngModel)]='email' type="email" name="_replyto" class="form-control" placeholder="La tua email"/>
                   <div class="validate"></div>
                 </div>
               </div>
@@ -710,15 +717,10 @@
                 <div class="validate"></div>
               </div>
               <div class="form-group">
-                <textarea  [(ngModel)]='message' class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Scrivi il tuo messaggio"></textarea>
+                <textarea  [(ngModel)]='message' class="form-control" name="message" rows="5" placeholder="Scrivi il tuo messaggio"></textarea>
                 <div class="validate"></div>
               </div>
-              <div class="mb-3">
-                <div class="loading">Caricamento</div>
-                <div class="error-message"></div>
-                <div class="sent-message">Il tuo messaggio è stato ricevuto, grazie!</div>
-              </div>
-              <div class="text-center"><button (click)='send()' type="submit">Spedisci messaggio</button></div>
+              <div class="text-center"><button type="submit" (click)='send()'>Spedisci messaggio</button></div>
             </form>
 
           </div>
@@ -727,7 +729,7 @@
 
       </div>
     </section><!-- End Contact Section -->
-
+  <app-footer></app-footer>
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
@@ -799,22 +801,9 @@
         </div>
       </div>
     </div> -->
-<footer id="footer">
-    <div class="container py-4">
-      <div class="copyright">
-        &copy; Copyright <strong><span>Butterfly</span></strong>. All Rights Reserved
-      </div>
-      <div class="credits">
-        <!-- All the links in the footer should remain intact. -->
-        <!-- You can delete the links only if you purchased the pro version. -->
-        <!-- Licensing information: https://bootstrapmade.com/license/ -->
-        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/butterfly-free-bootstrap-theme/ -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-      </div>
-    </div>
-  </footer><!-- End Footer -->
 
-  <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
+
+
 
   <!-- Vendor JS Files -->
   <script src="../assets/butterfly/assets/vendor/jquery/jquery.min.js"></script>
@@ -829,7 +818,8 @@
 
   <!-- Template Main JS File -->
   <script src="../assets/butterfly/assets/js/main.js"></script>
-
+  
+  <!-- Load Facebook SDK for JavaScript -->
 </body>
 
 </html>

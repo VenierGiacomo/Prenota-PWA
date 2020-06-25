@@ -8,11 +8,11 @@ export class Appointment {
     public month:number,
     public year:number,
     public client_name: string,
+    public phone: string,
     public details: string,
     public employee: string,
     public service: string,){}
   }
-
   export class NewCatalogService {
     constructor(
        public id: number,

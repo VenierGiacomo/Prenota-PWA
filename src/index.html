@@ -1,11 +1,14 @@
 <!doctype html>
-<html lang="en">
+<html lang="it">
 <head>
   <meta charset="utf-8">
-  <title>Calendarapp</title>
+  <title>Prenota - Prenota parrucchieri, medici e molto altro ad ogni ora del giorno</title>
+  <meta name="description" content="Prenota servizzi di ogni tipo in un semplice click. Recevi promemoria prima dell'appuntamento ">
+  <meta name="keywords" content="Prenota, Trieste, Parrucchieri, Servizi, Medici">
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <script src="https://js.stripe.com/v3/" ></script> -->
+  <script src="https://js.stripe.com/v3/" ></script>
+  <!-- <script type=”text/javascript”  src="https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js"></script> -->
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -16,9 +19,47 @@
   <link href="assets/butterfly/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet">
   <link href="assets/butterfly/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet">
   <link href="assets/butterfly/assets/css/style.css" rel="stylesheet">
+  <script src="assets/author/js/jquery.min.js"></script>
+  <script src="assets/author/js/jquery-migrate-3.0.1.min.js"></script>
+  <script src="assets/author/js/popper.min.js"></script>
+  <script src="assets/author/js/bootstrap.min.js"></script>
+  <script src="assets/author/js/jquery.easing.1.3.js"></script>
+  <script src="assets/author/js/jquery.waypoints.min.js"></script>
+  <script src="assets/author/js/jquery.stellar.min.js"></script>
+  <script src="assets/author/js/owl.carousel.min.js"></script>
+  <script src="assets/author/js/jquery.magnific-popup.min.js"></script>
+  <script src="assets/author/js/jquery.animateNumber.min.js"></script>
+  <script src="assets/author/js/scrollax.min.js"></script>
+  <script src="assets/author/js/main.js"></script>
+  <script src="https://unpkg.com/swiper/js/swiper.js"></script>
+  <script src="https://unpkg.com/swiper/js/swiper.min.js"></script>
 </head>
 <body>
-
+    <div id="fb-root"></div>
+    <script>
+          window.fbAsyncInit = function() {
+            FB.init({
+              xfbml            : true,
+              version          : 'v7.0'
+            });
+          };
+      
+          (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = 'https://connect.facebook.net/it_IT/sdk/xfbml.customerchat.js#xfbml=1&version=v2.12&autoLogAppEvents=1';
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+      
+        <!-- Your Chat Plugin code -->
+  <div class="fb-customerchat"
+          attribution=setup_tool
+          page_id="107672704334119"
+      theme_color="#0061d5"
+      logged_in_greeting="Benvenuto su Prenota! Sono Giacomo Venier, posso esserle d'aiuto?"
+      logged_out_greeting="Benvenuto su Prenota! Sono Giacomo Venier, posso esserle d'aiuto?">
+  </div> 
   <app-root></app-root>
   
 </body>

@@ -9,7 +9,7 @@
 # General
 --------------------------------------------------------------*/
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
   color: #444444;
 }
 
@@ -23,7 +23,7 @@ a:hover {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Dosis", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 /*--------------------------------------------------------------
@@ -68,13 +68,13 @@ h1, h2, h3, h4, h5, h6 {
 
 #header .logo {
   font-size: 28px;
+  line-height: 50px;
   margin: 0;
   padding: 0;
-  line-height: 1;
   font-weight: 700;
   letter-spacing: 1px;
-  font-family: "Lato", sans-serif;
-  color: #007bff;
+  font-family: "Comfortaa Bold";
+  color: #0061d5;
 }
 #header .logo .dark{
   color: #1f2da8;
@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
 .nav-menu > ul > li {
   position: relative;
   white-space: nowrap;
-  padding: 10px 0 10px 28px;
+  padding: 0px 0 0px 28px;
 }
 
 .nav-menu a {
@@ -113,25 +113,25 @@ h1, h2, h3, h4, h5, h6 {
   color: #0f394c;
   transition: 0.3s;
   font-size: 15px;
-  font-family: "Dosis", sans-serif;
+  line-height: 50px;
+  padding: 0xp;
+  font-family: "Open Sans", sans-serif !important;
   text-transform: uppercase;
-  font-weight: 600;
+  font-weight: 500;
 }
 .nav-menu button{
   display: block;
-  top: -4px;
+  top:5px;
   position: relative;
   color: white;
   transition: 0.3s;
   font-size: 15px;
-  font-family: "Dosis", sans-serif;
+  line-height: 20px;
+  font-family: "Open Sans", sans-serif !important;
   text-transform: uppercase;
-  font-weight: 600;
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
-  padding: 4px 10px;
+  font-weight: 500;
+  background: #0061d5;
+  padding: 10px 25px;
   border-radius: 5px;
   border: none;
 }
@@ -355,38 +355,36 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 #hero .btn-get-started {
-  font-family: "Dosis", sans-serif;
-  font-weight: 500;
-  font-size: 16px;
   letter-spacing: 1px;
   display: inline-block;
-  padding: 8px 28px;
+  padding: 15px 20px;
   border-radius: 3px;
   transition: 0.5s;
   margin-top: 25px;
   color: #fff;
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
-  text-transform: uppercase;
   cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: "Open Sans", sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #0061d5;
+  border: none;
 }
 
 #hero .btn-get-started:hover {
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
+  background: #0084ff;
 }
 .more-info{
-  font-family: "Dosis", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
   font-weight: 500;
-  font-size: 16px;
+  font-size: 15px;
+  line-height: 20px;
   cursor: pointer;
   letter-spacing: 1px;
   display: inline-block;
-  padding: 8px 28px;
+  padding: 14px 20px;
   border-radius: 3px;
   transition: 0.5s;
   margin-top: 25px;
@@ -419,7 +417,19 @@ h1, h2, h3, h4, h5, h6 {
     width: 80%;
   }
 }
-
+.head-45{
+  padding: 45px 0 !important;
+}
+@media (max-width: 575px) {
+.more-info{
+  padding: 10px 15px!important;
+  margin: 5px 0px 0px 0px!important;
+}
+.btn-get-started {
+  padding: 10px 15px!important;
+  margin-top: 5px!important;
+}
+}
 /*--------------------------------------------------------------
 # Sections General
 --------------------------------------------------------------*/
@@ -438,6 +448,7 @@ section {
 
 .section-title h2 {
   font-size: 32px;
+  padding: 10px 0;
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 20px;
@@ -623,14 +634,14 @@ section {
 .counts {
   background: url("../assets/butterfly/assets//img/counts-bg.jpg") center center no-repeat;
   background-size: cover;
-  padding: 80px 0 60px 0;
+  padding: 80px 0 0px 0;
+  background: #ebf7fc;
   position: relative;
 }
 
 .counts::before {
   content: "";
   position: absolute;
-  background: rgba(255, 255, 255, 0.8);
   left: 0;
   right: 0;
   top: 0;
@@ -653,7 +664,7 @@ section {
   font-weight: 700;
   display: block;
   color: #49b5e7;
-  font-family: "Dosis", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 .counts .counters p {
@@ -1127,7 +1138,7 @@ section {
   float: left;
   width: 44px;
   height: 44px;
-  background: #ebf7fc;
+  background: #fff;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1152,10 +1163,11 @@ section {
 
 .contact .info .email, .contact .info .phone {
   margin-top: 40px;
+  background:#fff
 }
 
 .contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
-  background: #49b5e7;
+  background: #0061d5;
   color: #fff;
 }
 
@@ -1217,6 +1229,7 @@ section {
 .contact .php-email-form input, .contact .php-email-form textarea {
   border-radius: 0;
   box-shadow: none;
+  background: #f4fbfe !important;
   font-size: 14px;
   border-radius: 4px;
 }
@@ -1230,15 +1243,22 @@ section {
 }
 
 .contact .php-email-form button[type="submit"] {
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
-  border: 0;
-  padding: 10px 24px;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 15px 28px;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin-top: 25px;
   color: #fff;
-  transition: 0.4s;
-  border-radius: 4px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: "Open Sans", sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #0061d5;
+  border: none;
 }
 
 .contact .php-email-form button[type="submit"]:hover {
@@ -1281,7 +1301,7 @@ section {
 .breadcrumbs h2 {
   font-size: 28px;
   font-weight: 400;
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
 }
 
 .breadcrumbs ol {
@@ -1485,7 +1505,7 @@ section {
   font-size: 14px;
   line-height: 24px;
   margin-bottom: 0;
-  font-family: "Lato", sans-serif;
+  font-family: "Open Sans", sans-serif !important;
   color: #777777;
 }
 

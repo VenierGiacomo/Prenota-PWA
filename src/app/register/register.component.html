@@ -1,125 +1,281 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <!-- Required meta tags-->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
-
-    <!-- Title Page-->
-    <title>Au Register Forms by Colorlib</title>
-
-    <!-- Icons font CSS-->
-    <!-- <link href="../assets/template/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all"> -->
-    <!-- <link href="../assets/template/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all"> -->
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Vendor CSS-->
-    <!-- <link href="../assets/template/vendor/select2/select2.min.css" rel="stylesheet" media="all"> -->
-    <!-- <link href="../assets/template/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all"> -->
-
-    <!-- Main CSS-->
-    <!-- <link href="../assets/template/css/main.css" rel="stylesheet" media="all"> -->
-</head>
-
 <body>
     <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4">
-                <div class="card-body">
-                    <h2 class="title">Benvenuto! Crea un account per iniziare</h2>
-                    <form >
-                        <div class="row row-space">
-                            <div class="col-2-r">
-                                <div class="input-group">
-                                    <label class="label">Nome</label>
-                                    <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
-                                    <p *ngIf='first_name_err!=""'>{{first_name_err}}</p>
+            <h1 class='logo-title'>prenota</h1>
+            <div class="swiper-container">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide"> <div class="wrapper wrapper--w680">
+                                <div class="card card-4">
+                                    <div class="card-body">
+                                        <h2 class="title">Benvenuto! Crea un account per iniziare</h2>
+                                        <form >
+                                            <div class="row row-space">
+                                                <div class="col-2-r">
+                                                    <div class="input-group">
+                                                        <label class="label">Nome</label>
+                                                        <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
+                                                        <p *ngIf='first_name_err!=""'>{{first_name_err}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2-r">
+                                                    <div class="input-group">
+                                                        <label class="label">Cognome</label>
+                                                        <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
+                                                        <p *ngIf='last_name_err!=""'>{{last_name_err}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row row-space">
+                                                <div class="col-2-r">
+                                                    <div class="input-group">
+                                                        <label class="label">Email</label>
+                                                        <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
+                                                        <p *ngIf='email_err!=""'>{{email_err}}</p>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2-r">
+                                                        <div class="input-group">
+                                                            <label class="label">Numero di telefono</label>
+                                                            <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                                            <p *ngIf='phone_err!=""'>{{phone_err}}</p>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                            <div class="row row-space">
+                                                <div class="col-2-r">
+                                                    <div class="input-group" >
+                                                        <label class="label">Sesso</label>
+                                                        <div class="p-t-10">
+                                                            <label class="radio-container m-r-45">Uomo
+                                                                <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                            <label class="radio-container">Donna
+                                                                <input type="radio" [(ngModel)]="sex" value="w" name="gender">
+                                                                <span class="checkmark"></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-2-r">
+                                                    <div class="input-group">
+                                                        <label class="label">Password</label>
+                                                        <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                                        <p *ngIf='password_err!=""'>{{password_err}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="p-t-15">
+                                                <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Registrati</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="bottom-login">Hai gia un' account? <a (click)='goLogin()'>Login</a></div>
                                 </div>
-                            </div>
-                            <div class="col-2-r">
-                                <div class="input-group">
-                                    <label class="label">Cognome</label>
-                                    <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
-                                    <p *ngIf='last_name_err!=""'>{{last_name_err}}</p>
-                                </div>
-                            </div>
+                            </div></div>
+
+
+
+
+                        <div class="swiper-slide">
+                                        <div class="wrapper wrapper--w680">
+                                            <div class="card card-4">
+                                                  <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
+                                                <div class="card-body">
+                                                    <h2 class="title">Inserisci i dati della tua attività</h2>
+                                                    <form >
+                                                        <div class="row row-space">
+                                                            <div class="col-2-r">
+                                                                <div class="input-group">
+                                                                    <label class="label">Nome dell'attività</label>
+                                                                    <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="Studio Rossi">
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-2-r">
+                                                                <div class="input-group">
+                                                                    <label class="label">Indirizzo</label>
+                                                                    <input class="input--style-4" [(ngModel)]="address" type="text" name="ship-address" placeholder="Via Garibaldi 12" autocomplete="shipping street-address">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row row-space">
+                                                                <div class="col-2-r">
+                                                                        <div class="input-group">
+                                                                            <label class="label">Città</label>
+                                                                            <input class="input--style-4" [(ngModel)]="city"type="text" name="ship-city" required id="frmCityS" placeholder="Trieste" autocomplete="shipping locality">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2-r">
+                                                                            <div class="input-group">
+                                                                                <label class="label">Codice postale</label>
+                                                                                <input class="input--style-4"[(ngModel)]="zip_code" name="ship-zip" required id="frmZipS" placeholder="34120" autocomplete="shipping postal-code">
+                                                                            </div>
+                                                                        </div>
+                                                            
+                                                        </div>
+                                                        <div class="p-t-15">
+                                                                <button class="btn btn--radius-2 btn--blue"  (click)='createStore()' >Prosegui</button>
+                                                            </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>                    
                         </div>
-                        <div class="row row-space">
-                                <div class="col-2-r">
-                                        <div class="input-group">
-                                            <label class="label">Username</label>
-                                            <input class="input--style-4" [(ngModel)]="username"type="text" name="username" placeholder="MarioRossi64">
-                                            <p *ngIf='username_err!=""'>{{username_err}}</p>
+
+
+                        <div class="swiper-slide">
+                            <div class="wrapper wrapper--w960">
+                                    <div class="card card-4">
+                                            <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
+                                        <div class="card-body">
+                                            <div class="opening-hours">
+                                                        <div>
+                                                            <h4>Orario di apertura della tua attività:</h4> 
+                                                            <div class="btn-time">
+                                                                <button class="btn btn--radius-2 btn--blue"  (click)='storeEverything()' >Prosegui</button>
+                                                            </div>
+                                                        </div>
+                                                <div class="days">
+                                                    <div class="day">
+                                                        <div class="title">Lunedi:</div>
+                                                        <div class="time"><div *ngIf='closed_days[0]'>dalle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[0]'><div *ngIf='closed_days[0]'>alle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[1]'><div *ngIf='double_turn[0]'>e dalle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[2]'><div *ngIf='double_turn[0]'>alle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[3]'><span *ngIf='closed_days[0]'> <input type="checkbox" [checked]="double_turn[0]" (change)="double_turn[0] = !double_turn[0]">&nbsp;2 turni</span><span *ngIf='!double_turn[0]'><input type="checkbox" [checked]="!closed_days[0]" (change)="closed_days[0] = !closed_days[0]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Martedi:</div>
+                                                        <div class="time"><div *ngIf='closed_days[1]'>dalle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[0]'><div *ngIf='closed_days[1]'>alle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[1]'><div *ngIf='double_turn[1]'>e dalle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[2]'><div *ngIf='double_turn[1]'>alle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[3]'><span *ngIf='closed_days[1]'> <input type="checkbox" [checked]="double_turn[1]" (change)="double_turn[1] = !double_turn[1]">&nbsp;2 turni</span><span *ngIf='!double_turn[1]'><input type="checkbox" [checked]="!closed_days[1]" (change)="closed_days[1] = !closed_days[1]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Mercoledi:</div>
+                                                        <div class="time"><div *ngIf='closed_days[2]'>dalle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[0]'><div *ngIf='closed_days[2]'>alle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[1]'><div *ngIf='double_turn[2]'>e dalle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[2]'><div *ngIf='double_turn[2]'>alle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[3]'><span *ngIf='closed_days[2]'> <input type="checkbox" [checked]="double_turn[2]" (change)="double_turn[2] = !double_turn[2]">&nbsp;2 turni</span><span *ngIf='!double_turn[2]'><input type="checkbox" [checked]="!closed_days[2]" (change)="closed_days[2] = !closed_days[2]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Giovedi:</div>
+                                                        <div class="time"><div *ngIf='closed_days[3]'>dalle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[0]'><div *ngIf='closed_days[3]'>alle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[1]'><div *ngIf='double_turn[3]'>e dalle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[2]'><div *ngIf='double_turn[3]'>alle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[3]'><span *ngIf='closed_days[3]'> <input type="checkbox" [checked]="double_turn[3]" (change)="double_turn[3] = !double_turn[3]">&nbsp;2 turni</span><span *ngIf='!double_turn[3]'><input type="checkbox" [checked]="!closed_days[3]" (change)="closed_days[3] = !closed_days[3]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Venerdi:</div>
+                                                        <div class="time"><div *ngIf='closed_days[4]'>dalle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[0]'><div *ngIf='closed_days[4]'>alle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[1]'><div *ngIf='double_turn[4]'>e dalle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[2]'><div *ngIf='double_turn[4]'>alle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[3]'><span *ngIf='closed_days[4]'> <input type="checkbox" [checked]="double_turn[4]" (change)="double_turn[4] = !double_turn[4]">&nbsp;2 turni</span><span *ngIf='!double_turn[4]'><input type="checkbox" [checked]="!closed_days[4]" (change)="closed_days[4] = !closed_days[4]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Sabato:</div>
+                                                        <div class="time"><div *ngIf='closed_days[5]'>dalle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[0]'><div *ngIf='closed_days[5]'>alle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[1]'><div *ngIf='double_turn[5]'>e dalle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[2]'><div *ngIf='double_turn[5]'>alle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[3]'><span *ngIf='closed_days[5]'> <input type="checkbox" [checked]="double_turn[5]" (change)="double_turn[5] = !double_turn[5]">&nbsp;2 turni</span><span *ngIf='!double_turn[5]'><input type="checkbox" [checked]="!closed_days[5]" (change)="closed_days[5] = !closed_days[5]">&nbsp;chiuso</span></div>
+                                                    </div>
+                                                    <div class="day">
+                                                        <div class="title">Domenica:</div>
+                                                        <div class="time"><div *ngIf='closed_days[6]'>dalle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[0]'><div *ngIf='closed_days[6]'>alle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[1]'><div *ngIf='double_turn[6]'>e dalle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[2]'><div *ngIf='double_turn[6]'>alle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[3]'><span *ngIf='closed_days[6]'> <input type="checkbox" [checked]="double_turn[6]" (change)="double_turn[6] = !double_turn[6]">&nbsp;2 turni</span><span *ngIf='!double_turn[6]'><input type="checkbox" [checked]="!closed_days[6]" (change)="closed_days[6] = !closed_days[6]">&nbsp;chiuso</span></div>
+                                                    </div>           
+                                                </div>
+                                            </div>
+                                        </div>    
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                    <div class="wrapper wrapper--w960">
+                                            <div class="card card-4">
+                                                    <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
+                                                <div class="card-body">
+                                                    <div class="opening-hours">
+                                                                <div>
+                                                                    <h4>Inserisci il tuo orario di lavoro:</h4> 
+                                                                    <div class="btn-time">
+                                                                        <button class="btn btn--radius-2 btn--blue"  (click)='storeOwnerours()' >Prosegui</button>
+                                                                    </div>
+                                                                </div>
+                                                        <div class="days">
+                                                            <div class="day">
+                                                                <div class="title">Lunedi:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[0]'>dalle</div><input type="time" *ngIf='closed_days1[0]' [(ngModel)]='lun1[0]'><div *ngIf='closed_days1[0]'>alle</div><input type="time" *ngIf='closed_days1[0]' [(ngModel)]='lun1[1]'><div *ngIf='double_turn[0]'>e dalle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun1[2]'><div *ngIf='double_turn[0]'>alle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun1[3]'><span *ngIf='closed_days1[0]'> <input type="checkbox" [checked]="double_turn[0]" (change)="double_turn[0] = !double_turn[0]">&nbsp;2 turni</span><span *ngIf='!double_turn[0]'><input type="checkbox" [checked]="!closed_days1[0]" (change)="closed_days1[0] = !closed_days1[0]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Martedi:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[1]'>dalle</div><input type="time" *ngIf='closed_days1[1]' [(ngModel)]='mar1[0]'><div *ngIf='closed_days1[1]'>alle</div><input type="time" *ngIf='closed_days1[1]' [(ngModel)]='mar1[1]'><div *ngIf='double_turn[1]'>e dalle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar1[2]'><div *ngIf='double_turn[1]'>alle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar1[3]'><span *ngIf='closed_days1[1]'> <input type="checkbox" [checked]="double_turn[1]" (change)="double_turn[1] = !double_turn[1]">&nbsp;2 turni</span><span *ngIf='!double_turn[1]'><input type="checkbox" [checked]="!closed_days1[1]" (change)="closed_days1[1] = !closed_days1[1]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Mercoledi:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[2]'>dalle</div><input type="time" *ngIf='closed_days1[2]' [(ngModel)]='mer1[0]'><div *ngIf='closed_days1[2]'>alle</div><input type="time" *ngIf='closed_days1[2]' [(ngModel)]='mer1[1]'><div *ngIf='double_turn[2]'>e dalle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer1[2]'><div *ngIf='double_turn[2]'>alle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer1[3]'><span *ngIf='closed_days1[2]'> <input type="checkbox" [checked]="double_turn[2]" (change)="double_turn[2] = !double_turn[2]">&nbsp;2 turni</span><span *ngIf='!double_turn[2]'><input type="checkbox" [checked]="!closed_days1[2]" (change)="closed_days1[2] = !closed_days1[2]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Giovedi:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[3]'>dalle</div><input type="time" *ngIf='closed_days1[3]' [(ngModel)]='gio1[0]'><div *ngIf='closed_days1[3]'>alle</div><input type="time" *ngIf='closed_days1[3]' [(ngModel)]='gio1[1]'><div *ngIf='double_turn[3]'>e dalle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio1[2]'><div *ngIf='double_turn[3]'>alle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio1[3]'><span *ngIf='closed_days1[3]'> <input type="checkbox" [checked]="double_turn[3]" (change)="double_turn[3] = !double_turn[3]">&nbsp;2 turni</span><span *ngIf='!double_turn[3]'><input type="checkbox" [checked]="!closed_days1[3]" (change)="closed_days1[3] = !closed_days1[3]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Venerdi:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[4]'>dalle</div><input type="time" *ngIf='closed_days1[4]' [(ngModel)]='ven1[0]'><div *ngIf='closed_days1[4]'>alle</div><input type="time" *ngIf='closed_days1[4]' [(ngModel)]='ven1[1]'><div *ngIf='double_turn[4]'>e dalle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven1[2]'><div *ngIf='double_turn[4]'>alle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven1[3]'><span *ngIf='closed_days1[4]'> <input type="checkbox" [checked]="double_turn[4]" (change)="double_turn[4] = !double_turn[4]">&nbsp;2 turni</span><span *ngIf='!double_turn[4]'><input type="checkbox" [checked]="!closed_days1[4]" (change)="closed_days1[4] = !closed_days1[4]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Sabato:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[5]'>dalle</div><input type="time" *ngIf='closed_days1[5]' [(ngModel)]='sab1[0]'><div *ngIf='closed_days1[5]'>alle</div><input type="time" *ngIf='closed_days1[5]' [(ngModel)]='sab1[1]'><div *ngIf='double_turn[5]'>e dalle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab1[2]'><div *ngIf='double_turn[5]'>alle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab1[3]'><span *ngIf='closed_days1[5]'> <input type="checkbox" [checked]="double_turn[5]" (change)="double_turn[5] = !double_turn[5]">&nbsp;2 turni</span><span *ngIf='!double_turn[5]'><input type="checkbox" [checked]="!closed_days1[5]" (change)="closed_days1[5] = !closed_days1[5]">&nbsp;chiuso</span></div>
+                                                            </div>
+                                                            <div class="day">
+                                                                <div class="title">Domenica:</div>
+                                                                <div class="time"><div *ngIf='closed_days1[6]'>dalle</div><input type="time" *ngIf='closed_days1[6]' [(ngModel)]='dom1[0]'><div *ngIf='closed_days1[6]'>alle</div><input type="time" *ngIf='closed_days1[6]' [(ngModel)]='dom1[1]'><div *ngIf='double_turn[6]'>e dalle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom1[2]'><div *ngIf='double_turn[6]'>alle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom1[3]'><span *ngIf='closed_days1[6]'> <input type="checkbox" [checked]="double_turn[6]" (change)="double_turn[6] = !double_turn[6]">&nbsp;2 turni</span><span *ngIf='!double_turn[6]'><input type="checkbox" [checked]="!closed_days1[6]" (change)="closed_days1[6] = !closed_days1[6]">&nbsp;chiuso</span></div>
+                                                            </div>           
+                                                        </div>
+                                                    </div>
+                                                </div>    
+                                            </div>
                                         </div>
-                                    </div>
-                            <div class="col-2-r">
-                                <div class="input-group" >
-                                    <label class="label">Sesso</label>
-                                    <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Uomo
-                                            <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                        <label class="radio-container">Donna
-                                            <input type="radio" [(ngModel)]="sex" value="w" name="gender">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2-r">
-                                <div class="input-group">
-                                    <label class="label">Email</label>
-                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
-                                    <p *ngIf='email_err!=""'>{{email_err}}</p>
+                                <div class="swiper-slide">
+                                                <div class="wrapper wrapper--w680">
+                                                    <div class="card card-4">
+                                                            <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
+                                                        <div class="card-body">
+                                                            <h2 class="title">Invita i tuoi collaborati all'agenda</h2>
+                                                            <form >
+                                                                <div class="row row-space">
+                                                                    <div class="col-2-r">
+                                                                        <div class="input-group">
+                                                                            <label class="label">Email collaboratori 1</label>
+                                                                            <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="mario.rossi@email.com">
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-2-r">
+                                                                        <div class="input-group">
+                                                                                <label class="label">Email collaboratori 2</label>
+                                                                                <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="mario.rossi@email.com">
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="row row-space">
+                                                                        <div class="col-2-r">
+                                                                            <div class="input-group">
+                                                                                    <label class="label">Email collaboratori 3</label>
+                                                                                    <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="mario.rossi@email.com">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-2-r">
+                                                                                <div class="input-group">
+                                                                                        <label class="label">Email collaboratori 4</label>
+                                                                                        <input class="input--style-4" [(ngModel)]="store_name" type="text" name="store_name"  placeholder="mario.rossi@email.com">
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                <div class="p-t-15">
+                                                                        <button class="btn btn--radius-2 btn--blue"  (click)='goCalendar()' >Crea attività</button>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                 </div>
-                            </div>
-                            <div class="col-2-r">
-                                    <div class="input-group">
-                                        <label class="label">Numero di telefono</label>
-                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
-                                        <p *ngIf='phone_err!=""'>{{phone_err}}</p>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="row row-space">
-                                <div class="col-2-r">
-                                    <div class="input-group">
-                                        <label class="label">Password</label>
-                                        <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
-                                        <p *ngIf='password_err!=""'>{{password_err}}</p>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Registrati</button>
-                        </div>
-                    </form>
+                    <!-- If we need pagination -->
+                    <!-- <div class="swiper-pagination"></div> -->
+                
+                    <!-- If we need navigation buttons -->
+                
+                    <!-- If we need scrollbar -->
+                    <!-- <div class="swiper-scrollbar"></div> -->
                 </div>
-                <div class="bottom-login">Hai gia un' account? <a (click)='goLogin()'>Login</a></div>
-            </div>
-        </div>
+       
     </div>
-
+    ...
+    </div>
     <!-- Jquery JS-->
-    <script src="../assets/template/vendor/jquery/jquery.min.js"></script>
-    
-    <script src="../assets/template/vendor/select2/select2.min.js"></script>
-    <script src="../assets/template/vendor/datepicker/moment.min.js"></script>
-    <script src="../assets/template/vendor/datepicker/daterangepicker.js"></script>
-
-    
-    <script src="../assets/template/js/global.js"></script>
 
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 
-</html>
+
 <!-- end document-->

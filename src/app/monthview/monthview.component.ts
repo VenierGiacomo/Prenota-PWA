@@ -78,12 +78,33 @@ export class MonthviewComponent implements OnInit {
    }
    var week =[]
    for (let i=0;i<7;i++){
-     var day_n = day_number - today  + i
-     if (day_n > this.months_days[this.month]){
-      day_n =day_n-this.months_days[this.month]
-     }
-     week.push(day_n)
+    var day_n = day_number - today  + i
+    if (day_n > this.months_days[this.month]){
+     day_n =day_n-this.months_days[this.month]
+    }
+    if(day_n <1){
+      if(this.month==0){
+        day_n =this.months_days[11]+day_n
+      }else{
+        day_n =this.months_days[this.month-1]+day_n
+      }
+    }
+    week.push(day_n)
    }
-    this.myMethod(week, this.month, this.year)
+  //  if(week[6]<7){
+  //    if(this.month==0){
+  //     this.myMethod(week, 11, this.year-1)
+  //    }else{
+  //     this.myMethod(week, this.month-1, this.year)
+  //    }
+  //  }else{
+    if(week[0]>week[6] && day>20){
+      this.myMethod(week, this.month+1, this.year)
+      //  }
+    }else{
+      this.myMethod(week, this.month, this.year)
+    }
+  //  }
+    
  }
 }

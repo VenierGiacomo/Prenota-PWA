@@ -10,6 +10,11 @@ export class AppComponent {
   // isConnected = true
   // private connectionService:ConnectionService
   constructor(){}
+  onActivate(event) {
+    window.scroll(0,0);
+    //or document.body.scrollTop = 0;
+    //or document.querySelector('body').scrollTo(0,0)
+  }
 //     this.connectionService.monitor().subscribe(isConnected => {
 //       console.log(isConnected)
 //     this.isConnected = isConnected;

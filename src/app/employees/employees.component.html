@@ -24,20 +24,20 @@
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
             <!-- <button (click)="goSettings()">Indietro</button> -->
-            <div class="menu-logout" (click)="goSettings()"> <img src="../assets/icons/back.svg"/> &nbsp;Indietro</div>
+            <div class="menu-logout" (click)="goSettings()"> <img src="../assets/icons/back-white.svg"/> &nbsp;Indietro</div>
         </div>  
         <div class="settings">
             <div class='title-sect'>
-                <h1>Dipendenti</h1>
+                <h1>Collaboratori</h1>
             </div>
             <div class="business-type">
-                <h4>Dipendete:</h4> 
+                <h4>Collaboratore:</h4> 
                 <span>
                     <select [(ngModel)]="employee"  (change)='changeTimetable()' >
-                        <option value=0>Seleziona un dipendete</option>
+                        <option value=0>Seleziona un collaboratore</option>
                         <option  *ngFor='let employee of employees' value={{employee.employee}}>{{employee.name}}</option>
                     </select>
-                    <p>Clicca per selezionare un altro dipendente</p>
+                    <p>Clicca per selezionare un altro collaboratore</p>
                 </span>
                 <div class="save" (click)='storeEverything()' *ngIf='employee!=0'>Salva modifiche</div>
             </div>
@@ -79,9 +79,9 @@
             </div>
             <div class="services" >
                 <div class="service-cont">
-                        <div *ngIf='employee!=0'class=" service add-service" (click)='displayCatalog()'>Servizzi <br> dipendente</div>
-                        <div *ngIf='employee==0' class=" service add-service" (click)='this.emplo = "block"'>I tuoi <br> dipendenti</div>
-                        <div class=" service add-service" (click)='createEmployee="block"'>Aggiungi <br> dipendente</div>
+                        <div *ngIf='employee!=0'class=" service add-service" (click)='displayCatalog()'>Servizzi <br> collaboratore</div>
+                        <div *ngIf='employee==0' class=" service add-service" (click)='this.emplo = "block"'>I tuoi <br> collaboratori</div>
+                        <div class=" service add-service" (click)='createEmployee="block"'>Aggiungi <br> collaboratore</div>
                        
                     
                 </div>
@@ -123,7 +123,7 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Crea il profilo di un nuovo dipendente</h2>
+                    <h2 class="title">Crea il profilo di un nuovo collaboratore</h2>
                     <form >
                         <div class="row row-space">
                             <div class="col-2-r">
@@ -140,12 +140,20 @@
                             </div>
                         </div>
                         <div class="row row-space">
-                                <div class="col-2-r">
-                                        <div class="input-group">
-                                            <div class="label">Username</div>
-                                            <input class="input--style-4" [(ngModel)]="username"type="text" name="username" placeholder="MarioRossi64">
-                                        </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <div class="label">Email</div>
+                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                    <div class="input-group">
+                                        <div class="label">Numero di telefono</div>
+                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
                                     </div>
+                                </div>
+                        </div>
+                        <div class="row row-space">
                                     <div class="col-2-r">
                                         <div class="input-group" >
                                             <label class="label">Sesso</label>
@@ -161,30 +169,13 @@
                                             </div>
                                         </div>
                                     </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2-r">
-                                <div class="input-group">
-                                    <div class="label">Email</div>
-                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
-                                </div>
-                            </div>
-                            <div class="col-2-r">
-                                    <div class="input-group">
-                                        <div class="label">Numero di telefono</div>
-                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                    <div class="col-2-r">
+                                        <div class="input-group">
+                                            <div class="label">Password</div>
+                                            <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                        </div>
                                     </div>
-                                </div>
                         </div>
-                        <div class="row row-space">
-                                <div class="col-2-r">
-                                    <div class="input-group">
-                                        <div class="label">Password</div>
-                                        <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
-                                    </div>
-                                </div>
-                                
-                            </div>
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Crea</button>
                         </div>

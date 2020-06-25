@@ -60,14 +60,21 @@ export class SettingsComponent implements OnInit {
   " 1 ora 55 min",
   " 2 ore"
 ]
-  sexs=['non spec','Uomo', 'Donna', 'Unisex' ]
+  sexs=['non spec','Donna', 'Uomo', 'Unisex' ]
   constructor(private api: ApiService, private storage: StorageService, private router: Router) { }
 
-  ngOnInit() {  
+  async ngOnInit() {  
     this.catalog = "none"
   var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
   
   var hours = this.storage.getOpenignhours()
+  if(hours==0){
+  await this.api.getopenHours().subscribe(data=>{
+    this.storage.setOpenignhours(data)
+      },err=>{
+        console.log(err)
+      })
+    }
   if(hours != []){
     for (let opening of hours){
       if(times[opening.wkday][0]==''){
@@ -86,9 +93,7 @@ export class SettingsComponent implements OnInit {
         this.closed_days[day] = false
       }
     }
-  }
-    
-      
+}
   }
   goHome(){
     this.router.navigateByUrl('/home')
@@ -194,5 +199,9 @@ export class SettingsComponent implements OnInit {
     this.storage.deleteservice(id)
     this.catalog_list  = this.storage.getCatalog()
     this.api.deleteService(id).subscribe(data=>{console.log(data)},err=>{console.log(err)})
+  }
+  logout(){
+    this.api.deleteAllData()
+    this.router.navigateByUrl('login')
   }
 }

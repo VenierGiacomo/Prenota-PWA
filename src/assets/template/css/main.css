@@ -3,11 +3,11 @@
    #FONT
    ========================================================================== */
 .font-robo {
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-family:  'Open Sans', sans-serif !important;
 }
 
 .font-poppins {
-  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+   font-family:  'Open Sans', sans-serif !important;
 }
 
 /* ==========================================================================
@@ -134,24 +134,24 @@ button {
    ========================================================================== */
 .page-wrapper {
   display: block;
-  width: 100%;
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
+  width: auto;
+  background-image:url("./../wave-retgister.svg");
+  background-attachment: fixed;
+  background-repeat: no-repeat;;
+  /* background-size: cover; */
+  height: 100vh;
 }
-.page-wrapper100 {
+/* .page-wrapper100 {
   display: block;
   width: 100%;
-  height:100%;
-  background: -webkit-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -moz-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
-  background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
-}
+  background-image:url("./../../applab/img/about/wave.svg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+} */
 
 body {
-  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+   font-family:  'Open Sans', sans-serif !important;
   font-weight: 400;
   font-size: 14px;
 }
@@ -290,7 +290,7 @@ h6 {
   cursor: pointer;
   font-size: 18px;
   color: #fff;
-  font-family: "Poppins", "Arial", "Helvetica Neue", sans-serif;
+   font-family:  'Open Sans', sans-serif !important;
 }
 
 .btn--radius {
@@ -320,7 +320,8 @@ h6 {
 }
 
 .btn--blue {
-  background: #0061d5;
+  background: #0061d5 !important;;
+  color: white !important;
 }
 
 .btn--blue:hover {
@@ -340,7 +341,7 @@ input[type="date" i] {
 
 .table-condensed td, .table-condensed th {
   font-size: 14px;
-  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-family:  'Open Sans', sans-serif !important;
   font-weight: 400;
 }
 
@@ -525,6 +526,8 @@ input {
   margin-bottom: 22px;
 }
 .input-group p{
+  margin: 0px !important;
+  padding:5px !important;
  color: rgb(146, 17, 17)
 }
 

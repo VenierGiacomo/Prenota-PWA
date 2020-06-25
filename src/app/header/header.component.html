@@ -1,0 +1,13 @@
+
+ 
+    <header id="header-section">
+    <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
+      <div class="container">
+        <div class="navbar-brand-wrapper d-flex w-100">
+       <div class="logo-menu" (click)='navListing()'>prenota</div>
+      <div class="header-act move-left"  [class.move-left]="move_l"><p *ngIf='show_business'>Hai un Business?</p> </div> <span (click)="navBusiness()"  class="btn" >{{button_text}}</span>
+            
+        </div>
+      </div>
+    </nav>
+  </header>

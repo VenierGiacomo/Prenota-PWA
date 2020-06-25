@@ -8,7 +8,7 @@
         </div>
         <div class="calendar">
             <div class="date"> 
-                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div>{{month_name}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
                 <div class="today-date" (click)='goToday()'>Oggi</div>
                 <div class="selector-date">
                     <div  (click)='displayWeek()'[class.active]='display=="week"'>Settimana</div>
@@ -70,17 +70,19 @@
                 <img src="../assets/icons/close.svg"/>
         </div>
             <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
+        <p>Cellulare:</p>
+        <input type="text" placeholder="3312233645" [(ngModel)]="phone">
         <p>Servizio:</p>
         <select class='select_no_margin_left' [(ngModel)]="info" >
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
-                <option value=10000 >altro</option>
+                <option value=-1 >altro</option>
         </select>
-        <p *ngIf='info == 10000' >Descrizione:</p>
-            <textarea class="lable-appointment-modal" *ngIf='info == 10000' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
-        <p *ngIf='info == 10000'>Durata</p>
+        <p *ngIf='info == -1' >Descrizione:</p>
+            <textarea class="lable-appointment-modal" *ngIf='info == -1' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
+        <p *ngIf='info == -1'>Durata</p>
     <div class="time" >
-        <div *ngIf='info == 10000'>
+        <div *ngIf='info == -1'>
         <select [(ngModel)]="time">
                 <option value=1>5 min</option>
                 <option value=2>10 min</option>
@@ -89,7 +91,7 @@
                 <option value=5>25 min</option>
                 <option value=6>30 min</option>
                 <option value=7>35 min</option>
-                <option value=8>40 ora</option>
+                <option value=8>40 min</option>
                 <option value=9>45 min</option>
                 <option value=10>50 min</option>
                 <option value=11>55 min</option>
@@ -126,11 +128,13 @@
                         <img src="../assets/icons/close.svg"/>
                 </div>
                     <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
+                <p>Cellulare:</p>
+                <input type="text" placeholder="3312233645" [(ngModel)]="phone">
                 <p>Servizio:</p>
                 <select class='select_no_margin_left' [(ngModel)]="info" >
                         <option value=101010 selected >Seleziona servizio</option>
                         <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
-                        <option value=10000 >altro</option>
+                        <option value=-1 >altro</option>
                 </select>
                 <mat-form-field>
                         <input matInput [ngxMatDatetimePicker]="picker" placeholder="Seleziona la data"  [(ngModel)]="date_picker" disabled>
@@ -138,11 +142,11 @@
                         <ngx-mat-datetime-picker #picker disabled="false">
                         </ngx-mat-datetime-picker>
                     </mat-form-field>   
-                <p *ngIf='info == 10000' >Descrizione:</p>
-                    <textarea class="lable-appointment-modal" *ngIf='info == 10000' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
-                <p *ngIf='info == 10000'>Durata</p>
+                <p *ngIf='info == -1' >Descrizione:</p>
+                    <textarea class="lable-appointment-modal" *ngIf='info == -1' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
+                <p *ngIf='info == -1'>Durata</p>
                 <div class="time" >
-                        <div *ngIf='info == 10000'>
+                        <div *ngIf='info == -1'>
                         <select [(ngModel)]="time">
                                 <option value=1>5 min</option>
                                 <option value=2>10 min</option>

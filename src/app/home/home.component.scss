@@ -20,7 +20,7 @@ body{
 .side-menu{
     background: #0061d5;
     color: #B3D1F1;
-    font-size: 2vw;
+    font-size: 28px;
     button{
         position: relative;
         top: 44vh;
@@ -31,7 +31,8 @@ body{
         margin-left: 2vw;
         border-radius: 10px;
         color: #00479D;
-        font-size: 2vw;
+        font-size: 21px;
+        cursor: pointer;
     }
     .menu-home{
         color: white;
@@ -46,6 +47,7 @@ body{
         margin-top: 10vh;
         margin-left: 2vw;
         display: block;    
+        cursor: pointer;
     }
     .menu-settings{
         position: relative;
@@ -54,6 +56,7 @@ body{
         margin-top: 5vh;
         margin-left: 2vw;
         display: block;
+        cursor: pointer;
     }
     .menu-logout{
         color: white;
@@ -61,6 +64,7 @@ body{
         top: 90vh;
         margin-left: 2vw;
         display: block;
+        cursor: pointer;
         img{
             margin-top: -3.5%;
             margin-left: -3.5%;
@@ -84,9 +88,10 @@ body{
         color: #0061d5;
         font-size: 1.3vw;
         display:grid;
-        grid-template-columns: 5fr 4fr 10fr;
+        grid-template-columns: 5fr 7fr 7fr;
         span{
         align-self:end;
+        line-height: 2.5vw;
         font-size: 2.5vw;
         color: #000;
         }
@@ -112,6 +117,7 @@ body{
         text-align: center;
         display: inline-block;
         align-self: end;
+        cursor: pointer;
        
     }
     .selector-date{
@@ -133,6 +139,7 @@ body{
             text-align: center;
             display: inline-block;
             align-self: end;
+            cursor: pointer;
         }
         .active{
             background: #0061d5;
@@ -166,6 +173,7 @@ body{
     width:100%;
     height: 50px;
     padding-left: 5px;
+    cursor: pointer;
     .active{
         background: white;
         z-index: 10 !important;
@@ -188,6 +196,7 @@ body{
     color: white;
     height: 30px;
     display: inline-block;
+    cursor: pointer;
   }
   
   .tab:hover {
@@ -317,19 +326,21 @@ th{
         display: block;
         border-radius: 5px;
         border: none;
-        padding: 8px 12px;
+        padding: 8px 12px ;
         
     }
     input{
         color: #00468e;
         width:200px;
-        margin: 5px 0px;
+        margin: 0px 0px  5px 0px;
         font-size: 14px;
+
     }
     p{
         display: inline-block;
         padding: 8px 0px;
         margin: 0px;
+        padding-bottom: 0px;;
     }
     textarea{
         color: #00468e;
@@ -373,7 +384,7 @@ th{
     }
     .modify-app{
         background: white;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
         color: #00468e;
         transition: 600ms;
     }
@@ -385,7 +396,7 @@ th{
     }
     .delete-app{
         background: #bd0026;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
         color: white;
         transition: 600ms;
     }
@@ -408,10 +419,11 @@ th{
         -webkit-appearance: none;
         -moz-appearance: none;      
         appearance: none;
+        cursor: pointer;
     }
     .select_no_margin_left{
         padding: 8px 12px !important;
-        margin:10px 0px !important;
+        margin:0px 0px 10px 0px !important;
     }
     input:focus,
 select:focus,
@@ -546,7 +558,7 @@ mat-form-field {
     .task-duration{
         font-size: 11px;
         margin: 0px 0px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family:  'Open Sans', sans-serif !important;
     }
     .task-name{
         text-transform: capitalize;
@@ -556,7 +568,7 @@ mat-form-field {
         right:5px;
         text-align: right;
         font-size: 11px;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family:  'Open Sans', sans-serif !important;
     }
     .task-details{
         font-weight: 500;
@@ -564,7 +576,7 @@ mat-form-field {
         overflow: hidden;
         text-overflow: ellipsis;
         margin: 5px 0px ;
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family:  'Open Sans', sans-serif !important;
     }
 }
 :host ::ng-deep .c{

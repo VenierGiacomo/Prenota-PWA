@@ -35,4 +35,7 @@ export class LoginComponent implements OnInit {
     }
   )
 }
+goHome(){
+  this.router.navigateByUrl('')
+}
 }

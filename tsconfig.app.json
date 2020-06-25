@@ -2,7 +2,9 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "stripe-v3"
+    ]
   },
   "files": [
     "src/main.ts",
@@ -16,3 +18,4 @@
     "src/**/*.spec.ts"
   ]
 }
+

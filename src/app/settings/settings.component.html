@@ -5,7 +5,7 @@
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
             <!-- <button>Logout</button> -->
-            <div class="menu-logout"> <img src="../assets/icons/logout.svg"/> Esci</div>
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
         </div>  
         <div class="settings">
             <div class="business-type">
@@ -63,7 +63,7 @@
                 <h4>I tuoi servizi:</h4> 
                 <div class="service-cont">
                     <div class=" service add-service" (click)='displayCatalog()'>I tuoi <br> servizi</div>
-                    <div class=" service add-service" (click)='goEmployees()'>I tuoi <br> dipendenti</div>
+                    <div class=" service add-service" (click)='goEmployees()'>I tuoi <br> collaboratori</div>
                    
                 </div>
             </div>

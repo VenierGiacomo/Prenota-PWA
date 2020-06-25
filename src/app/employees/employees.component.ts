@@ -75,6 +75,7 @@ export class EmployeesComponent implements OnInit {
     this.catalog = "none";
     this.createEmployee = "none";
     this.getEmployees()
+    console.log(this.employee)
       
  
     
@@ -84,6 +85,9 @@ export class EmployeesComponent implements OnInit {
         data=>{
           this.employees = data
         },
+        err=>{
+          console.log(err)
+        }
       )
     }
     goHome(){
@@ -108,7 +112,7 @@ export class EmployeesComponent implements OnInit {
     submit(){
       let str:string = this.first_name
       str = str[0].toUpperCase() + str.slice(1)
-      this.api.registeremployee(str, this.last_name, this.username, this.email, this.sex_emp, this.phone, this.password).subscribe(
+      this.api.registeremployee(str, this.last_name, this.email, this.sex_emp, this.phone, this.password).subscribe(
             data=>{
               console.log(data)
               this.createEmployee="none"
@@ -122,6 +126,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     storeEverything(){
+      console.log(this.employee)
       var opentimes=[]
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
       for (let i in times){

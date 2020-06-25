@@ -19,8 +19,50 @@
         <div class="confirm-pay"> <button  > Iscriviti {{amount/100}}€</button></div>
         
         </form>
+      
 
-      <form action="/form" method="post" id="setup-form" [style.display]='ibanvisibility'>
+        <form action="/charge" method="post" id="payment-form" [style.display]='ibanvisibility'>
+          <div class="form-row inline">
+            <div class="col">
+              <label for="name">
+               Nome e Cognome
+              </label>
+              <input id="name" name="name" placeholder="Mario Rossi" required>
+            </div>
+            <div class="col">
+              <label for="email">
+               Email
+              </label>
+              <input id="email" name="email" type="email" placeholder="mario.rossi@email.com" required>
+            </div>
+          </div>
+          {{sepaErr}}
+          <div class="form-row">
+            <label for="iban-element">
+              IBAN
+            </label>
+            <div id="iban-element">
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+          </div>
+          <div #ibanElement></div>
+          <div class="confirm-pay"><button type="submit" id='submit-button'>Iscriviti  {{amount/100}}€</button></div>
+        
+          <!-- Used to display form errors. -->
+          <div id="error-message" role="alert"></div>
+        
+          <!-- Display mandate acceptance text. -->
+          <div id="mandate-acceptance">
+            By providing your IBAN and confirming this payment, you are
+            authorizing Rocketship Inc. and Stripe, our payment service
+            provider, to send instructions to your bank to debit your account and
+            your bank to debit your account in accordance with those instructions.
+            You are entitled to a refund from your bank under the terms and
+            conditions of your agreement with your bank. A refund must be claimed
+            within 8 weeks starting from the date on which your account was debited.
+          </div>
+        </form>
+      <!-- <form action="/form" method="post" id="setup-form" [style.display]='ibanvisibility'>
           <div class="form-row inline">
             <div class="col">
               <label for="accountholder-name">
@@ -49,20 +91,16 @@
           </div>
       
           <div class="form-row">
-            <!--
-              Using a label with a for attribute that matches the ID of the
-              Element container enables the Element to automatically gain focus
-              when the customer clicks on the label.
-            -->
+            
             <label for="ibanElement">
               IBAN
             </label>
             <div #ibanElement>
-              <!-- A Stripe Element will be inserted here. -->
+
             </div>
           </div>
         
-          <!-- Add the client_secret from the SetupIntent as a data attribute   -->
+       
           <div  class='confirm-pay'>
               <button id="submit-button"  data-secret="{CLIENT_SECRET}">
                   Bonifico SEPA 
@@ -70,10 +108,10 @@
           </div>
       
         
-        <!-- Used to display form errors. -->
+       
         <div id="error-message" role="alert"></div>
       
-        <!-- Display mandate acceptance text. -->
+       
         <div id="mandate-acceptance">
           By providing your IBAN, you are authorizing Prenota srl and Stripe,
           our payment service provider, to send instructions to your bank to debit
@@ -83,7 +121,7 @@
           starting from the date on which your account was debited.
         </div>
       </form>
-    
+     -->
 </div>
 <!-- <path d="M54.783 50H3.217A3.217 3.217 0 010 46.783V11.217A3.217 3.217 0 013.217 8h51.566A3.217 3.217 0 0158 11.217v35.566A3.217 3.217 0 0154.783 50" fill="#8798cc"></path>
 <path fill="#556180" d="M0 13h58v8H0z"></path>

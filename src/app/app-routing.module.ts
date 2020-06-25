@@ -13,11 +13,15 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 import { AuthGuard } from './services/auth.guard';
 import { BookingComponent } from './booking/booking.component';
+import { FirstpageComponent } from './firstpage/firstpage.component';
+import { HomelistingComponent } from './homelisting/homelisting.component';
 
 
 
 const routes: Routes = [
-  {path: '', component: LandingComponent, },
+  {path: '', component: FirstpageComponent, },
+  {path: 'home/ricerca', component: HomelistingComponent,},
+  {path: 'business', component: LandingComponent, },
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'register', component: RegisterComponent},
   {path: 'booking', component: BookingComponent},
@@ -34,7 +38,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{
+    scrollPositionRestoration: 'enabled'
+  })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
