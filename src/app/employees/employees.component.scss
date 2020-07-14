@@ -1,3 +1,5 @@
+@import "./../../assets/ElaAdmin-master/assets/css/style.css";
+
 .home{
     display:grid;
     height: 100vh;
@@ -24,25 +26,13 @@ input:focus, textarea:focus, select:focus{
 }
 
 // 
-
-
+.count{
+    font-size:15px !important;
+}
 .side-menu{
     background: #0061d5;
     color: #B3D1F1;
     font-size: 28px;
-    button{
-        position: relative;
-        top: 44vh;
-        display: inline-block;
-        background:#fff;
-        height: 15vh;
-        width: 80%;
-        margin-left: 2vw;
-        border-radius: 10px;
-        color: #00479D;
-        font-size: 21px;
-        cursor: pointer;
-    }
     .menu-home{
         margin-right: 30px;
      
@@ -68,23 +58,10 @@ input:focus, textarea:focus, select:focus{
         display: block;
         cursor: pointer;
     }
-    .menu-logout{
-        color: white;
-        position: absolute;
-        top: 90vh;
-        margin-left: 2vw;
-        display: block;
-        cursor: pointer;
-        img{
-            margin-top: -3.5%;
-            margin-left: -3.5%;
-            height: 2.8vh;
-        }
-    }
 }
 .settings{
-    background:#f4fbfe;
-    overflow: scroll;
+    background:#fafafa;
+    overflow: hidden;
     min-width: 900px;
     position: relative;
     color: #00468e;
@@ -99,77 +76,28 @@ input:focus, textarea:focus, select:focus{
               font-family:  'Open Sans', sans-serif !important;
         }
     }
-    .business-type{
-        padding: 0px 40px;
-        background: #f4fbfe;
-        display:grid;
-        grid-template-columns: 3fr 4fr 3fr;
-        width: 100%;
-        height: 70px;
-        h4{
-              font-family:  'Open Sans', sans-serif !important;
-            align-self:center;
-            font-size: 21px !important;
-            font-weight: 600 !important;
-            margin: 0px ;
-            display: inline;
-        }
-        span{
-            display:grid;
-            grid-template-columns: 3fr 2fr ;
-            width: 100%;
-            select{
-                background: #f4fbfe;
-                border: none;
-                display: inline-block;
-                align-self:center;
-                text-align: center;
-                color: #00468e;
-                width: 240px;
-                margin: 0px ;
-                padding:  5px;
-                font-size: 16px;
-               
-            }
-            p{
-                align-self:center;
-                font-size: 11px;
-                color: #3c6186;
-            }
-        }
-       
-        
-    }
-    .save{
-        background: #0061d5;
-        border-radius: 5px;
-        padding: 10px;
-        margin: auto;
-        text-align: center;
-        vertical-align: center;
-        justify-content: center;
-        color: #fff;
-        box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-    }
-    .save:hover{
-        background: #003FDE;
-        box-shadow: 0 10px 14px rgba(#0061d5, 0.6);
-    }
+.content{
+    padding: 5px 1.875em;
+}  
+
 
     .opening-hours{
         padding: 0px 40px;
         background: #fff;
         display:grid;
-        grid-template-rows: 1fr 7fr;
+        grid-template-rows: 1fr 15fr;
         width: 100%;
-        height: 500px;
+        margin-top: -2vh;
+        border-radius: 10px;
+        height: -moz-min-content;
+        height: 73vh;
+        margin-bottom: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
             h4{
-                  font-family:  'Open Sans', sans-serif !important;
-            align-self:center;
-            font-size: 21px !important;
-            font-weight: 600 !important;
-            margin: 0px ;
-            display: inline;
+                align-self:center;
+                font-size: 21px;
+                margin: 0px ;
+                display: inline;
             }
         
         .days{
@@ -184,10 +112,7 @@ input:focus, textarea:focus, select:focus{
                     padding-left:20px;
                 }
                 .time{
-                    // display:grid;
                     font-size: 14px;
-                    // grid-template-columns: 2fr 3fr 1fr 3fr 3fr 3fr 3fr 3fr 3fr;
-                    // min-width: 1200px;
                     input{
                         display: inline-block;
                         font-family:  'Open Sans', sans-serif !important;
@@ -215,11 +140,11 @@ input:focus, textarea:focus, select:focus{
     }
     .services{
         min-width: 600px;
-        padding: 30px 0px;
+        padding: 10px 40px;
         background: #f4fbfe;
         display:grid;
         grid-template-rows: 1fr ;
-        // width: 100%;
+        height: min-content;
         .service-cont1{
             display:grid;
             grid-template-columns: 1fr ;
@@ -248,26 +173,6 @@ input:focus, textarea:focus, select:focus{
             font-size: 16px;
             cursor: pointer;
         }
-        .show-service{
-            background: #fdb44d;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 10px 14px rgba(#fdb44d, 0.4);
-           
-           
-        }
-        .add-service{
-            background: #00479D;
-            justify-content: center;
-            color: #fff;
-            box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-        }
-        .add-service:hover{
-            background: #003FDE;
-            justify-content: center;
-            color: #fff;
-            box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-        }
         .delete-service{
             background:#fa607e;
             justify-content: center;
@@ -291,10 +196,10 @@ input:focus, textarea:focus, select:focus{
     
 }
 .cont-table{
-    margin: 20vh 15vw;
+    margin: 20vh 25vw;
     display: block;
-    height: 60vh;
-    width: 70vw;
+    // height: 60vh;
+    width: 50vw;
     border-radius: 10px;
     background: #fff;
     overflow: auto;
@@ -342,13 +247,6 @@ input:focus, textarea:focus, select:focus{
         margin: 0px 10px;
         border: none;
         font-size: 16px;
-    }
-    .modify{
-        background: #fdb44d;
-        justify-content: center;
-        color: white;
-        box-shadow: 0 10px 14px rgba(#fdb44d, 0.4);
-       
     }
     .delete{
         background:#fa607e;
@@ -453,9 +351,6 @@ input:focus, textarea:focus, select:focus{
         color: #0061d5;
         background: white;
         font-size: 16px;
-        // -webkit-appearance: none;
-        // -moz-appearance: none;      
-        // appearance: none;
     }
     ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
         color: #0061d5;
@@ -492,3 +387,91 @@ input:focus, textarea:focus, select:focus{
 input::-webkit-calendar-picker-indicator {
     background: none;
 } 
+
+.form-time{
+    display: grid;
+    width:100%;
+    padding: 10px 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    h1{
+      width: 100%;
+      line-height: 24px;
+      text-align: left;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      align-self: flex-end;
+  
+    }
+  }
+  vaadin-time-picker{
+    width: 120px;
+    margin: 0 20px;
+  }
+  vaadin-checkbox{
+    font-size: 16px;
+  }
+  vaadin-checkbox-group{
+      text-align: center;
+    margin: 8px 0px;
+    align-self: flex-end;
+  }
+
+/////////////topbar 
+
+.topbar{
+    position: fixed;
+    left:20vw;
+    width: 80vw;
+    height: 6vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background: #0061d5;
+    z-index: 10;
+    // padding: 10px;
+    div{
+        background: #0061d5;
+        line-height: 6vh;
+        margin-top:10px;
+        text-align: center;
+        color: #B3D1F1;
+        z-index: 11;
+    }
+    .not{
+        background: #00479D  !important;
+        color: #fff !important;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        
+    }
+    
+  }
+  .title{
+      margin: 20px 0px !important;
+  }
+  .bk-empl-sel{
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    text-align: center;
+    background: rgba(1, 28, 83, 0.8);
+    select{
+        background: #fff;
+        border: none;
+        display: inline-block;
+        align-self:center;
+        text-align: center;
+        color: #00468e;
+        margin-top: 30vh;
+        margin: 40vh 0px 0px  0px;
+        padding:  40px;
+        border-radius: 10px;
+        font-size: 16px;
+       
+    }
+}

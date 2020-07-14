@@ -95,7 +95,7 @@
    */
 
   var TRANSITION_END = 'transitionend';
-  var MAX_UID = 1000000;
+  var MAX_UID = 100;
   var MILLISECONDS_MULTIPLIER = 1000; // Shoutout AngusCroll (https://goo.gl/pxwQGp)
 
   function toType(obj) {

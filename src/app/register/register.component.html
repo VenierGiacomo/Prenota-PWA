@@ -1,6 +1,6 @@
 <body>
     <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins">
-            <h1 class='logo-title'>prenota</h1>
+            <h1 class='logo-title' (click)='goHome()'>prenota</h1>
             <div class="swiper-container">
                     <!-- Additional required wrapper -->
                     <div class="swiper-wrapper">
@@ -37,7 +37,7 @@
                                                 <div class="col-2-r">
                                                         <div class="input-group">
                                                             <label class="label">Numero di telefono</label>
-                                                            <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                                            <input class="input--style-4"[(ngModel)]="phone" type="tel" name="phone" placeholder="3312233645">
                                                             <p *ngIf='phone_err!=""'>{{phone_err}}</p>
                                                         </div>
                                                     </div>
@@ -125,54 +125,363 @@
 
 
                         <div class="swiper-slide">
-                            <div class="wrapper wrapper--w960">
+                            <div class="wrapper wrapper--w1200">
                                     <div class="card card-4">
                                             <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
                                         <div class="card-body">
                                             <div class="opening-hours">
                                                         <div>
-                                                            <h4>Orario di apertura della tua attività:</h4> 
+                                                            <h4>Inserisci l'orario di apertura della tua attività:</h4> 
+                                                            <!-- <p>Questi sono gli orari di apertura del tuo negozio. Dopo potrai inserire gli orari dei tui turni di lavoro</p>  -->
                                                             <div class="btn-time">
                                                                 <button class="btn btn--radius-2 btn--blue"  (click)='storeEverything()' >Prosegui</button>
                                                             </div>
                                                         </div>
-                                                <div class="days">
-                                                    <div class="day">
-                                                        <div class="title">Lunedi:</div>
-                                                        <div class="time"><div *ngIf='closed_days[0]'>dalle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[0]'><div *ngIf='closed_days[0]'>alle</div><input type="time" *ngIf='closed_days[0]' [(ngModel)]='lun[1]'><div *ngIf='double_turn[0]'>e dalle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[2]'><div *ngIf='double_turn[0]'>alle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun[3]'><span *ngIf='closed_days[0]'> <input type="checkbox" [checked]="double_turn[0]" (change)="double_turn[0] = !double_turn[0]">&nbsp;2 turni</span><span *ngIf='!double_turn[0]'><input type="checkbox" [checked]="!closed_days[0]" (change)="closed_days[0] = !closed_days[0]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Martedi:</div>
-                                                        <div class="time"><div *ngIf='closed_days[1]'>dalle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[0]'><div *ngIf='closed_days[1]'>alle</div><input type="time" *ngIf='closed_days[1]' [(ngModel)]='mar[1]'><div *ngIf='double_turn[1]'>e dalle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[2]'><div *ngIf='double_turn[1]'>alle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar[3]'><span *ngIf='closed_days[1]'> <input type="checkbox" [checked]="double_turn[1]" (change)="double_turn[1] = !double_turn[1]">&nbsp;2 turni</span><span *ngIf='!double_turn[1]'><input type="checkbox" [checked]="!closed_days[1]" (change)="closed_days[1] = !closed_days[1]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Mercoledi:</div>
-                                                        <div class="time"><div *ngIf='closed_days[2]'>dalle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[0]'><div *ngIf='closed_days[2]'>alle</div><input type="time" *ngIf='closed_days[2]' [(ngModel)]='mer[1]'><div *ngIf='double_turn[2]'>e dalle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[2]'><div *ngIf='double_turn[2]'>alle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer[3]'><span *ngIf='closed_days[2]'> <input type="checkbox" [checked]="double_turn[2]" (change)="double_turn[2] = !double_turn[2]">&nbsp;2 turni</span><span *ngIf='!double_turn[2]'><input type="checkbox" [checked]="!closed_days[2]" (change)="closed_days[2] = !closed_days[2]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Giovedi:</div>
-                                                        <div class="time"><div *ngIf='closed_days[3]'>dalle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[0]'><div *ngIf='closed_days[3]'>alle</div><input type="time" *ngIf='closed_days[3]' [(ngModel)]='gio[1]'><div *ngIf='double_turn[3]'>e dalle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[2]'><div *ngIf='double_turn[3]'>alle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio[3]'><span *ngIf='closed_days[3]'> <input type="checkbox" [checked]="double_turn[3]" (change)="double_turn[3] = !double_turn[3]">&nbsp;2 turni</span><span *ngIf='!double_turn[3]'><input type="checkbox" [checked]="!closed_days[3]" (change)="closed_days[3] = !closed_days[3]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Venerdi:</div>
-                                                        <div class="time"><div *ngIf='closed_days[4]'>dalle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[0]'><div *ngIf='closed_days[4]'>alle</div><input type="time" *ngIf='closed_days[4]' [(ngModel)]='ven[1]'><div *ngIf='double_turn[4]'>e dalle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[2]'><div *ngIf='double_turn[4]'>alle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven[3]'><span *ngIf='closed_days[4]'> <input type="checkbox" [checked]="double_turn[4]" (change)="double_turn[4] = !double_turn[4]">&nbsp;2 turni</span><span *ngIf='!double_turn[4]'><input type="checkbox" [checked]="!closed_days[4]" (change)="closed_days[4] = !closed_days[4]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Sabato:</div>
-                                                        <div class="time"><div *ngIf='closed_days[5]'>dalle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[0]'><div *ngIf='closed_days[5]'>alle</div><input type="time" *ngIf='closed_days[5]' [(ngModel)]='sab[1]'><div *ngIf='double_turn[5]'>e dalle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[2]'><div *ngIf='double_turn[5]'>alle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab[3]'><span *ngIf='closed_days[5]'> <input type="checkbox" [checked]="double_turn[5]" (change)="double_turn[5] = !double_turn[5]">&nbsp;2 turni</span><span *ngIf='!double_turn[5]'><input type="checkbox" [checked]="!closed_days[5]" (change)="closed_days[5] = !closed_days[5]">&nbsp;chiuso</span></div>
-                                                    </div>
-                                                    <div class="day">
-                                                        <div class="title">Domenica:</div>
-                                                        <div class="time"><div *ngIf='closed_days[6]'>dalle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[0]'><div *ngIf='closed_days[6]'>alle</div><input type="time" *ngIf='closed_days[6]' [(ngModel)]='dom[1]'><div *ngIf='double_turn[6]'>e dalle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[2]'><div *ngIf='double_turn[6]'>alle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom[3]'><span *ngIf='closed_days[6]'> <input type="checkbox" [checked]="double_turn[6]" (change)="double_turn[6] = !double_turn[6]">&nbsp;2 turni</span><span *ngIf='!double_turn[6]'><input type="checkbox" [checked]="!closed_days[6]" (change)="closed_days[6] = !closed_days[6]">&nbsp;chiuso</span></div>
-                                                    </div>           
-                                                </div>
-                                            </div>
+                                                        <form class="form_c"> 
+                                                                <h1>Lunedì</h1>
+                                                                    <div *ngIf='!closed_days[0]'></div>
+                                                                    <div *ngIf='!closed_days[0]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,0,0)"
+                                                                    [value]="lun[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[0]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,0,1)"
+                                                                    [value]="lun[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[0]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[0]'></div>
+                                                                    <div *ngIf='!double_turn[0]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,0,2)"
+                                                                    [value]="lun[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[0]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,0,3)"
+                                                                    [value]="lun[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[0]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[0]' (change)='double_turn[0]=!double_turn[0]' [checked]="double_turn[0]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[0]'(change)='closed_days[0]=!closed_days[0]'[checked]="!closed_days[0]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Martedì</h1>
+                                                                    <div *ngIf='!closed_days[1]'></div>
+                                                                    <div *ngIf='!closed_days[1]'></div>
+                                                                   
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,1,0)"
+                                                                    [value]="mar[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[1]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,1,1)"
+                                                                    [value]="mar[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[1]'>
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[1]'></div>
+                                                                    <div *ngIf='!double_turn[1]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,1,2)"
+                                                                    [value]="mar[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[1]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,1,3)"
+                                                                    [value]="mar[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[1]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[1]' (change)='double_turn[1]=!double_turn[1]' [checked]="double_turn[1]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[1]'(change)='closed_days[1]=!closed_days[1]'[checked]="!closed_days[1]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Mercoledì</h1>
+                                                                    <div *ngIf='!closed_days[2]'></div>
+                                                                    <div *ngIf='!closed_days[2]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,2,0)"
+                                                                    [value]="mer[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[2]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,2,1)"
+                                                                    [value]="mer[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[2]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[2]'></div>
+                                                                    <div *ngIf='!double_turn[2]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,2,2)"
+                                                                    [value]="mer[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[2]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,2,3)"
+                                                                    [value]="mer[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[2]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[2]' (change)='double_turn[2]=!double_turn[2]' [checked]="double_turn[2]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[2]'(change)='closed_days[2]=!closed_days[2]'[checked]="!closed_days[2]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Giovedì</h1>
+                                                                    <div *ngIf='!closed_days[3]'></div>
+                                                                    <div *ngIf='!closed_days[3]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,3,0)"
+                                                                    [value]="gio[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[3]'
+                                                                    >
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,3,1)"
+                                                                    [value]="gio[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[3]'>
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[3]'></div>
+                                                                    <div *ngIf='!double_turn[3]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,3,2)"
+                                                                    [value]="gio[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[3]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,3,3)"
+                                                                    [value]="gio[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[3]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[3]' (change)='double_turn[3]=!double_turn[3]' [checked]="double_turn[3]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[3]'(change)='closed_days[3]=!closed_days[3]'[checked]="!closed_days[3]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Venerdì</h1>
+                                                                    <div *ngIf='!closed_days[4]'></div>
+                                                                    <div *ngIf='!closed_days[4]'></div>
+                                                                  
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,4,0)"
+                                                                    [value]="ven[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[4]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,4,1)"
+                                                                    [value]="ven[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[4]'>
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[4]'></div>
+                                                                    <div *ngIf='!double_turn[4]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,4,2)"
+                                                                    [value]="ven[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[4]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,4,3)"
+                                                                    [value]="ven[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[4]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[4]' (change)='double_turn[4]=!double_turn[4]' [checked]="double_turn[4]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[4]'(change)='closed_days[4]=!closed_days[4]'[checked]="!closed_days[4]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Sabato</h1>
+                                                                    <div *ngIf='!closed_days[5]'></div>
+                                                                    <div *ngIf='!closed_days[5]'></div>
+                                                                
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,5,0)"
+                                                                    [value]="sab[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[5]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,5,1)"
+                                                                    [value]="sab[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[5]'>
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[5]'></div>
+                                                                    <div *ngIf='!double_turn[5]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,5,2)"
+                                                                    [value]="sab[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[5]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,5,3)"
+                                                                    [value]="sab[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[5]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[5]' (change)='double_turn[5]=!double_turn[5]' [checked]="double_turn[5]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[5]'(change)='closed_days[5]=!closed_days[5]'[checked]="!closed_days[5]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                                    <!--  -->
+                                                                    <h1>Domenica</h1>
+                                                                    <div *ngIf='!closed_days[6]'></div>
+                                                                    <div *ngIf='!closed_days[6]'></div>
+                                                                    
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,6,0)"
+                                                                    [value]="dom[0]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='closed_days[6]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,6,1)"
+                                                                    [value]="dom[1]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='closed_days[6]'>
+                                                                    </vaadin-time-picker>
+                                                                    <div *ngIf='!double_turn[6]'></div>
+                                                                    <div *ngIf='!double_turn[6]'></div>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,6,2)"
+                                                                    [value]="dom[2]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Apertura"
+                                                                    *ngIf='double_turn[6]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-time-picker 
+                                                                    (change)="dateChanged($event,6,3)"
+                                                                    [value]="dom[3]"
+                                                                    id="time-picker-basic-demos-value-resolution" 
+                                                        min="06:30" max="22:00" 
+                                                                    step="900" 
+                                                                    label="Chiusura"
+                                                                    *ngIf='double_turn[6]'>
+                                                                    </vaadin-time-picker>
+                                                                    <vaadin-checkbox-group theme="vertical">
+                                                                            <vaadin-checkbox value="Option" *ngIf='closed_days[6]' (change)='double_turn[6]=!double_turn[6]' [checked]="double_turn[6]">2 turni</vaadin-checkbox>
+                                                                            <vaadin-checkbox value="Option" *ngIf='!double_turn[6]'(change)='closed_days[6]=!closed_days[6]'[checked]="!closed_days[6]">chiuso</vaadin-checkbox>
+                                                                    </vaadin-checkbox-group>
+                                                            </form>
+                                            <!-- <div class="btn-time"> -->
+                                                <button  style="margin-top: 10px;" class="btn btn--radius-2 btn--blue"  (click)='copyTimeslotsstore()' >Copia orario di Lunedì</button>
+                                            <!-- </div> -->
                                         </div>    
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    
                             <div class="swiper-slide">
-                                    <div class="wrapper wrapper--w960">
+                                    <div class="wrapper wrapper--w1200">
                                             <div class="card card-4">
                                                     <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
                                                 <div class="card-body">
@@ -183,36 +492,341 @@
                                                                         <button class="btn btn--radius-2 btn--blue"  (click)='storeOwnerours()' >Prosegui</button>
                                                                     </div>
                                                                 </div>
-                                                        <div class="days">
-                                                            <div class="day">
-                                                                <div class="title">Lunedi:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[0]'>dalle</div><input type="time" *ngIf='closed_days1[0]' [(ngModel)]='lun1[0]'><div *ngIf='closed_days1[0]'>alle</div><input type="time" *ngIf='closed_days1[0]' [(ngModel)]='lun1[1]'><div *ngIf='double_turn[0]'>e dalle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun1[2]'><div *ngIf='double_turn[0]'>alle</div><input type="time" *ngIf='double_turn[0]' [(ngModel)]='lun1[3]'><span *ngIf='closed_days1[0]'> <input type="checkbox" [checked]="double_turn[0]" (change)="double_turn[0] = !double_turn[0]">&nbsp;2 turni</span><span *ngIf='!double_turn[0]'><input type="checkbox" [checked]="!closed_days1[0]" (change)="closed_days1[0] = !closed_days1[0]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Martedi:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[1]'>dalle</div><input type="time" *ngIf='closed_days1[1]' [(ngModel)]='mar1[0]'><div *ngIf='closed_days1[1]'>alle</div><input type="time" *ngIf='closed_days1[1]' [(ngModel)]='mar1[1]'><div *ngIf='double_turn[1]'>e dalle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar1[2]'><div *ngIf='double_turn[1]'>alle</div><input type="time" *ngIf='double_turn[1]' [(ngModel)]='mar1[3]'><span *ngIf='closed_days1[1]'> <input type="checkbox" [checked]="double_turn[1]" (change)="double_turn[1] = !double_turn[1]">&nbsp;2 turni</span><span *ngIf='!double_turn[1]'><input type="checkbox" [checked]="!closed_days1[1]" (change)="closed_days1[1] = !closed_days1[1]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Mercoledi:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[2]'>dalle</div><input type="time" *ngIf='closed_days1[2]' [(ngModel)]='mer1[0]'><div *ngIf='closed_days1[2]'>alle</div><input type="time" *ngIf='closed_days1[2]' [(ngModel)]='mer1[1]'><div *ngIf='double_turn[2]'>e dalle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer1[2]'><div *ngIf='double_turn[2]'>alle</div><input type="time" *ngIf='double_turn[2]' [(ngModel)]='mer1[3]'><span *ngIf='closed_days1[2]'> <input type="checkbox" [checked]="double_turn[2]" (change)="double_turn[2] = !double_turn[2]">&nbsp;2 turni</span><span *ngIf='!double_turn[2]'><input type="checkbox" [checked]="!closed_days1[2]" (change)="closed_days1[2] = !closed_days1[2]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Giovedi:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[3]'>dalle</div><input type="time" *ngIf='closed_days1[3]' [(ngModel)]='gio1[0]'><div *ngIf='closed_days1[3]'>alle</div><input type="time" *ngIf='closed_days1[3]' [(ngModel)]='gio1[1]'><div *ngIf='double_turn[3]'>e dalle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio1[2]'><div *ngIf='double_turn[3]'>alle</div><input type="time" *ngIf='double_turn[3]' [(ngModel)]='gio1[3]'><span *ngIf='closed_days1[3]'> <input type="checkbox" [checked]="double_turn[3]" (change)="double_turn[3] = !double_turn[3]">&nbsp;2 turni</span><span *ngIf='!double_turn[3]'><input type="checkbox" [checked]="!closed_days1[3]" (change)="closed_days1[3] = !closed_days1[3]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Venerdi:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[4]'>dalle</div><input type="time" *ngIf='closed_days1[4]' [(ngModel)]='ven1[0]'><div *ngIf='closed_days1[4]'>alle</div><input type="time" *ngIf='closed_days1[4]' [(ngModel)]='ven1[1]'><div *ngIf='double_turn[4]'>e dalle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven1[2]'><div *ngIf='double_turn[4]'>alle</div><input type="time" *ngIf='double_turn[4]' [(ngModel)]='ven1[3]'><span *ngIf='closed_days1[4]'> <input type="checkbox" [checked]="double_turn[4]" (change)="double_turn[4] = !double_turn[4]">&nbsp;2 turni</span><span *ngIf='!double_turn[4]'><input type="checkbox" [checked]="!closed_days1[4]" (change)="closed_days1[4] = !closed_days1[4]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Sabato:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[5]'>dalle</div><input type="time" *ngIf='closed_days1[5]' [(ngModel)]='sab1[0]'><div *ngIf='closed_days1[5]'>alle</div><input type="time" *ngIf='closed_days1[5]' [(ngModel)]='sab1[1]'><div *ngIf='double_turn[5]'>e dalle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab1[2]'><div *ngIf='double_turn[5]'>alle</div><input type="time" *ngIf='double_turn[5]' [(ngModel)]='sab1[3]'><span *ngIf='closed_days1[5]'> <input type="checkbox" [checked]="double_turn[5]" (change)="double_turn[5] = !double_turn[5]">&nbsp;2 turni</span><span *ngIf='!double_turn[5]'><input type="checkbox" [checked]="!closed_days1[5]" (change)="closed_days1[5] = !closed_days1[5]">&nbsp;chiuso</span></div>
-                                                            </div>
-                                                            <div class="day">
-                                                                <div class="title">Domenica:</div>
-                                                                <div class="time"><div *ngIf='closed_days1[6]'>dalle</div><input type="time" *ngIf='closed_days1[6]' [(ngModel)]='dom1[0]'><div *ngIf='closed_days1[6]'>alle</div><input type="time" *ngIf='closed_days1[6]' [(ngModel)]='dom1[1]'><div *ngIf='double_turn[6]'>e dalle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom1[2]'><div *ngIf='double_turn[6]'>alle</div><input type="time" *ngIf='double_turn[6]' [(ngModel)]='dom1[3]'><span *ngIf='closed_days1[6]'> <input type="checkbox" [checked]="double_turn[6]" (change)="double_turn[6] = !double_turn[6]">&nbsp;2 turni</span><span *ngIf='!double_turn[6]'><input type="checkbox" [checked]="!closed_days1[6]" (change)="closed_days1[6] = !closed_days1[6]">&nbsp;chiuso</span></div>
-                                                            </div>           
-                                                        </div>
+                                                                <form class="form_c"> 
+                                                                        <h1>Lunedì</h1>
+                                                                            <div *ngIf='!closed_days1[0]'></div>
+                                                                            <div *ngIf='!closed_days1[0]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,0,0)"
+                                                                            [value]="lun1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[0]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,0,1)"
+                                                                            [value]="lun1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[0]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[0]'></div>
+                                                                            <div *ngIf='!double_turn1[0]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,0,2)"
+                                                                            [value]="lun1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[0]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,0,3)"
+                                                                            [value]="lun1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[0]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[0]' (change)='double_turn1[0]=!double_turn1[0]' [checked]="double_turn1[0]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[0]'(change)='closed_days1[0]=!closed_days1[0]'[checked]="!closed_days1[0]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Martedì</h1>
+                                                                            <div *ngIf='!closed_days1[1]'></div>
+                                                                            <div *ngIf='!closed_days1[1]'></div>
+                                                                           
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,1,0)"
+                                                                            [value]="mar1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[1]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,1,1)"
+                                                                            [value]="mar1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[1]'>
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[1]'></div>
+                                                                            <div *ngIf='!double_turn1[1]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,1,2)"
+                                                                            [value]="mar1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[1]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,1,3)"
+                                                                            [value]="mar1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[1]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[1]' (change)='double_turn1[1]=!double_turn1[1]' [checked]="double_turn1[1]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[1]'(change)='closed_days1[1]=!closed_days1[1]'[checked]="!closed_days1[1]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Mercoledì</h1>
+                                                                            <div *ngIf='!closed_days1[2]'></div>
+                                                                            <div *ngIf='!closed_days1[2]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,2,0)"
+                                                                            [value]="mer1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[2]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,2,1)"
+                                                                            [value]="mer1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[2]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[2]'></div>
+                                                                            <div *ngIf='!double_turn1[2]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,2,2)"
+                                                                            [value]="mer1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[2]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,2,3)"
+                                                                            [value]="mer1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[2]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[2]' (change)='double_turn1[2]=!double_turn1[2]' [checked]="double_turn1[2]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[2]'(change)='closed_days1[2]=!closed_days1[2]'[checked]="!closed_days1[2]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Giovedì</h1>
+                                                                            <div *ngIf='!closed_days1[3]'></div>
+                                                                            <div *ngIf='!closed_days1[3]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,3,0)"
+                                                                            [value]="gio1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[3]'
+                                                                            >
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,3,1)"
+                                                                            [value]="gio1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[3]'>
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[3]'></div>
+                                                                            <div *ngIf='!double_turn1[3]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,3,2)"
+                                                                            [value]="gio1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[3]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,3,3)"
+                                                                            [value]="gio1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[3]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[3]' (change)='double_turn1[3]=!double_turn1[3]' [checked]="double_turn1[3]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[3]'(change)='closed_days1[3]=!closed_days1[3]'[checked]="!closed_days1[3]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Venerdì</h1>
+                                                                            <div *ngIf='!closed_days1[4]'></div>
+                                                                            <div *ngIf='!closed_days1[4]'></div>
+                                                                          
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,4,0)"
+                                                                            [value]="ven1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[4]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,4,1)"
+                                                                            [value]="ven1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[4]'>
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[4]'></div>
+                                                                            <div *ngIf='!double_turn1[4]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,4,2)"
+                                                                            [value]="ven1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[4]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,4,3)"
+                                                                            [value]="ven1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[4]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[4]' (change)='double_turn1[4]=!double_turn1[4]' [checked]="double_turn1[4]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[4]'(change)='closed_days1[4]=!closed_days1[4]'[checked]="!closed_days1[4]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Sabato</h1>
+                                                                            <div *ngIf='!closed_days1[5]'></div>
+                                                                            <div *ngIf='!closed_days1[5]'></div>
+                                                                        
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,5,0)"
+                                                                            [value]="sab1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[5]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,5,1)"
+                                                                            [value]="sab1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[5]'>
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[5]'></div>
+                                                                            <div *ngIf='!double_turn1[5]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,5,2)"
+                                                                            [value]="sab1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[5]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,5,3)"
+                                                                            [value]="sab1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[5]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[5]' (change)='double_turn1[5]=!double_turn1[5]' [checked]="double_turn1[5]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[5]'(change)='closed_days1[5]=!closed_days1[5]'[checked]="!closed_days1[5]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                            <!--  -->
+                                                                            <h1>Domenica</h1>
+                                                                            <div *ngIf='!closed_days1[6]'></div>
+                                                                            <div *ngIf='!closed_days1[6]'></div>
+                                                                            
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,6,0)"
+                                                                            [value]="dom1[0]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='closed_days1[6]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,6,1)"
+                                                                            [value]="dom1[1]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='closed_days1[6]'>
+                                                                            </vaadin-time-picker>
+                                                                            <div *ngIf='!double_turn1[6]'></div>
+                                                                            <div *ngIf='!double_turn1[6]'></div>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,6,2)"
+                                                                            [value]="dom1[2]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Apertura"
+                                                                            *ngIf='double_turn1[6]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-time-picker 
+                                                                            (change)="dateChanged1($event,6,3)"
+                                                                            [value]="dom1[3]"
+                                                                            id="time-picker-basic-demos-value-resolution" 
+                                                                min="06:30" max="22:00" 
+                                                                            step="900" 
+                                                                            label="Chiusura"
+                                                                            *ngIf='double_turn1[6]'>
+                                                                            </vaadin-time-picker>
+                                                                            <vaadin-checkbox-group theme="vertical">
+                                                                                    <vaadin-checkbox value="Option" *ngIf='closed_days1[6]' (change)='double_turn1[6]=!double_turn1[6]' [checked]="double_turn1[6]">2 turni</vaadin-checkbox>
+                                                                                    <vaadin-checkbox value="Option" *ngIf='!double_turn1[6]'(change)='closed_days1[6]=!closed_days1[6]'[checked]="!closed_days1[6]">chiuso</vaadin-checkbox>
+                                                                            </vaadin-checkbox-group>
+                                                                    </form>
+                                                                    <button  style="margin-top: 10px;" class="btn btn--radius-2 btn--blue"  (click)='copyTimeslotsemplo()' >Copia orario di Lunedì</button>
                                                     </div>
                                                 </div>    
                                             </div>

@@ -1,0 +1,150 @@
+<body>
+        <div class="home">
+            <div class="side-menu">
+                <div class="menu-home" (click)='goHome()'>Calendario</div>
+                <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
+                <div class="menu-data">Area clienti</div>
+                <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
+            </div> 
+            <div class="cont-left">
+                <div class="topbar">
+                    <div class="not" >Notifiche</div>
+                    <div (click)='goClient()'>Clienti</div>
+                </div>
+                <div class="spinner" [style.display]="spin">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                      </div>
+                <div id="right-panel" style="margin-top: 8vh;">
+                        <!-- /#header -->
+                        <!-- Content -->
+                        <div class="content">
+                            <!-- Animated -->
+                            <div class="animated fadeIn">
+                                <!-- Widgets  -->
+                                <!-- <div class="row">
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-1">
+                                                        <img src="../assets/icons/calendar.svg" height="40px">
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-text"><span class="count">43</span></div>
+                                                            <div class="stat-heading">Appuntamenti settimanali</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-2">
+                                                        <i class="pe-7s-cart"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-text"><span class="count">3435</span></div>
+                                                            <div class="stat-heading">Sales</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-3">
+                                                        <i class="pe-7s-browser"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-text"><span class="count">349</span></div>
+                                                            <div class="stat-heading">Templates</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                
+                                    <div class="col-lg-3 col-md-6">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="stat-widget-five">
+                                                    <div class="stat-icon dib flat-color-4">
+                                                        <i class="pe-7s-users"></i>
+                                                    </div>
+                                                    <div class="stat-content">
+                                                        <div class="text-left dib">
+                                                            <div class="stat-text"><span class="count">2986</span></div>
+                                                            <div class="stat-heading">Clients</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <!-- /Widgets -->
+                                <div class="clearfix"></div>
+                                <!-- Orders -->
+                                <div class="orders">
+                                    <div class="row">
+                                        <div class="col-xl-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <h4 class="box-title">Gli ultimi appuntamenti presi dai tuoi clienti questa settimana</h4>
+                                                </div>
+                                                <div class="card-body--">
+                                                    <div class="table-stats order-table ov-h">
+                                                        <table class="table">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="serial">#</th>
+                                                                    <th class="avatar">Nome</th>
+                                                                    <th>Cellulare</th>        
+                                                                    <th>Servizio</th>
+                                                                    <th style="text-align: left; padding-left: 25px;">Data</th>
+                                                                    <th style="text-align: left; padding-left: 25px;">Ora</th>
+                                                                    <th style="text-align: left; padding-left: 25px;">Status</th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody>
+                                                                <tr *ngFor='let app of last_external; let ind =index'>
+                                                                    <td class="serial">{{ind+1}}.</td>
+                                                                    <td class="avatar"><span class="name">{{app.client_name}}</span></td>
+                                                                    <td>{{app.phone}}</td>
+                                                                    <td><span class="product">{{app.details}}</span> </td>
+                                                                    <td style="text-align: left;">{{app.day}}/{{app.month+1}}/{{app.year}}</td>
+                                                                    <td style="text-align: left;">{{rows[app.start]}}</td>
+                                                                    <td style="text-align: left;" *ngIf='app.day >=day && app.month >=month'>
+                                                                        <span class="badge badge-complete">Nuovo</span>
+                                                                    </td>
+                                                                    <td style="text-align: left;" *ngIf='day>app.day && month>=app.month'>
+                                                                        <span class="badge badge-pending">Passato</span>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div> <!-- /.table-stats -->
+                                                </div>
+                                            </div> <!-- /.card -->
+                                        </div>  <!-- /.col-lg-8 -->
+                                    </div>
+                                </div>
+                            </div>   <!-- /.orders -->
+                    </div>
+                    </div>
+            </div>
+        </div>
+</body>

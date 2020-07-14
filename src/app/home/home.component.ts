@@ -4,6 +4,7 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import {fromEvent, Observable, Subscription} from 'rxjs';
 import *  as screenfull from 'screenfull'
+import { Title } from '@angular/platform-browser';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -11,7 +12,9 @@ import *  as screenfull from 'screenfull'
 })
 export class HomeComponent implements OnInit {
 // private cdRef:ChangeDetectorRef
-  constructor(private api: ApiService, private storage: StorageService, private router: Router) { } 
+  constructor(private api: ApiService, private storage: StorageService, private router: Router ,private titleService: Title) {
+    this.titleService.setTitle( "Prenota: Agenda online - Il tuo gestionale");
+   }
   resp:any
   bgModalDisp='none';
   display = 'week'
@@ -60,13 +63,25 @@ async ngOnInit() {
 // dispaly the appopriate days number and months
   var now = new  Date()
   var today = now.getDay() -1
+  var month = now.getMonth()
   var day_number = now.getDate()
   if (today == -1){
     today= 6
   }
   for (let i=0;i<7;i++){
-    var day = day_number - today  + i
+    if( day_number - today  + i< this.months_days[month]){
+      var day = day_number - today  + i
+      if(day<1){
+      day= day +this.months_days[month-1]
+      }
+    }else{
+      var day = day_number - today  + i - this.months_days[month]
+    }
     this.week.push(day)
+  }
+  if(this.week[6]<this.week[0] && day_number>20){
+this.month=month+1
+this.month_name=this.months_names[month+1]
   }
 
 // dispaly the closed hours
@@ -284,6 +299,7 @@ async getAppoitments(){
   var online_data: any = await this.api.getAppointments(week).subscribe(
     data=>{
       this.appointmentlist= data
+      console.log(this.appointmentlist)
       if (this.appointmentlist.length != 0){
         for (let appo of this.appointmentlist){
           this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
@@ -493,6 +509,10 @@ pastWeek(){
 goSettings(){
   this.router.navigateByUrl('/settings')
 }
+goNotifications(){
+  this.router.navigateByUrl('/notifications')
+}
+notifications
 activetab(employee){
   var paras = document.getElementsByClassName('task');
   while(paras[0]) {
@@ -521,16 +541,32 @@ goToday(){
   while(paras[0]) {
     paras[0].parentNode.removeChild(paras[0]);
   } ​
+  this.week =[]
   var now = new  Date()
-  this.week=[]
   var today = now.getDay() -1
+  var month = now.getMonth()
   var day_number = now.getDate()
+  if (today == -1){
+    today= 6
+  }
   for (let i=0;i<7;i++){
-    var day = day_number - today  + i
+    if( day_number - today  + i< this.months_days[month]){
+      var day = day_number - today  + i
+      if(day<1){
+      day= day +this.months_days[month-1]
+      }
+    }else{
+      var day = day_number - today  + i - this.months_days[month]
+    }
     this.week.push(day)
   }
-  this.month = now.getMonth()
-  this.month_name= this.months_names[this.month]
+  if(this.week[6]<this.week[0] && day_number>20){
+this.month=month+1
+this.month_name=this.months_names[month+1]
+  }else{
+    this.month =month
+    this.month_name=this.months_names[month]
+  }
   this.year = now.getFullYear()
   this.display="week"
   setTimeout(() => {

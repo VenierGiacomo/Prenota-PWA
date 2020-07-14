@@ -1,3 +1,5 @@
+@import "./../../assets/ElaAdmin-master/assets/css/style.css";
+
 .home{
     display:grid;
     height: 100vh;
@@ -64,6 +66,21 @@
         display: block;    
         cursor: pointer;
     }
+    .menu-data{
+  
+        width: max-content;
+
+        margin-right: 30px;
+        padding-left: 5px;
+        padding-right: 20px;
+        border-radius: 5px;
+        font-weight: 500;
+        position: relative;
+        margin-top: 5vh;
+        margin-left: 2vw;
+        display: block;    
+        cursor: pointer;
+    }
     .menu-logout{
         position: absolute;
         color: white;
@@ -78,173 +95,40 @@
         }
     }
 }
+.content{
+    padding: 5px 1.875em;
+}   
 .settings{
-    overflow: scroll;
+    overflow: hidden;
     min-width: 900px;
     position: relative;
     color: #00468e;
-    .business-type{
-        padding: 0px 40px;
-        background: #fff;
-        display:grid;
-        grid-template-columns: 3fr 4fr 3fr;
-        width: 100%;
-        height: 70px;
-        h4{
-            align-self:center;
-            font-size: 21px;
-            margin: 0px ;
-            display: inline;
-        }
-        select{
-            background: #fff;
-            border: none;
-            display: inline-block;
-            align-self:center;
-            text-align: center;
-            color: #00468e;
-            width: 240px;
-            margin: 0px ;
-            padding:  5px;
-            font-size: 18px;
-            -webkit-appearance: none;
-            -moz-appearance: none;      
-            appearance: none;
-        }
-        
-    }
-    .save{
-        background: #00479D;
-        border-radius: 5px;
-        padding: 10px;
-        font-size: 16px;
-        margin: auto;
-        text-align: center;
-        vertical-align: center;
-        justify-content: center;
-        color: #fff;
-        box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-        cursor: pointer;
-    }
-    .save:hover{
-        background: #003FDE;
-        box-shadow: 0 10px 14px rgba(#0061d5, 0.6);
-    }
+    background: #fafafa;
+    
 
     .opening-hours{
+        margin-top: -1vh;
         padding: 0px 40px;
-        background: #f4fbfe;
-        display:grid;
-        grid-template-rows: 1fr 7fr;
+        background: #fff;
+        display: grid;
+        grid-template-rows: 1fr 15fr;
         width: 100%;
-        height: 500px;
+        border-radius: 10px;
+        height: -moz-min-content;
+        height: 72vh;
+        margin-bottom: 40px;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
             h4{
                 align-self:center;
                 font-size: 21px;
                 margin: 0px ;
                 display: inline;
             }
-        
-        .days{
-            display:grid;
-            grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-            .day{
-                align-self:center;
-                display:grid;
-                grid-template-columns: 2fr 7fr;
-                .title{
-                    font-size: 18px;
-                    padding-left:20px;
-                }
-                .time{
-                    font-size: 14px;
-                    input{
-                        display: inline-block;
-                        font-family:  'Open Sans', sans-serif !important;
-                        background: #f4fbfe;
-                        width: max-content;
-                        color: #00468e;
-                        border: none;
-                        justify-self:center;
-                        font-size: 1vw;
-                        outline: none;
-                        // -webkit-appearance: none;
-                        // -moz-appearance: none;      
-                        // appearance: none;
-                    }
-                    div{
-                        display: inline-block;
-                        width: max-content;
-                        padding-right: 5px;
-                    }
-                    span{
-                        padding-right: 5px;
-                        display: inline-block;
-                        width: max-content;
-                    }
-                }
-            }
         }
     }
-    .services{
-        min-width: 600px;
-        padding: 0px 40px;
-        background: #fff;
-        display:grid;
-        grid-template-rows: 1fr 4fr;
-        // width: 100%;
-        height: 200px;
-        .service-cont{
-            display:grid;
-            grid-template-columns: 1fr 1fr;
-        }
-        h4{
-            align-self:center;
-            font-size: 21px;
-            margin: 0px ;
-            display: inline;
-        }
-        .service{
-            width: 15vw;
-            margin: auto;
-            display: inline-block;
-            border-radius: 4px;
-            align-self: center;
-            justify-content: center;
-            text-align: center;
-            padding: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
-        .show-service{
-            background: #fdb44d;
-            justify-content: center;
-            color: white;
-            box-shadow: 0 10px 14px rgba(#fdb44d, 0.4);
-           
-           
-        }
-        .add-service{
-            background: #00479D;
-            justify-content: center;
-            color: #fff;
-            
-        }
-        .add-service:hover{
-            background: #0061d5;
-            justify-content: center;
-            color: #fff;
-            
-        }
-        .delete-service{
-            background:#fa607e;
-            justify-content: center;
-            color: #fff;
-            
-        }
-    }
+.stat-content{
+    margin-left: 100px !important;
 }
-
 ////// catalog
 
 .catalog{
@@ -508,3 +392,70 @@
   input::-webkit-calendar-picker-indicator {
     background: none;
 } 
+#time-picker-basic-demos-value-resolution{
+    width: 7vw;
+    margin-right:2vw;
+}
+
+form{
+    display: grid;
+    width:100%;
+    padding: 10px 0;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 2fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    h1{
+      width: 100%;
+      line-height: 24px;
+      text-align: left;
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      align-self: flex-end;
+  
+    }
+  }
+  vaadin-time-picker{
+    width: 120px;
+    margin: -5px 20px 0 20px;
+    height: 20px !important;
+  }
+  vaadin-checkbox{
+    font-size: 16px;
+  }
+  vaadin-checkbox-group{
+    height: 20px !important;
+      text-align: center;
+    margin: 8px 0px;
+    align-self: flex-end;
+  }
+
+
+  ///////////////// topbar 
+
+  .topbar{
+    position: fixed;
+    left:20vw;
+    width: 80vw;
+    height: 6vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background: #0061d5;
+    z-index: 10;
+    // padding: 10px;
+    div{
+        background: #0061d5;
+        line-height: 6vh;
+        margin-top:10px;
+        text-align: center;
+        color: #B3D1F1;
+        z-index: 100001;
+    }
+    .not{
+        background: #00479D  !important;
+        color: #fff !important;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        
+    }
+    
+  }

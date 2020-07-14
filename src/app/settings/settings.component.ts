@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
-
+import { Title } from '@angular/platform-browser';
+import '@vaadin/vaadin-time-picker';
+import '@vaadin/vaadin-checkbox';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -61,7 +63,9 @@ export class SettingsComponent implements OnInit {
   " 2 ore"
 ]
   sexs=['non spec','Donna', 'Uomo', 'Unisex' ]
-  constructor(private api: ApiService, private storage: StorageService, private router: Router) { }
+  constructor(private api: ApiService, private storage: StorageService, private router: Router, private titleService: Title) {
+    this.titleService.setTitle( "Prenota: Imposta i settaggi e l'orario del tuo negozio");
+   }
 
   async ngOnInit() {  
     this.catalog = "none"
@@ -71,6 +75,7 @@ export class SettingsComponent implements OnInit {
   if(hours==0){
   await this.api.getopenHours().subscribe(data=>{
     this.storage.setOpenignhours(data)
+    console.log(data)
       },err=>{
         console.log(err)
       })
@@ -95,12 +100,22 @@ export class SettingsComponent implements OnInit {
     }
 }
   }
+  dateChanged(ev,day,spot){
+    var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
+    times[day][spot] = ev.target.__data.value
+  }
   goHome(){
     this.router.navigateByUrl('/home')
+  }
+  goData(){
+    this.router.navigateByUrl('/notifications')
   }
   goEmployees(){
     this.router.navigateByUrl('/settings/employees')
   }
+  // print(){
+  //   console.log(this.lun[0])
+  // }
 
   storeEverything(){
     var opentimes=[]
@@ -117,6 +132,10 @@ export class SettingsComponent implements OnInit {
       }else{
         var b1 = 0
         var b2 = 0
+      }
+      if (!this.closed_days[i]){
+        a1=0
+        a2=0
       }
       if(a1 <0 && times[i][0]!=''){
         console.log(`Non è possibile selezionare ${times[i][0]} come orario. Altri orari possibili sono ${times[i][0].split(':')[0]}:00, ${times[i][0].split(':')[0]}:15, ${times[i][0].split(':')[0]}:30, ${times[i][0].split(':')[0]}:45`  )

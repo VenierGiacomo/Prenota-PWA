@@ -133,7 +133,7 @@ getSpecificUser(id){
   
 }
 getopenHours(): Observable<any>{
-        return this.http.get(BASE_URL+'closedhours/',{headers: this.httpheader})
+        return this.http.get(BASE_URL+'closedhours/',{headers:  this.newheader()})
 }
 setopenHours(data): Observable<any>{
   return this.http.post(BASE_URL+'closedhours/', data, {headers: this.newheader()})
@@ -150,6 +150,10 @@ getemployeeHours(): Observable<any>{
   }
   throw throwError("error");  
 }
+getemployeeHoursNoLogin(id): Observable<any>{
+     return this.http.get(BASE_URL+'employeehours/?employee='+id,{headers: this.httpheader})
+ 
+}
 setStoreservice( name, duration, sex, max_n, color){
 var data = { 'name':name, 'duration':duration, 'sex':sex, 'max_n':max_n, 'color':color}
   return this.http.post(BASE_URL+'services/', data, {headers: this.newheader()})
@@ -163,12 +167,19 @@ getStoreservice(){
 }
   throw throwError("error");  
 }
+getStoreserviceNoLogin(owner){
+  return this.http.get(BASE_URL+'services/?owner='+owner,{headers: this.httpheader})
+
+}
+getEmployeeservices(owner){
+    return this.http.get(BASE_URL+'employee/services/?owner='+owner, {headers: this.httpheader})
+}
 setEmployeeservice(employee, service_id){
   var data = {'employee':employee, 'service_id':service_id}
-    return this.http.post(BASE_URL+'employee/serices/', data, {headers: this.newheader()})
+    return this.http.post(BASE_URL+'employee/services/', data, {headers: this.newheader()})
 }
 deleteEmployeeservice(employee, service_id){
-  return this.http.delete(BASE_URL+'employee/serices/'+employee+'/'+service_id+'/', {headers: this.newheader()})
+  return this.http.delete(BASE_URL+'employee/services/'+employee+'/'+service_id+'/', {headers: this.newheader()})
 }
 
 bookAppointment(start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
@@ -191,6 +202,16 @@ getAppointments(week):Observable<any>{
   throw throwError("error");  
   
 }
+getAppointmentsExternal(week):Observable<any>{
+  const token = this.getToken()
+  var l 
+  if (token) {
+     l = this.parseJwt(token) 
+     return this.http.get(BASE_URL+'bookings/week/'+week+'/external/?owner='+l.user_id, {headers: this.httpheader})
+  }
+  throw throwError("error");  
+  
+}
 getStoreAppointments(week,store):Observable<any>{ 
      return this.http.get(BASE_URL+'bookings/week/'+week+'/?owner='+store, {headers: this.httpheader})   
 }
@@ -201,7 +222,7 @@ getMonthAppointments(month):Observable<any>{
 updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
   console.log(id, start, end, day, month, year,name, phone, details, employee, service, 'id, start, end, day, month, year,name, details, employee, service')
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone}
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
 
@@ -223,7 +244,20 @@ createStore(store_name, address, city, zip_code):Observable<any>{
 sendEmail(input: any) {
   return this.http.post(this.mailApi, input, { responseType: 'text' })
 }
-
+emailConfirmBooking(email,name,surname,day,month,year,time,service,shop){
+  var data ={
+    "email":email,
+    "name":name,
+    "surname":surname,
+    "day":day,
+    "month": month,
+    "year":year,
+    "time":time,
+    "service":service,
+    "shop":shop
+  }
+  return this.http.post(BASE_URL+'email/bookingconfirm', data,{headers: this.newheader()})
+}
 getWeekNumber(d) {
   // Copy date so don't modify original
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
@@ -238,7 +272,7 @@ getWeekNumber(d) {
   return  weekNo
 }
 deleteEmployee(id){
-  return this.http.delete(BASE_URL+'employees/'+id+'/',  {headers: this.newheader()})
+  return this.http.delete(BASE_URL+'employees/delete/'+id+'/',  {headers: this.newheader()})
 }
 deleteService(id):Observable<any>{
   return this.http.delete(BASE_URL+'services/'+id+'/',  {headers: this.newheader()})

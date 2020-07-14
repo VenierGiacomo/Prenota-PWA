@@ -34,7 +34,7 @@ show_business: boolean = true
   };
 navBusiness(){
   if(this.mobileCheck()){
-    window.location.href="https://apps.apple.com/app/id1490126275"
+    window.location.href="https://apps.apple.com/app/id1520379243"
   }
   console.log(this.href)
   if(this.href== '/business'){

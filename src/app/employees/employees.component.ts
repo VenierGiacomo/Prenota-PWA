@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-employees',
@@ -15,8 +16,10 @@ export class EmployeesComponent implements OnInit {
   toast="none";
   emplo = "none";
   catalog="none";
+  bk_empl='none';
   createEmployee = "none";
   employee= 0
+  emplo_name=''
   ////
   first_name = ''
   last_name = ''
@@ -69,16 +72,14 @@ export class EmployeesComponent implements OnInit {
   " 2 ore"
 ]
   sexs=['non spec','Uomo', 'Donna', 'Unisex' ]
-  constructor(private api: ApiService, private storage: StorageService, private router: Router,private cdRef:ChangeDetectorRef) { }
+  constructor(private api: ApiService, private storage: StorageService, private router: Router,private cdRef:ChangeDetectorRef, private titleService: Title) {
+    this.titleService.setTitle( "Prenota: Imposta i dati dei tuoi dipendenti e il loro orario di lavoro");
+   }
 
   ngOnInit() {  
     this.catalog = "none";
     this.createEmployee = "none";
     this.getEmployees()
-    console.log(this.employee)
-      
- 
-    
     }
     getEmployees(){
       this.api.getEmployees().subscribe(
@@ -92,6 +93,9 @@ export class EmployeesComponent implements OnInit {
     }
     goHome(){
       this.router.navigateByUrl('/home')
+    }
+    goData(){
+      this.router.navigateByUrl('/notifications')
     }
     deleteEmployee(employee){
       this.api.deleteEmployee(employee.id).subscribe(
@@ -126,7 +130,6 @@ export class EmployeesComponent implements OnInit {
     }
 
     storeEverything(){
-      console.log(this.employee)
       var opentimes=[]
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
       for (let i in times){
@@ -236,7 +239,7 @@ export class EmployeesComponent implements OnInit {
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
       
       var hours = this.storage.getEmployeehours()
-      hours = hours.filter((employee)=> {if(employee.id == this.employee){ return employee}})
+      hours = hours.filter((employee)=> {if(employee.id == this.employee){ this.emplo_name = employee.name; return employee}})
 
         for (let opening of hours[0].timetable){
           if(times[opening.wkday][0]==''){
@@ -258,9 +261,14 @@ export class EmployeesComponent implements OnInit {
             this.closed_days[day] = true
           }
         }
-
-      
-
+        this.bk_empl="none"
+    }
+    dateChanged(ev,day,spot){
+      var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
+      times[day][spot] = ev.target.__data.value
+    }
+    selectEmpl(){
+      this.emplo = "block"
     }
   }
   

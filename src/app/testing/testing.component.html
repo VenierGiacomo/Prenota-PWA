@@ -1,19 +1,213 @@
-<div class="swiper-container">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">Slide 1</div>
-        <div class="swiper-slide">Slide 2</div>
-        <div class="swiper-slide">Slide 3</div>
-        ...
-    </div>
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
+<!-- <vaadin-time-picker [value]='value_t'  id="time-picker-basic-demos-value-resolution" step="900" label="Apertura"></vaadin-time-picker> -->
 
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-
-    <!-- If we need scrollbar -->
-    <div class="swiper-scrollbar"></div>
-</div>
+<form> 
+    <h1 (click)='printval()'>Lunedì</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="lun[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="lun[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="lun[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="lun[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Martedì</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mar[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mar[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mar[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mar[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Mercoledì</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mer[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mer[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mer[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="mer[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Giovedì</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="gio[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="gio[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="gio[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="gio[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Venerdì</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="ven[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="ven[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="ven[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="ven[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Sabato</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="sab[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="sab[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="sab[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="sab[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <!--  -->
+        <h1>Domenica</h1>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="dom[0]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="dom[1]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="dom[2]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Apertura">
+        </vaadin-time-picker>
+        <vaadin-time-picker 
+        (change)="dateChanged($event)"
+        [value]="dom[3]"
+        id="time-picker-basic-demos-value-resolution" 
+        step="900" 
+        label="Chiusura">
+        </vaadin-time-picker>
+</form>

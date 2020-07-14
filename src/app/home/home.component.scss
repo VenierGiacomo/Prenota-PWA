@@ -23,7 +23,7 @@ body{
     font-size: 28px;
     button{
         position: relative;
-        top: 44vh;
+        top: 36vh;
         display: inline-block;
         background:#fff;
         height: 15vh;
@@ -88,7 +88,7 @@ body{
         color: #0061d5;
         font-size: 1.3vw;
         display:grid;
-        grid-template-columns: 5fr 7fr 7fr;
+        grid-template-columns: 5fr 8fr 6fr;
         span{
         align-self:end;
         line-height: 2.5vw;
@@ -557,7 +557,7 @@ mat-form-field {
       }
     .task-duration{
         font-size: 11px;
-        margin: 0px 0px;
+        margin: -5px 0px;
         font-family:  'Open Sans', sans-serif !important;
     }
     .task-name{
@@ -575,7 +575,7 @@ mat-form-field {
         font-size: 15px;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin: 5px 0px ;
+        margin: -5px 0px;
         font-family:  'Open Sans', sans-serif !important;
     }
 }

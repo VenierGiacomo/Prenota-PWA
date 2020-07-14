@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule, MatNativeDateModule,  } from '@angular/material'
 import { NgxMatNativeDateModule, NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -29,6 +29,11 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 
 import { FacebookModule } from 'ngx-facebook';
+import { PrivacyComponent } from './privacy/privacy.component';
+import { LoadingpageComponent } from './loadingpage/loadingpage.component';
+import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
+import { TableComponent } from './table/table.component';
+import { NotificPageComponent } from './notific-page/notific-page.component';
 
 
 @NgModule({
@@ -50,6 +55,11 @@ import { FacebookModule } from 'ngx-facebook';
     HomelistingComponent,
     FooterComponent,
     HeaderComponent,
+    PrivacyComponent,
+    LoadingpageComponent,
+    RegEmployeeComponent,
+    TableComponent,
+    NotificPageComponent,
     
   ],
   imports: [
@@ -65,8 +75,10 @@ import { FacebookModule } from 'ngx-facebook';
     BrowserAnimationsModule,
     MatFormFieldModule,
     MatInputModule,
+    ReactiveFormsModule,
     FacebookModule.forRoot(),
   ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   exports:[
     MatDatepickerModule,

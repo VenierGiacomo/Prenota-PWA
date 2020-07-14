@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-
-import Swiper from 'swiper';
+import '@vaadin/vaadin-time-picker';
+import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-testing',
@@ -8,33 +8,30 @@ import Swiper from 'swiper';
   styleUrls: ['./testing.component.scss']
 })
 export class TestingComponent implements OnInit {
+  // Lun_time="08:00:00"
+  // form = new FormGroup({ 
+  //   Lun_time: new FormControl(''),
+  //   lastName: new FormControl('')
+  // });
+
   constructor() { }
-
- 
-  
-
-  
-  mySwiper 
-
+  lun= ['08:00','12:00','','']
+  mar= ['08:00','12:00','','']
+  mer= ['08:00','12:00','','']
+  gio= ['08:00','12:00','','']
+  ven= ['08:00','12:00','','']
+  sab= ['08:00','12:00','','']
+  dom= ['08:00','12:00','','']
   ngOnInit() {
-    this.mySwiper == new Swiper('.swiper-container', {
-      // Optional parameters
-      direction: 'horizontal',
-      loop: true,
-  
-      // If we need pagination
-     
-  
-      // Navigation arrows
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-      },
-  
-      });
-  
   }
   
+  printval(){
+    // this.lun[0]= '09:00:00'
+    // console.log(this.form.value,this.form.value)
+  }
+  dateChanged(ev){
+    console.log('Date changed', ev.target.__data.value);
+  }
 }
 
 

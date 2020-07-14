@@ -423,11 +423,11 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 575px) {
 .more-info{
   padding: 10px 15px!important;
-  margin: 5px 0px 0px 0px!important;
+  margin: 10px 0px 0px 0px!important;
 }
 .btn-get-started {
   padding: 10px 15px!important;
-  margin-top: 5px!important;
+  margin: 10px 20px 0px 20px!important;
 }
 }
 /*--------------------------------------------------------------

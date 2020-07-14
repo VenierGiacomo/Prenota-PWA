@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import Notiflix from "notiflix";
+import { Title } from '@angular/platform-browser';
 declare var $: any;
 @Component({
   selector: 'app-landing',
@@ -18,8 +19,9 @@ export class LandingComponent implements OnInit {
   price_SMALL = 19
   price_MEDIUM = 39
   call_to_act='Inizia la prova gratuita'
-  constructor(private api: ApiService, private router: Router) { }
-
+  constructor(private api: ApiService, private router: Router, private titleService: Title) {
+    this.titleService.setTitle( "Prenota: Esplora la nostra Agenda online e inizia la prova gratuia ");
+   }
   ngOnInit() {
     if(this.mobileCheck()){
       this.call_to_act="Scarica l'app"

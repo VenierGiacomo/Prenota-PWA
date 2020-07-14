@@ -4,6 +4,7 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import Notiflix from "notiflix";
 import Swiper from 'swiper';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-register',
@@ -12,7 +13,10 @@ import Swiper from 'swiper';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private api: ApiService, private storage: StorageService, private router: Router) { }
+  constructor(private api: ApiService, private storage: StorageService, private router: Router, private titleService: Title) {
+    this.titleService.setTitle( "Prenota: Registra il tuo business e inizia a ricevere appuntamenti online");
+   }
+
   first_name = ''
   last_name = ''
   email = ''
@@ -97,11 +101,20 @@ export class RegisterComponent implements OnInit {
   sexs=['non spec','Uomo', 'Donna', 'Unisex' ]
 
   ngOnInit() {
-    this.mySwiper = new Swiper('.swiper-container', { direction: 'horizontal', allowTouchMove: false});
+    // allowTouchMove: false 
+    this.mySwiper = new Swiper('.swiper-container', { direction: 'horizontal', });
     this.getEmployees()
   }
   goLogin(){
     this.router.navigateByUrl('/login')
+  }
+  dateChanged(ev,day,spot){
+    var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
+    times[day][spot] = ev.target.__data.value
+  }
+  dateChanged1(ev,day,spot){
+    var times=[this.lun1, this.mar1,this.mer1,this.gio1,this.ven1,this.sab1,this.dom1]
+    times[day][spot] = ev.target.__data.value
   }
  submit(){
   Notiflix.Block.Standard('.wrapper', 'Salvando dati...');     
@@ -301,6 +314,51 @@ getEmployees(){
     this.mySwiper.slidePrev()
   }
   goCalendar(){
-    this.router.navigateByUrl('home')
+    this.router.navigateByUrl('loading')
   }  
+  goHome(){
+    this.router.navigateByUrl('')
+  }
+  copyTimeslotsstore(){
+    console.log(this.double_turn)
+    this.double_turn[1]= this.double_turn[0]
+    this.double_turn[2]= this.double_turn[0]
+    this.double_turn[3]= this.double_turn[0]
+    this.double_turn[4]= this.double_turn[0]
+    this.double_turn[5]= this.double_turn[0]
+    this.double_turn[6]= this.double_turn[0]
+    this.closed_days[1]=  this.closed_days[0]
+    this.closed_days[2]=  this.closed_days[0]
+    this.closed_days[3]=  this.closed_days[0]
+    this.closed_days[4]=  this.closed_days[0]
+    this.closed_days[5]=  this.closed_days[0]
+    this.closed_days[6]=  this.closed_days[0]
+    this.mar=this.lun
+    this.mer=this.lun
+    this.gio=this.lun
+    this.ven=this.lun
+    this.sab=this.lun
+    this.dom=this.lun
+  }
+  copyTimeslotsemplo(){
+    console.log( this.mar1, this.lun1)
+    this.double_turn1[1]= this.double_turn1[0]
+    this.double_turn1[2]= this.double_turn1[0]
+    this.double_turn1[3]= this.double_turn1[0]
+    this.double_turn1[4]= this.double_turn1[0]
+    this.double_turn1[5]= this.double_turn1[0]
+    this.double_turn1[6]= this.double_turn1[0]
+    this.closed_days1[1]=  this.closed_days1[0]
+    this.closed_days1[2]=  this.closed_days1[0]
+    this.closed_days1[3]=  this.closed_days1[0]
+    this.closed_days1[4]=  this.closed_days1[0]
+    this.closed_days1[5]=  this.closed_days1[0]
+    this.closed_days1[6]=  this.closed_days1[0]
+    this.mar1=this.lun1
+    this.mer1=this.lun1
+    this.gio1=this.lun1
+    this.ven1=this.lun1
+    this.sab1=this.lun1
+    this.dom1=this.lun1
+  }
 }

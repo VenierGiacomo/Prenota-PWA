@@ -45,7 +45,7 @@ var Util = function ($) {
 
   var transition = false;
 
-  var MAX_UID = 1000000;
+  var MAX_UID = 100;
 
   var TransitionEndEvent = {
     WebkitTransition: 'webkitTransitionEnd',

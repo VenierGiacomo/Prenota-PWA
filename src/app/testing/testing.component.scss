@@ -1,193 +1,20 @@
-// /**
-//  * The CSS shown here will not be introduced in the Quickstart guide, but shows
-//  * how you can use CSS to style your Element's container.
-//  */
-//  .StripeElement {
-//     box-sizing: border-box;
-//     margin: 0px 5vw;
-  
-//     height: 40px;
-  
-//     padding: 10px 12px;
-  
-//     border: 1px solid transparent;
-//     border-radius: 4px;
-//     background-color: white;
-  
-//     box-shadow: 0 1px 3px 0 #e6ebf1;
-//     -webkit-transition: box-shadow 150ms ease;
-//     transition: box-shadow 150ms ease;
-//   }
-  
-//   .StripeElement--focus {
-//     box-shadow: 0 1px 3px 0 #cfd7df;
-//   }
-  
-//   .StripeElement--invalid {
-//     border-color: #fa755a;
-//   }
-  
-//   .StripeElement--webkit-autofill {
-//     background-color: #fefde5 !important;
-//   }
-// p{
-//   color: white;
-// }
-//   /**
-// * The CSS shown here will not be introduced in the Quickstart guide, but
-// * shows how you can use CSS to style your Element's container.
-// */
-// input,
-// .StripeElement {
-//   height: 40px;
-//   padding: 10px 12px;
+form{
+  display: grid;
+  width:100%;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
+  h1{
+    width: 100%;
+    line-height: 24px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    align-self: flex-end;
 
-//   color: #32325d;
-//   background-color: white;
-//   border: 1px solid transparent;
-//   border-radius: 4px;
-
-//   box-shadow: 0 1px 3px 0 #e6ebf1;
-//   -webkit-transition: box-shadow 150ms ease;
-//   transition: box-shadow 150ms ease;
-// }
-
-// input:focus,
-// .StripeElement--focus {
-//   box-shadow: 0 1px 3px 0 #cfd7df;
-// }
-
-// .StripeElement--invalid {
-//   border-color: #fa755a;
-// }
-
-// .StripeElement--webkit-autofill {
-//   background-color: #fefde5 !important;
-// }
-// .swiper-container {
-//   width: 100vw;
-//   height: 90vw;
-// }
-
-///// my scss
-
-.task {
-  // resize:vertical;
-  // resize:both;
-  // width: 100%;
-  margin: 30px;
-  border-left-width: 3px;
-  width: 80px;
-  height: 140px;
-  text-overflow: ellipsis;
-  padding: 8px 12px;
-  border-left-style: solid;
-  font-size: 14px;
-  position: relative;
-  transition: height 800ms;
-  -webkit-transition: 800ms;;
-  -moz-transition: 800ms;
-  -o-transition: 800ms;
-  &--primary {
-    border: 0;
-    border-radius: 4px;
-    grid-column: 3 / span 3;
-    grid-row: 4;
-    align-self: end;
-    color: #fff;
-  }
-  
-  &1{
-    color: #85040a;
-    background: #f2b3b3;
-  }
-  &2{
-    color: #b63a00;
-    background: #fccbbc;
-  }
-  &3{
-    color: #9c6b00;
-    background: #fcecbe;
-  }
-  &4{
-    color: #047a10;
-    background: #c2e9d7;
-   
-  }
-  &5{
-    color: #0954cc;
-    background: #b3e1f7;
-   
-  }
-  &6{
-    color: #4c21a3;
-    background: #c5cbe9;
-  }
-  &7{
-    color: rgb(68, 78, 126);
-    background: #d7dbef;
-    
-    
-  }
-  &8{
-    color: rgb(95, 17, 131);
-    background: #ddbde6;
-  }
-  &--online {
-      background: #0151ff;
-      border: 0;
-      border-radius: 4px;
-      grid-column: 3 / span 3;
-      grid-row: 4;
-      align-self: end;
-      color: #fff;
-      box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-    }
-  .task-duration{
-      font-size: 11px;
-      margin: 0px 0px;
-      font-family:  'Open Sans', sans-serif !important;
-  }
-  .task-name{
-      text-transform: capitalize;
-      right: 0vw;
-      position: absolute;
-      bottom: 5px;
-      right:5px;
-      text-align: right;
-      font-size: 11px;
-      font-family:  'Open Sans', sans-serif !important;
-  }
-  .task-details{
-      font-weight: 500;
-      font-size: 15px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      margin: 10px 0px;
-      font-family:  'Open Sans', sans-serif !important;
   }
 }
+vaadin-time-picker{
+  width: 120px;
+  margin: 0 20px;
 
-
-.color-picker{
-  position: absolute;
-  left:50%;
-  top: 10px;
-  display: block;
-  height: 60px;
-  .c{
-    display: inline-block;
-    height: 20px;
-    width: 20px;
-    margin:5px;
-    border-radius: 5px;
-  }
-}
-
-.d{
-    display: block;
-    height: 20px;
-    width: 20px;
-    margin:5px;
-    border-radius: 5px;
 }

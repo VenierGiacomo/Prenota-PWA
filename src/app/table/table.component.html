@@ -1,0 +1,448 @@
+<body>
+    <div class="home">
+        <div class="side-menu">
+            <div class="menu-home" (click)='goHome()'>Calendario</div>
+            <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
+            <div class="menu-data">Area clienti</div>
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
+        </div> 
+        <div class="cont-left">
+                <div class="spinner" [style.display]="spin">
+                        <div class="double-bounce1"></div>
+                        <div class="double-bounce2"></div>
+                      </div>
+            <div class="topbar">
+                <div (click)='goNotifications()'>Notifiche</div>
+                <div class="not"  >Clienti</div>
+            </div>
+                <div id="right-panel" style="margin-top: 8vh;">
+                        <!-- /#header -->
+                        <!-- Content -->
+                        <div class="content">
+                                <!-- Animated -->
+                                <div class="animated fadeIn">
+                <div class="orders">
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h4 class="box-title">I tuoi clienti e i loro dati </h4>
+                                    </div>
+                                    <div class="card-body--">
+                                        <div class="table-stats order-table ov-h">
+                                            <table class="table ">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="serial">Cliente</th>
+                                                        <th class="avatar">Telefono</th>
+                                                        <th>Email</th>
+                                                        <th>Colore</th>
+                                                        <th>Lunghezza</th>
+                                                        <th>Spesa</th>
+                                                        <th>Prodotti</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td class="serial">1.</td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5469 </td>
+                                                        <td>  <span class="name">Louis Stanley</span> </td>
+                                                        <td> <span class="product">iMax</span> </td>
+                                                        <td><span class="count">231</span></td>
+                                                        <td>
+                                                            <span class="badge badge-complete">Complete</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class="serial">1.</td>
+                                                            <td class="avatar">
+                                                                <div class="round-img">
+                                                                    <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                                </div>
+                                                            </td>
+                                                            <td> #5469 </td>
+                                                            <td>  <span class="name">Louis Stanley</span> </td>
+                                                            <td> <span class="product">iMax</span> </td>
+                                                            <td><span class="count">231</span></td>
+                                                            <td>
+                                                                <span class="badge badge-complete">Complete</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="serial">1.</td>
+                                                                <td class="avatar">
+                                                                    <div class="round-img">
+                                                                        <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                                    </div>
+                                                                </td>
+                                                                <td> #5469 </td>
+                                                                <td>  <span class="name">Louis Stanley</span> </td>
+                                                                <td> <span class="product">iMax</span> </td>
+                                                                <td><span class="count">231</span></td>
+                                                                <td>
+                                                                    <span class="badge badge-complete">Complete</span>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td class="serial">1.</td>
+                                                                    <td class="avatar">
+                                                                        <div class="round-img">
+                                                                            <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td> #5469 </td>
+                                                                    <td>  <span class="name">Louis Stanley</span> </td>
+                                                                    <td> <span class="product">iMax</span> </td>
+                                                                    <td><span class="count">231</span></td>
+                                                                    <td>
+                                                                        <span class="badge badge-complete">Complete</span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                        <td class="serial">1.</td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5469 </td>
+                                                        <td>  <span class="name">Louis Stanley</span> </td>
+                                                        <td> <span class="product">iMax</span> </td>
+                                                        <td><span class="count">231</span></td>
+                                                        <td>
+                                                            <span class="badge badge-complete">Complete</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class="serial">1.</td>
+                                                            <td class="avatar">
+                                                                <div class="round-img">
+                                                                    <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                                </div>
+                                                            </td>
+                                                            <td> #5469 </td>
+                                                            <td>  <span class="name">Louis Stanley</span> </td>
+                                                            <td> <span class="product">iMax</span> </td>
+                                                            <td><span class="count">231</span></td>
+                                                            <td>
+                                                                <span class="badge badge-complete">Complete</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class="serial">1.</td>
+                                                                <td class="avatar">
+                                                                    <div class="round-img">
+                                                                        <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
+                                                                    </div>
+                                                                </td>
+                                                                <td> #5469 </td>
+                                                                <td>  <span class="name">Louis Stanley</span> </td>
+                                                                <td> <span class="product">iMax</span> </td>
+                                                                <td><span class="count">231</span></td>
+                                                                <td>
+                                                                    <span class="badge badge-complete">Complete</span>
+                                                                </td>
+                                                            </tr>
+
+                                                    <tr>
+                                                        <td class="serial">2.</td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/2.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5468 </td>
+                                                        <td>  <span class="name">Gregory Dixon</span> </td>
+                                                        <td> <span class="product">iPad</span> </td>
+                                                        <td><span class="count">250</span></td>
+                                                        <td>
+                                                            <span class="badge badge-complete">Complete</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="serial">3.</td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/3.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5467 </td>
+                                                        <td>  <span class="name">Catherine Dixon</span> </td>
+                                                        <td> <span class="product">SSD</span> </td>
+                                                        <td><span class="count">250</span></td>
+                                                        <td>
+                                                            <span class="badge badge-complete">Complete</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="serial">4.</td>
+                                                        <td class="avatar">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/4.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5466 </td>
+                                                        <td>  <span class="name">Mary Silva</span> </td>
+                                                        <td> <span class="product">Magic Mouse</span> </td>
+                                                        <td><span class="count">250</span></td>
+                                                        <td>
+                                                            <span class="badge badge-pending">Pending</span>
+                                                        </td>
+                                                    </tr>
+                                                    <tr class=" pb-0">
+                                                        <td class="serial">5.</td>
+                                                        <td class="avatar pb-0">
+                                                            <div class="round-img">
+                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/6.jpg" alt=""></a>
+                                                            </div>
+                                                        </td>
+                                                        <td> #5465 </td>
+                                                        <td>  <span class="name">Johnny Stephens</span> </td>
+                                                        <td> <span class="product">Monitor</span> </td>
+                                                        <td><span class="count">250</span></td>
+                                                        <td>
+                                                            <span class="badge badge-complete">Complete</span>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div> <!-- /.table-stats -->
+                                    </div>
+                                </div> <!-- /.card -->
+                            </div>  <!-- /.col-lg-8 -->
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+
+
+   <!-- <div class="container-table100">
+                    <h2 style="padding:20px">I dati sui tuoi clienti</h2>
+                    <div class="wrap-table100">
+                        <div class="table100 ver1 m-b-110">
+                            <div class="table100-head">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th class=" column1">Cliente</th>
+                                            <th class=" column2">Telefono</th>
+                                            <th class=" column3">Email</th>
+                                            <th class=" column4">Colore</th>
+                                            <th class=" column5">Lunghezza </th>
+                                            <th class=" column6">Spesa</th>
+                                            <th class=" column7">Prodotti</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+        
+                            <div class="table100-body js-pscroll">
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td class=" column1">Giacomo Venier</td>
+                                            <td class=" column2">331 2233645</td>
+                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                            <td class=" column4">Castano</td>
+                                            <td class=" column5">Corto</td>
+                                            <td class=" column6">Media</td>
+                                            <td class=" column7">Shampoo</td>
+                                        </tr>
+                                        <tr>
+                                            <td class=" column1">Giacomo Venier</td>
+                                            <td class=" column2">331 2233645</td>
+                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                            <td class=" column4">Castano</td>
+                                            <td class=" column5">Corto</td>
+                                            <td class=" column6">Media</td>
+                                            <td class=" column7">Shampoo</td>
+                                        </tr>
+                                        <tr>
+                                                <td class=" column1">Giacomo Venier</td>
+                                                <td class=" column2">331 2233645</td>
+                                                <td class=" column3">giacomo.venier@gmail.com</td>
+                                                <td class=" column4">Castano</td>
+                                                <td class=" column5">Corto</td>
+                                                <td class=" column6">Media</td>
+                                                <td class=" column7">Shampoo</td>
+                                            </tr>
+                                            <tr>
+                                                    <td class=" column1">Giacomo Venier</td>
+                                                    <td class=" column2">331 2233645</td>
+                                                    <td class=" column3">giacomo.venier@gmail.com</td>
+                                                    <td class=" column4">Castano</td>
+                                                    <td class=" column5">Corto</td>
+                                                    <td class=" column6">Media</td>
+                                                    <td class=" column7">Shampoo</td>
+                                                </tr>
+                                                <tr>
+                                                        <td class=" column1">Giacomo Venier</td>
+                                                        <td class=" column2">331 2233645</td>
+                                                        <td class=" column3">giacomo.venier@gmail.com</td>
+                                                        <td class=" column4">Castano</td>
+                                                        <td class=" column5">Corto</td>
+                                                        <td class=" column6">Media</td>
+                                                        <td class=" column7">Shampoo</td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class=" column1">Giacomo Venier</td>
+                                                            <td class=" column2">331 2233645</td>
+                                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                                            <td class=" column4">Castano</td>
+                                                            <td class=" column5">Corto</td>
+                                                            <td class=" column6">Media</td>
+                                                            <td class=" column7">Shampoo</td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class=" column1">Giacomo Venier</td>
+                                                                <td class=" column2">331 2233645</td>
+                                                                <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                <td class=" column4">Castano</td>
+                                                                <td class=" column5">Corto</td>
+                                                                <td class=" column6">Media</td>
+                                                                <td class=" column7">Shampoo</td>
+                                                            </tr>
+                                                            <tr>
+                                                                    <td class=" column1">Giacomo Venier</td>
+                                                                    <td class=" column2">331 2233645</td>
+                                                                    <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                    <td class=" column4">Castano</td>
+                                                                    <td class=" column5">Corto</td>
+                                                                    <td class=" column6">Media</td>
+                                                                    <td class=" column7">Shampoo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                        <td class=" column1">Giacomo Venier</td>
+                                                                        <td class=" column2">331 2233645</td>
+                                                                        <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                        <td class=" column4">Castano</td>
+                                                                        <td class=" column5">Corto</td>
+                                                                        <td class=" column6">Media</td>
+                                                                        <td class=" column7">Shampoo</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                            <td class=" column1">Giacomo Venier</td>
+                                                                            <td class=" column2">331 2233645</td>
+                                                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                            <td class=" column4">Castano</td>
+                                                                            <td class=" column5">Corto</td>
+                                                                            <td class=" column6">Media</td>
+                                                                            <td class=" column7">Shampoo</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                                <td class=" column1">Giacomo Venier</td>
+                                                                                <td class=" column2">331 2233645</td>
+                                                                                <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                                <td class=" column4">Castano</td>
+                                                                                <td class=" column5">Corto</td>
+                                                                                <td class=" column6">Media</td>
+                                                                                <td class=" column7">Shampoo</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                    <td class=" column1">Giacomo Venier</td>
+                                                                                    <td class=" column2">331 2233645</td>
+                                                                                    <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                                    <td class=" column4">Castano</td>
+                                                                                    <td class=" column5">Corto</td>
+                                                                                    <td class=" column6">Media</td>
+                                                                                    <td class=" column7">Shampoo</td>
+                                                                                </tr><tr>
+                                                                                        <td class=" column1">Giacomo Venier</td>
+                                                                                        <td class=" column2">331 2233645</td>
+                                                                                        <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                                        <td class=" column4">Castano</td>
+                                                                                        <td class=" column5">Corto</td>
+                                                                                        <td class=" column6">Media</td>
+                                                                                        <td class=" column7">Shampoo</td>
+                                                                                    </tr>
+
+                                                                                    <tr>
+                                            <td class=" column1">Giacomo Venier</td>
+                                            <td class=" column2">331 2233645</td>
+                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                            <td class=" column4">Castano</td>
+                                            <td class=" column5">Corto</td>
+                                            <td class=" column6">Media</td>
+                                            <td class=" column7">Shampoo</td>
+                                        </tr>
+                                        <tr>
+                                            <td class=" column1">Giacomo Venier</td>
+                                            <td class=" column2">331 2233645</td>
+                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                            <td class=" column4">Castano</td>
+                                            <td class=" column5">Corto</td>
+                                            <td class=" column6">Media</td>
+                                            <td class=" column7">Shampoo</td>
+                                        </tr>
+                                        <tr>
+                                                <td class=" column1">Giacomo Venier</td>
+                                                <td class=" column2">331 2233645</td>
+                                                <td class=" column3">giacomo.venier@gmail.com</td>
+                                                <td class=" column4">Castano</td>
+                                                <td class=" column5">Corto</td>
+                                                <td class=" column6">Media</td>
+                                                <td class=" column7">Shampoo</td>
+                                            </tr>
+                                            <tr>
+                                                    <td class=" column1">Giacomo Venier</td>
+                                                    <td class=" column2">331 2233645</td>
+                                                    <td class=" column3">giacomo.venier@gmail.com</td>
+                                                    <td class=" column4">Castano</td>
+                                                    <td class=" column5">Corto</td>
+                                                    <td class=" column6">Media</td>
+                                                    <td class=" column7">Shampoo</td>
+                                                </tr>
+                                                <tr>
+                                                        <td class=" column1">Giacomo Venier</td>
+                                                        <td class=" column2">331 2233645</td>
+                                                        <td class=" column3">giacomo.venier@gmail.com</td>
+                                                        <td class=" column4">Castano</td>
+                                                        <td class=" column5">Corto</td>
+                                                        <td class=" column6">Media</td>
+                                                        <td class=" column7">Shampoo</td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td class=" column1">Giacomo Venier</td>
+                                                            <td class=" column2">331 2233645</td>
+                                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                                            <td class=" column4">Castano</td>
+                                                            <td class=" column5">Corto</td>
+                                                            <td class=" column6">Media</td>
+                                                            <td class=" column7">Shampoo</td>
+                                                        </tr>
+                                                        <tr>
+                                                                <td class=" column1">Giacomo Venier</td>
+                                                                <td class=" column2">331 2233645</td>
+                                                                <td class=" column3">giacomo.venier@gmail.com</td>
+                                                                <td class=" column4">Castano</td>
+                                                                <td class=" column5">Corto</td>
+                                                                <td class=" column6">Media</td>
+                                                                <td class=" column7">Shampoo</td>
+                                                            </tr>
+
+                                                            <tr>
+                                            <td class=" column1">Giacomo Venier</td>
+                                            <td class=" column2">331 2233645</td>
+                                            <td class=" column3">giacomo.venier@gmail.com</td>
+                                            <td class=" column4">Castano</td>
+                                            <td class=" column5">Corto</td>
+                                            <td class=" column6">Media</td>
+                                            <td class=" column7">Shampoo</td>
+                                        </tr>
+                                       
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>         
+                    </div>
+                </div> -->

@@ -6,7 +6,7 @@
             <!-- <h2>Prenota ora</h2> -->
             <div (mouseover)="ser='block'" (mouseout)="ser='none'">
                     <span class="services" [style.display]='ser' (mouseout)="ser='none'" (mouseover)="ser='block'">
-                            <span class="time-available" *ngFor='let service of services' (click)="selectService(service)">{{service.name}}</span>
+                            <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]'[style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}</span>
                     </span>
                     {{selected_service}}
             </div>
@@ -30,15 +30,18 @@
                     {{displ_hour}}
                     <!--  -->
                     <span class="bookings-time" [style.display]='spots' (mouseout)="spots='none'" (mouseover)="spots='block'">
-                        <span class="employee-spot" *ngFor="let employee of employees_list">
+                        <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
                             <h3>{{employee.first_name}} {{employee.last_name}}</h3>
-                            <p class='nada' *ngIf=' service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p>
-                            <span class="cont-timeslots">
+                            <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p>
+                            <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
+                            <span class="cont-timeslots" *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length ' >
+                                    <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
                                 <span *ngFor='let spot of availableSpots'>
                                     <span class="time-available"  *ngIf="spot.employee == employee.id" (click)="selectHour(spot)">{{times[spot.start]}}</span>
                                 </span>
                             </span>
-                            <span class='nada' *ngIf='selected_date=="Seleziona data" || service==undefined'>Seleziona una data e un servizio</span>
+                            <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.first_name}} {{employee.last_name}} non effetua questop tipo di servizi</span>
+                            <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
                             <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
                         <!-- -->
                            
@@ -53,22 +56,7 @@
 </div>
 
 <div class="cont-template">
-    <head>
-        <title>Author - Free Bootstrap 4 Template by Colorlib</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        
-        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-            <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    
-       
-      </head>
       <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-          
-          
         <!-- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
             <div class="container">
               <a class="navbar-brand" href="index.html">Author<span>.</span></a>
@@ -111,7 +99,7 @@
                                     <ul class="about-info mt-4 px-md-0 px-2">
                                         <li class="d-flex"><span>Indirizzo:</span> <span>Via Torrebianca 28/A</span></li>
                                         <li class="d-flex"><span>Email:</span> <span>gianfranco.stupar@gmail.com</span></li>
-                                        <li class="d-flex"><span>Telefono: </span> <span>040 660779</span></li>
+                                        <li class="d-flex"><span>Telefono: </span> <span>339 1139977</span></li>
                                     </ul>
                                   </div>
                                 </div>
@@ -255,7 +243,7 @@
                             <ul>
                               <li><a (click)='navBox("page-1")' class="page-1 current">Chi siamo</a></li>
                               <li><a (click)='navBox("page-2")' class="page-2">Il nostro team</a></li>
-                              <li><a (click)='navBox("page-3")' class="page-3">Servizi e Tarrifario</a></li>
+                              <li><a (click)='navBox("page-3")' class="page-3">Servizi e Tariffario</a></li>
                               <!-- <li><a (click)='navBox("page-4")' class="page-4"></a></li> -->
                               <!-- <li><a href="#page-5">Foreword</a></li>
                               <li><a href="#page-6">Prologue</a></li>
@@ -294,7 +282,7 @@ Laureata in Medicina e Chirurgia ed in Scienze Biologiche presso l’Università
                                 Dieta e nutrizione per sportivi  - da € 100 a € 300 <br> <br>
                                 Ecg - elettrocardiogramma a riposo - € 20 <br> <br>
                                 Certificato Medico non agonistico - € 40 <br> <br>
-                                VISITA MEDICO SPORTIVA AGONISTICA CON PROVA DA SFORZO - € 120
+                                Visita medico sportiva agonistica con prova da sforzo - € 120
                                     </p>
                           </div>
                           <!-- <div id="page-5" class= "page bg-light five">
