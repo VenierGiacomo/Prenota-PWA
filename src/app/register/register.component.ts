@@ -102,7 +102,7 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     // allowTouchMove: false 
-    this.mySwiper = new Swiper('.swiper-container', { direction: 'horizontal', });
+    this.mySwiper = new Swiper('.swiper-container', { direction: 'horizontal',allowTouchMove: false  } );
     this.getEmployees()
   }
   goLogin(){
@@ -158,6 +158,8 @@ export class RegisterComponent implements OnInit {
           console.log(err.error,'err')
         }
       )
+    }else{
+      Notiflix.Block.Remove('.wrapper');
     }
     
 

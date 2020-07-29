@@ -58,6 +58,26 @@ input:focus, textarea:focus, select:focus{
         display: block;
         cursor: pointer;
     }
+    .menu-logout{
+        position: absolute;
+        color: white;
+        top: 90vh;
+        margin-left: 2vw;
+        display: block;
+        cursor: pointer;
+        img{
+            margin-top: -3.5%;
+            margin-left: -3.5%;
+            height: 2.8vh;
+        }
+    }
+}
+.stat-content{
+    margin-left: 70px !important;
+}
+.stat-text{
+    line-height: 21px !important;
+    font-size: 15px !important;
 }
 .settings{
     background:#fafafa;
@@ -196,10 +216,10 @@ input:focus, textarea:focus, select:focus{
     
 }
 .cont-table{
-    margin: 20vh 25vw;
+    margin: 20vh 10vw;
     display: block;
     // height: 60vh;
-    width: 50vw;
+    width: 80vw;
     border-radius: 10px;
     background: #fff;
     overflow: auto;

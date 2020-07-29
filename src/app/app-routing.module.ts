@@ -16,6 +16,12 @@ import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
 import { TestingComponent } from './testing/testing.component';
 import { TableComponent } from './table/table.component';
 import { NotificPageComponent } from './notific-page/notific-page.component';
+import { TermofuseComponent } from './termofuse/termofuse.component';
+import { AparucchieriComponent } from './aparucchieri/aparucchieri.component';
+import { BookingTemplComponent } from './booking-templ/booking-templ.component';
+import { HowtouseComponent } from './howtouse/howtouse.component';
+import { NitrogymComponent } from './nitrogym/nitrogym.component';
+import { BooktestComponent } from './booktest/booktest.component';
 
 
 
@@ -34,10 +40,16 @@ const routes: Routes = [
   {path: 'register/employee', component: RegEmployeeComponent},
   {path: 'data', component: TableComponent},
   {path: 'notifications', component: NotificPageComponent},
+  {path: 'termofuse', component: TermofuseComponent},
+  {path: 'aparrucchieri', component: AparucchieriComponent},
+  {path: 'nitrogym', component: NitrogymComponent},
+  {path: 'istruzioni', component: HowtouseComponent},
+  {path: 'book-test', component: BooktestComponent},
+  // {path: 'booking/templ', component: BookingTemplComponent},
   // {path: 'month', component: MonthviewComponent},
   // {path: 'subscription', component: SubscriptionComponent},
   //da eliminare
-  {path: 'test', component: TestingComponent},
+  // {path: 'test', component: TestingComponent},
   // {path: 'store/setup', component: StoreSetupComponent, canActivate: [AuthGuard]},
   //da eliminare
   // {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},

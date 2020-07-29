@@ -33,182 +33,28 @@
                                             <table class="table ">
                                                 <thead>
                                                     <tr>
-                                                        <th class="serial">Cliente</th>
-                                                        <th class="avatar">Telefono</th>
-                                                        <th>Email</th>
-                                                        <th>Colore</th>
+                                                        <th class="serial">Nome e Cognome</th>
+                                                        <th class="avatar">Colore</th>
                                                         <th>Lunghezza</th>
+                                                        <th>Cellulare</th>
                                                         <th>Spesa</th>
-                                                        <th>Prodotti</th>
+                                                        <th>Ultimo Servizio</th>
+                                                        <th>Salva</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
-                                                    <tr>
-                                                        <td class="serial">1.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5469 </td>
-                                                        <td>  <span class="name">Louis Stanley</span> </td>
-                                                        <td> <span class="product">iMax</span> </td>
-                                                        <td><span class="count">231</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                            <td class="serial">1.</td>
-                                                            <td class="avatar">
-                                                                <div class="round-img">
-                                                                    <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                                </div>
-                                                            </td>
-                                                            <td> #5469 </td>
-                                                            <td>  <span class="name">Louis Stanley</span> </td>
-                                                            <td> <span class="product">iMax</span> </td>
-                                                            <td><span class="count">231</span></td>
-                                                            <td>
-                                                                <span class="badge badge-complete">Complete</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td class="serial">1.</td>
-                                                                <td class="avatar">
-                                                                    <div class="round-img">
-                                                                        <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                                    </div>
-                                                                </td>
-                                                                <td> #5469 </td>
-                                                                <td>  <span class="name">Louis Stanley</span> </td>
-                                                                <td> <span class="product">iMax</span> </td>
-                                                                <td><span class="count">231</span></td>
+                                                        <tr *ngFor='let client of clients'>
+                                                                <td class="serial"><input [(ngModel)]='client.client_name'></td>
+                                                                <td class="avatar"><input [(ngModel)]='client.hair_color'></td>
+                                                                <td> <input [(ngModel)]='client.hair_lenght'></td>
+                                                                <td> <input [(ngModel)]='client.phone'></td>
+                                                                <td> <input [(ngModel)]='client.avarage_expense'></td>
+                                                                <td><input [(ngModel)]='client.last_service'></td>
                                                                 <td>
-                                                                    <span class="badge badge-complete">Complete</span>
+                                                                    <span class="badge badge-complete" (click)='update(client)'>Aggiorna</span>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                    <td class="serial">1.</td>
-                                                                    <td class="avatar">
-                                                                        <div class="round-img">
-                                                                            <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                                        </div>
-                                                                    </td>
-                                                                    <td> #5469 </td>
-                                                                    <td>  <span class="name">Louis Stanley</span> </td>
-                                                                    <td> <span class="product">iMax</span> </td>
-                                                                    <td><span class="count">231</span></td>
-                                                                    <td>
-                                                                        <span class="badge badge-complete">Complete</span>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                        <td class="serial">1.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5469 </td>
-                                                        <td>  <span class="name">Louis Stanley</span> </td>
-                                                        <td> <span class="product">iMax</span> </td>
-                                                        <td><span class="count">231</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                            <td class="serial">1.</td>
-                                                            <td class="avatar">
-                                                                <div class="round-img">
-                                                                    <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                                </div>
-                                                            </td>
-                                                            <td> #5469 </td>
-                                                            <td>  <span class="name">Louis Stanley</span> </td>
-                                                            <td> <span class="product">iMax</span> </td>
-                                                            <td><span class="count">231</span></td>
-                                                            <td>
-                                                                <span class="badge badge-complete">Complete</span>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                                <td class="serial">1.</td>
-                                                                <td class="avatar">
-                                                                    <div class="round-img">
-                                                                        <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/1.jpg" alt=""></a>
-                                                                    </div>
-                                                                </td>
-                                                                <td> #5469 </td>
-                                                                <td>  <span class="name">Louis Stanley</span> </td>
-                                                                <td> <span class="product">iMax</span> </td>
-                                                                <td><span class="count">231</span></td>
-                                                                <td>
-                                                                    <span class="badge badge-complete">Complete</span>
-                                                                </td>
-                                                            </tr>
-
-                                                    <tr>
-                                                        <td class="serial">2.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/2.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5468 </td>
-                                                        <td>  <span class="name">Gregory Dixon</span> </td>
-                                                        <td> <span class="product">iPad</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="serial">3.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/3.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5467 </td>
-                                                        <td>  <span class="name">Catherine Dixon</span> </td>
-                                                        <td> <span class="product">SSD</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="serial">4.</td>
-                                                        <td class="avatar">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/4.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5466 </td>
-                                                        <td>  <span class="name">Mary Silva</span> </td>
-                                                        <td> <span class="product">Magic Mouse</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-pending">Pending</span>
-                                                        </td>
-                                                    </tr>
-                                                    <tr class=" pb-0">
-                                                        <td class="serial">5.</td>
-                                                        <td class="avatar pb-0">
-                                                            <div class="round-img">
-                                                                <a href="#"><img class="rounded-circle" src="../assets/ElaAdmin-master/images/avatar/6.jpg" alt=""></a>
-                                                            </div>
-                                                        </td>
-                                                        <td> #5465 </td>
-                                                        <td>  <span class="name">Johnny Stephens</span> </td>
-                                                        <td> <span class="product">Monitor</span> </td>
-                                                        <td><span class="count">250</span></td>
-                                                        <td>
-                                                            <span class="badge badge-complete">Complete</span>
-                                                        </td>
-                                                    </tr>
+                                                   
                                                 </tbody>
                                             </table>
                                         </div> <!-- /.table-stats -->
@@ -216,6 +62,49 @@
                                 </div> <!-- /.card -->
                             </div>  <!-- /.col-lg-8 -->
                         </div>
+                           
+                            <div class="row">
+                                <div class="col-xl-12">
+                                    <div class="card" style="height: unset !important;">
+                                        <div class="card-body">
+                                            <h4 class="box-title">Aggiungi nuovo cliente</h4>
+                                        </div>
+                                        <div class="card-body--">
+                                            <div class="table-stats order-table ov-h">
+                                                <table class="table ">
+                        
+                                <thead>
+                                    <tr>
+                                        <th class="serial">Nome e Cognome</th>
+                                        <th class="avatar">Colore</th>
+                                        <th>Lunghezza</th>
+                                        <th>Cellulare</th>
+                                        <th>Spesa</th>
+                                        <th>Ultimo Servizio</th>
+                                        <th>Aggiungi</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="serial"><input [(ngModel)]='client_name' placeholder="Mario Rossi"></td>
+                                        <td class="serial"><input [(ngModel)]='hair_color' placeholder="Castano"></td>
+                                        <td class="serial"><input [(ngModel)]='hair_lenght' placeholder="Capello Lungo"></td>
+                                        <td class="serial"><input [(ngModel)]='phone' placeholder="331 2233645"></td>
+                                        <td class="serial"><input [(ngModel)]='avarage_expense' placeholder="Spesa media"></td>
+                                        <td class="serial"><input [(ngModel)]='last_service' placeholder="Talgio + barba"></td>
+                                        <td>
+                                            <span class="badge badge-complete" (click)='newClient()'>Aggiungi</span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                </div>
+                                </div>
+                                </div>
+                                </div>
+                            </div>
+                           
+               
                     </div>
                 </div>
                 </div>

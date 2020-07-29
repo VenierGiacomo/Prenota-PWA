@@ -33,13 +33,16 @@ show_business: boolean = true
     return check;
   };
 navBusiness(){
-  if(this.mobileCheck()){
-    window.location.href="https://apps.apple.com/app/id1520379243"
+  var userAgent = navigator.userAgent || navigator.vendor ;
+  if (/android/i.test(userAgent)) {
+    window.location.href="http://play.google.com/store/apps/details?id=io.prenota.client"
   }
-  console.log(this.href)
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.location.href="https://apps.apple.com/app/id1523525291"
+  }
   if(this.href== '/business'){
     this.router.navigateByUrl('register')
-    console.log('called nut no nav')
   }else{
     this.router.navigateByUrl('business')
   }

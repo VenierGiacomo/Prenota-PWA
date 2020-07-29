@@ -6,7 +6,7 @@
         <div class="navbar-brand-wrapper d-flex w-100">
        <div class="logo-menu" (click)='navListing()'>prenota</div>
       <div class="header-act move-left"  [class.move-left]="move_l"><p *ngIf='show_business'>Hai un Business?</p> </div> <span (click)="navBusiness()"  class="btn" >{{button_text}}</span>
-            
+      <!-- <span  class="btn" *ngIf='show_business'>Istruzioni</span>  -->
         </div>
       </div>
     </nav>

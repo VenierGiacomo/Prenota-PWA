@@ -34,6 +34,12 @@ import { LoadingpageComponent } from './loadingpage/loadingpage.component';
 import { RegEmployeeComponent } from './reg-employee/reg-employee.component';
 import { TableComponent } from './table/table.component';
 import { NotificPageComponent } from './notific-page/notific-page.component';
+import { TermofuseComponent } from './termofuse/termofuse.component';
+import { AparucchieriComponent } from './aparucchieri/aparucchieri.component';
+import { BookingTemplComponent } from './booking-templ/booking-templ.component';
+import { HowtouseComponent } from './howtouse/howtouse.component';
+import { NitrogymComponent } from './nitrogym/nitrogym.component';
+import { BooktestComponent } from './booktest/booktest.component';
 
 
 @NgModule({
@@ -60,6 +66,12 @@ import { NotificPageComponent } from './notific-page/notific-page.component';
     RegEmployeeComponent,
     TableComponent,
     NotificPageComponent,
+    TermofuseComponent,
+    AparucchieriComponent,
+    BookingTemplComponent,
+    HowtouseComponent,
+    NitrogymComponent,
+    BooktestComponent,
     
   ],
   imports: [

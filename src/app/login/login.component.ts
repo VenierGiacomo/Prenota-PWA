@@ -17,15 +17,15 @@ export class LoginComponent implements OnInit {
     this.titleService.setTitle( "Prenota: Fai il login e utilizza la tua agenda");
    }
   ngOnInit() {
-    console.log(new Date(1589528118*1000))
   }
 
   goRegister(){
     this.router.navigateByUrl('/register')
   }
 
-  login(){
+  async login(){
   this.error=''
+  await this.api.deleteAllData()
   this.api.login(this.email,this.password).subscribe(
     data=>{
       this.api.storeToken(data.token) 

@@ -12,7 +12,21 @@ body{
     // background: -o-linear-gradient(bottom left, #2cb0fc 0%, #1f2da8 100%);
     // background: linear-gradient(to top right, #2cb0fc 0%, #1f2da8 100%);
 }
-
+.instrucitons{
+    position: absolute;
+    width: 100vw;
+    bottom: 0px;
+    line-height: 2px;
+    padding:0px;
+    text-align: center;
+    left: 0px;
+    p{
+        line-height: 21px;
+    }
+    a{
+        color: #0061d5;
+    }
+}
 .bottom-login{
     position: relative;
     bottom: 30px;
@@ -48,7 +62,7 @@ body{
     padding: 0px 40px;
     background: #fff;
     display:grid;
-    grid-template-rows: 1fr 7fr 1fr;
+    grid-template-rows: 1fr 7fr;
     width: 100%;
         h4{
             align-self:center;

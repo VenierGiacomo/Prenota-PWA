@@ -187,6 +187,18 @@ bookAppointment(start, end, day, month, year,name, phone, details, employee, ser
   var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
+
+addClientStore(client_name, hair_color, hair_lenght, phone, avarage_expense, last_service):Observable<any>{
+  var data = {'client_name': client_name , 'hair_color': hair_color, 'hair_lenght': hair_lenght, 'phone':phone, 'avarage_expense':avarage_expense, 'last_service' : last_service}
+    return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
+}
+updateClientStore(id, client_name, hair_color, hair_lenght, phone, avarage_expense, last_service):Observable<any>{
+  var data = {'client_name': client_name , 'hair_color': hair_color, 'hair_lenght': hair_lenght, 'phone':phone, 'avarage_expense':avarage_expense, 'last_service' : last_service}
+    return this.http.put(BASE_URL+'store/clients/'+id+'/', data,{headers: this.newheader()})
+}
+getStoreClients():Observable<any>{
+    return this.http.get(BASE_URL+'store/clients/',{headers: this.newheader()})
+}
 bookAppointmentNoOwner(start, end, day, month, year,name, phone, details, employee, service, shop):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
   var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone': phone, 'details': details, 'service_n': service, 'shop':shop}
@@ -219,10 +231,9 @@ getMonthAppointments(month):Observable<any>{
   return this.http.get(BASE_URL+'bookings/month/'+month,{headers: this.newheader()})
 }
 
-updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
-  console.log(id, start, end, day, month, year,name, phone, details, employee, service, 'id, start, end, day, month, year,name, details, employee, service')
+updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service, note):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
 

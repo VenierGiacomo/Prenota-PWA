@@ -13,6 +13,10 @@ body{
 
 }
 
+.activetoday{
+    background: #0061d5 !important;
+    color: #fff !important;
+}
 // 
 
 
@@ -86,7 +90,7 @@ body{
         position: relative;
         margin-left: 5vw;
         color: #0061d5;
-        font-size: 1.3vw;
+        font-size: 1.2vw;
         display:grid;
         grid-template-columns: 5fr 8fr 6fr;
         span{
@@ -110,7 +114,6 @@ body{
         top:3vh;
         right: 30vw;
         font-size: 1vw;
-        width: 5vw;
         border-radius: 20px;
         margin: 0 ;
         padding: 1vh 1.5vw;
@@ -216,6 +219,7 @@ table-layout: fixed;
 }
 .cell{
     position: relative;
+    pointer-events: inherit;
     height: 60px;
     width: 100%;
     overflow: visible;
@@ -287,6 +291,14 @@ th{
     border-radius: 10px;
     background: white;
     margin-top:30px;
+}
+.fixed-table1{
+    z-index: 3;
+    position: fixed;
+    width: 72.1vw;
+    border-radius: 10px;
+    background: white;
+    margin-top:0px;
 }
 .autoscroll{
     margin-top:40px;
@@ -524,6 +536,7 @@ mat-form-field {
     // resize:vertical;
     // resize:both;
     // width: 100%;
+    z-index: 1;
     border-left-width: 3px;
     text-overflow: ellipsis;
     padding: 8px 12px;
@@ -554,6 +567,14 @@ mat-form-field {
         align-self: end;
         color: #fff;
         box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+      }
+      img{
+          z-index: 10;
+          display: block;
+          position: absolute;
+          top:5px;
+          right: 5px;
+          height: 15px;
       }
     .task-duration{
         font-size: 11px;

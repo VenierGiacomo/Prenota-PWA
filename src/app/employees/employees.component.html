@@ -24,12 +24,11 @@
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
             <div class="menu-home" style="margin-top: 5vh;" (click)='goData()'>Area clienti</div>
-            <!-- <button (click)="goSettings()">Indietro</button> -->
-            <!-- <div class="menu-logout" (click)="goSettings()"> <img src="../assets/icons/back-white.svg"/> &nbsp;Indietro</div> -->
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
         </div>   
         <div class="settings">
                 <div class="topbar">
-                        <div (click)="goSettings()">Negozio</div>
+                        <div (click)="goSettings()">Attività</div>
                         <div class="not" >Collaboratori</div>
                 </div>
                 <div style='margin-top: 8vh'  class="content">
@@ -54,15 +53,15 @@
                                 </div>
                             </div>
                             <div class="col-lg-3 col-md-6">
-                                    <div class="card" (click)='this.emplo = "block"'>
+                                    <div class="card" (click)='displayCatalog()'>
                                         <div class="card-body">
                                             <div class="stat-widget-five">
                                                 <div class="stat-icon dib flat-color-1">
-                                                    <img src="../assets/icons/delete.svg" height="50px">
+                                                    <img src="../assets/icons/support.svg" height="50px">
                                                 </div>
                                                 <div class="stat-content">
                                                     <div class="text-left dib">
-                                                        <div class="stat-text"><span class="count">Elimina collaboratore</span></div>
+                                                        <div class="stat-text"><span class="count">Servizi collaboratore</span></div>
                                                         <!-- <div class="stat-heading">Elimina collaboratore</div> -->
                                                     </div>
                                                 </div>
@@ -80,7 +79,7 @@
                                             </div>
                                             <div class="stat-content">
                                                 <div class="text-left dib">
-                                                    <div class="stat-text"><span class="count">Impostazioni collaboratori</span></div>
+                                                    <div class="stat-text"><span class="count">Orario dei collaboratori</span></div>
                                                      <!-- <div class="stat-heading">Tipo di studio</div> -->
                                                 </div>
                                             </div>
@@ -569,7 +568,7 @@
         </div>
     </div>
 </div>
-<div class="catalog" [style.display]='emplo'>
+<div class="catalog" style="width: 50vw!important; margin: 20vh 25vw!important;" [style.display]='emplo'>
         <div class="close-catalog" (click)='emplo="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
                 <table class="table-catalog">

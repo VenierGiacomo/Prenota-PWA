@@ -1,4 +1,5 @@
 export class Appointment {
+  
  constructor(
      public id: number,
     public start: number,
@@ -11,8 +12,10 @@ export class Appointment {
     public phone: string,
     public details: string,
     public employee: string,
-    public service: string,){}
+    public service: string,
+    public note: string){}
   }
+
   export class NewCatalogService {
     constructor(
        public id: number,

@@ -47,6 +47,7 @@ export class BookingComponent implements OnInit {
   toastx='none'
   register_form='none'
   logout_displ='none'
+  hollidays = 'none'
   today
   openhours
   availableSpots= []
@@ -86,14 +87,9 @@ export class BookingComponent implements OnInit {
         console.log(err)
       })
     }
+    //  18 shop 31 owner
     this.api.getEmployeesfromshop(18).subscribe(data=>{
-      for(let user of data){
-        this.api.getSpecificUser(user.employee).subscribe(data=>{
-          this.employees_list.push(data)
-        },err=>{
-          console.log(err)
-        })
-      }
+      this.employees_list =data
     },err=>{
       console.log(err)
     })
@@ -107,7 +103,6 @@ export class BookingComponent implements OnInit {
       //     },err=>{
       //       console.log(err)
       //     })
-      console.log(this.service,this.selected_date,this.selected_service)
   }
   nextMonth(){
     if  (this.month==11){
@@ -148,7 +143,6 @@ export class BookingComponent implements OnInit {
   selectHour(hour){
     this.selected_hour  = hour
     this.displ_hour = this.times[hour.start]
-   
     this.spots ='none'
   }
   selectService(service,i){
@@ -160,12 +154,11 @@ export class BookingComponent implements OnInit {
       this.service.push(service)
     }
     if(this.active_services[i][2]){
-      this.active_services[i]=["#ffffff","#0061d5",false]
+      this.active_services[i]=["#ffffff","#263b56",false,"#939999"]
     }else{
-      this.active_services[i]=["#0061d5","#ffffff",true]
+      this.active_services[i]=["#0061d5","#ffffff",true,"#ffffff"]
     }
     if(this.service.length==1){
-     console.log(this.service)
       this.selected_service  =this.service[0].name
       this.cont=1
     }else{
@@ -180,8 +173,7 @@ export class BookingComponent implements OnInit {
             }
             }
           this.selected_service= `${this.cont} elementi selezionati`
-        }
-     
+        }    
     }
     this.displ_hour='Seleziona ora'
     if(this.selected_date != 'Seleziona data'){
@@ -191,9 +183,8 @@ export class BookingComponent implements OnInit {
       for(let ind in this.active_services){
         if (this.active_services[ind][2]){
           this.selected_service = this.services[ind].name
+         
           this.total_service.id = this.services[ind].id
-        }else{
-          this.total_service.id=-1
         }
       }
     } 
@@ -330,7 +321,14 @@ export class BookingComponent implements OnInit {
     }
   }
   phoneBook(){
-    window.location.href= window.location.href="https://apps.apple.com/app/id1520379243"
+    var userAgent = navigator.userAgent || navigator.vendor ;
+  if (/android/i.test(userAgent)) {
+    window.location.href="http://play.google.com/store/apps/details?id=io.prenota.client"
+  }
+  // iOS detection from: http://stackoverflow.com/a/9039885/177710
+  if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    window.location.href="https://apps.apple.com/app/id1523525291"
+  }
   }
   itsemploJob(){
     this.results_empl_serv =[]
@@ -358,41 +356,45 @@ items.forEach(function (a) {
     }
   }
   book(){
-    if (this.selected_date!='Seleziona data' &&  this.displ_hour!='Seleziona ora' && this.service !=''){
-      if(this.api.isvalidToken()){
-        var client_name = this.user.first_name+' '+ this.user.last_name
-        var start = this.rows.indexOf(this.times[this.selected_hour.start])
-        var end = start + this.total_service.duration
-        console.log(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,18)
-        this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,18).subscribe(data=>{
-          this.toast_text= "Prenotazione andata a buon fine"
-          this.toastx="block"
-          this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Wellness Clinic")
-          Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
-          this.selected_date='Seleziona data'
-          this.displ_hour='Seleziona ora'
-          this.selected_service='Seleziona servizio'
-        setTimeout(() => {
-          this.toastx="none"
-        }, 3000);
-        this.total_service={name:'',duration:0,id:-1}
-        this.service=[]
-        this.getServices()},
-        err=>{
-          Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
-          console.log(err)
-      })
-      }else{
-        this.register_form="block"
-      }
-     
+    if( this.today>26 && this.month==6 || this.today<3 && this.month==7){
+      this.hollidays="block"
     }else{
-        this.toast_text= " I dati inseriti non sono sufficenti"
-        this.toastx="block"
-        setTimeout(() => {
-          this.toastx="none"
-        }, 3000);
+      if (this.selected_date!='Seleziona data' &&  this.displ_hour!='Seleziona ora' && this.service !=''){
+        if(this.api.isvalidToken()){
+          var client_name = this.user.first_name+' '+ this.user.last_name
+          var start = this.rows.indexOf(this.times[this.selected_hour.start])
+          var end = start + this.total_service.duration
+          this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,18).subscribe(data=>{
+            this.toast_text= "Prenotazione andata a buon fine"
+            this.toastx="block"
+            this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Wellness Clinic")
+            Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
+            this.selected_date='Seleziona data'
+            this.displ_hour='Seleziona ora'
+            this.selected_service='Seleziona servizio'
+          setTimeout(() => {
+            this.toastx="none"
+          }, 3000);
+          this.total_service={name:'',duration:0,id:-1}
+          this.service=[]
+          this.getServices()},
+          err=>{
+            Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
+            console.log(err)
+        })
+        }else{
+          this.register_form="block"
+        }
+       
+      }else{
+          this.toast_text= " I dati inseriti non sono sufficenti"
+          this.toastx="block"
+          setTimeout(() => {
+            this.toastx="none"
+          }, 3000);
+      }
     }
+    
   }
   submit(){
     //aggiungi loading icon
@@ -425,7 +427,7 @@ items.forEach(function (a) {
           var client_name = this.first_name+' '+this.last_name
           var start = this.rows.indexOf(this.times[this.selected_hour.start])
           var end = start + this.total_service.duration
-          this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id, 1).subscribe(data=>{
+          this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id, 18).subscribe(data=>{
           this.register_form='none'
           this.user.first_name=this.first_name
           this.user.last_name=this.last_name
@@ -470,7 +472,7 @@ items.forEach(function (a) {
           var client_name = this.user.first_name+' '+this.user.last_name
           var start = this.rows.indexOf(this.times[this.selected_hour.start])
           var end = start + this.total_service.duration 
-          this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,1).subscribe(data=>{
+          this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,18).subscribe(data=>{
           this.register_form='none'
           this.sendEmailConfirmation(this.email,this.first_name,this.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Wellness Clinic")
           this.toast_text= "Prenotazione andata a buon fine"

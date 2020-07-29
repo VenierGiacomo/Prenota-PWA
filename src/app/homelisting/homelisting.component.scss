@@ -25,6 +25,9 @@
 
 
 }
+.opacity{
+    opacity: 0.7;
+}
 .logo-menu{
     font-size: 28px;
     line-height: 50px !important;
@@ -44,7 +47,9 @@
   }
 
 .categories{
-    background-image: url(./../../assets/applab/img/about/wave.svg);
+    margin-top: 90px;
+    // background-image: url(./../../assets/applab/img/about/wave.svg);
+    background: #0061d5;
     background-repeat: no-repeat;
     background-size: cover;
 }

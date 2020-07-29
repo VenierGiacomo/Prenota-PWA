@@ -3,6 +3,7 @@ import anime from 'animejs/lib/anime.es';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
+import Notiflix from "notiflix";
 @Component({
   selector: 'app-loadingpage',
   templateUrl: './loadingpage.component.html',
@@ -28,16 +29,24 @@ anime.timeline({loop: false})
     duration: 800,
     delay: (el, i) => 70*i
   })
-  this.api.getEmployees().subscribe(data=>{
+  this.api.getEmployees().subscribe(async data=>{
     for(let user of data){
-      this.api.getSpecificUser(user.employee).subscribe(data=>{
-        this.employees_list.push(data)
+      await this.api.getSpecificUser(user.employee).subscribe(async data=>{
+        await this.employees_list.push(data)
       },err=>{
+        Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+         Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+         function(){ 
+          this.api.deleteAllData()
+           window.location.reload(true);
+          }, 
+        function(){ this.api.deleteAllData()
+          this.router.navigateByUrl('login')
+      } ); 
         console.log(err)
       })
     }
-
-      this.api.getemployeeHours().subscribe(data=>{
+      this.api.getemployeeHours().subscribe(async data=>{
         for (let employee of this.employees_list){
           let timetable =[]
           for(let timeslot of data){
@@ -45,38 +54,154 @@ anime.timeline({loop: false})
               timetable.push(timeslot)
             }
           }
-        
-         this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
+         await this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
         }
       },err=>{
+        Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+         Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+         function(){ 
+           this.api.deleteAllData()
+          window.location.reload(true);
+          }, 
+        function(){ this.api.deleteAllData()
+          this.router.navigateByUrl('login')
+      } ); 
         console.log(err)
       })
 
   },err=>{
+    Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+     Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+     function(){ 
+       this.api.deleteAllData()
+      window.location.reload(true);
+      }, 
+    function(){ this.api.deleteAllData()
+      this.router.navigateByUrl('login')
+  } ); 
     console.log(err)
   })
-
-
-  this.api.getStoreservice().subscribe(data=>{
+  await this.api.getStoreservice().subscribe(data=>{
     var services:any = data
     for(let service of services){
       this.storage.setCatalog(service.id, service.name, service.duration, service.sex, service.max_n, service.color)
     }
   },err=>{
+    Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+     Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+     function(){ 
+       this.api.deleteAllData()
+      window.location.reload(true);
+      }, 
+    function(){ this.api.deleteAllData()
+      this.router.navigateByUrl('login')
+  } ); 
     console.log(err)
   })
 
-
-
- this.api.getopenHours().subscribe(data=>{
+ await this.api.getopenHours().subscribe(data=>{
     this.storage.setOpenignhours(data)
     setTimeout(() => {
       this.router.navigateByUrl('home')
     }, 4000);
     
       },err=>{
+        Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+         Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+         function(){ 
+           this.api.deleteAllData()
+          window.location.reload(true);
+          }, 
+        function(){ this.api.deleteAllData()
+          this.router.navigateByUrl('login')
+      } ); 
         console.log(err)
       })
     }
   }
+
+
+
+  // this.api.deleteAllData()
+//   this.api.getEmployees().subscribe(async data=>{
+//     for(let user of data){
+//       await this.api.getSpecificUser(user.employee).subscribe(async data=>{
+//         await this.employees_list.push(data)
+//       },err=>{
+//         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+//          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+//          function(){ window.location.reload(true);
+//           }, 
+//         function(){ this.api.deleteAllData()
+//           this.router.navigateByUrl('login')
+//       } ); 
+//         console.log(err)
+//       })
+//     }
+//       this.api.getemployeeHours().subscribe(async data=>{
+//         for (let employee of this.employees_list){
+//           let timetable =[]
+//           for(let timeslot of data){
+//             console.log(employee, timeslot)
+//             if(employee.id == timeslot.employee){
+//               timetable.push(timeslot)
+//             }
+//           }
+//          await this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
+//         }
+//       },err=>{
+//         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+//          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+//          function(){ window.location.reload(true);
+//           }, 
+//         function(){ this.api.deleteAllData()
+//           this.router.navigateByUrl('login')
+//       } ); 
+//         console.log(err)
+//       })
+
+//   },err=>{
+//     Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+//      Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+//      function(){ window.location.reload(true);
+//       }, 
+//     function(){ this.api.deleteAllData()
+//       this.router.navigateByUrl('login')
+//   } ); 
+//     console.log(err)
+//   })
+//   await this.api.getStoreservice().subscribe(data=>{
+//     var services:any = data
+//     for(let service of services){
+//       this.storage.setCatalog(service.id, service.name, service.duration, service.sex, service.max_n, service.color)
+//     }
+//   },err=>{
+//     Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+//      Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+//      function(){ window.location.reload(true);
+//       }, 
+//     function(){ this.api.deleteAllData()
+//       this.router.navigateByUrl('login')
+//   } ); 
+//     console.log(err)
+//   })
+
+//  await this.api.getopenHours().subscribe(data=>{
+//     this.storage.setOpenignhours(data)
+//     setTimeout(() => {
+//       this.router.navigateByUrl('home')
+//     }, 4000);
+    
+//       },err=>{
+//         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+//          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+//          function(){ window.location.reload(true);
+//           }, 
+//         function(){ this.api.deleteAllData()
+//           this.router.navigateByUrl('login')
+//       } ); 
+//         console.log(err)
+//       })
+//     }
+//   }
 

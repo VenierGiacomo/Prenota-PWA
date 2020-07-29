@@ -139,7 +139,7 @@
 
 .cont-left{
     display: block;
-    overflow: hidden !important;
+    overflow: scroll !important;
 }
 
 .topbar{
@@ -171,11 +171,18 @@
   }
 
   .card{
-    height: 82vh;
+    max-height: 82vh;
     overflow: scroll;
+}
+.card1{
+  overflow: hidden;
+  background: #fff;
 }
 .table{
   margin-top: 20px
+}
+.badge{
+  cursor: pointer!important;
 }
 //////////////////
 //////

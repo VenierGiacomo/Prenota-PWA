@@ -123,11 +123,15 @@ export class StorageService {
     var AllAppointmets = appointments.concat(unstoredAppointments)
     return AllAppointmets == null ? [] : AllAppointmets;
   }
-  addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, bool){
+  addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, bool, note){
     var week = this.getWeekNumber(new Date(year, month, day))
-    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, phone,  details, employee, service)
+    if(note=='' || note == null ){
+      note= " "
+    }
+    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, phone,  details, employee, service, note)
     let oldAppointments = this.getAppointmets(bool)
     oldAppointments.push(appointment)
+    console.log(appointment)
     this.setAppointmentsStorage(oldAppointments, bool)
 }
   setAppointmentsStorage(appointments: Appointment[],bool){
@@ -147,13 +151,13 @@ deleteAppointmet(id){
   this.setAppointmentsStorage(stored,true)
 }
 
-updateAppointment(id, start, end,  day, month, year, name,phone, details,employee, service, bool){
+updateAppointment(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note){
   var update =false
   var stored = this.getAppointmets(bool)
   for (let appointment of stored){
     if (appointment.id== id){
       var week = this.getWeekNumber(new Date(year, month, day))
-      appointment = new Appointment(id ,start, end,  day, week,month, year, name, phone, details, employee, service)
+      appointment = new Appointment(id ,start, end,  day, week,month, year, name, phone, details, employee, service, note)
       update = true
     }
   }
@@ -161,15 +165,15 @@ updateAppointment(id, start, end,  day, month, year, name,phone, details,employe
     return
   }
   else{
-    this.addAppointmet(id, start, end,  day, month, year, name,phone, details,employee, service, bool)
+    this.addAppointmet(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note)
   }
 }
 
-dragUpdateAppointment(id, start, end,  day, month, year, name, phone, details, employee, service){
+dragUpdateAppointment(id, start, end,  day, month, year, name, phone, details, employee, service, note){
       this.deleteAppointmet(id)
       id =+id
       setTimeout(() => {
-        this.addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, true)
+        this.addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, true, note)
       }, 500);
      
  

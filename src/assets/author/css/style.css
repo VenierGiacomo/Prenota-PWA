@@ -8510,9 +8510,9 @@ h1, h2, h3, h4, h5,
   font-weight: 600; }
   .btn:hover, .btn:active, .btn:focus {
     outline: none; }
-  .btn.btn-primary {
+  /* .btn.btn-primary {
     background: #17b978;
-    border: 1px solid #17b978 !important;
+    border: 1px solid #17b978 ;
     color: #fff !important; }
     .btn.btn-primary:hover {
       border: 1px solid #17b978 !important;
@@ -8525,7 +8525,7 @@ h1, h2, h3, h4, h5,
       .btn.btn-primary.btn-outline-primary:hover {
         border: 2px solid transparent !important;
         background: #17b978 !important;
-        color: #fff !important; }
+        color: #fff !important; } */
   .btn.btn-secondary {
     background: #a0f669 !important;
     border: 1px solid #a0f669 !important;

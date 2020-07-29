@@ -14,10 +14,10 @@ body{
     background-image: url(./../../assets/applab/img/about/Waves-multiple.svg);
     background-repeat: no-repeat;
     background-size: cover;
+    height: 100vh;
+    overflow: hidden;
 }
-.wrapper{
-height: 100vh;
-}
+
 .logo-title{
     color: #ffffff;
     width: 100vw;

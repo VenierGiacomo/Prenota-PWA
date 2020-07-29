@@ -103,7 +103,7 @@
                                         <div class="col-xl-12">
                                             <div class="card">
                                                 <div class="card-body">
-                                                    <h4 class="box-title">Gli ultimi appuntamenti presi dai tuoi clienti questa settimana</h4>
+                                                    <h4 class="box-title">Prossimi appuntamenti (prenotati online)</h4>
                                                 </div>
                                                 <div class="card-body--">
                                                     <div class="table-stats order-table ov-h">
@@ -134,6 +134,7 @@
                                                                         <span class="badge badge-pending">Passato</span>
                                                                     </td>
                                                                 </tr>
+                                                                <tr *ngIf='last_external.length==0' ><p style="text-align: center; font-size: 18px; color: #aaa; padding: 20px 0; width:79vw;">Al momento non ci sono nuovi appuntamenti</p></tr>
                                                             </tbody>
                                                         </table>
                                                     </div> <!-- /.table-stats -->

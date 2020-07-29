@@ -5,18 +5,19 @@
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
             <div class="menu-data" (click)='goData()'>Area clienti</div>
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
             <!-- <button>Logout</button> -->
         </div>  
         <div class="settings">
                         <div class="topbar">
-                            <div class="not">Negozio</div>
+                            <div class="not">Attività</div>
                             <div (click)='goEmployees()' >Collaboratori</div>
                         </div>
                         <div style='margin-top: 8vh'  class="content">
                                 <!-- Animated -->
                                 <div class="animated fadeIn">
                          <div class="row">
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="stat-widget-five">
@@ -25,7 +26,7 @@
                                                     </div>
                                                     <div class="stat-content">
                                                         <div class="text-left dib">
-                                                            <div class="stat-text"><span class="count">Tipo di studio</span></div>
+                                                            <div class="stat-text"><span class="count">Tipo di attività</span></div>
                                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
                                                         </div>
                                                     </div>
@@ -34,7 +35,7 @@
                                         </div>
                                     </div>
                 
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-lg-3 col-md-6">
                                         <div class="card" (click)='displayCatalog()'>
                                             <div class="card-body">
                                                 <div class="stat-widget-five">
@@ -44,7 +45,7 @@
                                                     </div>
                                                     <div class="stat-content">
                                                         <div class="text-left dib">
-                                                            <div class="stat-text"><span class="count">I tuoi servizzi</span></div>
+                                                            <div class="stat-text"><span class="count">I tuoi servizi</span></div>
                                                              <!-- <div class="stat-heading">Tipo di studio</div> -->
                                                         </div>
                                                     </div>
@@ -53,7 +54,7 @@
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-4 col-md-6">
+                                    <div class="col-lg-3 col-md-6">
                                             <div class="card" (click)='goEmployees()'>
                                                 <div class="card-body">
                                                     <div class="stat-widget-five">
@@ -70,7 +71,24 @@
                                                 </div>
                                             </div>
                                         </div>
-                                   
+                                        <div class="col-lg-3 col-md-6">
+                                                <div class="card" (click)='storeEverything()'>
+                                                    <div class="card-body">
+                                                        <div class="stat-widget-five">
+                                                            <div class="stat-icon dib flat-color-2">
+                                                                <i class="pe-7s-cart"></i>
+                                                                <img src="../assets/icons/save.svg" height="50px">
+                                                            </div>
+                                                            <div class="stat-content">
+                                                                <div class="text-left dib">
+                                                                    <div class="stat-text"><span class="count">Salva modifiche</span></div>
+                                                                     <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                 </div>
                       
             <!-- <div class="business-type">

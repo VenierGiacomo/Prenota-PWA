@@ -8,7 +8,7 @@
                     <span class="services" [style.display]='ser' (mouseout)="ser='none'" (mouseover)="ser='block'">
                             <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]'[style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}</span>
                     </span>
-                    {{selected_service}}
+                    <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
             </div>
             <div (mouseover)="cal='block'" (mouseout)="cal='none'">
                     <span class="time" [style.display]='cal' (mouseout)="cal='none'" (mouseover)="cal='block'">
@@ -24,23 +24,23 @@
                             <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'>{{day}} </span>
                             <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
                          </span>
-               {{selected_date}}
+                         <p style="font-size: 18px;">{{selected_date}}</p> 
             </div>
             <div  (mouseout)="spots='none'" (mouseover)="spots='block'">
-                    {{displ_hour}}
+                    <p style="font-size: 18px;">{{displ_hour}}</p>
                     <!--  -->
                     <span class="bookings-time" [style.display]='spots' (mouseout)="spots='none'" (mouseover)="spots='block'">
                         <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
-                            <h3>{{employee.first_name}} {{employee.last_name}}</h3>
+                            <h3>{{employee.name}}</h3>
                             <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p>
                             <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
                             <span class="cont-timeslots" *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length ' >
                                     <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
                                 <span *ngFor='let spot of availableSpots'>
-                                    <span class="time-available"  *ngIf="spot.employee == employee.id" (click)="selectHour(spot)">{{times[spot.start]}}</span>
+                                    <span class="time-available"  *ngIf="spot.employee == employee.employee" (click)="selectHour(spot)">{{times[spot.start]}}</span>
                                 </span>
                             </span>
-                            <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.first_name}} {{employee.last_name}} non effetua questop tipo di servizi</span>
+                            <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
                             <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
                             <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
                         <!-- -->
@@ -334,7 +334,7 @@ Laureata in Medicina e Chirurgia ed in Scienze Biologiche presso l’Università
                 prenota
             </div>
         </div>
-    
+      
         
     
         
@@ -358,25 +358,32 @@ Laureata in Medicina e Chirurgia ed in Scienze Biologiche presso l’Università
       
     
       <!-- loader -->
-      <div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>
+      <app-footer></app-footer>
     
-    
-      <script src="assets/author/js/jquery.min.js"></script>
-      <script src="assets/author/js/jquery-migrate-3.0.1.min.js"></script>
-      <script src="assets/author/js/popper.min.js"></script>
-      <script src="assets/author/js/bootstrap.min.js"></script>
-      <script src="assets/author/js/jquery.easing.1.3.js"></script>
-      <script src="assets/author/js/jquery.waypoints.min.js"></script>
-      <script src="assets/author/js/jquery.stellar.min.js"></script>
-      <script src="assets/author/js/owl.carousel.min.js"></script>
-      <script src="assets/author/js/jquery.magnific-popup.min.js"></script>
-      <script src="assets/author/js/jquery.animateNumber.min.js"></script>
-      <script src="assets/author/js/scrollax.min.js"></script>
-      <script src="assets/author/js/main.js"></script>
+      
         
       </body>
 </div>
 
+<div class="cont-reg" [style.display]="hollidays">
+    <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+<div class="register-form" *ngIf="formType=='Register'">
+        <h1>prenota</h1>
+    <div class="header">
+        <div class="active">
+            Registrati
+        </div>
+        <div >
+            Accedi
+        </div>
+    </div>
+    <div class='inputs'>
+      <h4 style="width: 100%; text-align: center;display: block;">Siamo spiacenti ma Wellness Clinic è chiuso per ferie dal 27 Luglio 2020 al 2 Agosto 2020.</h4>
+      <p style="width: 100%; text-align:left ;display: block;">Se desideri prendere un appuntamento, seleziona una data sucessiva al 2 Agosto 2020</p>
+            <div class="button-reg">  <button (click)='hollidays="none"'>Indietro</button></div>
+    </div> 
+</div>
+</div>
 <div class="cont-reg" [style.display]="register_form">
         <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
     <div class="register-form" *ngIf="formType=='Register'">

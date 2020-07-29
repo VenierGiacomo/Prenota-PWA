@@ -7,16 +7,16 @@
             <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
             <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
         </div>
-        <div class="calendar">
+        <div class="calendar" *ngIf='!OneView'>
             <div class="date"> 
                 <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
-                <div class="today-date" (click)='goToday()'>Oggi</div>
+                <div class="today-date" (click)='goToday()' >Oggi</div>
                 <div class="selector-date">
-                    <div  (click)='displayWeek()'[class.active]='display=="week"'>Settimana</div>
-                    <div (click)='displayMonth()' [class.active]='display=="month"'>Mese</div>
+                    <div  (click)='displayWeek()'[class.active]='display=="week" && !OneView'>Settimana</div>
+                    <div (click)='displayMonth()' [class.active]='display=="month" && !OneView'>Mese</div>
                 </div>
             </div>
-            <div class="calendar-table">
+            <div class="calendar-table" >
                 <div class="table-cont">
                     <div class="tabs" *ngIf='display==="week"' >  <div class="tab " *ngFor='let employee of employees' [class.active]='employee.id == selected' (click)="activetab(employee)"> {{employee.name}}</div> </div>
                         <app-monthview *ngIf='display=="month"' [myMethod]="myMethodFunc"></app-monthview>
@@ -41,14 +41,11 @@
                         <tbody>
                         <tr *ngFor="let row of rows,let row_idx = index" class="rows">
                             <td class="fst-col"><p>{{row}}</p></td>
-                            <td *ngFor="let cell of columns,  let col_idx = index">
-                                <div [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
+                            <td *ngFor="let cell of columns,  let col_idx = index" >
+                                <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
                                     <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx)" id="{{row_idx}}-{{col_idx}}" ></div>
                                 </div>
-                                 <!-- <div *ngIf="(resp >= row_idx && col == col_idx)||(row_idx >= closed && col == col_idx)">  -->
-                                    <!-- <div *ngIf="openlist[col_idx][0]>= row_idx   ) && ( row_idx>= openlist[col_idx][1] )">
-                                        <div  class="cell-blocked" ></div>
-                                    </div> -->
+                                 
                                 </td>
                         </tr>
                         
@@ -57,8 +54,45 @@
                 </div>
             </div>
             </div> 
-
-
+        </div>
+        <div class="calendar" *ngIf='OneView'>
+            <div class="date"> 
+                <div class="current-date"> <span>  {{today}}</span> <div *ngIf='week[6]>week[0]'>{{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="today-date activetoday" (click)='goToday()'>Oggi</div>
+                <div class="selector-date">
+                    <div  (click)='displayWeek()'>Settimana</div>
+                    <div (click)='displayMonth()' >Mese</div>
+                </div>
+            </div>
+            <div class="calendar-table">
+                <div class="table-cont">
+                        <app-monthview *ngIf='display=="month"' [myMethod]="myMethodFunc"></app-monthview>
+                        <table *ngIf='display==="week"' class="fixed-table1">
+                                <thead>
+                                    <tr> 
+                                        <td class="fst-col"><p class="ph">07:00</p></td>
+                                        <th *ngFor='let employee of employees' >{{employee.name}}</th>
+                                    </tr>
+                                </thead>  
+                            </table>
+          
+                       
+                <div  (click)="showCoords($event)"  *ngIf='display==="week"'>
+                    <table class="autoscroll" >
+                        <tbody>
+                        <tr *ngFor="let row of rows,let row_idx = index" class="rows">
+                            <td class="fst-col"><p>{{row}}</p></td>
+                            <td *ngFor="let employee of employees,  let col_idx = index" >
+                                <!-- <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'> -->
+                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, employee.id)" id="{{row_idx}}-{{employee.id}}" ></div>
+                                <!-- </div> -->
+                                </td>
+                        </tr>
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+            </div> 
         </div>
     </div>
    
@@ -79,6 +113,8 @@
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
                 <option value=-1 >altro</option>
         </select>
+        <p *ngIf='edit'>Aggiungi note:</p>
+        <textarea class="lable-appointment-modal" *ngIf='edit' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
         <p *ngIf='info == -1' >Descrizione:</p>
             <textarea class="lable-appointment-modal" *ngIf='info == -1' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
         <p *ngIf='info == -1'>Durata</p>

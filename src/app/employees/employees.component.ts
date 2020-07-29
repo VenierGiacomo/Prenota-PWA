@@ -4,7 +4,7 @@ import { StorageService } from '../services/storage.service';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-
+import Notiflix from "notiflix";
 @Component({
   selector: 'app-employees',
   templateUrl: './employees.component.html',
@@ -183,7 +183,6 @@ export class EmployeesComponent implements OnInit {
       if( this.employee != 0){
         for (let emp of this.employees){
           if (emp.employee== Number(this.employee)){
-            console.log(emp)
             var name= emp.name
             this.storage.setEmployeehours(this.employee,name, opentimes)
           }
@@ -191,11 +190,7 @@ export class EmployeesComponent implements OnInit {
       }
   this.api.setemployeeHours(opentimes).subscribe(
     data=>{
-      console.log(data, 'stored ')
-      this.toast="block"
-      setTimeout(() => {
-        this.toast="none"
-      }, 3500);
+      Notiflix.Notify.Success('Modifiche salvate con successo');
     },
     err => {
       console.log(err, 'error while storing')
@@ -270,5 +265,10 @@ export class EmployeesComponent implements OnInit {
     selectEmpl(){
       this.emplo = "block"
     }
+    logout(){
+      this.api.deleteAllData()
+      this.router.navigateByUrl('login')
+    }
   }
+
   
