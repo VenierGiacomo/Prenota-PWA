@@ -80,11 +80,30 @@ export class EmployeesComponent implements OnInit {
     this.catalog = "none";
     this.createEmployee = "none";
     this.getEmployees()
+    this.getemployeeServices()
     }
     getEmployees(){
       this.api.getEmployees().subscribe(
         data=>{
           this.employees = data
+          for(let empl of this.employees){
+            empl.first_name = empl.name.split(" ")[0]
+            empl.last_name = empl.name.split(" ")[1]
+          }
+        },
+        err=>{
+          console.log(err)
+        }
+      )
+    }
+    getemployeeServices(){
+      this.api.getEmployeeservicesNoInput().subscribe(
+        data=>{
+          var services:any = data
+          for(let service of services){
+            this.storage.setemployCatalog(service.employee, service.service_id)
+          }
+          console.log(data)  
         },
         err=>{
           console.log(err)
@@ -100,7 +119,7 @@ export class EmployeesComponent implements OnInit {
     deleteEmployee(employee){
       this.api.deleteEmployee(employee.id).subscribe(
         data=>{
-          console.log('success')
+          Notiflix.Notify.Success('Collaboratore eliminato con successo');
           this.storage.deleteEmployeehours(employee.employee)
           this.getEmployees()
         },
@@ -115,12 +134,16 @@ export class EmployeesComponent implements OnInit {
     }
     submit(){
       let str:string = this.first_name
+      let str1:string = this.last_name
       str = str[0].toUpperCase() + str.slice(1)
-      this.api.registeremployee(str, this.last_name, this.email, this.sex_emp, this.phone, this.password).subscribe(
+      str1 = str1[0].toUpperCase() + str1.slice(1)
+      this.api.registeremployee(str, str1, new Date().getTime()+"@libero.it", 'm', 3312233645, "Omocaig"+ new Date().getTime()).subscribe(
             data=>{
-              console.log(data)
+              this.first_name=''
+              this.last_name=''
               this.createEmployee="none"
-               this.getEmployees()
+              Notiflix.Notify.Success('Collaboratore aggiunto con successo');
+              this.getEmployees()
             },
             err => {
               console.log(err.error,'err')
@@ -199,17 +222,21 @@ export class EmployeesComponent implements OnInit {
 }
       
     displayCatalog(){
-      this.catalog = 'block'
-      this.catalog_list = this.storage.getCatalog()
-      var empl_catalog = this.storage.getemployCatalog()
-      for (let serv of this.catalog_list){
-        for(let empl_serv of empl_catalog){
-          if( serv.id == empl_serv.service && this.employee == empl_serv.employee){
-            serv.active = true
+      if(this.employee!=0){
+        this.catalog = 'block'
+        this.catalog_list = this.storage.getCatalog()
+        var empl_catalog = this.storage.getemployCatalog()
+        for (let serv of this.catalog_list){
+          for(let empl_serv of empl_catalog){
+            if( serv.id == empl_serv.service && this.employee == empl_serv.employee){
+              serv.active = true
+            }
           }
         }
-       
+      }else{
+        Notiflix.Notify.Warning('Per poter modificare i servizzi, devi prima selzionare un collaboratore');
       }
+      
     }
     activate(service){
     if (!service.active){
@@ -224,6 +251,7 @@ export class EmployeesComponent implements OnInit {
     
     }
     changeTimetable(){
+      this.bk_empl="none"
       this.lun= ['','','','']
       this.mar= ['','','','']
       this.mer= ['','','','']
@@ -256,7 +284,6 @@ export class EmployeesComponent implements OnInit {
             this.closed_days[day] = true
           }
         }
-        this.bk_empl="none"
     }
     dateChanged(ev,day,spot){
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]

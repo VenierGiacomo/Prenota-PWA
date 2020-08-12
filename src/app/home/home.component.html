@@ -6,6 +6,13 @@
             <div class="menu-settings" (click)='goNotifications()'>Area clienti</div>
             <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
             <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
+            <div class="menu-toggle">
+                Mostra appuntamenti dei colleghi
+                    <label class="switch" >
+                        <input type="checkbox" [(ngModel)]='show_others' (click)="showOthers()">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
         </div>
         <div class="calendar" *ngIf='!OneView'>
             <div class="date"> 

@@ -118,6 +118,7 @@ input:focus, textarea:focus, select:focus{
                 font-size: 21px;
                 margin: 0px ;
                 display: inline;
+                margin-bottom: -25px;
             }
         
         .days{
@@ -199,6 +200,11 @@ input:focus, textarea:focus, select:focus{
             color: #fff;
             box-shadow: 0 10px 14px rgba(#fa607e, 0.4);
         }
+        .add-service{
+            background: #00479D;
+            justify-content: center;
+            color: #fff;
+        }
     }
 }
 
@@ -227,7 +233,7 @@ input:focus, textarea:focus, select:focus{
 
 .table-catalog{
     border-collapse: collapse;
-    color: #0061d5;
+    color: #555555;
     overflow: auto;
     border-radius: 10px;
     width: 100%;
@@ -288,9 +294,16 @@ input:focus, textarea:focus, select:focus{
     }
     .corner1{
         border-top-left-radius: 10px;
+        input{
+            width: 100%;
+            text-align: center;
+        }
     }
     .corner2{
-        border-top-right-radius: 10px;
+        input{
+            width: 100%;
+            text-align: center;
+        }
     }
 }
 .cont-insert{

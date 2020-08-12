@@ -40,11 +40,12 @@ navBusiness(){
   // iOS detection from: http://stackoverflow.com/a/9039885/177710
   if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
     window.location.href="https://apps.apple.com/app/id1523525291"
-  }
-  if(this.href== '/business'){
-    this.router.navigateByUrl('register')
   }else{
-    this.router.navigateByUrl('business')
+    if(this.href== '/business'){
+      this.router.navigateByUrl('register')
+    }else{
+      this.router.navigateByUrl('business')
+    }
   }
 }
    

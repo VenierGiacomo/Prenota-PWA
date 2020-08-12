@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import *  as screenfull from 'screenfull'
 import { Title } from '@angular/platform-browser';
 import { ControlStateMixin } from '@vaadin/vaadin-control-state-mixin';
+import { Appointment } from '../services/appointment.model';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit {
     col: 0,
   }
   OneView=false
+  show_others=false
   updateAppointmentId
   openlist = [[],[],[],[],[],[],[],]
   times =["06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
@@ -95,7 +97,6 @@ else{
 
 // dispaly the closed hours
 var openinghours = await this.storage.getEmployeehours()
-console.log(openinghours[0].timetable )
 if(openinghours==0 || openinghours[0].timetable.length == 0){
   this.api.getEmployees().subscribe(async data=>{
     for(let user of data){
@@ -270,6 +271,7 @@ addAppointment() {
     document.getElementById(ev.target.id).style.zIndex = "0"
   }
   drop(ev) {
+    console.log(ev.target.id)
     if(ev.target.id.includes('-')){
       console.log(this.currentBlock.row+"-"+ this.currentBlock.col)
       // document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
@@ -339,6 +341,7 @@ addAppointment() {
 
 // Function that displays the stored appointments
 async getAppoitments(){
+  this.appointmentlist=[]
   var week 
   if(this.week[6]<this.week[0]){
     week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
@@ -348,7 +351,6 @@ async getAppoitments(){
   // usa un last check 10minutes per risparmiare server
   var now = + new Date()
   // if ((now - this.time_passed )>60000){
-    this.appointmentlist=[]
     this.api.getAppointments(week).subscribe(
       data=>{
         this.appointmentlist= data
@@ -357,11 +359,13 @@ async getAppoitments(){
           if(this.OneView){
             for (let appo of this.appointmentlist){
               this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+              // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
           }else{
             for (let appo of this.appointmentlist){
               this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+              // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
           } 
@@ -370,9 +374,11 @@ async getAppoitments(){
         this.saveNotStored()
       },
       err => {
+        this.appointmentlist=[]
         this.appointmentlist = this.storage.getAllAppointmets()
         for (let appo of this.appointmentlist){
           this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
         }
        
       }
@@ -388,10 +394,12 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
         if(this.OneView){
           this.drawEmploAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month, year)
         this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
+        this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, ''))
         }
         else{
           this.drawAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month-1, year)
           this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
+          this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, ''))
         }
         
       },
@@ -439,7 +447,7 @@ if(this.info !=-1){
   var div_height = (this.time*20)+'px'
   new_service= {color: 10000, duration: this.time } 
  }
-  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, this.selected, this.info, this.appointment_notes ).subscribe(data =>{
+  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info, this.appointment_notes ).subscribe(data =>{
     var element = document.getElementById(this.updateAppointmentId)
     var hour1= this.rows[app.start]
     var hour2 = this.times[this.times.indexOf(hour1)+Number(new_service.duration)]
@@ -452,7 +460,7 @@ if(this.info !=-1){
     element.className = element.className.replace(colors, '') 
     element.classList.add(`c${new_service.color}`)
 
-    this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, this.selected, this.info, this.appointment_notes)
+    this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee, this.info, this.appointment_notes)
          },err =>{
           console.log(err,"Siamo spiacenti. Ci sono dei problemi. Controlla la connessione")
          })
@@ -588,8 +596,37 @@ goSettings(){
 goNotifications(){
   this.router.navigateByUrl('/notifications')
 }
-notifications
-activetab(employee){
+showOthers(){
+  if(this.show_others){
+    var paras = document.getElementsByClassName('task');
+    while(paras[0]) {
+      paras[0].parentNode.removeChild(paras[0]);
+    } ​
+    if (this.appointmentlist.length != 0){
+      if(!this.OneView){
+        for (let appo of this.appointmentlist){
+          // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+        }
+      }
+    }
+    this.show_others=false
+  }else{
+    if (this.appointmentlist.length != 0){
+      if(!this.OneView){
+        for (let appo of this.appointmentlist){
+          this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          // this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+        }
+      }
+    }
+    this.show_others=true
+  }
+}
+
+// notifications
+async activetab(employee){
+  this.show_others=false
   var paras = document.getElementsByClassName('task');
   while(paras[0]) {
     paras[0].parentNode.removeChild(paras[0]);
@@ -607,17 +644,16 @@ activetab(employee){
    this.openlist[hour.wkday].push(hour.start)
    this.openlist[hour.wkday].push(hour.end)      
   }
-
+  // this.appointmentlist = await this.storage.getAppointmets(true)
+  // console.log(this.appointmentlist)
   if (this.appointmentlist.length != 0){
     if(this.OneView){
       for (let appo of this.appointmentlist){
         this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
-       
       }
     }else{
       for (let appo of this.appointmentlist){
         this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
-
       }
     }
   }
@@ -735,13 +771,62 @@ for (let service_el of services){
   }
   
   }  
+  drawfadedAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
+    var height = end - start
+    var div_height = (height*20)+'px'
+    var div = document.createElement('div');
+    div.style.opacity = '0.5'
+    var self = this
+    
+  var services = this.storage.getCatalog()
+  var color = 10000
+  for (let service_el of services){
+    if (service_el.id == service){
+      color = service_el.color
+    }
+  }
+    div.classList.add('task','task--primary', `c${color}`) 
+    div.id= id
+    div.style.height =div_height
+    div.style.zIndex = '-1 !important'
+    div.ondragover=this.allowDrop
+    div.style.pointerEvents ='none'
+    div.ondrop=this.drop
+    // div.style.top = "15px"
+    var hour1=this.rows[start]
+    var hour2 = this.times[this.times.indexOf(hour1)+height]
+    // <div><img src='../assets/icons/info.svg'></div>
+    div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+                    <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+                    <div class="task-name" id=${id} >${client_name}</div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
+    if(this.week[6]<this.week[0]){1
+      if(day<7){
+        if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected !=employee){
+         if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount ==0){
+          document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+         } 
+          }
+      }else{
+        if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month-1, day)) == week && this.selected !=employee){
+          if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount == 0){
+            document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+          }
+         
+          }
+      }}
+    if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected !=employee){
+      if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount == 0){
+        document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+      }
+    }
+    
+    } 
   drawEmploAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
     var height = end - start
     var div_height = (height*20)+'px'
     var div = document.createElement('div');
     div.ondragstart = this.drag
     var self = this
-    // console.log(client_name, day ,week, month, year )
     div.onclick = function() {
       setTimeout(() => {
       // document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'

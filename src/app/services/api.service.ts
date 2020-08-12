@@ -174,6 +174,15 @@ getStoreserviceNoLogin(owner){
 getEmployeeservices(owner){
     return this.http.get(BASE_URL+'employee/services/?owner='+owner, {headers: this.httpheader})
 }
+
+getEmployeeservicesNoInput(){
+  const token = this.getToken()
+  var l 
+  if (token) {
+     l = this.parseJwt(token) 
+  }
+  return this.http.get(BASE_URL+'employee/services/?owner='+l.user_id, {headers: this.httpheader})
+}
 setEmployeeservice(employee, service_id){
   var data = {'employee':employee, 'service_id':service_id}
     return this.http.post(BASE_URL+'employee/services/', data, {headers: this.newheader()})
@@ -250,6 +259,17 @@ createStore(store_name, address, city, zip_code):Observable<any>{
   }
   var header = new HttpHeaders({'Content-type':'application/json','Authorization':'JWT '+ this.getToken() })
   return this.http.post(BASE_URL+'store/', new_store,{headers: this.newheader()})
+}
+updateStore(type):Observable<any>{
+  const token = this.getToken()
+  var l 
+  if (token) {
+     l = this.parseJwt(token) 
+  }
+  var data ={
+    'business_type': type
+  }
+  return this.http.put(BASE_URL+'store/'+l.user_id+'/', data,{headers: this.newheader()})
 }
 
 sendEmail(input: any) {

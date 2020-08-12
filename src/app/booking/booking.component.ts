@@ -29,7 +29,7 @@ export class BookingComponent implements OnInit {
   sex = 'm'
   phone = ''
   password =''
-
+  disabled_btn=false
   first_name_err=''
   last_name_err=''
   username_err= ''
@@ -293,6 +293,7 @@ export class BookingComponent implements OnInit {
         this.availableSpots.sort(function(a, b) {
              return a.start - b.start;
           });
+      this.availableSpots=[...new Set(this.availableSpots)]
       for(let ind in  this.availableSpots){
         var x:number = +ind
         // if(this.availableSpots[x]==this.availableSpots[x-1] || this.availableSpots[x]==this.availableSpots[x+1]){
@@ -347,7 +348,6 @@ items.forEach(function (a) {
         }else{ 
           var x = grouped[ind].filter(function(value, index, arr){ return value.service_id == service.id})
           if(x.length != 0 ){
-            console.log(x.length)
               this.results_empl_serv[ind].push(x)
           }
         }
@@ -356,6 +356,7 @@ items.forEach(function (a) {
     }
   }
   book(){
+    this.disabled_btn=true
     if( this.today>26 && this.month==6 || this.today<3 && this.month==7){
       this.hollidays="block"
     }else{
@@ -374,6 +375,7 @@ items.forEach(function (a) {
             this.selected_service='Seleziona servizio'
           setTimeout(() => {
             this.toastx="none"
+            this.disabled_btn=false
           }, 3000);
           this.total_service={name:'',duration:0,id:-1}
           this.service=[]
@@ -384,6 +386,7 @@ items.forEach(function (a) {
         })
         }else{
           this.register_form="block"
+          this.disabled_btn=false
         }
        
       }else{

@@ -40,7 +40,7 @@ export class AparucchieriComponent implements OnInit {
   password_err=''
   error= ''
   employees_list:any=[]
-
+  disabled_btn=false
   cont = 0 
   active_services= []
   list_appointments=[]
@@ -318,6 +318,7 @@ this.api.getEmployeeservices(45).subscribe(async data=>{
         this.availableSpots.sort(function(a, b) {
              return a.start - b.start;
           });
+          this.availableSpots=[...new Set(this.availableSpots)]
       for(let ind in  this.availableSpots){
         var x:number = +ind
         // if(this.availableSpots[x]==this.availableSpots[x-1] || this.availableSpots[x]==this.availableSpots[x+1]){
@@ -388,6 +389,7 @@ items.forEach(function (a) {
     }
   }
   book(){
+    this.disabled_btn=true
     if (this.selected_date!='Seleziona data' &&  this.displ_hour!='Seleziona ora' && this.service !=''){
       if(this.api.isvalidToken()){
         var client_name = this.user.first_name+' '+ this.user.last_name
@@ -404,6 +406,7 @@ items.forEach(function (a) {
           this.selected_service='Seleziona servizio'
         setTimeout(() => {
           this.toastx="none"
+          this.disabled_btn=false
         }, 3000);
         this.total_service={name:'',duration:0,id:-1}
         this.service=[]
@@ -414,6 +417,7 @@ items.forEach(function (a) {
       })
       }else{
         this.register_form="block"
+        this.disabled_btn=false
       }
      
     }else{

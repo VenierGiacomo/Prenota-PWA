@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import '@vaadin/vaadin-time-picker';
 import '@vaadin/vaadin-checkbox';
+import Notiflix from "notiflix";
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -35,7 +36,7 @@ export class SettingsComponent implements OnInit {
   name=''
   duration=5
   sex=3 
-  max
+  max=1
 
   durations=[ "durata assente","5 min",
   "10 min",
@@ -63,6 +64,7 @@ export class SettingsComponent implements OnInit {
   " 2 ore"
 ]
   sexs=['non spec','Donna', 'Uomo', 'Unisex' ]
+  bussiness_selection='none'
   constructor(private api: ApiService, private storage: StorageService, private router: Router, private titleService: Title) {
     this.titleService.setTitle( "Prenota: Imposta i settaggi e l'orario del tuo negozio");
    }
@@ -112,6 +114,19 @@ export class SettingsComponent implements OnInit {
   }
   goEmployees(){
     this.router.navigateByUrl('/settings/employees')
+  }
+  updateBusinessType(type){
+    this.api.updateStore(type).subscribe(data=>{
+
+      this.bussiness_selection ='none'
+      Notiflix.Notify.Success('Il tuo tipo di business è stato registrato');
+      console.log(data, type)
+
+    },err=>{
+      this.bussiness_selection ='none'
+      Notiflix.Notify.Failure("C'è stato un errore durante il salvataggio! \nRiprova più tardi");
+      console.log(err)
+    })
   }
   // print(){
   //   console.log(this.lun[0])
@@ -199,7 +214,7 @@ export class SettingsComponent implements OnInit {
     this.name=''
     this.duration=5
     this.sex=3 
-    this.max = ''
+    this.max = 1
     this.bgcolor = this.colors_list[0]
     setTimeout(() => {
       this.catalog_list = this.storage.getCatalog()

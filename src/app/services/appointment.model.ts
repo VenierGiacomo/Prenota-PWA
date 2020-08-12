@@ -12,7 +12,7 @@ export class Appointment {
     public phone: string,
     public details: string,
     public employee: string,
-    public service: string,
+    public service_n: string,
     public note: string){}
   }
 

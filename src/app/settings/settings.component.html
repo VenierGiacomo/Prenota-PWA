@@ -18,7 +18,7 @@
                                 <div class="animated fadeIn">
                          <div class="row">
                                     <div class="col-lg-3 col-md-6">
-                                        <div class="card">
+                                        <div class="card" (click)='bussiness_selection="block"'>
                                             <div class="card-body">
                                                 <div class="stat-widget-five">
                                                     <div class="stat-icon dib flat-color-1">
@@ -532,7 +532,7 @@ min="06:30" max="22:00"
                                         <option value=3>Unisex</option>
                                     </select>
                                 </td>
-                                <td><input class='input-price'type="numner" placeholder="1" [(ngModel)]="max"></td>
+                                <td><input class='input-price' type="number" placeholder="1" [(ngModel)]="max"></td>
                                 <td><div class="color-serv" [style.background]='bgcolor' (click)='color_show="block"'></div></td>
                                 <td><button  class="add-catalog" (click)='storeCatalogService()'>Aggiungi</button></td>
                             </tr>
@@ -550,3 +550,134 @@ min="06:30" max="22:00"
         <div class="c c7" (click)='changeColor(6)'></div>
         <div class="c c8" (click)='changeColor(7)'></div>  
     </div>
+
+<div class="catalog" [style.display]='bussiness_selection'>
+        <div class="close-catalog" (click)='bussiness_selection="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+        <h1 style="width: 100vw; color: #fff; text-align: center;margin-top: 30px;">Seleziona la tipologia di attività:</h1>
+    <div class="content" style="position: absolute; margin-top: 24vh;">
+        <div class="row" >
+                <div class="col-lg-3 col-md-6">
+                    <div class="card" (click)='updateBusinessType(1)'>
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <img src="../assets/icons/doctor.svg" height="50px">
+                                </div>
+                                <div class="stat-content">
+                                    <div class="text-left dib">
+                                        <div class="stat-text"><span class="count">Salute</span></div>
+                                        <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                        <div class="card" (click)='updateBusinessType(2)'>
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <img src="../assets/icons/hair.svg" height="50px">
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">Cura capelli e viso</span></div>
+                                            <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                            <div class="card" (click)='updateBusinessType(3)'>
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-1">
+                                            <img src="../assets/icons/nails.svg" height="50px">
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-text"><span class="count">Estetisti</span></div>
+                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                                <div class="card" (click)='updateBusinessType(4)'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-1">
+                                                <img src="../assets/icons/physiotherapy.svg" height="50px">
+                                            </div>
+                                            <div class="stat-content">
+                                                <div class="text-left dib">
+                                                    <div class="stat-text"><span class="count">Fisioterapia</span></div>
+                                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            <div class="row" >
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card" (click)='updateBusinessType(5)'>
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <img src="../assets/icons/dentist.svg" height="50px">
+                                    </div>
+                                    <div class="stat-content">
+                                        <div class="text-left dib">
+                                            <div class="stat-text"><span class="count">Dentisti</span></div>
+                                            <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                            <div class="card" (click)='updateBusinessType(6)'>
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-1">
+                                            <img src="../assets/icons/gym.svg" height="50px">
+                                        </div>
+                                        <div class="stat-content">
+                                            <div class="text-left dib">
+                                                <div class="stat-text"><span class="count">Personal trainer</span></div>
+                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                                <div class="card" (click)='updateBusinessType(7)'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-1">
+                                                <img src="../assets/icons/lawyer.svg" height="50px">
+                                            </div>
+                                            <div class="stat-content">
+                                                <div class="text-left dib">
+                                                    <div class="stat-text"><span class="count">Avvocati</span></div>
+                                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                </div>
+    </div>
+</div>
