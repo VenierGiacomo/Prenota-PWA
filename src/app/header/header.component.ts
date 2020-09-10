@@ -23,6 +23,11 @@ show_business: boolean = true
         this.move_l=true
         this.button_text="Inizia la prova gratuita"
       }
+      if(this.href== '/home/ricerca'){
+        this.show_business=false
+        this.move_l=true
+        this.button_text="I tuoi appuntamenti"
+      }
     }
     
    
@@ -43,7 +48,9 @@ navBusiness(){
   }else{
     if(this.href== '/business'){
       this.router.navigateByUrl('register')
-    }else{
+    }else if(this.href== '/home/ricerca'){
+      this.router.navigateByUrl('i_miei_appuntamenti')
+    }else {
       this.router.navigateByUrl('business')
     }
   }

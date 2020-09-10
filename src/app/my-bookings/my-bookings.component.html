@@ -1,0 +1,57 @@
+<app-header></app-header>
+<body>
+
+    <div class="home">
+        <div class="appo_list">
+            <h1 style="text-align: center; padding: 10px;">I tuoi appuntamenti</h1>
+            <div class="appo-1" (click)="navListing()">
+                    <h1>Prenota un nuovo appuntamento</h1>
+                    <img src="../../assets/icons/more_white.svg" >
+                </div>
+            <div *ngIf="logged" class="appos" >
+                <div class="appo" *ngFor='let appointment of appointments_list'>
+                    <h1>{{appointment.store_name}}</h1>
+                    <h3>{{appointment.details}}</h3>
+                    <div class="appo_date">
+                        <h4>{{appointment.day}} {{months_names[appointment.month]}} {{appointment.year}} ore {{rows[appointment.start]}} </h4>
+                    </div>
+                  <img src='../../assets/icons/delete.svg' (click)='deletestorage(appointment)' >
+                </div>
+            <div class="log_out" (click)='logout()'><img src="../assets/icons/logout_blue.svg"/> Esci</div>
+            </div>
+            <div *ngIf="!logged" class="appos-1" >
+                    <!-- <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins"> -->
+                        <div class="wrapper wrapper--w680" style="margin-top: 80px;">
+                            <div class="card card-4">
+                                <div class="card-body">
+                                    <h2 class="title">Fai il login</h2>
+                                    <form >
+                                        <div class="row row-space">
+                                            <p *ngIf='error!=""'>{{error}}</p>
+                                                <div class="col-2-r">
+                                                        <div class="input-group">
+                                                            <label class="label">Email</label>
+                                                            <input class="input--style-4" [(ngModel)]="email" type="email" name="email" placeholder="mario.rossi@email.com">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-2-r">
+                                                        <div class="input-group">
+                                                            <label class="label">Password</label>
+                                                            <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        <div class="p-t-15">
+                                            <button class="btn btn--radius-2 btn--blue"  (click)='login()' >Login</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="bottom-login">Non hai ancora un account? <a (click)='navListing()'> Prenota un appuntamento</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        <!-- </div> -->
+    </div>
+</body>
+<app-footer></app-footer>

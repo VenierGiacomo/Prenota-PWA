@@ -10,16 +10,17 @@
                 Mostra appuntamenti dei colleghi
                     <label class="switch" >
                         <input type="checkbox" [(ngModel)]='show_others' (click)="showOthers()">
+                        <!-- <input type="checkbox" [(ngModel)]='show_others' (click)="setStoreserviceDefault()"> -->
                         <span class="slider round"></span>
                     </label>
                 </div>
         </div>
         <div class="calendar" *ngIf='!OneView'>
             <div class="date"> 
-                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
-                <div class="today-date" (click)='goToday()' >Oggi</div>
+                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}}  {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="today-date" (click)='goToday(false)' >Oggi</div>
                 <div class="selector-date">
-                    <div  (click)='displayWeek()'[class.active]='display=="week" && !OneView'>Settimana</div>
+                    <div  (click)='displayWeek(false)'[class.active]='display=="week" && !OneView'>Settimana</div>
                     <div (click)='displayMonth()' [class.active]='display=="month" && !OneView'>Mese</div>
                 </div>
             </div>
@@ -64,10 +65,10 @@
         </div>
         <div class="calendar" *ngIf='OneView'>
             <div class="date"> 
-                <div class="current-date"> <span>  {{today}}</span> <div *ngIf='week[6]>week[0]'>{{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
-                <div class="today-date activetoday" (click)='goToday()'>Oggi</div>
+                <div class="current-date"> <span>  {{today}}</span>  <div *ngIf='week[0]>week[6] '>{{months_names[month]}}  {{year}}</div> <div *ngIf='week[6]>week[0] '>{{months_names[month]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="today-date activetoday" (click)='goToday(false)'>Oggi</div>
                 <div class="selector-date">
-                    <div  (click)='displayWeek()'>Settimana</div>
+                    <div  (click)='displayWeek(false)'>Settimana</div>
                     <div (click)='displayMonth()' >Mese</div>
                 </div>
             </div>
@@ -119,6 +120,7 @@
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
                 <option value=-1 >altro</option>
+                <option value=-2 >chiudi</option>
         </select>
         <p *ngIf='edit'>Aggiungi note:</p>
         <textarea class="lable-appointment-modal" *ngIf='edit' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
@@ -157,8 +159,9 @@
         </div>
         <button  *ngIf='!edit'class="single-button " (click)='addAppointment()'>Salva</button>
         <div *ngIf='edit'>
-                <button  class="two-buttons modify-app" (click)='updateAppointment()'>Modifica</button>
+               
                 <button  class="two-buttons delete-app" (click)='deleteAppointment()'>Cancella</button>
+                <button  class="two-buttons modify-app" (click)='updateAppointment()'>Modifica</button>
         </div>
     </div>
     </div>

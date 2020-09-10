@@ -22,6 +22,16 @@ import { BookingTemplComponent } from './booking-templ/booking-templ.component';
 import { HowtouseComponent } from './howtouse/howtouse.component';
 import { NitrogymComponent } from './nitrogym/nitrogym.component';
 import { BooktestComponent } from './booktest/booktest.component';
+import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { GoogleDeepLinksComponent } from './google-deep-links/google-deep-links.component';
+import { CmassaggiComponent } from './cmassaggi/cmassaggi.component';
+import { CreateStoreComponent } from './create-store/create-store.component';
+import { SaloneRoccoComponent } from './salone-rocco/salone-rocco.component';
+import { TennisClubGrignanoComponent } from './tennis-club-grignano/tennis-club-grignano.component';
+import { AquaesaleComponent } from './aquaesale/aquaesale.component';
+import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.component';
+import { SubscriptionComponent } from './subscription/subscription.component';
+import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 
 
 
@@ -33,6 +43,7 @@ const routes: Routes = [
   {path: 'home/ricerca', component: HomelistingComponent,},
   {path: 'business', component: LandingComponent, },
   {path: 'register', component: RegisterComponent},
+  {path: 'kajsndvkjbnslvjbnsojdbncjo', component: CreateStoreComponent},
   {path: 'booking', component: BookingComponent},
   {path: 'login', component: LoginComponent},
   {path: 'privacy', component: PrivacyComponent},
@@ -42,17 +53,24 @@ const routes: Routes = [
   {path: 'notifications', component: NotificPageComponent},
   {path: 'termofuse', component: TermofuseComponent},
   {path: 'aparrucchieri', component: AparucchieriComponent},
+  {path: 'cmassaggi', component: CmassaggiComponent},
+  {path: 'aquaesale', component: AquaesaleComponent},
+  {path: 'thegreenfactory', component: TheGreenFactoryComponent},
+  // {path: 'tennis_club_grignano', component: TennisClubGrignanoComponent},
   // {path: 'nitrogym', component: NitrogymComponent},
+  {path: 'i_miei_appuntamenti', component: MyBookingsComponent},
   {path: 'istruzioni', component: HowtouseComponent},
-  // {path: 'book-test', component: BooktestComponent},
+  {path: 'book-test', component: BooktestComponent},
+  {path: 'salonerocco', component: SaloneRoccoComponent},
   // {path: 'booking/templ', component: BookingTemplComponent},
   // {path: 'month', component: MonthviewComponent},
-  // {path: 'subscription', component: SubscriptionComponent},
+  {path: 'subscription', component: SubscriptionComponent},
   //da eliminare
   // {path: 'test', component: TestingComponent},
+  {path: '.well-known/assetlinks.json', component: GoogleDeepLinksComponent},
   // {path: 'store/setup', component: StoreSetupComponent, canActivate: [AuthGuard]},
   //da eliminare
-  // {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
+  {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
 ];
 
 @NgModule({

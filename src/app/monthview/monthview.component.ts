@@ -71,6 +71,7 @@ export class MonthviewComponent implements OnInit {
   }
  setWeek(day){
    var now = new  Date(this.year, this.month, day)
+   console.log(this.month)
    var today = now.getDay() -1
    var day_number = now.getDate()
    if (today == -1){

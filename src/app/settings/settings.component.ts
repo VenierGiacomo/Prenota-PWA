@@ -200,7 +200,7 @@ export class SettingsComponent implements OnInit {
     this.api.setStoreservice(this.name, this.duration, this.sex, this.max, this.colors_list.indexOf(this.bgcolor)).subscribe(
       data=>{
         var res:any = data
-        this.storage.setCatalog(res.id, res.name, res.duration, res.sex, res.max_n, res.color)
+        this.storage.setCatalog(res.id, res.name, res.duration, res.duration, res.sex, res.max_n, res.color)
         this.catalog_list = this.storage.getCatalog()
         this.toast="block"
         setTimeout(() => {

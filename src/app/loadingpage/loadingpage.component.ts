@@ -30,31 +30,17 @@ anime.timeline({loop: false})
     delay: (el, i) => 70*i
   })
   this.api.getEmployees().subscribe(async data=>{
-    for(let user of data){
-      await this.api.getSpecificUser(user.employee).subscribe(async data=>{
-        await this.employees_list.push(data)
-      },err=>{
-        Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
-         Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
-         function(){ 
-          this.api.deleteAllData()
-           window.location.reload(true);
-          }, 
-        function(){ this.api.deleteAllData()
-          this.router.navigateByUrl('login')
-      } ); 
-        console.log(err)
-      })
-    }
+    this.employees_list = await data
       this.api.getemployeeHours().subscribe(async data=>{
+        var time= await data
         for (let employee of this.employees_list){
           let timetable =[]
-          for(let timeslot of data){
-            if(employee.id == timeslot.employee){
+          for(let timeslot of time){
+            if(employee.employee == timeslot.employee){
               timetable.push(timeslot)
             }
           }
-         await this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
+         await this.storage.setEmployeehours(employee.employee, employee.name,timetable)
         }
       },err=>{
         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
@@ -64,27 +50,74 @@ anime.timeline({loop: false})
           window.location.reload(true);
           }, 
         function(){ this.api.deleteAllData()
-          this.router.navigateByUrl('login')
+          // this.router.navigateByUrl('login')
       } ); 
         console.log(err)
       })
 
   },err=>{
-    Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
-     Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
-     function(){ 
-       this.api.deleteAllData()
-      window.location.reload(true);
-      }, 
-    function(){ this.api.deleteAllData()
-      this.router.navigateByUrl('login')
-  } ); 
     console.log(err)
   })
+  // this.api.getEmployees().subscribe(async data=>{
+  //   for(let user of data){
+  //     await this.api.getSpecificUser(user.employee).subscribe(async data=>{
+  //       await this.employees_list.push(data)
+  //     },err=>{
+  //       Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+  //        Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+  //        function(){ 
+  //         this.api.deleteAllData()
+  //          window.location.reload(true);
+  //         }, 
+  //       function(){ this.api.deleteAllData()
+  //         this.router.navigateByUrl('login')
+  //     } ); 
+  //       console.log(err)
+  //     })
+  //   }
+  //     this.api.getemployeeHours().subscribe(async data=>{
+  //       var time= await data
+  //       for (let employee of this.employees_list){
+  //         let timetable =[]
+  //         for(let timeslot of time){
+  //           if(employee.id == timeslot.employee){
+  //             timetable.push(timeslot)
+  //           }
+  //         }
+  //         setTimeout(async () => {
+  //           await this.storage.setEmployeehours(employee.id, employee.first_name,timetable)
+  //         }, 1000);
+        
+  //       }
+  //     },err=>{
+  //       Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+  //        Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+  //        function(){ 
+  //          this.api.deleteAllData()
+  //         window.location.reload(true);
+  //         }, 
+  //       function(){ this.api.deleteAllData()
+  //         this.router.navigateByUrl('login')
+  //     } ); 
+  //       console.log(err)
+  //     })
+
+  // },err=>{
+  //   Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+  //    Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+  //    function(){ 
+  //      this.api.deleteAllData()
+  //     window.location.reload(true);
+  //     }, 
+  //   function(){ this.api.deleteAllData()
+  //     this.router.navigateByUrl('login')
+  // } ); 
+  //   console.log(err)
+  // })
   await this.api.getStoreservice().subscribe(data=>{
     var services:any = data
     for(let service of services){
-      this.storage.setCatalog(service.id, service.name, service.duration, service.sex, service.max_n, service.color)
+      this.storage.setCatalog(service.id, service.name, service.duration, service.duration_book, service.sex, service.max_n, service.color)
     }
   },err=>{
     Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
@@ -103,7 +136,7 @@ anime.timeline({loop: false})
     this.storage.setOpenignhours(data)
     setTimeout(() => {
       this.router.navigateByUrl('home')
-    }, 4000);
+    }, 6000);
     
       },err=>{
         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 

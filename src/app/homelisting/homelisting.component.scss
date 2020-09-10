@@ -52,6 +52,7 @@
     background: #0061d5;
     background-repeat: no-repeat;
     background-size: cover;
+    min-height: calc( 100vh - 90px);
 }
 .category-block{
 background: white !important;

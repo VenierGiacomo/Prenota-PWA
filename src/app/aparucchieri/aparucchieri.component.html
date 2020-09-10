@@ -1,4 +1,5 @@
 
+<!-- <body> -->
 <div class="top-bar">
     <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
     <app-header></app-header>
@@ -12,7 +13,7 @@
                         <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
                         <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
                 </span>
-                <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
+                <div class="close" (click)='closeBooking()'>Annulla</div>
             </span>
             <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
         </div>
@@ -31,7 +32,7 @@
                         <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day>actual_day || month>actual_month">{{day}}</p> </span>
                         <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
                      </span>
-                     <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
+                     <div class="close" (click)='closeBooking()'>Annulla</div>
                 </span>
                 <p style="font-size: 18px;">{{selected_date}}</p>
         </div>
@@ -58,7 +59,7 @@
                     </span>
                    
                 </span>
-                <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
+                <div class="close" (click)='closeBooking()'>Annulla</div>
             </span>
         </div>
         <div class="prenota-blue" (click)='book()'>
@@ -68,20 +69,21 @@
 </div>
 
 <div class="cont-template">
-                <div class="hero-wrap js-fullheight" style="background-image: url('../assets/trim/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-                    
+                <div class="hero-wrap js-fullheight" style="background-image: url('../assets/aparucchieri_backgroud.jpg');" >
+                <div class="bg-black">
                     <div class="container">
-                      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start">
                           <!-- <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
                               <span class="icon-play"></a>
                           </a> -->
-                        <div class="col-md-6 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                          <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">APARRUCCHIERI</h1>
+                        <div class="col-md-6 ftco-animate" >
+                          <h1 class="mb-5">APARRUCCHIERI</h1>
                           <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
                           <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
                         </div>
                       </div>
                     </div>
+                </div>
                   </div>
                   <section class="ftco-intro light-blue">
                         <div class="container-wrap">
@@ -91,7 +93,7 @@
                                         <div class="col-md-3 d-flex ftco-animate">
                                             <div class="icon"><span class="icon-phone"></span></div>
                                             <div class="text">
-                                                <h3>040 265209</h3>
+                                                <h3>040 2652079</h3>
                                                 <p>Telefono</p>
                                             </div>
                                         </div>
@@ -290,14 +292,14 @@
                                 </div>
                                 </div>
                             </section>
-                            <section class="ftco-section ftco-discount img" style="background-image: url(../assets/trim/images/bg_4.jpg);" data-stellar-background-ratio="0.5">
+                            <section class="ftco-section ftco-discount img" style="background-image: url(../assets/trim/images/bg_4.jpg);" >
                                 <div class="overlay"></div>
                                 <div class="container">
-                                    <div class="row justify-content-center" data-scrollax-parent="true">
-                                        <div class="col-md-7 text-center discount ftco-animate" data-scrollax=" properties: { translateY: '-30%'}">
+                                    <div class="row justify-content-center" >
+                                        <div class="col-md-7 text-center discount ftco-animate">
                                             <h3>Prendi appuntamento online</h3>
                                             <h2 class="mb-4">Tutti i servizi disponibili</h2>
-                                            <p class="mb-4" style="color: white;">Senza doverti distubare a prendere il telefono e chiamare, puoi prendere appuntmento direttamente da qui</p>
+                                            <p class="mb-4" style="color: white;">Senza doverti disturbare a prendere il telefono e chiamare, puoi prendere appuntamento direttamente da qui</p>
                                             <div (click)="showServices()" class="btn btn-primary px-4 py-3">{{button_text}}</div>
                                         </div>
                                     </div>
@@ -399,3 +401,4 @@
             </div> 
         </div>
 </div>
+<!-- </body> -->

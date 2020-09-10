@@ -8,7 +8,7 @@
                         <div class="swiper-slide"> <div class="wrapper wrapper--w680">
                                 <div class="card card-4">
                                     <div class="card-body">
-                                        <h2 class="title">Benvenuto! Crea un account per iniziare</h2>
+                                        <h2 class="title">Benvenuto! Inserisci i tuoi dati  per iniziare</h2>
                                         <form >
                                             <div class="row row-space">
                                                 <div class="col-2-r">
@@ -42,7 +42,7 @@
                                                         </div>
                                                     </div>
                                             </div>
-                                            <div class="row row-space">
+                                            <!-- <div class="row row-space">
                                                 <div class="col-2-r">
                                                     <div class="input-group" >
                                                         <label class="label">Sesso</label>
@@ -65,9 +65,9 @@
                                                         <p *ngIf='password_err!=""'>{{password_err}}</p>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                             <div class="p-t-15">
-                                                <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Registrati</button>
+                                                <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Conferma</button>
                                             </div>
                                         </form>
                                     </div>
@@ -79,7 +79,15 @@
 
 
                         <div class="swiper-slide">
-                                        <div class="wrapper wrapper--w680">
+                                <div class="wrapper wrapper--w680">
+                                    <div class="card card-4" style="text-align:center">
+                                        <img src="../assets/landing/confirm.svg" style="height: 160px; margin: 40px;">
+                                        <h1>Grazie per l'iscrizione!</h1>
+                                        <h4 style="padding: 20px;">Verrai riconttattato da noi nelle prossime 12 ore!</h4>
+                                        <p style="padding: 40px 0px 0px 0px;">Torna alla <a style='color:#0061d5' href="/">home</a></p>
+                                    </div>
+                                </div>
+                                        <!-- <div class="wrapper wrapper--w680">
                                             <div class="card card-4">
                                                   <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
                                                 <div class="card-body">
@@ -120,11 +128,11 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                        </div>                    
+                                        </div>                     -->
                         </div>
 
 
-                        <div class="swiper-slide">
+                        <!-- <div class="swiper-slide">
                             <div class="wrapper wrapper--w1200">
                                     <div class="card card-4">
                                             <div class="back-card" (click)='Backslide()'><img class="bback" src='../assets/icons/back.svg'>Indietro</div>  
@@ -132,7 +140,7 @@
                                             <div class="opening-hours">
                                                         <div>
                                                             <h4>Inserisci l'orario di apertura della tua attività:</h4> 
-                                                            <!-- <p>Questi sono gli orari di apertura del tuo negozio. Dopo potrai inserire gli orari dei tui turni di lavoro</p>  -->
+                                                     
                                                             <div class="btn-time">
                                                                 <button class="btn btn--radius-2 btn--blue"  (click)='storeEverything()' >Prosegui</button>
                                                             </div>
@@ -187,7 +195,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[0]' (change)='double_turn[0]=!double_turn[0]' [checked]="double_turn[0]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[0]'(change)='closed_days[0]=!closed_days[0]'[checked]="!closed_days[0]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                               
                                                                     <h1>Martedì</h1>
                                                                     <div *ngIf='!closed_days[1]'></div>
                                                                     <div *ngIf='!closed_days[1]'></div>
@@ -235,7 +243,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[1]' (change)='double_turn[1]=!double_turn[1]' [checked]="double_turn[1]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[1]'(change)='closed_days[1]=!closed_days[1]'[checked]="!closed_days[1]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                           
                                                                     <h1>Mercoledì</h1>
                                                                     <div *ngIf='!closed_days[2]'></div>
                                                                     <div *ngIf='!closed_days[2]'></div>
@@ -282,7 +290,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[2]' (change)='double_turn[2]=!double_turn[2]' [checked]="double_turn[2]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[2]'(change)='closed_days[2]=!closed_days[2]'[checked]="!closed_days[2]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                               
                                                                     <h1>Giovedì</h1>
                                                                     <div *ngIf='!closed_days[3]'></div>
                                                                     <div *ngIf='!closed_days[3]'></div>
@@ -329,7 +337,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[3]' (change)='double_turn[3]=!double_turn[3]' [checked]="double_turn[3]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[3]'(change)='closed_days[3]=!closed_days[3]'[checked]="!closed_days[3]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                          
                                                                     <h1>Venerdì</h1>
                                                                     <div *ngIf='!closed_days[4]'></div>
                                                                     <div *ngIf='!closed_days[4]'></div>
@@ -376,7 +384,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[4]' (change)='double_turn[4]=!double_turn[4]' [checked]="double_turn[4]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[4]'(change)='closed_days[4]=!closed_days[4]'[checked]="!closed_days[4]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                                   
                                                                     <h1>Sabato</h1>
                                                                     <div *ngIf='!closed_days[5]'></div>
                                                                     <div *ngIf='!closed_days[5]'></div>
@@ -423,7 +431,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='closed_days[5]' (change)='double_turn[5]=!double_turn[5]' [checked]="double_turn[5]">2 turni</vaadin-checkbox>
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[5]'(change)='closed_days[5]=!closed_days[5]'[checked]="!closed_days[5]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
-                                                                    <!--  -->
+                                                                    
                                                                     <h1>Domenica</h1>
                                                                     <div *ngIf='!closed_days[6]'></div>
                                                                     <div *ngIf='!closed_days[6]'></div>
@@ -471,9 +479,7 @@
                                                                             <vaadin-checkbox value="Option" *ngIf='!double_turn[6]'(change)='closed_days[6]=!closed_days[6]'[checked]="!closed_days[6]">chiuso</vaadin-checkbox>
                                                                     </vaadin-checkbox-group>
                                                             </form>
-                                            <!-- <div class="btn-time"> -->
-                                                <!-- <button  style="margin-top: 10px;" class="btn btn--radius-2 btn--blue"  (click)='copyTimeslotsstore()' >Copia orario di Lunedì</button> -->
-                                            <!-- </div> -->
+                                            
                                         </div>    
                                     </div>
                                 </div>
@@ -542,7 +548,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[0]' (change)='double_turn1[0]=!double_turn1[0]' [checked]="double_turn1[0]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[0]'(change)='closed_days1[0]=!closed_days1[0]'[checked]="!closed_days1[0]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                                       
                                                                             <h1>Martedì</h1>
                                                                             <div *ngIf='!closed_days1[1]'></div>
                                                                             <div *ngIf='!closed_days1[1]'></div>
@@ -590,7 +596,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[1]' (change)='double_turn1[1]=!double_turn1[1]' [checked]="double_turn1[1]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[1]'(change)='closed_days1[1]=!closed_days1[1]'[checked]="!closed_days1[1]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                                     
                                                                             <h1>Mercoledì</h1>
                                                                             <div *ngIf='!closed_days1[2]'></div>
                                                                             <div *ngIf='!closed_days1[2]'></div>
@@ -637,7 +643,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[2]' (change)='double_turn1[2]=!double_turn1[2]' [checked]="double_turn1[2]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[2]'(change)='closed_days1[2]=!closed_days1[2]'[checked]="!closed_days1[2]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                                      
                                                                             <h1>Giovedì</h1>
                                                                             <div *ngIf='!closed_days1[3]'></div>
                                                                             <div *ngIf='!closed_days1[3]'></div>
@@ -684,7 +690,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[3]' (change)='double_turn1[3]=!double_turn1[3]' [checked]="double_turn1[3]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[3]'(change)='closed_days1[3]=!closed_days1[3]'[checked]="!closed_days1[3]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                                      
                                                                             <h1>Venerdì</h1>
                                                                             <div *ngIf='!closed_days1[4]'></div>
                                                                             <div *ngIf='!closed_days1[4]'></div>
@@ -731,7 +737,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[4]' (change)='double_turn1[4]=!double_turn1[4]' [checked]="double_turn1[4]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[4]'(change)='closed_days1[4]=!closed_days1[4]'[checked]="!closed_days1[4]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                                     
                                                                             <h1>Sabato</h1>
                                                                             <div *ngIf='!closed_days1[5]'></div>
                                                                             <div *ngIf='!closed_days1[5]'></div>
@@ -778,7 +784,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='closed_days1[5]' (change)='double_turn1[5]=!double_turn1[5]' [checked]="double_turn1[5]">2 turni</vaadin-checkbox>
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[5]'(change)='closed_days1[5]=!closed_days1[5]'[checked]="!closed_days1[5]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
-                                                                            <!--  -->
+                                                               
                                                                             <h1>Domenica</h1>
                                                                             <div *ngIf='!closed_days1[6]'></div>
                                                                             <div *ngIf='!closed_days1[6]'></div>
@@ -826,7 +832,7 @@
                                                                                     <vaadin-checkbox value="Option" *ngIf='!double_turn1[6]'(change)='closed_days1[6]=!closed_days1[6]'[checked]="!closed_days1[6]">chiuso</vaadin-checkbox>
                                                                             </vaadin-checkbox-group>
                                                                     </form>
-                                                                    <!-- <button  style="margin-top: 10px;" class="btn btn--radius-2 btn--blue"  (click)='copyTimeslotsemplo()' >Copia orario di Lunedì</button> -->
+                                                                   
                                                     </div>
                                                 </div>    
                                             </div>
@@ -874,7 +880,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                </div>
+                                </div> -->
                     <!-- If we need pagination -->
                     <!-- <div class="swiper-pagination"></div> -->
                 
@@ -885,7 +891,7 @@
                 </div>
        
     </div>
-   <div class="instrucitons"><p>Non sai compilare il form? Consulta le <a href='https://prenota.cc/istruzioni' target="_blank">istruzioni.</a></p></div>
+   <!-- <div class="instrucitons"><p>Non sai compilare il form? Consulta le <a href='https://prenota.cc/istruzioni' target="_blank">istruzioni.</a></p></div> -->
     </div>
     <!-- Jquery JS-->
 

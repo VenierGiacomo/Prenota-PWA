@@ -17,9 +17,9 @@ input,
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
-#email{
-  width: 110%;
-}
+// #email{
+//   width: 110%;
+// }
 input:focus,
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
@@ -53,11 +53,18 @@ input:focus,
 
 ///// my scss
 .pay-cont{
+    margin: 0 30vw;
+    position: absolute;
+    
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    margin-top: auto;
     padding: 0px 20px 10px 20px;
     border-radius: 15px;
     border: 5px solid #02203c;
     width: 40vw;
-    margin-left: 30vw;
+    // margin-left: 30vw;
     background-color: #ebf3fd;
     color: #02203c;
   }
@@ -108,3 +115,34 @@ input:focus,
     border-bottom: 5px solid #02203c;
     }
   }
+.background_payment {
+  position: fixed;
+  left:0px;
+  // background-image: url('../../assets/applab/img/about/Waves-multiple.svg');
+  // background-repeat: no-repeat;
+  // background-size: cover;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 10000000;
+  top:0px;
+  width: 100vw;
+  text-align: center;
+  background: rgba($color: #0061d5, $alpha: 0.5);
+}
+.background_payment1{
+  position: relative;
+  top:0px;
+  width: 100vw;
+  height: 100vh;;
+  text-align: center;
+  // background: rgba($color: #0061d5, $alpha: 0.5);
+}
+.close-catalog{
+  position: absolute;
+  width: 5vw;
+  left: 90vw;
+  top: 5vw;
+  img{
+    width: 5vh;
+  }
+}

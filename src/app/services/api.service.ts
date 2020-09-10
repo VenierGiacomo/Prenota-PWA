@@ -158,6 +158,9 @@ setStoreservice( name, duration, sex, max_n, color){
 var data = { 'name':name, 'duration':duration, 'sex':sex, 'max_n':max_n, 'color':color}
   return this.http.post(BASE_URL+'services/', data, {headers: this.newheader()})
 }
+setStoreserviceDefault(){
+    return this.http.get(BASE_URL+'services/setdefault', {headers: this.httpheader})
+}
 getStoreservice(){
   const token = this.getToken()
   var l 
@@ -193,7 +196,7 @@ deleteEmployeeservice(employee, service_id){
 
 bookAppointment(start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': ''}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
@@ -232,6 +235,15 @@ getAppointmentsExternal(week):Observable<any>{
   }
   throw throwError("error");  
   
+}
+getClientAppointments():Observable<any>{
+  const token = this.getToken()
+  var l 
+  if (token) {
+     l = this.parseJwt(token) 
+     return this.http.get(BASE_URL+'bookings/user/?user='+l.user_id,{headers: this.newheader()})
+  }
+  throw throwError("error"); 
 }
 getStoreAppointments(week,store):Observable<any>{ 
      return this.http.get(BASE_URL+'bookings/week/'+week+'/?owner='+store, {headers: this.httpheader})   
@@ -288,6 +300,16 @@ emailConfirmBooking(email,name,surname,day,month,year,time,service,shop){
     "shop":shop
   }
   return this.http.post(BASE_URL+'email/bookingconfirm', data,{headers: this.newheader()})
+}
+
+registrationConfirmation(name,surname,email,phone){
+  var data ={
+    "name":name,
+    "surname":surname,
+    "email":email,
+    "phone":phone,
+  }
+  return this.http.post(BASE_URL+'email/registrationconfirm', data,{headers: this.httpheader})
 }
 getWeekNumber(d) {
   // Copy date so don't modify original

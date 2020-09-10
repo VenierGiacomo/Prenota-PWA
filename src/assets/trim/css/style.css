@@ -4,6 +4,13 @@
  * Copyright 2011-2018 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+.bg-black{
+  width:100vw;
+  height: 100%;
+  margin:0px;
+background: rgba(0, 0, 0, 0.5);
+ }
 :root {
   --blue: #007bff;
   --indigo: #6610f2;

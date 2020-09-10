@@ -1,0 +1,116 @@
+.home{
+    display:block;
+    height: calc(100vh - 90px);
+    width: 100vw;
+    margin-top: 90px;
+    grid-template-columns: 2fr ;
+    font-size: 1.5vw;
+}
+body{
+    background-image: url(./../../assets/applab/img/about/Waves-multiple.svg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.appo_list{
+    // background: #fcfcfc;
+    position: relative;
+}
+h1{
+    line-height: 60px;
+    color: #fff;
+}
+.appos{
+    overflow: scroll;
+    width: 100%;
+    margin: 20px 0px;
+    padding: 0px 0px 20px 0px;
+    height: calc(100vh - 230px);
+}
+.appos-1{
+    overflow: hidden;
+    width: 100%;
+    margin: 20px 0px;
+    padding: 0px 0px 20px 0px;
+    height: calc(100vh - 190px);
+}
+.appo{
+ position: relative;
+ width: 70%;
+ margin-top: 20px;
+ padding: 20px;
+ margin-left: 15%;
+ border-radius: 10px;
+ display: block;
+ background: #fff;
+ box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+ h1{
+     font-size: 28px;
+     color: #263b5e;
+     line-height: initial !important;
+ }
+ h3{
+    font-size: 18px;
+    color: #00479D;
+ }
+ .appo_date{
+     h4{
+        font-size: 18px;
+     }
+ }
+ img{
+    position: absolute;
+    right: 20px;
+    top: calc(50% - 18px);
+    height: 36px;
+}
+}
+.appo-1{
+    position: relative;
+    width: 70%;
+    margin-top: 20px;
+    padding: 20px;
+    margin-left: 15%;
+    border-radius: 10px;
+    display: block;
+    background: #00479D;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    h1{
+        font-size: 28px;
+        color: #fff;
+        line-height: initial !important;
+    }
+    img{
+        position: absolute;
+        right: 20px;
+        top:25px;
+        height: 36px;
+    }
+}
+.appo-1:hover{
+    background: #0073ff;
+}
+
+.bottom-login{
+    position: relative;
+    bottom: 30px;
+    width: 100%;
+    font-size: 16px;;
+    text-align: center;
+    a{
+        color: #0061d5;
+    }
+    a:hover{
+        color: rgb(0, 162, 255);
+    }
+}
+.log_out{
+    position: absolute;
+    height: 30px;
+    top:calc(100vh - 60px);
+    right: 30px;
+    color: #00479D;
+    img{
+        height: 20px;
+    };
+}

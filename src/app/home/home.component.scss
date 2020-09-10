@@ -3,6 +3,12 @@ body{
     width: 100vw;
     overflow: hidden;
     display: block;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; 
 }
 .home{
     display:grid;
@@ -316,11 +322,7 @@ th{
 }
 
 /////modal
-/////modal
-/////modal
-/////modal
-/////modal
-/////modal
+
 
 .appointment-modal{
     z-index: 100;
@@ -537,15 +539,10 @@ mat-form-field {
 
 
 ///// appointment
-///// appointment
-///// appointment
-///// appointment
-///// appointment
+
 
 :host ::ng-deep .task {
-    // resize:vertical;
-    // resize:both;
-    // width: 100%;
+
     z-index: 1;
     border-left-width: 3px;
     text-overflow: ellipsis;
@@ -554,10 +551,10 @@ mat-form-field {
     border-left-style: solid;
     font-size: 14px;
     position: relative;
-    transition: height 800ms;
-    -webkit-transition: 800ms;;
-    -moz-transition: 800ms;
-    -o-transition: 800ms;
+    // transition: height 1ms;
+    // -webkit-transition: 1ms;;
+    // -moz-transition: 1ms;
+    // -o-transition: 1ms;
     &--primary {
     //   background: #019aff;
       border: 0;
@@ -610,6 +607,7 @@ mat-form-field {
         font-family:  'Open Sans', sans-serif !important;
     }
 }
+
 :host ::ng-deep .c{
     &0{
         color: #85040a !important;
@@ -648,46 +646,20 @@ mat-form-field {
         background: #d7dbef; 
       }
 }
-// :host ::ng-deep .task:hover {
-//     height: 85px; /* This is the height on hover */
-// }
+:host ::ng-deep .bot-drag{
+    height: 10px;
+    left:0px;
+    z-index: 100;
+    width: 100%;
+    position: absolute;
+    bottom: -5px;
+    background: transparent;
+    cursor: ns-resize;
+}
 
 
 
 
-// ::-webkit-textarea-placeholder { /* Chrome/Opera/Safari */
-//     position: relative;
-//     top: -5vh;
-//     color: rgba($color: #0061d5, $alpha: 0.8);
-//     font-size: 2vh;
-//     vertical-align: top;
-
-//   }
-//   ::-moz-placeholder { /* Firefox 19+ */
-//      position: relative;
-//     top: -5vh;
-//     color: rgba($color: #0061d5, $alpha: 0.8);
-//     font-size: 2vh;
-//     vertical-align: top;
-//   }
-//   :-ms-input-placeholder { /* IE 10+ */
-//     position: relative;
-//     top: -5vh;
-//     color: rgba($color: #0061d5, $alpha: 0.8);
-//     font-size: 2vh;
-//     vertical-align: top;
-//   }
-//   :-moz-placeholder { /* Firefox 18- */
-//     position: relative;
-//     top: -5vh;
-//     color: rgba($color: #0061d5, $alpha: 0.8);
-//     font-size: 2vh;
-//     vertical-align: top;
-//   }
-
-//toogle
-
-/* The switch - the box around the slider */
 .switch {
     position: relative;
     display: inline-block;
@@ -695,14 +667,14 @@ mat-form-field {
     height: 34px;
   }
   
-  /* Hide default HTML checkbox */
+
   .switch input {
     opacity: 0;
     width: 0;
     height: 0;
   }
   
-  /* The slider */
+ 
   .slider {
     position: absolute;
     cursor: pointer;
@@ -741,7 +713,7 @@ mat-form-field {
     transform: translateX(26px);
   }
   
-  /* Rounded sliders */
+
   .slider.round {
     border-radius: 34px;
   }

@@ -21,6 +21,7 @@ export class Appointment {
        public id: number,
        public name: string,
        public duration: number,
+       public duration_book: number,
        public sex: number,
        public max_n:number,
        public color:number,

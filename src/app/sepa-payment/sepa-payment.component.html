@@ -1,3 +1,6 @@
+<div class="background_payment" >
+    <div class="background_payment1">
+        <div class="close-catalog" (click)='close()'>  <img src="../assets/icons/closewhite.svg"/></div>
 <div class="pay-cont">
   <div class="payment-selection"> 
     <div [class.active]='cardvisibility=="block"' (click)='swichView(1)'><img src='../assets/icons/payment-card.svg'/><p>Carta di credito</p></div>
@@ -6,47 +9,70 @@
   </div>
   
         <form (submit)="handleForm($event)" [style.display]='cardvisibility'>
-
-
-          <div #cardElement>
-            <!-- A Stripe Element will be inserted here. -->
-          </div>
-        
+            <div class="row inline">
+                <div class="col-md-6" style="padding: 5px 20px; text-align: left;">
+                  <label >
+                   Nome e Cognome
+                  </label>
+                  <input id="name" name="name" placeholder="Mario Rossi" required>
+                </div>
+                <div class="col-md-6" style="padding: 5px 20px; text-align: left;">
+                  <label >
+                   Email
+                  </label>
+                  <input id="email" name="email" type="email" placeholder="mario.rossi@email.com" required>
+                </div>
+              </div>
+          <div class="row inline">
+              <div class="col-md-6" style="padding: 15px 20px 5px 20px; text-align: left;">
+                <label>
+                 Carta di credito
+                </label>
+            </div>
+            <div  class="col-md-12" style="padding: 5px 20px; text-align: left;">
+            <div #cardElement>
+              <!-- A Stripe Element will be inserted here. -->
+            </div>
+        </div>
+        </div>
         
           <!-- Used to display Element errors. -->
           <p>{{ cardErrors }}</p>
         
-        <div class="confirm-pay"> <button  > Iscriviti {{amount/100}}€</button></div>
+        <div class="confirm-pay"> <button  > Iscriviti {{displ_ammount}}€</button></div>
         
         </form>
       
 
         <form action="/charge" method="post" id="payment-form" [style.display]='ibanvisibility'>
-          <div class="form-row inline">
-            <div class="col">
-              <label for="name">
-               Nome e Cognome
-              </label>
-              <input id="name" name="name" placeholder="Mario Rossi" required>
+          <div class="row inline">
+              <div class="col-md-6" style="padding: 5px 20px; text-align: left;">
+                <label for="name">
+                 Nome e Cognome
+                </label>
+                <input id="name" name="name" placeholder="Mario Rossi" required>
+              </div>
+              <div class="col-md-6" style="padding: 5px 20px; text-align: left;">
+                <label for="email">
+                 Email
+                </label>
+                <input id="email" name="email" type="email" placeholder="mario.rossi@email.com" required>
+              </div>
             </div>
-            <div class="col">
-              <label for="email">
-               Email
-              </label>
-              <input id="email" name="email" type="email" placeholder="mario.rossi@email.com" required>
-            </div>
-          </div>
           {{sepaErr}}
-          <div class="form-row">
+          <div class="row inline">
+              <div class="col-md-6" style="padding: 15px 20px 5px 20px; text-align: left;">
             <label for="iban-element">
               IBAN
             </label>
-            <div id="iban-element">
-              <!-- A Stripe Element will be inserted here. -->
-            </div>
           </div>
+
+          
+          <div  class="col-md-12" style="padding: 5px 20px; text-align: left;">
           <div #ibanElement></div>
-          <div class="confirm-pay"><button type="submit" id='submit-button'>Iscriviti  {{amount/100}}€</button></div>
+        </div>
+      </div>
+          <div class="confirm-pay"><button type="submit" id='submit-button'>Iscriviti {{displ_ammount}}€</button></div>
         
           <!-- Used to display form errors. -->
           <div id="error-message" role="alert"></div>
@@ -122,6 +148,8 @@
         </div>
       </form>
      -->
+</div>
+</div>
 </div>
 <!-- <path d="M54.783 50H3.217A3.217 3.217 0 010 46.783V11.217A3.217 3.217 0 013.217 8h51.566A3.217 3.217 0 0158 11.217v35.566A3.217 3.217 0 0154.783 50" fill="#8798cc"></path>
 <path fill="#556180" d="M0 13h58v8H0z"></path>

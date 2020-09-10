@@ -8,6 +8,7 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SubscriptionComponent implements OnInit {
 selected = false
 amount = 0
+ref_sub = this
 @Input() price_SMALL
 @Input() price_MEDIUM
   constructor() { }
@@ -17,16 +18,32 @@ amount = 0
   }
 selectesubscription(sub){
   if(sub == 1){
-    this.amount=1000
+    if(this.price_SMALL==19){
+      this.amount=1990
+      setTimeout(() => {
+        this.selected =true
+      }, 100);
+    }else{
+      this.amount=2990
+    setTimeout(() => {
+      this.selected =true
+    }, 100);
+    }
+    
   }else if(sub == 2){
-    this.amount=2500
+    if(this.price_SMALL==19){
+      this.amount=3990
+      setTimeout(() => {
+        this.selected =true
+      }, 100);
+    }else{
+      this.amount=4990
+    setTimeout(() => {
+      this.selected =true
+    }, 100);
+    }
   }else{
-    this.amount=2000
-  }
-  console.log(this.amount)
-  window.scrollTo({top: document.body.scrollHeight , behavior: 'smooth',});
-  setTimeout(() => {
-    this.selected =true
-  }, 400);
+    window.scrollTo({top: document.body.scrollHeight , behavior: 'smooth',});
+  } 
   }
 }

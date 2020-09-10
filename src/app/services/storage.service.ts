@@ -53,9 +53,9 @@ export class StorageService {
     var timetable = this.getEmployeehours()
     var timetable_new = timetable.filter((employee)=> {if(employee.id != id){ return employee}})
     localStorage.setItem('employeehours',JSON.stringify(timetable_new))
-    console.log(timetable_new, id)
+    
   }
-  setCatalog(id, name, duration, sex, max, color){
+  setCatalog(id, name, duration, duration_book, sex, max, color){
     // if(services.length==0){
     //   this.nextId =0
     // }else {
@@ -63,9 +63,9 @@ export class StorageService {
     //   this.nextId = maxId + 1
     // }
 
-    var newservice= new NewCatalogService(id, name, duration, sex, max, color)
+    var newservice= new NewCatalogService(id, name, duration, duration_book, sex, max, color)
 
-    console.log(newservice,id, name, duration, sex, max, color )
+    
     let catalog = this.getCatalog()
     catalog.push(newservice)
     localStorage.setItem('catalog',JSON.stringify({ 'services': catalog}))
@@ -131,7 +131,7 @@ export class StorageService {
     var appointment = new Appointment(id ,start, end,  day, week, month, year, name, phone,  details, employee, service, note)
     let oldAppointments = this.getAppointmets(bool)
     oldAppointments.push(appointment)
-    console.log(appointment)
+    
     this.setAppointmentsStorage(oldAppointments, bool)
 }
   setAppointmentsStorage(appointments: Appointment[],bool){
@@ -170,6 +170,7 @@ updateAppointment(id, start, end,  day, month, year, name,phone, details,employe
 }
 
 dragUpdateAppointment(id, start, end,  day, month, year, name, phone, details, employee, service, note){
+  // console.log(id, start, end,  day, month, year, name, phone, details, employee, service, note)
       this.deleteAppointmet(id)
       id =+id
       setTimeout(() => {

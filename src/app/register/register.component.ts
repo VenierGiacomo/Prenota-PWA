@@ -116,8 +116,9 @@ export class RegisterComponent implements OnInit {
     var times=[this.lun1, this.mar1,this.mer1,this.gio1,this.ven1,this.sab1,this.dom1]
     times[day][spot] = ev.target.__data.value
   }
- submit(){
-  Notiflix.Block.Standard('.wrapper', 'Salvando dati...');     
+ async submit(){
+  await this.api.deleteAllData()
+  Notiflix.Block.Standard('.wrapper', 'Registrando account...');     
     this.first_name_err = ''
     this.last_name_err = ''
     this.email_err = ''
@@ -136,13 +137,9 @@ export class RegisterComponent implements OnInit {
     if(this.phone== ''){
       this.phone_err = 'Inserisci il tuo numero di telefono'
     }
-    if(this.password== ''){
-      this.password_err = 'Inserisci una password'
-    }
-    if(this.first_name_err == '' && this.last_name_err == '' && this.email_err == '' && this.phone_err == '' && this.password_err == ''){
-      this.api.register(this.first_name, this.last_name, this.email, this.sex, this.phone, this.password).subscribe(
+    // if(this.first_name_err == '' && this.last_name_err == '' && this.email_err == '' && this.phone_err == '' && this.password_err == ''){
+      this.api.registrationConfirmation(this.first_name, this.last_name, this.email,  this.phone).subscribe(
         data=>{
-          this.api.storeToken(data.token)
           Notiflix.Block.Remove('.wrapper');
           this.mySwiper.slideNext()
         },
@@ -154,15 +151,13 @@ export class RegisterComponent implements OnInit {
           if (err.error.password != undefined){
             this.password_err = 'Questa password è troppo semplice. Prova ad aggiungere dei numeri'
           }
+          if(err.error.email == undefined, err.error.password == undefined){
+            Notiflix.Report.Failure("Errore, registrazione fallita", 'Controlla la tua connessione', 'Annulla');
+          }
           console.log(err.error.password)
           console.log(err.error,'err')
         }
       )
-    }else{
-      Notiflix.Block.Remove('.wrapper');
-    }
-    
-
   }
   createStore(){
     Notiflix.Block.Standard('.wrapper', 'Salvando dati...');

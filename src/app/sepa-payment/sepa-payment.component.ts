@@ -8,28 +8,29 @@ declare var Stripe;
   styleUrls: ['./sepa-payment.component.scss']
 })
 export class SepaPaymentComponent implements OnInit {
-
+  ibanvisibility= 'none'
   @ViewChild('ibanElement', {static: true}) ibanElement: ElementRef;
   @ViewChild('cardElement', {static: true}) cardElement: ElementRef;
-
   stripe
   card;
   iban
   cardvisibility = 'block'
   paypalvisibility= 'none'
-  ibanvisibility= 'none'
+  card_displ=true
   cardErrors;
   sepaErr;
   selectedView='card'
-  // @Input() amount: number;
-  amount = 2500
+  @Input() amount: number;
+  @Input() ref_sub: any;
+  // amount = 2500
   description: "nuovo stripe";
-
+  displ_ammount:string
   loading = false;
   confirmation;
   constructor() { }
 
   ngOnInit() {
+    this.displ_ammount= this.amount/100 +'0'
     this.stripe = Stripe('pk_test_f3m2iNJqa6UdyuD9Ey8O7ZiH00eSjJ4lEt');
     const elements = this.stripe.elements({locale: 'it',});
     this.card = elements.create('card');
@@ -114,6 +115,8 @@ export class SepaPaymentComponent implements OnInit {
         }
       );
     });
+  
+    // this.displ_ammount = this.displ_ammount.toString()+0
   }
   async handleForm(e) {
     e.preventDefault();
@@ -151,6 +154,7 @@ swichView(view){
     this.cardvisibility = 'block'
     this.paypalvisibility = 'none'
     this.ibanvisibility = 'none'
+    this.card_displ = true
   }
   else if(view == 2){
     this.cardvisibility = 'none'
@@ -220,5 +224,8 @@ swichView(view){
       );
     });
   }
+}
+close(){
+  this.ref_sub.selected=false
 }
 }

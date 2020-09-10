@@ -1,77 +1,79 @@
 
 <div class="top-bar">
-    <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
-    <app-header></app-header>
-    <div class="service" >
-        <!-- <h2>Prenota ora</h2> -->
-        <!--   (mouseout)="ser='none'" -->
-        <div (click)="showServices()">
-            <span class="services-cont"[style.display]='serv_displ'>
-                <span class="services"  >
-                        <!-- (mouseover)="ser='block'" -->
-                        <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                        <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
+        <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
+        <app-header></app-header>
+        <div class="service" >
+            <!-- <h2>Prenota ora</h2> -->
+            <!--   (mouseout)="ser='none'" -->
+            <div (click)="showServices()">
+                <span class="services-cont"[style.display]='serv_displ'>
+                    <span class="services"  >
+                            <!-- (mouseover)="ser='block'" -->
+                            <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
+                            <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
+                    </span>
+                    <div class="close" (click)='closeBooking()'>Annulla</div>
                 </span>
-                <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
-            </span>
-            <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
-        </div>
-        <div  (click)="showCalendar()">
-                <span class="services-cont services-cont2"[style.display]='cal'>
-                <span class="time">
-                        <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
-                        <span class="day">Lun</span>
-                        <span class="day">Mar</span>
-                        <span class="day">Mer</span>
-                        <span class="day">Gio</span>
-                        <span class="day">Ven</span>
-                        <span class="day">Sab</span>
-                        <span class="day">Dom</span>
-                        <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
-                        <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day>actual_day || month>actual_month">{{day}}</p> </span>
-                        <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
-                     </span>
-                     <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
-                </span>
-                <p style="font-size: 18px;">{{selected_date}}</p>
-        </div>
-        <div  (click)="showSpots()">
-                <p style="font-size: 18px;"> {{displ_hour}}</p>
-                <!--  -->
-                <span class="services-cont services-cont3"[style.display]='spots'>
-                <span class="bookings-time" >
-                    <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
-                        <h3>{{employee.name}}</h3>
-                        <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
-                        <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
-                        <span class="cont-timeslots"  >
-                                <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p>
-                            <span *ngFor='let spot of availableSpots'>
-                                <span class="time-available"  *ngIf="spot.employee == employee.employee" (click)="selectHour(spot)">{{times[spot.start]}}</span>
+                <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
+            </div>
+            <div  (click)="showCalendar()">
+                    <span class="services-cont services-cont2"[style.display]='cal'>
+                    <span class="time">
+                            <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
+                            <span class="day">Lun</span>
+                            <span class="day">Mar</span>
+                            <span class="day">Mer</span>
+                            <span class="day">Gio</span>
+                            <span class="day">Ven</span>
+                            <span class="day">Sab</span>
+                            <span class="day">Dom</span>
+                            <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
+                            <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day+1>actual_day || month>actual_month">{{day}}</p> </span>
+                            <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
+                         </span>
+                         <div class="close" (click)='closeBooking()'>Annulla</div>
+                    </span>
+                    <p style="font-size: 18px;">{{selected_date}}</p>
+            </div>
+            <div  (click)="showSpots()">
+                    <p style="font-size: 18px;"> {{displ_hour}}</p>
+                    <!--  -->
+                    <span class="services-cont services-cont3"[style.display]='spots'>
+                    <span class="bookings-time" >
+                        <span *ngFor="let employee of employees_list, let ind =index ">
+                            <span class="employee-spot"  >
+                                <!-- *ngIf='employee.employee==2' -->
+                            <h3>{{employee.name}}</h3>
+                            <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
+                            <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
+                            <span class="cont-timeslots">
+                                    <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p>
+                                <span *ngFor='let spot of final_spots'>
+                                    <span class="time-available"  *ngIf="spot[0].employee == employee.employee" (click)="selectHour(spot)">{{times[spot[0].start]}}</span>
+                                </span>
+                            </span>
+                            <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
+                            <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
+                            <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
+                        <!-- -->
                             </span>
                         </span>
-                        <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
-                        <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
-                        <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
-                    <!-- -->
                        
                     </span>
-                   
+                    <div class="close" (click)='closeBooking()'>Annulla</div>
                 </span>
-                <div class="close" (click)='closeBooking()'>Annulla prenotazione</div>
-            </span>
-        </div>
-        <div class="prenota-blue" (click)='book()'>
-               prenota
+            </div>
+            <div class="prenota-blue" (click)='book()'>
+                    <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
+             </div>
         </div>
     </div>
-</div>
 
 <div class="cont-template">
-                <div class="hero-wrap js-fullheight" style="background-image: url('../assets/trim/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
+                <div class="hero-wrap " style="background-image: url('../assets/trim/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
                     
                     <div class="container">
-                      <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start" data-scrollax-parent="true">
+                      <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
                           <!-- <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
                               <span class="icon-play"></a>
                           </a> -->

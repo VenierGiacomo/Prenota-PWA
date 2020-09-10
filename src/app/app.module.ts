@@ -40,6 +40,14 @@ import { BookingTemplComponent } from './booking-templ/booking-templ.component';
 import { HowtouseComponent } from './howtouse/howtouse.component';
 import { NitrogymComponent } from './nitrogym/nitrogym.component';
 import { BooktestComponent } from './booktest/booktest.component';
+import { MyBookingsComponent } from './my-bookings/my-bookings.component';
+import { GoogleDeepLinksComponent } from './google-deep-links/google-deep-links.component';
+import { CmassaggiComponent } from './cmassaggi/cmassaggi.component';
+import { CreateStoreComponent } from './create-store/create-store.component';
+import { SaloneRoccoComponent } from './salone-rocco/salone-rocco.component';
+import { TennisClubGrignanoComponent } from './tennis-club-grignano/tennis-club-grignano.component';
+import { AquaesaleComponent } from './aquaesale/aquaesale.component';
+import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.component';
 
 
 @NgModule({
@@ -72,6 +80,14 @@ import { BooktestComponent } from './booktest/booktest.component';
     HowtouseComponent,
     NitrogymComponent,
     BooktestComponent,
+    MyBookingsComponent,
+    GoogleDeepLinksComponent,
+    CmassaggiComponent,
+    CreateStoreComponent,
+    SaloneRoccoComponent,
+    TennisClubGrignanoComponent,
+    AquaesaleComponent,
+    TheGreenFactoryComponent,
     
   ],
   imports: [
