@@ -27,11 +27,13 @@ export class BooktestComponent implements OnInit {
   last_name = ''
   username = ''
   email = ''
+  email1 = ''
   sex = 'm'
   empl_hours
   button_text='Prenota un appuntamento'
   phone = ''
   password =''
+  password1 =''
   ser_height = '0px'
   first_name_err=''
   last_name_err=''
@@ -771,7 +773,8 @@ items.forEach(function (a) {
   }
   login(){
     this.error=''
-    this.api.login(this.email,this.password).subscribe(
+    console.log(this.email1,this.password1)
+    this.api.login(this.email1,this.password1).subscribe(
       data=>{
         this.api.storeToken(data.token)
         this.api.getUser().subscribe(async data=>{

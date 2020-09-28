@@ -12,7 +12,7 @@ export class HomelistingComponent implements OnInit {
 
   constructor(private router: Router, private titleService: Title, private plt: Platform) {
           // window.location.reload();
-      this.titleService.setTitle( "Prenota: Scopri parruchieri e medici a Trieste e prendi appuntamento");
+      this.titleService.setTitle( "Prenota: Scopri parrucchieri e medici a Trieste e prendi appuntamento");
    }
 
   ngOnInit(): void {

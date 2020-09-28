@@ -16,7 +16,7 @@ ref_sub = this
   ngOnInit() {
       console.log(this.price_SMALL, this.price_MEDIUM)
   }
-selectesubscription(sub){
+async selectesubscription(sub){
   if(sub == 1){
     if(this.price_SMALL==19){
       this.amount=1990
@@ -43,7 +43,12 @@ selectesubscription(sub){
     }, 100);
     }
   }else{
-    window.scrollTo({top: document.body.scrollHeight , behavior: 'smooth',});
+
+    await document.getElementById("contact").scrollIntoView({behavior: 'smooth'});
+    // setTimeout(()=>{
+    //   window.scrollBy({top: -90 ,behavior: 'smooth'});
+    // },200)
+    
   } 
   }
 }

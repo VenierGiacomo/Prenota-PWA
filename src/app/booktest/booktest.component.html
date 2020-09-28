@@ -47,12 +47,12 @@
                             <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
                             <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
                             <span class="cont-timeslots">
-                                    <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p>
+                                    <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
                                 <span *ngFor='let spot of final_spots'>
                                     <span class="time-available"  *ngIf="spot[0].employee == employee.employee" (click)="selectHour(spot)">{{times[spot[0].start]}}</span>
                                 </span>
                             </span>
-                            <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
+                            <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
                             <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
                             <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
                         <!-- -->
@@ -394,9 +394,9 @@
             <div class='inputs'>
             <p *ngIf='error!=""'>{{error}}</p>
             <label class="label">Email</label>
-            <input class="input--style-4"  type="email" [(ngModel)]="email" name="email" placeholder="mario.rossi@email.com">
+            <input class="input--style-4"  type="email" [(ngModel)]="email1" name="email" placeholder="mario.rossi@email.com">
             <label class="label">Password</label>
-            <input class="input--style-4"  type="password" name="password" [(ngModel)]="password"  placeholder="********">
+            <input class="input--style-4"  type="password" name="password" [(ngModel)]="password1"  placeholder="********">
                     <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
             </div> 
         </div>

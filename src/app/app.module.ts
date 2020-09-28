@@ -48,6 +48,7 @@ import { SaloneRoccoComponent } from './salone-rocco/salone-rocco.component';
 import { TennisClubGrignanoComponent } from './tennis-club-grignano/tennis-club-grignano.component';
 import { AquaesaleComponent } from './aquaesale/aquaesale.component';
 import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 
 @NgModule({
@@ -88,6 +89,7 @@ import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.
     TennisClubGrignanoComponent,
     AquaesaleComponent,
     TheGreenFactoryComponent,
+    PaymentSuccessComponent,
     
   ],
   imports: [

@@ -1,478 +1,331 @@
 
-<div class="top-bar">
-        <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
-        <app-header></app-header>
-        <div class="service">
-            <!-- <h2>Prenota ora</h2> -->
-            <div (mouseover)="ser='block'" (mouseout)="ser='none'">
-                    <span class="services" [style.display]='ser' (mouseout)="ser='none'" (mouseover)="ser='block'">
-                            <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]'[style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}</span>
-                    </span>
-                    <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
-            </div>
-            <div (mouseover)="cal='block'" (mouseout)="cal='none'">
-                    <span class="time" [style.display]='cal' (mouseout)="cal='none'" (mouseover)="cal='block'">
-                            <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
-                            <span class="day">Lun</span>
-                            <span class="day">Mar</span>
-                            <span class="day">Mer</span>
-                            <span class="day">Gio</span>
-                            <span class="day">Ven</span>
-                            <span class="day">Sab</span>
-                            <span class="day">Dom</span>
-                            <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
-                            <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'>{{day}} </span>
-                            <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
-                         </span>
-                         <p style="font-size: 18px;">{{selected_date}}</p> 
-            </div>
-            <div  (mouseout)="spots='none'" (mouseover)="spots='block'">
-                    <p style="font-size: 18px;">{{displ_hour}}</p>
-                    <!--  -->
-                    <span class="bookings-time" [style.display]='spots' (mouseout)="spots='none'" (mouseover)="spots='block'">
-                        <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
-                            <h3>{{employee.name}}</h3>
-                            <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p>
-                            <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
-                            <span class="cont-timeslots" *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length ' >
-                                    <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
-                                <span *ngFor='let spot of availableSpots'>
-                                    <span class="time-available"  *ngIf="spot.employee == employee.employee" (click)="selectHour(spot)">{{times[spot.start]}}</span>
-                                </span>
+<!-- <body> -->
+        <div class="top-bar">
+                <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
+                <app-header></app-header>
+                <div class="service" >
+                    <!-- <h2>Prenota ora</h2> -->
+                    <!--   (mouseout)="ser='none'" -->
+                    <div (click)="showServices()">
+                        <span class="services-cont"[style.display]='serv_displ'>
+                            <span class="services"  >
+                                    <!-- (mouseover)="ser='block'" -->
+                                    <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
+                                    <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
                             </span>
-                            <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
-                            <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
-                            <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
-                        <!-- -->
-                           
+                            <div class="close" (click)='closeBooking()'>Annulla</div>
                         </span>
-                       
-                    </span>
-            </div>
-            <div class="prenota-blue" (click)='book()'>
-                   <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
-            </div>
-        </div>
-</div>
-
-<div class="cont-template">
-      <body data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
-        <!-- <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light site-navbar-target" id="ftco-navbar">
-            <div class="container">
-              <a class="navbar-brand" href="index.html">Author<span>.</span></a>
-              <button class="navbar-toggler js-fh5co-nav-toggle fh5co-nav-toggle" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="oi oi-menu"></span> Menu
-              </button>
-    
-              <div class="collapse navbar-collapse" id="ftco-nav">
-                <ul class="navbar-nav nav ml-auto">
-                  <li class="nav-item"><a href="booking/#home-section" class="nav-link"><span>Home</span></a></li>
-                  <li class="nav-item"><a href="booking#about-section" class="nav-link"><span>About</span></a></li>
-                  <li class="nav-item"><a href="booking#chapter-section" class="nav-link"><span>Chapter</span></a></li>
-                  <li class="nav-item"><a href="booking/#testimonial-section" class="nav-link"><span>Reviews</span></a></li>
-                  <li class="nav-item"><a href="booking/#projects-section" class="nav-link"><span>My Books</span></a></li>
-                  <li class="nav-item"><a href="booking/#author-section" class="nav-link"><span>Author</span></a></li>
-                  <li class="nav-item"><a href="booking#contact-section" class="nav-link"><span>Contact</span></a></li>
-                </ul>
-              </div>
-            </div>
-          </nav> -->
-          <section class="ftco-about img ftco-section ftco-no-pt ftco-no-pb " id="author-section">
-            <div class="container ccbox cell-mar">
-                <div class="row d-flex no-gutters ">
-                    <div class="col-md-6 col-lg-6 d-flex prof-card">
-                        <!-- <div class="img-about img d-flex align-items-stretch"> -->
-                            <!-- <div class="overlay"></div>
-                            <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(../assets/logo.png);"> -->
-                           <div class="image-logo"><img  src='../assets/logo.png'></div> 
-                            <!-- </div> -->
-                        <!-- </div> -->
+                        <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
                     </div>
-                    <div class="col-md-6 col-lg-6 d-flex  ">
-                            <div class="py-md-5 w-100 bg-light px-md-5">
-                                <div class="py-md-5  ">
-                                    <div class="row justify-content-start cell-pad pb-3">
-                                  <div class="col-md-12 heading-section ftco-animate">
-                                      <span class="subheading">Studio medico sportivo</span>
-                                    <h2 class="mb-4">Wellness Clinic</h2>
-                                    <!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
-                                    <ul class="about-info mt-4 px-md-0 px-2">
-                                        <li class="d-flex"><span>Indirizzo:</span> <span>Via Torrebianca 28/A</span></li>
-                                        <li class="d-flex"><span>Email:</span> <span>gianfranco.stupar@gmail.com</span></li>
-                                        <li class="d-flex"><span>Telefono: </span> <span>339 1139977</span></li>
-                                    </ul>
+                    <div  (click)="showCalendar()">
+                            <span class="services-cont services-cont2"[style.display]='cal'>
+                            <span class="time">
+                                    <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
+                                    <span class="day">Lun</span>
+                                    <span class="day">Mar</span>
+                                    <span class="day">Mer</span>
+                                    <span class="day">Gio</span>
+                                    <span class="day">Ven</span>
+                                    <span class="day">Sab</span>
+                                    <span class="day">Dom</span>
+                                    <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
+                                    <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day>actual_day || month>actual_month">{{day}}</p> </span>
+                                    <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
+                                 </span>
+                                 <div class="close" (click)='closeBooking()'>Annulla</div>
+                            </span>
+                            <p style="font-size: 18px;">{{selected_date}}</p>
+                    </div>
+                    <div  (click)="showSpots()">
+                            <p style="font-size: 18px;"> {{displ_hour}}</p>
+                            <!--  -->
+                            <span class="services-cont services-cont3"[style.display]='spots'>
+                            <span class="bookings-time" >
+                                <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
+                                    <h3>{{employee.name}}</h3>
+                                    <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
+                                    <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
+                                    <span class="cont-timeslots"  >
+                                            <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p>
+                                        <span *ngFor='let spot of availableSpots'>
+                                            <span class="time-available"  *ngIf="spot.employee == employee.employee" (click)="selectHour(spot)">{{times[spot.start]}}</span>
+                                        </span>
+                                    </span>
+                                    <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
+                                    <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
+                                    <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
+                                <!-- -->
+                                   
+                                </span>
+                               
+                            </span>
+                            <div class="close" (click)='closeBooking()'>Annulla</div>
+                        </span>
+                    </div>
+                    <div class="prenota-blue" (click)='book()'>
+                            <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
+                     </div>
+                </div>
+            </div>
+            
+            <div class="cont-template">
+                            <div class="hero-wrap js-fullheight" style="background-image: url('../assets/ddd.jpg');" >
+                            <div class="bg-black">
+                                <div class="container">
+                                  <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start">
+                                      <!-- <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
+                                          <span class="icon-play"></a>
+                                      </a> -->
+                                    <div class="col-md-6 ftco-animate" >
+                                      <h1 class="mb-5">Wellness Clinic</h1>
+                                      <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
+                                      <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                                    </div>
                                   </div>
                                 </div>
-                              <!-- <div class="counter-wrap ftco-animate d-flex mt-md-3"> -->
-                                    <div class=" btn-butt1" (click)='navBox("page-1")'>
-                                             Chi siamo
-                                     </div>
-                              <!-- </div> -->
                             </div>
-                        </div>
-                    </div>
+                              </div>
+                              <section class="ftco-intro light-blue">
+                                    <div class="container-wrap">
+                                        <div class="wrap d-md-flex align-items-end">
+                                            <div class="info">
+                                                <div class="row no-gutters">
+                                                    <div class="col-md-2 d-flex ftco-animate">
+                                                        <div class="icon"><span class="icon-phone"></span></div>
+                                                        <div class="text">
+                                                            <h3>339 1139977</h3>
+                                                            <p>Telefono</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 d-flex ftco-animate">
+                                                        <div class="icon"><span class="icon-my_location"></span></div>
+                                                        <div class="text">
+                                                            <h3>Via Torrebianca 28/A</h3>
+                                                            <p>34122 Trieste(TS) Italy</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-7 d-flex ftco-animate">
+                                                        <div class="icon"><span class="icon-clock-o"></span></div>
+                                                        <div class="text">
+                                                            <h3>Orario di apertura</h3>
+                                                            <p>Lun, Mar, Mer, Gio, Ven:
+                                                                8:30 - 12:30 e 14:30 - 20:00<br> Sab:  <span style="text-align: right;">8:30 - 12:30 e 14:30 - 20:00</span></p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="social pl-md-5 p-4">
+                                                <ul class="social-icon">
+                                          <!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
+                                          <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
+                                          <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li> -->
+                                        </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                                <section class="ftco-section light-blue">
+                                        <div class="container">
+                                            <div class="row justify-content-center mb-4">
+                                          <div class="col-md-7 heading-section ftco-animate text-center">
+                                            <h2 class="mb-4">Benvenuto da <br><span>Wellness Clinic</span></h2>
+                                            <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
+                                          </div>
+                                        </div>
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-8 text-center ftco-animate">
+                                                    <p>WELLNESS CLINIC è un laboratorio della salute dove l’esercizio fisico viene prescritto alla pari di un farmaco e somministrato in uno spazio wellness-medico attrezzato e protetto.
+                                                        Con la sua equipe di professionisti, la WELLNESS CLINIC opera nell'attuare un protocollo di prevenzione, attraverso uno specifico programma di esercizi, sviluppati al fine di ridurre gli infortuni durante la pratica sportiva specifica.
+                    </p>                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                </section>
+                                <section class="ftco-section ">
+                                        <div class="container">
+                                                <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
+                                              <div class="col-md-7 heading-section text-center ftco-animate">
+                                                <h2 class="mb-4">Listino servizi &amp; prezzi</h2>
+                                                <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
+                                                <p class="mt-5">I nostri servizi ed listino prezzi</p>
+                                              </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">                                                    
+                                                    <div class="pricing-entry ftco-animate">
+                                                            <div class="d-flex text align-items-center">
+                                                                <h3><span>Visita medico sportiva agonistica (con ECG compreso)</span></h3>
+                                                                <span class="price">€50.00</span>
+                                                            </div>
+                                                            <div class="d-block">
+                                                                <p>	Durata:<b> 30 minuti</b><br>
+                                                        
+                                                                  
+                                                                    Da portare: <b>Urine, Documenti</b> </p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="pricing-entry ftco-animate">
+                                                                <div class="d-flex text align-items-center">
+                                                                    <h3><span>Visita medico sportiva non agonistica (con ECG compreso)</span></h3>
+                                                                    <span class="price">€40.00</span>
+                                                                </div>
+                                                                <div class="d-block">
+                                                                    <p>	Durata:<b> 20 minuti</b><br>
+                                                            
+                                                                      
+                                                                        Da portare: <b>Documenti</b> </p>
+                                                                </div>
+                                                            </div>
+                                                            <div class="pricing-entry ftco-animate">
+                                                                    <div class="d-flex text align-items-center">
+                                                                        <h3><span>Visita medico sportiva agonistica con prova da sforzo cicloergometro</span></h3>
+                                                                        <span class="price">€100.00</span>
+                                                                    </div>
+                                                                    <div class="d-block">
+                                                                        <p>	Durata:<b> 1 ora</b><br>
+                                                                
+                                                                          
+                                                                            Da portare: <b>Urine, Documenti</b> <br>
+                                                                            Consigliata:<b> uomini over 40 e donne over 50 </b><br></p>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="pricing-entry ftco-animate">
+                                                                        <div class="d-flex text align-items-center">
+                                                                            <h3><span>Dieta e nutrizione per sportivi</span></h3>
+                                                                            <span class="price"> da €100.00</span>
+                                                                        </div>
+                                                                        <div class="d-block">
+                                                                            <p>	Durata:<b> 1 ora</b><br>
+                                                                    
+                                                                              
+                                                                                Da portare: <b>-</b> </p>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="pricing-entry ftco-animate">
+                                                                            <div class="d-flex text align-items-center">
+                                                                                <h3><span>Elettrocardiogramma ECG</span></h3>
+                                                                                <span class="price">€20.00</span>
+                                                                            </div>
+                                                                            <div class="d-block">
+                                                                                <p>	Durata:<b> 20 minuti</b><br>
+                                                                        
+                                                                                  
+                                                                                    Da portare: <b>Documenti</b> </p>
+                                                                            </div>
+                                                                        </div>
+                                                </div>
+                                    
+                                             
+                                            </div>
+                                            </div>
+                                        </section>
+                                        <section class="ftco-section ftco-discount img" style="background-image: url('../assets/ddd.jpg')" >
+                                            <div class="overlay"></div>
+                                            <div class="container">
+                                                <div class="row justify-content-center" >
+                                                    <div class="col-md-7 text-center discount ftco-animate">
+                                                        <h3>Prendi appuntamento online</h3>
+                                                        <h2 class="mb-4">Tutti i servizi disponibili</h2>
+                                                        <p class="mb-4" style="color: white;">Senza doverti disturbare a prendere il telefono e chiamare, puoi prendere appuntamento direttamente da qui</p>
+                                                        <div (click)="showServices()" class="btn btn-primary px-4 py-3">{{button_text}}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </section>
+                                        <app-footer></app-footer>
             </div>
-            </div>
-        </section>
-        <!-- <section class="ftco-section ftco-no-pt">
-            <div class="container">
-                <div class="row justify-content-center py-5 mt-5">
-              <div class="col-md-5 heading-section text-center ftco-animate">
-                  
-                <h2 class="mb-4">Services</h2>
-              </div>
-            </div>
-                <div class="row">
-                        <div class="col-md-4 text-center d-flex ftco-animate">
-                            <div class="services-1 bg-light">
-                                <span class="icon">
-                                    <i class="flaticon-user-experience"></i>
-                                </span>
-                                <div class="desc">
-                                    <h3 class="mb-5">Experience</h3>
-                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center d-flex ftco-animate">
-                            <div class="services-1 bg-light">
-                                <span class="icon">
-                                    <i class="flaticon-network"></i>
-                                </span>
-                                <div class="desc">
-                                    <h3 class="mb-5">Marketing Goals</h3>
-                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-4 text-center d-flex ftco-animate">
-                            <div class="services-1 bg-light">
-                                <span class="icon">
-                                    <i class="flaticon-innovation"></i>
-                                </span>
-                                <div class="desc">
-                                    <h3 class="mb-5">Targetting Vission</h3>
-                                    <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-        </section>  -->
-          <!-- <section class="hero-wrap js-fullheight">
-          <div class="overlay"></div>
-          <div class="container-fluid px-0">
-              <div class="row d-md-flex no-gutters slider-text align-items-center js-fullheight justify-content-end">
-                  <img class="one-third js-fullheight align-self-end order-md-last img-fluid" src="../assets/author/images/undraw_book_lover_mkck.svg" alt="">
-                <div class="one-forth d-flex align-items-center ftco-animate js-fullheight">
-                    <div class="text mt-5">
-                        <span class="subheading">Best Seller Book Of The Week</span>
-                              <h1>Clue Of The Wooden Cottage</h1>
-                              <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                              <p><a href="#" class="btn btn-primary py-3 px-4">Buy Now For $22.78</a></p>
-                  </div>
-                </div>
-                </div>
-          </div>
-        </section> -->
-    
-        <!-- <section class="ftco-section ftco-no-pb ftco-partner">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12 col-lg ftco-animate">
-                        <a href="#" class="partner d-flex justify-content-center"><img src="../assets/author/images/partner-1.png" class="img-fluid" alt="Colorlib Template"></a>
-                    </div>
-                    <div class="col-md-12 col-lg ftco-animate">
-                        <a href="#" class="partner d-flex justify-content-center"><img src="../assets/author/images/partner-2.png" class="img-fluid" alt="Colorlib Template"></a>
-                    </div>
-                    <div class="col-md-12 col-lg ftco-animate">
-                        <a href="#" class="partner d-flex justify-content-center"><img src="../assets/author/images/partner-3.png" class="img-fluid" alt="Colorlib Template"></a>
-                    </div>
-                    <div class="col-md-12 col-lg ftco-animate">
-                        <a href="#" class="partner d-flex justify-content-center"><img src="../assets/author/images/partner-4.png" class="img-fluid" alt="Colorlib Template"></a>
-                    </div>
-                    <div class="col-md-12 col-lg ftco-animate">
-                        <a href="#" class="partner d-flex justify-content-center"><img src="../assets/author/images/partner-5.png" class="img-fluid" alt="Colorlib Template"></a>
-                    </div>
-                </div>
-            </div>
-        </section> -->
-    
-        <!-- <section class="ftco-about img ftco-section" id="about-section">
-            <div class="container">
-                <div class="row d-flex no-gutters">
-                    <div class="col-md-3 col-lg-4 d-flex">
-                        <div class="img-about img d-flex align-items-stretch">
-                            <div class="overlay"></div>
-                            <div class="img d-flex align-self-stretch align-items-center" style="background-image:url(../assets/author/images/bg_1.jpg);">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-lg-7 pl-md-5">
-                        <div class="row justify-content-start pb-3">
-                      <div class="col-md-12 heading-section ftco-animate">
-                        <h2 class="mb-4">About Wellness Studio</h2>
-                        <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-                        <div class="text-about">
-                            <h4>Award achievements</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                            <h4>Read On Any Devices</h4>
-                            <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-                            <h4>Very High Resolution</h4>
-                            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-            </div>
-            </div>
-        </section> -->
-    
-        
-    
-        <section class="ftco-section ftco-no-pb ftco-no-pt" id="chapter-section">
-            <div class="container" >
-                <div class="row justify-content-center py-5 mt-5">
-              <div class="col-md-12 heading-section text-center ftco-animate">
-                <h2 class="mb-4">Informazioni</h2>
-              </div>
-            </div>
-                <div class="row">
-                    <div class="col-md-3 mb-4" >
-                        <nav id="navi">
-                            <ul>
-                              <li><a (click)='navBox("page-1")' class="page-1 current">Chi siamo</a></li>
-                              <li><a (click)='navBox("page-2")' class="page-2">Il nostro team</a></li>
-                              <li><a (click)='navBox("page-3")' class="page-3">Servizi e Tariffario</a></li>
-                              <!-- <li><a (click)='navBox("page-4")' class="page-4"></a></li> -->
-                              <!-- <li><a href="#page-5">Foreword</a></li>
-                              <li><a href="#page-6">Prologue</a></li>
-                              <li><a href="#page-7">Epilogue</a></li>
-                              <li><a href="#page-8">Epigraph</a></li> -->
-                            </ul>
-                          </nav>
-                        </div>
-                        <div class="col-md-9" >
-                          <div id="page-1" class= "page bg-light one">
-                              <h2 class="heading">CHI SIAMO</h2>
-                              <p>La <b>WELLNESS CLINIC</b> è un laboratorio della salute dove l’esercizio fisico viene prescritto alla pari di un farmaco e somministrato in uno spazio wellness-medico attrezzato e protetto.
-                                    Con la sua equipe di professionisti, la WELLNESS CLINIC opera nell'attuare un protocollo di prevenzione, attraverso uno specifico programma di esercizi, sviluppati al fine di ridurre gli infortuni durante la pratica sportiva specifica.
-</p>                                    
-                          </div>
-                          <div id="page-2" class= "page bg-light two">
-                              <h2 class="heading">IL NOSTRO TEAM</h2>
-                              <p><h5>Gianfranco Stupar</h5>
-                                <p>
-                                    Laureato a pieni voti in Medicina e Chirurgia a Trieste nel 1988; abilitato all'esercizio professionale presso l'Università di Bologna nel 1988; iscritto all'Ordine dei Medici di Trieste (tess. 2921).Specialista in Medicina dello Sport (Trieste,1993) e in Medicina Interna (Trieste, 1998).
-                                    Sottotenente di Vascello (Corpo Medici) in congedo della Marina Militare.
-                                </p>
-                                <h5>Elena Vecile</h5>
-                                
-                                <p> 
-Laureata in Medicina e Chirurgia ed in Scienze Biologiche presso l’Università degli Studi di Trieste, dove ha successivamente conseguito il dottorato di ricerca in Patologia Sperimentale. Si è specializzata in Medicina dello Sport presso l’Università degli Studi di Padova. Ha ricoperto il ruolo di Professore a contratto di Patologia Generale dal 2000 al 2010 presso la facoltà di Medicina e Chirurgia dell’Università degli Studi di Trieste. E’ coautrice di diverse pubblicazioni su riviste internazionali.
-                                </p>
-                          </div>
-                          <!-- <div id="page-3" class= "page bg-light three">
-                              <h2 class="heading">Il nostro team</h2>
-                              <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                          </div> -->
-                          <div id="page-3" class= "page bg-light three">
-                            <h2 class="heading">SERVIZI E TARIFFARIO</h2>
-                            <p>Certificato idoneità sportiva agonistica - € 50<br> <br>
-                                Dieta e nutrizione per sportivi  - da € 100 a € 300 <br> <br>
-                                Ecg - elettrocardiogramma a riposo - € 20 <br> <br>
-                                Certificato Medico non agonistico - € 40 <br> <br>
-                                Visita medico sportiva agonistica con prova da sforzo - € 120
-                                    </p>
-                          </div>
-                          <!-- <div id="page-5" class= "page bg-light five">
-                            <h2 class="heading">Foreword</h2>
-                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                          </div>
-                          <div id="page-6" class= "page bg-light six">
-                            <h2 class="heading">Prologue</h2>
-                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                          </div>
-                          <div id="page-7" class= "page bg-light seven">
-                            <h2 class="heading">Epilogue</h2>
-                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                          </div>
-                          <div id="page-8" class= "page bg-light eight">
-                            <h2 class="heading">Epigraph</h2>
-                            <p>On her way she met a copy. The copy warned the Little Blind Text, that where it came from it would have been rewritten a thousand times and everything that was left from its origin would be the word "and" and the Little Blind Text should turn around and return to its own, safe country. But nothing the copy said could convince her and so it didn’t take long until a few insidious Copy Writers ambushed her, made her drunk with Longe and Parole and dragged her into their agency, where they abused her for their.</p>
-                          </div> -->
-                          
-                        </div>
-                  </div>
-            </div>
-            <!-- <div class="prenota btn-butt" (click)='book()'>
-                    prenota
-             </div> -->
-        </section>
-        <!-- <div class="phone-services" *ngIf='service_phone' >
-            <div class="phone-header"><h4 >Seleziona un servizio</h4></div>
-                <span class="time-available" *ngFor='let service of services' (click)="selectService(service)">{{service.name}}</span>
-        </div>
-        <div class="phone-services" *ngIf='date_phone' >
-             <div class="phone-header" *ngIf='date_phone' ><h4 >Seleziona una data</h4></div>
-             <span class="date-phone">
-                    <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
-                    <span class="day">Lun</span>
-                    <span class="day">Mar</span>
-                    <span class="day">Mer</span>
-                    <span class="day">Gio</span>
-                    <span class="day">Ven</span>
-                    <span class="day">Sab</span>
-                    <span class="day">Dom</span>
-                    <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
-                    <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'>{{day}} </span>
-                    <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
-                 </span>
-             </div> -->
-        <div class="bot-bar">
-            <div class="prenota btn-butt" (click)='phoneBook()'>
-                prenota
-            </div>
-        </div>
-      
-        
-    
-        
-        
             
-<!--     
-        <footer class="ftco-footer ftco-section">
-          <div class="container">
             
-            <div class="row">
-              <div class="col-md-12 text-center">
-    
-                <p>
-      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by Colorlib
-      </p>
-              </div>
-            </div>
-          </div>
-        </footer> -->
-        
-      
-    
-      <!-- loader -->
-      <app-footer></app-footer>
-    
-      
-        
-      </body>
-</div>
-
-<div class="cont-reg" [style.display]="hollidays">
-    <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
-<div class="register-form" *ngIf="formType=='Register'">
-        <h1>prenota</h1>
-    <div class="header">
-        <div class="active">
-            Registrati
-        </div>
-        <div >
-            Accedi
-        </div>
-    </div>
-    <div class='inputs'>
-      <h4 style="width: 100%; text-align: center;display: block;">Siamo spiacenti ma Wellness Clinic è chiuso per ferie dal 27 Luglio 2020 al 2 Agosto 2020.</h4>
-      <p style="width: 100%; text-align:left ;display: block;">Se desideri prendere un appuntamento, seleziona una data sucessiva al 2 Agosto 2020</p>
-            <div class="button-reg">  <button (click)='hollidays="none"'>Indietro</button></div>
-    </div> 
-</div>
-</div>
-<div class="cont-reg" [style.display]="register_form">
-        <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
-    <div class="register-form" *ngIf="formType=='Register'">
-            <h1>prenota</h1>
-        <div class="header">
-            <div class="active">
-                Registrati
-            </div>
-            <div (click)="formType='Login'">
-                Accedi
-            </div>
-        </div>
-        <div class='inputs'>
-            <div class="row row-space">
-                <div class="col-2-r">
-                    <div class="input-group">
-                        <label class="label">Nome</label>
-                        <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
-                        <p *ngIf='first_name_err!=""'>{{first_name_err}}</p>
+            <div class="cont-reg" [style.display]="register_form">
+                    <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+                <div class="register-form" *ngIf="formType=='Register'">
+                        <h1>prenota</h1>
+                    <div class="header">
+                        <div class="active">
+                            Registrati
+                        </div>
+                        <div (click)="formType='Login'">
+                            Accedi
+                        </div>
                     </div>
+                    <div class='inputs'>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Nome</label>
+                                    <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
+                                    <p *ngIf='first_name_err!=""'>{{first_name_err}}</p>
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Cognome</label>
+                                    <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
+                                    <p *ngIf='last_name_err!=""'>{{last_name_err}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
+                                    <p *ngIf='email_err!=""'>{{email_err}}</p>
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                    <div class="input-group">
+                                        <label class="label">Numero di telefono</label>
+                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                        <p *ngIf='phone_err!=""'>{{phone_err}}</p>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group" >
+                                    <label class="label">Sesso</label>
+                                    <div class="p-t-10">
+                                        <label class="radio-container m-r-45">Uomo
+                                            <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Donna
+                                            <input type="radio" [(ngModel)]="sex" value="w" name="gender">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Password</label>
+                                    <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                    <p *ngIf='password_err!=""'>{{password_err}}</p>
+                                </div>
+                            </div>
+                        </div>
+                            <div class="button-reg">  <button (click)='SendBooking("register")'>Conferma prenotazione</button></div>
+                    </div> 
                 </div>
-                <div class="col-2-r">
-                    <div class="input-group">
-                        <label class="label">Cognome</label>
-                        <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
-                        <p *ngIf='last_name_err!=""'>{{last_name_err}}</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row row-space">
-                <div class="col-2-r">
-                    <div class="input-group">
+                <div class="login-form" *ngIf="formType=='Login'"> 
+                        <h1>prenota</h1>
+                        <div class="header">
+                            <div  (click)="formType='Register'">
+                                Registrati
+                            </div>
+                            <div class="active">
+                                Accedi
+                            </div>
+                        </div>
+                        <div class='inputs'>
+                        <p *ngIf='error!=""'>{{error}}</p>
                         <label class="label">Email</label>
-                        <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
-                        <p *ngIf='email_err!=""'>{{email_err}}</p>
-                    </div>
-                </div>
-                <div class="col-2-r">
-                        <div class="input-group">
-                            <label class="label">Numero di telefono</label>
-                            <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
-                            <p *ngIf='phone_err!=""'>{{phone_err}}</p>
-                        </div>
-                    </div>
-            </div>
-            <div class="row row-space">
-                <div class="col-2-r">
-                    <div class="input-group" >
-                        <label class="label">Sesso</label>
-                        <div class="p-t-10">
-                            <label class="radio-container m-r-45">Uomo
-                                <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
-                                <span class="checkmark"></span>
-                            </label>
-                            <label class="radio-container">Donna
-                                <input type="radio" [(ngModel)]="sex" value="w" name="gender">
-                                <span class="checkmark"></span>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-2-r">
-                    <div class="input-group">
+                        <input class="input--style-4"  type="email" [(ngModel)]="email" name="email" placeholder="mario.rossi@email.com">
                         <label class="label">Password</label>
-                        <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
-                        <p *ngIf='password_err!=""'>{{password_err}}</p>
+                        <input class="input--style-4"  type="password" name="password" [(ngModel)]="password"  placeholder="********">
+                                <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
+                        </div> 
                     </div>
-                </div>
             </div>
-                <div class="button-reg">  <button (click)='SendBooking("register")'>Conferma prenotazione</button></div>
-        </div> 
-    </div>
-    <div class="login-form" *ngIf="formType=='Login'"> 
-            <h1>prenota</h1>
-            <div class="header">
-                <div  (click)="formType='Register'">
-                    Registrati
-                </div>
-                <div class="active">
-                    Accedi
-                </div>
-            </div>
-            <div class='inputs'>
-            <p *ngIf='error!=""'>{{error}}</p>
-            <label class="label">Email</label>
-            <input class="input--style-4"  type="email" [(ngModel)]="email" name="email" placeholder="mario.rossi@email.com">
-            <label class="label">Password</label>
-            <input class="input--style-4"  type="password" name="password" [(ngModel)]="password"  placeholder="********">
-                    <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
-            </div> 
-        </div>
-</div>
+            <!-- </body> -->

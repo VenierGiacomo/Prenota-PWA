@@ -65,9 +65,9 @@ rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", 
       function(){ // Yes button callback 
         self.api.deleteAppointment(appo.id).subscribe(data=>{
             self.getAppointmets()
-            Notiflix.Report.Success("Appuntamento cancellato", "L'appuntamenton è stato cancellato con successo!", 'Continua')
+            Notiflix.Report.Success("Appuntamento cancellato", "L'appuntamento è stato cancellato con successo!", 'Continua')
           },err=>{
-            Notiflix.Report.Failure("Errore durante la cancellazione", "L'appuntamenton non è stato cancellato. Controlla la tua connessione e riprova.", 'Annulla');
+            Notiflix.Report.Failure("Errore durante la cancellazione", "L'appuntamento non è stato cancellato. Controlla la tua connessione e riprova.", 'Annulla');
           })}, 
        function(){ // No button callback 
          } ); 

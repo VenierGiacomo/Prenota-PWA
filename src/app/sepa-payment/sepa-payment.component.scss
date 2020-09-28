@@ -7,7 +7,7 @@ input,
 
   padding: 5px 10px;
   color: #32325d;
-  background-color: white;
+  background-color: #f3f3f9;
   border: 1px solid transparent;
   border-radius: 4px;
 
@@ -53,34 +53,48 @@ input:focus,
 
 ///// my scss
 .pay-cont{
-    margin: 0 30vw;
-    position: absolute;
+    position: relative;
     
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-    margin-top: auto;
-    padding: 0px 20px 10px 20px;
-    border-radius: 15px;
-    border: 5px solid #02203c;
-    width: 40vw;
+    bottom: 0px;
+    margin-bottom:0px;
+    padding: 60px 20px 10px 20px;
+    // border-radius: 15px;
+    border-top: 5px solid #02203c;
+    width: 100%;
     // margin-left: 30vw;
-    background-color: #ebf3fd;
+    background-color: #fff;
     color: #02203c;
   }
   .confirm-pay{
     width:100%;
     text-align: center;
     button{
-      color: #02203c;
+      color: #fff;
       border: none;
-      background: white;
+      background: #0061d5;
       padding: 10px 20px;
       border-radius: 10px;
       font-size: 16px;
       font-weight: 500;
       width: 16vw;
-      margin: 10px auto;
+      margin: 20px auto;
+      box-shadow: 0 5px 7px rgba(#ffffff, 0.2);
+    }
+    
+  }
+  .confirm-pay1{
+    width:100%;
+    text-align: center;
+    button{
+      color: #fff;
+      border: none;
+      background: #0061d5;
+      padding: 10px 20px;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 500;
+      width: 50%;
+      margin: 20px auto;
       box-shadow: 0 5px 7px rgba(#ffffff, 0.2);
     }
     
@@ -94,6 +108,7 @@ input:focus,
 
   .payment-selection{
     display: grid;
+    cursor: pointer;
     grid-template-columns: 1fr  1fr;
     margin-bottom: 30px;
     div{
@@ -118,24 +133,38 @@ input:focus,
 .background_payment {
   position: fixed;
   left:0px;
-  // background-image: url('../../assets/applab/img/about/Waves-multiple.svg');
-  // background-repeat: no-repeat;
-  // background-size: cover;
+  background-image: url('../../assets/applab/img/about/Waves-multiple.svg');
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 100vh;
   overflow: hidden;
   z-index: 10000000;
   top:0px;
   width: 100vw;
   text-align: center;
-  background: rgba($color: #0061d5, $alpha: 0.5);
+  // background: rgba($color: #0061d5, $alpha: 0.5);
 }
 .background_payment1{
   position: relative;
+  text-align: center;
   top:0px;
   width: 100vw;
   height: 100vh;;
   text-align: center;
+  overflow: scroll;
   // background: rgba($color: #0061d5, $alpha: 0.5);
+}
+.document{
+  position: relative;
+  display: block;
+  left: calc(50vw - 10.5cm);
+  width: 21cm;
+  border-radius: 15px;
+  box-shadow:0 10px 40px rgba(0,0,0,0.08);
+  // height: 100vh;
+  overflow: hidden;
+  margin:50px 0pc;
+  background: #fff;
 }
 .close-catalog{
   position: absolute;
@@ -145,4 +174,28 @@ input:focus,
   img{
     width: 5vh;
   }
+}
+h1{
+  width: 100%;
+  font-size: 36px;
+  display: inline-block;
+  // text-align: center;
+  font-family: "Comfortaa Bold" !important;
+  color: #0061d5;
+  letter-spacing: 1px;
+  padding:40px  0px 20px 0px;
+}
+
+// h2{
+//   font-weight: 700;
+//   font-size: 36px;
+// }
+p{
+  // font-size: 18px;
+}
+h5{
+  font-size: 24px;
+}
+h4{
+  font-size: 21px;
 }

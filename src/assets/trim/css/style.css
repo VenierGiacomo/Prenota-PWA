@@ -7512,7 +7512,7 @@ h1, h2, h3, h4, h5,
     @media (min-width: 768px) {
       .ftco-intro .wrap .info {
         width: calc(100% - 35%);
-        padding: 2% 5% 2% 12%; } }
+        padding: 2% 1% 2% 1%; } }
     .ftco-intro .wrap .info p {
       margin-bottom: 0; }
   .ftco-intro .wrap .social {

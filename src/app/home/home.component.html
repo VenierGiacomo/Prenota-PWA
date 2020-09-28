@@ -4,7 +4,7 @@
             <div class="menu-home" >Calendario</div>
             <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
             <div class="menu-settings" (click)='goNotifications()'>Area clienti</div>
-            <button (click)="bgModalDisp='block'"> Nuovo appuntamento</button>
+            <button (click)="freeSpots()">Posti liberi</button>
             <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
             <div class="menu-toggle">
                 Mostra appuntamenti dei colleghi
@@ -225,5 +225,26 @@
                         <button class="single-button " (click)='pickerApoointment()'>Salva</button>
                     </div>
             </div>   
+</div>
+
+<div class="free_spots" [style.display]="spot_show" >
+        <div class="close-spot-modal" (click)="spot_show='none'">
+                <img src="../assets/icons/closewhite.svg"/>
+        </div>
+<div class="container" style="text-align: center;">
+    <h1>Posti liberi</h1>
+    <h5>Scorri in basse per vedere tutte le disponibilità della settimana</h5>
+    <span style="display: inline-block; position: absolute; left: 20px; top: 20px; font-size: 14px; line-height: 14px; color: #0061d5;" (click)='pastWeSpots()'> <img style="height:14px" src="../assets/icons/last.svg"/> Settimana precedente</span> <span style="display: inline-block; position: absolute; right: 20px; top: 20px; font-size: 14px; color:#0061d5; line-height: 14px;;" (click)="nextWeSpots()">Settimana successiva <img style="height:14px" src="../assets/icons/next.svg"/></span>
+    <div class="row" style="text-align: center ;">
+        <div class="col-md-12" *ngFor="let day of week, let day_idx = index" >
+                <div style="display: block; font-weight: 700; font-size: 24px; color: #00468e; padding: 30px;"> {{columns[day_idx]}} {{day}}  </div>
+            <div *ngFor="let spot of availableSpots" style="display: inline-block;" >
+                <div *ngIf='day_idx==spot.day' class="single_spot">
+                    <p><b>{{this.times[spot.start]}} - {{this.times[spot.start+spot.duration]}} </b>   <span *ngIf='employees.length!=1'> {{spot.name}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
 </body>

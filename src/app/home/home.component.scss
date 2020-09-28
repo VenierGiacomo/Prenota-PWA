@@ -3,11 +3,11 @@ body{
     width: 100vw;
     overflow: hidden;
     display: block;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-     -khtml-user-select: none; /* Konqueror HTML */
-       -moz-user-select: none; /* Firefox */
-        -ms-user-select: none; /* Internet Explorer/Edge */
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
             user-select: none; 
 }
 .home{
@@ -19,11 +19,58 @@ body{
 
 }
 
+.close-spot-modal{
+    position: absolute;
+    display: inline-block;
+    top:50px;
+    right: 50px;
+    img{
+        height: 50px;
+       
+    }
+}
 .activetoday{
     background: #0061d5 !important;
     color: #fff !important;
 }
 // 
+.free_spots{
+
+    position: absolute;
+    left: 0;
+    z-index: 100000;
+    top:0;
+    width: 100vw;
+    overflow: hidden;
+    height: 100vh;
+    background: rgba(#00468e, 0.6);
+}
+.free_spots .container{
+
+    position: relative;
+    height: 70vh;
+    overflow: scroll;
+    margin-top:15vh;
+    background: #fff;
+    border-radius: 15px;
+}
+.single_spot{
+    padding:0px 15px;
+    height: 55px;
+    border-radius: 5px;
+    box-shadow: 0 5px 7px rgba(#4786ff, 0.2);
+    margin: 10px 20px;
+    background: #0061d5;
+    display: inline-block;
+    p{
+        font-size: 15px;
+        color: #fff;
+        line-height: 55px;
+        b{
+            font-size: 21px;
+        }
+    }
+}
 
 
 
@@ -223,9 +270,7 @@ body{
     color: #0061d5;
   }
 
-///calendar
-///calendar
-///calendar
+
 ///calendar
 
 thead, table{
@@ -460,17 +505,17 @@ button:focus {
         text-align: center;
     }
     
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    ::placeholder { 
         color: #00468e;
-        opacity: 0.7; /* Firefox */
+        opacity: 0.7; 
       }
       
-      :-ms-input-placeholder { /* Internet Explorer 10-11 */
+      :-ms-input-placeholder { 
         color: #00468e;
         opacity: 0.7;
       }
       
-      ::-ms-input-placeholder { /* Microsoft Edge */
+      ::-ms-input-placeholder { 
         color: #00468e;
         opacity: 0.7;
       }
@@ -485,32 +530,7 @@ button:focus {
         }
         
     }
-    mat-form-field , mat-label, mat-datepicker-toggle, ngx-mat-datetime-picker,mat-datepicker-toggle, mat-datepicker{
-    input{
-        color: white;
-        margin: 5px 0px;
-        font-size: 14px;
-    }
-    color: white;
-    border: none !important;
-    }
 } 
-
-mat-form-field {
-    width:200px;
-}
-.big-modal{
-   position: absolute;
-   display: block;
-   top: 0 ;
-   left: 0;
-   width: 100vw;
-   height: 100vh;
-   z-index: 10;
-   background: rgba($color: rgb(1, 28, 83), $alpha: 0.8);
-   
-}
-
     
 
 
@@ -549,21 +569,18 @@ mat-form-field {
     padding: 8px 12px;
     margin: 0px 5px;
     border-left-style: solid;
-    font-size: 14px;
+    font-size: 12px;
     position: relative;
-    // transition: height 1ms;
-    // -webkit-transition: 1ms;;
-    // -moz-transition: 1ms;
-    // -o-transition: 1ms;
+
     &--primary {
-    //   background: #019aff;
+
       border: 0;
       border-radius: 4px;
       grid-column: 3 / span 3;
       grid-row: 4;
       align-self: end;
       color: #fff;
-    //   box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+   
     }
     &--online {
         background: #0151ff;
@@ -600,10 +617,11 @@ mat-form-field {
     }
     .task-details{
         font-weight: 500;
-        font-size: 15px;
+        line-height: 1.2;
+        font-size: 13px;
         overflow: hidden;
         text-overflow: ellipsis;
-        margin: -5px 0px;
+        margin: 5px 0px;
         font-family:  'Open Sans', sans-serif !important;
     }
 }

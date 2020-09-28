@@ -442,7 +442,7 @@ items.forEach(function (a) {
         this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,23).subscribe(data=>{
           this.toast_text= "Prenotazione andata a buon fine"
           this.toastx="block"
-          this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparucchieri")
+          this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparrucchieri")
           Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
           this.selected_date='Seleziona data'
           this.displ_hour='Seleziona ora'
@@ -506,7 +506,7 @@ items.forEach(function (a) {
           this.register_form='none'
           this.user.first_name=this.first_name
           this.user.last_name=this.last_name
-          this.sendEmailConfirmation(this.email,this.first_name,this.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparucchieri")
+          this.sendEmailConfirmation(this.email,this.first_name,this.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparrucchieri")
           this.toast_text= "Prenotazione andata a buon fine"
           this.toastx="block"
           Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
@@ -549,7 +549,7 @@ items.forEach(function (a) {
           var end = start + this.total_service.duration 
           this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,23).subscribe(data=>{
           this.register_form='none'
-          this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparucchieri")
+          this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Aparrucchieri")
           this.toast_text= "Prenotazione andata a buon fine"
           this.user.first_name=this.first_name
           this.user.last_name=this.last_name

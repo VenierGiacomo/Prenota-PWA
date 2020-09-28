@@ -26,6 +26,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets",
+              "src/.well-known",
               {
                   "glob": "**/*.js",
                   "input": "node_modules/@webcomponents/webcomponentsjs",
@@ -81,6 +82,9 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "es5": {
+              "tsConfig": "./tsconfig.es5.json"
             }
           }
         },
@@ -92,6 +96,9 @@
           "configurations": {
             "production": {
               "browserTarget": "calendarapp:build:production"
+            },
+            "es5": {
+              "browserTarget": "calendarapp:build:es5"
             }
           }
         },

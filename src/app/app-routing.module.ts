@@ -32,6 +32,7 @@ import { AquaesaleComponent } from './aquaesale/aquaesale.component';
 import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
+import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 
 
 
@@ -56,7 +57,7 @@ const routes: Routes = [
   {path: 'cmassaggi', component: CmassaggiComponent},
   {path: 'aquaesale', component: AquaesaleComponent},
   {path: 'thegreenfactory', component: TheGreenFactoryComponent},
-  // {path: 'tennis_club_grignano', component: TennisClubGrignanoComponent},
+  {path: 'tennis_club_grignano', component: TennisClubGrignanoComponent},
   // {path: 'nitrogym', component: NitrogymComponent},
   {path: 'i_miei_appuntamenti', component: MyBookingsComponent},
   {path: 'istruzioni', component: HowtouseComponent},
@@ -67,10 +68,11 @@ const routes: Routes = [
   {path: 'subscription', component: SubscriptionComponent},
   //da eliminare
   // {path: 'test', component: TestingComponent},
-  {path: '.well-known/assetlinks.json', component: GoogleDeepLinksComponent},
+  // {path: '.well-known/assetlinks.json', component: GoogleDeepLinksComponent},
   // {path: 'store/setup', component: StoreSetupComponent, canActivate: [AuthGuard]},
   //da eliminare
   {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
+  {path: 'payment_success', component: PaymentSuccessComponent},
 ];
 
 @NgModule({

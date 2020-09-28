@@ -2,12 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AppComponent } from '../app.component';
 import { MonthviewComponent } from '../monthview/monthview.component';
+import { AppModule } from '../app.module';
 
 
 
 @NgModule({
-  declarations: [ AppComponent,MonthviewComponent],
+  // declarations: [ AppComponent,MonthviewComponent],
   imports: [
+    AppModule,
     CommonModule
   ]
 })
