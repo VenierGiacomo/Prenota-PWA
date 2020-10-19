@@ -14,13 +14,29 @@ export class LoginComponent implements OnInit {
   password=''
   error= ''
   constructor(private router: Router, private api: ApiService, private storage: StorageService, private titleService: Title) {
+    
     this.titleService.setTitle( "Prenota: Fai il login e utilizza la tua agenda");
+    if(this.api.isvalidToken()){
+      this.api.hasStore().subscribe(
+        async data=>{
+          var res:any = await data
+          if(res.has_store){
+            this.router.navigateByUrl('home')    
+          }
+         
+        },
+        err => {
+          this.error = 'La password o la email che hai inserito non sono valide'
+      console.log(err.error,'err')
+        })
+    }
    }
   ngOnInit() {
+   
   }
 
   goRegister(){
-    this.router.navigateByUrl('/register')
+    this.router.navigateByUrl('/home/ricerca')
   }
 
   async login(){
@@ -29,7 +45,20 @@ export class LoginComponent implements OnInit {
   this.api.login(this.email,this.password).subscribe(
     data=>{
       this.api.storeToken(data.token) 
-      this.router.navigateByUrl('loading')    
+      this.api.hasStore().subscribe(
+        async data=>{
+          var res:any = await data
+          if(res.has_store){
+            this.router.navigateByUrl('loading')    
+          }else{
+            this.router.navigateByUrl('home/ricerca')
+          }
+         
+        },
+        err => {
+          this.error = 'La password o la email che hai inserito non sono valide'
+      console.log(err.error,'err')
+        })
     },
     err => {
       this.error = 'La password o la email che hai inserito non sono valide'

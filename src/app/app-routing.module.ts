@@ -33,6 +33,8 @@ import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { Page404Component } from './page404/page404.component';
+import { DlfComponent } from './dlf/dlf.component';
 
 
 
@@ -73,6 +75,9 @@ const routes: Routes = [
   //da eliminare
   {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
   {path: 'payment_success', component: PaymentSuccessComponent},
+  {path: 'dopolavoroferroviario', component: DlfComponent},
+
+  {path: '**', component: Page404Component}
 ];
 
 @NgModule({

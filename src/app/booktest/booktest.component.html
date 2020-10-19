@@ -9,37 +9,32 @@
                 <span class="services-cont"[style.display]='serv_displ'>
                     <span class="services"  >
                             <!-- (mouseover)="ser='block'" -->
+                            <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona uno o più servizi</h2>
                             <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                            <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
+                            <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span>
+                            <span  *ngIf='service.length>0' (click)='showSpots()' class="time-available" style="color: #fff; background: #00479d;">Prosegui</span>
                     </span>
                     <div class="close" (click)='closeBooking()'>Annulla</div>
                 </span>
                 <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
             </div>
             <div  (click)="showCalendar()">
-                    <span class="services-cont services-cont2"[style.display]='cal'>
-                    <span class="time">
-                            <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
-                            <span class="day">Lun</span>
-                            <span class="day">Mar</span>
-                            <span class="day">Mer</span>
-                            <span class="day">Gio</span>
-                            <span class="day">Ven</span>
-                            <span class="day">Sab</span>
-                            <span class="day">Dom</span>
-                            <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
-                            <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day+1>actual_day || month>actual_month">{{day}}</p> </span>
-                            <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
-                         </span>
-                         <div class="close" (click)='closeBooking()'>Annulla</div>
+                    <span class="services-cont services-cont2 "[style.display]='cal'>
+                        <span class="white_ss">
+                            <span class="time-available1" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='active_date[ind]'>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</span>
+                            <div class="close" (click)='closeBooking()'>Annulla</div>
+                        </span>
                     </span>
                     <p style="font-size: 18px;">{{selected_date}}</p>
             </div>
             <div  (click)="showSpots()">
+                 
                     <p style="font-size: 18px;"> {{displ_hour}}</p>
                     <!--  -->
                     <span class="services-cont services-cont3"[style.display]='spots'>
+                          
                     <span class="bookings-time" >
+                            <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2>
                         <span *ngFor="let employee of employees_list, let ind =index ">
                             <span class="employee-spot"  >
                                 <!-- *ngIf='employee.employee==2' -->
@@ -49,12 +44,12 @@
                             <span class="cont-timeslots">
                                     <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
                                 <span *ngFor='let spot of final_spots'>
-                                    <span class="time-available"  *ngIf="spot[0].employee == employee.employee" (click)="selectHour(spot)">{{times[spot[0].start]}}</span>
+                                    <span class="time-available"  *ngIf="spot[0].employee == employee.employee" (click)="selectTime(spot)">{{times[spot[0].start]}}</span>
                                 </span>
                             </span>
                             <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
                             <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
-                            <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
+                            <!-- <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span> -->
                         <!-- -->
                             </span>
                         </span>

@@ -18,7 +18,7 @@ export class LandingComponent implements OnInit {
   make_website=false
   price_SMALL = 19
   price_MEDIUM = 39
-  call_to_act='Inizia la prova gratuita'
+  call_to_act='Richiedi informazioni'
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
     this.titleService.setTitle( "Prenota: Esplora la nostra Agenda online e inizia la prova gratuia ");
    }

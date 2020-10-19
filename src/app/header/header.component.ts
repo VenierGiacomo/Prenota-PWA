@@ -7,21 +7,25 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  button_text='PROVACI GRATIS'
+  button_text='Maggiori Informazioni'
   constructor(private router: Router) { }
 href
-move_l=false
+move_l=true
+is_business=false
 show_business: boolean = true
   ngOnInit(): void {
     this.href = this.router.url
     if(this.mobileCheck()){
+      this.is_business=false
       this.button_text="Scarica l'app"
       this.show_business=false
     }else{
-      this.show_business=true
+     
       if(this.href== '/business'){
+        this.show_business=false
+        this.is_business=true
         this.move_l=true
-        this.button_text="Inizia la prova gratuita"
+        this.button_text="Richiedi info"
       }
       if(this.href== '/home/ricerca'){
         this.show_business=false
@@ -58,5 +62,8 @@ navBusiness(){
    
   navListing(){
     this.router.navigateByUrl('')
+  }
+  navLogin(){
+    this.router.navigateByUrl('login')
   }
 }

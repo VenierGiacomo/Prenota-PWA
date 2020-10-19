@@ -49,6 +49,8 @@ import { TennisClubGrignanoComponent } from './tennis-club-grignano/tennis-club-
 import { AquaesaleComponent } from './aquaesale/aquaesale.component';
 import { TheGreenFactoryComponent } from './the-green-factory/the-green-factory.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
+import { Page404Component } from './page404/page404.component';
+import { DlfComponent } from './dlf/dlf.component';
 
 
 @NgModule({
@@ -90,6 +92,8 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
     AquaesaleComponent,
     TheGreenFactoryComponent,
     PaymentSuccessComponent,
+    Page404Component,
+    DlfComponent,
     
   ],
   imports: [

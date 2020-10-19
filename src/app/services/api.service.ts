@@ -331,6 +331,28 @@ deleteService(id):Observable<any>{
   return this.http.delete(BASE_URL+'services/'+id+'/',  {headers: this.newheader()})
 }
 
+stripePaymentIntet(service){
+  return this.http.post(BASE_URL+'webhooks/payment_intent', {services:service},{headers: this.newheader()})
+}
+hasStore(){
+  return this.http.get(BASE_URL+'store/owner/',  {headers: this.newheader()})
+}
+getAppointmentsByshop2(week,id):Observable<any>{
+  return this.http.get(BASE_URL+'bookings/week/'+week+'/2shop/?shop='+id, {headers: this.httpheader})
+}
+getEmploservicebyStore(id){
+  return this.http.get(BASE_URL+'employee/services/store/?store='+id,{headers: this.httpheader, params: {shop: id }})
+}
+getemployeeHoursByShop(id): Observable<any>{
+  return this.http.get(BASE_URL+'employeehours/shop/?shop='+id,{headers: this.httpheader})
+}
+getAppointmentsByshop(week,id):Observable<any>{
+  return this.http.get(BASE_URL+'bookings/week/'+week+'/shop/?shop='+id, {headers: this.httpheader})
+}
+getStoreservicebyStore(id){
+  return this.http.get(BASE_URL+'services/byshop/',{headers: this.httpheader, params: {shop: id }})
+}
+
 parseJwt = (token) => {
 try {
 return JSON.parse(atob(token.split('.')[1]));

@@ -80,6 +80,8 @@
                                       <h1 class="mb-5">Wellness Clinic</h1>
                                       <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
                                       <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                                      <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota da sito</div></div>
+                                    
                                     </div>
                                   </div>
                                 </div>
@@ -87,24 +89,24 @@
                               </div>
                               <section class="ftco-intro light-blue">
                                     <div class="container-wrap">
-                                        <div class="wrap d-md-flex align-items-end">
+                                        <div class="wrap d-lg-flex align-items-end">
                                             <div class="info">
                                                 <div class="row no-gutters">
-                                                    <div class="col-md-2 d-flex ftco-animate">
+                                                    <div class="col-lg-3 d-flex ftco-animate" style="padding: 10px ;">
                                                         <div class="icon"><span class="icon-phone"></span></div>
                                                         <div class="text">
                                                             <h3>339 1139977</h3>
                                                             <p>Telefono</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-3 d-flex ftco-animate">
+                                                    <div class="col-lg-3 d-flex ftco-animate " style="padding: 10px ;">
                                                         <div class="icon"><span class="icon-my_location"></span></div>
                                                         <div class="text">
                                                             <h3>Via Torrebianca 28/A</h3>
                                                             <p>34122 Trieste(TS) Italy</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-md-7 d-flex ftco-animate">
+                                                    <div class="col-lg-6 d-flex ftco-animate" style="padding: 10px ;">
                                                         <div class="icon"><span class="icon-clock-o"></span></div>
                                                         <div class="text">
                                                             <h3>Orario di apertura</h3>
@@ -114,13 +116,11 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="social pl-md-5 p-4">
+                                            <!-- <div class="social pl-lg-5 p-4 pl-md-12">
                                                 <ul class="social-icon">
-                                          <!-- <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                                          <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                                          <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li> -->
+                                          
                                         </ul>
-                                            </div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 </section>

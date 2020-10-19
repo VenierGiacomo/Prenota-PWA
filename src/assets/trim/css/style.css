@@ -7505,20 +7505,20 @@ h1, h2, h3, h4, h5,
 
 .ftco-intro .wrap {
   width: 100%; 
-  margin-top: -40px;}
+  margin-top: -50px;}
   .ftco-intro .wrap .info {
     background: #fff;
     padding: 30px; }
-    @media (min-width: 768px) {
+    @media (min-width: 992px) {
       .ftco-intro .wrap .info {
-        width: calc(100% - 35%);
+        width: 100%;
         padding: 2% 1% 2% 1%; } }
     .ftco-intro .wrap .info p {
       margin-bottom: 0; }
-  .ftco-intro .wrap .social {
+  /* .ftco-intro .wrap .social {
     width: 35%;
-    background: #0061d5; }
-    @media (max-width: 767.98px) {
+    background: #0061d5; } */
+    @media (max-width: 991px) {
       .ftco-intro .wrap .social {
         width: 100%; } }
     .ftco-intro .wrap .social .social-icon {

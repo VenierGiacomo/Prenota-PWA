@@ -8527,21 +8527,10 @@ h1, h2, h3, h4, h5,
         background: #17b978 !important;
         color: #fff !important; } */
   .btn.btn-secondary {
-    background: #a0f669 !important;
-    border: 1px solid #a0f669 !important;
-    color: #fff !important; }
-    .btn.btn-secondary:hover {
-      border: 1px solid #a0f669 !important;
-      background: transparent !important;
-      color: #a0f669 !important; }
-    .btn.btn-secondary.btn-outline-primary {
-      border: 1px solid #a0f669;
-      background: transparent;
-      color: #a0f669; }
-      .btn.btn-secondary.btn-outline-primary:hover {
-        border: 1px solid transparent;
-        background: #a0f669;
-        color: #fff; }
+    margin-top: 20px;
+    background: #fff !important;
+    border: 1px solid #fff !important;
+    color: #0061d5 !important; }
   .btn.btn-white {
     background: #fff !important;
     border: 1px solid #fff !important;

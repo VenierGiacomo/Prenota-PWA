@@ -1,3 +1,194 @@
+
+.appointment-modal{
+    z-index: 100;
+    position: absolute;
+    width: 240px;
+    padding: 8px 20px;
+    margin: 5px 10px;
+    font-size: 16px;
+    background: #019aff;
+    border: 0;
+    border-radius: 8px;
+    grid-column: 3 / span 3;
+    grid-row: 4;
+    align-self: end;
+    color: #fff;
+    text-align: left;
+    box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+
+     &-date  {
+        left: 20vw;
+        bottom:10vh;
+        // height: 420px !important;
+      }
+    input, textarea, p{
+        display: block;
+        border-radius: 5px;
+        border: none;
+        padding: 8px 12px ;
+        
+    }
+    input{
+        color: #00468e;
+        width:200px;
+        margin: 0px 0px  5px 0px;
+        font-size: 14px;
+
+    }
+    p{
+        display: inline-block;
+        padding: 8px 0px;
+        margin: 0px;
+        padding-bottom: 0px;;
+    }
+    textarea{
+        color: #00468e;
+        width:200px;
+        margin: 5px 0px;
+        font-size: 14px;
+        resize: none;
+    }
+    .single-button{
+        width: 100%;
+        margin: 20px 0px 10px 0px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border: none;
+        
+        background: #00468e;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        color: white;
+        transition: 600ms;
+    }
+    .single-button:hover{
+        color: #00468e;
+        background: #fff;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.3);
+        
+    }
+    .two-buttons{
+        width: 40%;
+        margin-right: 5%;
+        margin-left: 5%;
+        margin-top: 20px;
+        border-radius: 5px;
+        font-size: 14px;
+        font-weight: 500;
+        padding: 8px 12px;
+        border: none;
+        
+       
+    }
+    .modify-app{
+        background: white;
+        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
+        color: #00468e;
+        transition: 600ms;
+    }
+    .modify-app:hover{
+        background: #00468e;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        color: #fff;
+        transition: 600ms;
+    }
+    .delete-app{
+        background: #bd0026;
+        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
+        color: white;
+        transition: 600ms;
+    }
+    .delete-app:hover{
+        background: #fff;
+        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+        color: #bd0026;
+        transition: 600ms;
+    }
+    select::-ms-expand {
+        display: none;
+    }
+    select{
+        display: inline-block;
+        color: #00468e;
+        border-radius: 5px;
+        width:200px;
+        padding:  5px;
+        font-size: 14px;
+        -webkit-appearance: none;
+        -moz-appearance: none;      
+        appearance: none;
+        cursor: pointer;
+    }
+    .select_no_margin_left{
+        padding: 8px 12px !important;
+        margin:0px 0px 10px 0px !important;
+    }
+    input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+    .time{
+        width: 100%;
+        text-align: center;
+    }
+    
+    ::placeholder { 
+        color: #00468e;
+        opacity: 0.7; 
+      }
+      
+      :-ms-input-placeholder { 
+        color: #00468e;
+        opacity: 0.7;
+      }
+      
+      ::-ms-input-placeholder { 
+        color: #00468e;
+        opacity: 0.7;
+      }
+      .close-appointment-modal{
+        position: absolute;
+        display: inline-block;
+        top:5px;
+        right: 15px;
+        img{
+            height: 15px;
+           
+        }
+        
+    }
+} 
+    
+
+
+
+.modal-cont{
+    position: relative;
+    display: block;
+    background: white;
+    top: 20vh ;
+    left: 20vw;
+    width: 60vw;
+    border-radius: 30px;
+    height: 60vh;
+}
+.close-modal-cont{
+    position: absolute;
+    display: block;
+    top: 5vh;
+    left: 90vw;
+    width: 10vw;
+    img{
+
+        height: 3vw;
+    }
+}
+
+
+
 body{
     height: 100vh;
     width: 100vw;
@@ -367,195 +558,6 @@ th{
 }
 
 /////modal
-
-
-.appointment-modal{
-    z-index: 100;
-    position: absolute;
-    width: 240px;
-    padding: 8px 20px;
-    margin: 5px 10px;
-    font-size: 16px;
-    background: #019aff;
-    border: 0;
-    border-radius: 8px;
-    grid-column: 3 / span 3;
-    grid-row: 4;
-    align-self: end;
-    color: #fff;
-    text-align: left;
-    box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
-
-     &-date  {
-        left: 20vw;
-        bottom:10vh;
-        // height: 420px !important;
-      }
-    input, textarea, p{
-        display: block;
-        border-radius: 5px;
-        border: none;
-        padding: 8px 12px ;
-        
-    }
-    input{
-        color: #00468e;
-        width:200px;
-        margin: 0px 0px  5px 0px;
-        font-size: 14px;
-
-    }
-    p{
-        display: inline-block;
-        padding: 8px 0px;
-        margin: 0px;
-        padding-bottom: 0px;;
-    }
-    textarea{
-        color: #00468e;
-        width:200px;
-        margin: 5px 0px;
-        font-size: 14px;
-        resize: none;
-    }
-    .single-button{
-        width: 100%;
-        margin: 20px 0px 10px 0px;
-        border-radius: 5px;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 8px 12px;
-        border: none;
-        
-        background: #00468e;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
-        color: white;
-        transition: 600ms;
-    }
-    .single-button:hover{
-        color: #00468e;
-        background: #fff;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.3);
-        
-    }
-    .two-buttons{
-        width: 40%;
-        margin-right: 5%;
-        margin-left: 5%;
-        margin-top: 20px;
-        border-radius: 5px;
-        font-size: 14px;
-        font-weight: 500;
-        padding: 8px 12px;
-        border: none;
-        
-       
-    }
-    .modify-app{
-        background: white;
-        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
-        color: #00468e;
-        transition: 600ms;
-    }
-    .modify-app:hover{
-        background: #00468e;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
-        color: #fff;
-        transition: 600ms;
-    }
-    .delete-app{
-        background: #bd0026;
-        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
-        color: white;
-        transition: 600ms;
-    }
-    .delete-app:hover{
-        background: #fff;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
-        color: #bd0026;
-        transition: 600ms;
-    }
-    select::-ms-expand {
-        display: none;
-    }
-    select{
-        display: inline-block;
-        color: #00468e;
-        border-radius: 5px;
-        width:200px;
-        padding:  5px;
-        font-size: 14px;
-        -webkit-appearance: none;
-        -moz-appearance: none;      
-        appearance: none;
-        cursor: pointer;
-    }
-    .select_no_margin_left{
-        padding: 8px 12px !important;
-        margin:0px 0px 10px 0px !important;
-    }
-    input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
-}
-    .time{
-        width: 100%;
-        text-align: center;
-    }
-    
-    ::placeholder { 
-        color: #00468e;
-        opacity: 0.7; 
-      }
-      
-      :-ms-input-placeholder { 
-        color: #00468e;
-        opacity: 0.7;
-      }
-      
-      ::-ms-input-placeholder { 
-        color: #00468e;
-        opacity: 0.7;
-      }
-      .close-appointment-modal{
-        position: absolute;
-        display: inline-block;
-        top:5px;
-        right: 15px;
-        img{
-            height: 15px;
-           
-        }
-        
-    }
-} 
-    
-
-
-
-.modal-cont{
-    position: relative;
-    display: block;
-    background: white;
-    top: 20vh ;
-    left: 20vw;
-    width: 60vw;
-    border-radius: 30px;
-    height: 60vh;
-}
-.close-modal-cont{
-    position: absolute;
-    display: block;
-    top: 5vh;
-    left: 90vw;
-    width: 10vw;
-    img{
-
-        height: 3vw;
-    }
-}
 
 
 ///// appointment

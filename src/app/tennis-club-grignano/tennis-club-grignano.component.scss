@@ -488,7 +488,7 @@ input,
   background-color: #f3f3f9;
   border: 1px solid transparent;
   border-radius: 4px;
-
+  line-height: 24px;
   font-size: 15px;
 
   box-shadow: 0 1px 3px 0 #e6ebf1;
@@ -498,6 +498,19 @@ input,
 // #email{
 //   width: 110%;
 // }
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #aab7c4;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #aab7c4;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #aab7c4;
+  }
+
 input:focus,
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
@@ -521,19 +534,17 @@ input:focus,
     color: #02203c;
   }
   .confirm-pay{
-    width:100%;
-    text-align: center;
-    button{
       color: #fff;
       border: none;
-      background: #0061d5;
+      width: 100%;
+      text-align: center;
+      background: #00479d;
       padding: 10px 20px;
-      border-radius: 10px;
+      border-radius: 3px;
       font-size: 16px;
-      width: 16vw;
       margin: 20px auto;
       box-shadow: 0 5px 7px rgba(#ffffff, 0.2);
-    }
+
   }
   .confirm-pay1{
     width:100%;
@@ -592,9 +603,11 @@ input:focus,
   overflow: hidden;
   margin:50px 0pc;
   background: #fff;
+//   text-align: center;
   h1{
+    text-align: center;
     width: 100%;
-    font-size: 36px;
+    font-size: 24px;
     display: block;
     font-family: "Comfortaa Bold" !important;
     color: #0061d5;
@@ -602,27 +615,25 @@ input:focus,
     letter-spacing: 1px;
     padding:40px  0px 20px 0px;
   }
-  h5{
-    font-size: 21px;
-    display: inline-block;
-  }
+
   h4{
-    font-size: 18px;
+    font-size: 16px;
     display: inline-block;
+    padding:0px 
   }
 }
 
 .switch-conts{
     display: inline-block;
-    padding: 10px 20px;
+    padding: 5px 10x;
   }
   .switch {
-    top: -23px;
+    top: -15px;
     left: 10px !important;
       position: relative;
       display: inline-block;
-      width: 60px;
-      height: 34px;
+      width: 40px;
+      height: 24px;
     }
     .switch input {
       opacity: 0;
@@ -643,10 +654,10 @@ input:focus,
   .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: 20px;
+    width: 20px;
+    left: 2px;
+    bottom: 2px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -656,9 +667,9 @@ input:focus,
   }
   
   input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
   }
   .slider.round {
     border-radius: 34px;
@@ -676,4 +687,24 @@ input:focus,
     overflow: scroll;
     margin: 0;
     background: rgba($color: rgb(1, 28, 83), $alpha: 0.8);
+  }
+
+  .cont_of_pay_buttons{
+    width: 300px;
+    margin-left: calc(50% - 150px);
+    input,
+.StripeElement {
+
+  padding:0px !important;
+  color: #32325d;
+  background-color: #f3f3f9;
+  border: 1px solid transparent;
+  border-radius: 4px;
+
+  font-size: 15px;
+
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
   }
