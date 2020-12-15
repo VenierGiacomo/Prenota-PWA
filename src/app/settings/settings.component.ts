@@ -31,7 +31,7 @@ export class SettingsComponent implements OnInit {
   dom= ['','','','']
   ///catalog
 
-
+  color_top='0px'
   catalog_list=[]
   name=''
   duration=5
@@ -237,5 +237,18 @@ export class SettingsComponent implements OnInit {
   logout(){
     this.api.deleteAllData()
     this.router.navigateByUrl('login')
+  }
+  async portalStripe(){
+    this.api.stripePortalSession().subscribe(async data=>{
+      var session:any = await data
+     window.location.href = session.url
+  })
+  }
+  displayColorPicker(){
+    var col = document.getElementById('color')
+   
+    this.color_top= (col.offsetHeight+ col.offsetTop+  window.innerHeight/5+10)+'px'
+    this.color_show='block'
+    console.log(col.scrollTop, col.offsetHeight, col.offsetTop,)
   }
 }

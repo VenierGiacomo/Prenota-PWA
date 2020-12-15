@@ -31,7 +31,7 @@ export class HomelistingComponent implements OnInit {
     this.router.navigateByUrl('/business')
   }
   goParrucchieri(){
-    this.router.navigateByUrl('/aparrucchieri')
+    this.router.navigateByUrl('/home/ricerca/parrucchieri')
   }
   goDottori(){
     this.router.navigateByUrl('/booking')

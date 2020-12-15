@@ -73,7 +73,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   font-weight: 700;
   letter-spacing: 1px;
-  font-family: "Comfortaa Bold";
+  font-family: "Comfortaa" , sans-serif;
   color: #0061d5;
 }
 #header .logo .dark{
@@ -354,14 +354,14 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 20px;
 }
 
-#hero .btn-get-started {
+.btn-get-started {
   letter-spacing: 1px;
   display: inline-block;
   padding: 15px 20px;
   border-radius: 3px;
   transition: 0.5s;
   margin-top: 25px;
-  color: #fff;
+  color: #fff !important;
   cursor: pointer;
   transition: 0.3s;
   font-size: 15px;
@@ -373,7 +373,7 @@ h1, h2, h3, h4, h5, h6 {
   border: none;
 }
 
-#hero .btn-get-started:hover {
+.btn-get-started:hover {
   background: #0084ff;
 }
 .more-info{

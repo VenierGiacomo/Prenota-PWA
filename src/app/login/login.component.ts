@@ -38,6 +38,9 @@ export class LoginComponent implements OnInit {
   goRegister(){
     this.router.navigateByUrl('/home/ricerca')
   }
+  goResetPassword(){
+    window.open('https://giacomovenier.pythonanywhere.com/api/auth/reset_password','_blank')
+  }
 
   async login(){
   this.error=''

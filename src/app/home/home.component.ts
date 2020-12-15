@@ -409,7 +409,7 @@ async getAppoitments(){
             }
           }else{
             for (let appo of this.appointmentlist){
-              this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+              this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note )
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
@@ -422,7 +422,7 @@ async getAppoitments(){
         this.appointmentlist=[]
         this.appointmentlist = this.storage.getAllAppointmets()
         for (let appo of this.appointmentlist){
-          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note )
           // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
         }
        
@@ -443,7 +443,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
         this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, ''))
         }
         else{
-          this.drawAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month-1, year)
+          this.drawAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month-1, year,'')
           this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
           this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, ''))
         }
@@ -455,7 +455,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
           this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,client_name, phone, details, employee, service, false, '')
         }
         else{
-            this.drawAppointment(new Date(), start, end, details, client_name, employee, service, day ,week, month-1, year)
+            this.drawAppointment(new Date(), start, end, details, client_name, employee, service, day ,week, month-1, year,'')
             this.storage.addAppointmet(new Date().getTime(),start, end, day, month, year,client_name, phone, details, employee, service, false, '')}
       }
     )
@@ -673,7 +673,7 @@ pastWeek(){
       this.week[day] -=7
     }
     else{
-      if (this.week[day] < 7  && this.week[6] > 7){
+      if (this.week[6] > 7){
       if (this.month == 0){
         this.week[day] = this.week[day] -7 +this.months_days[11]
       }
@@ -682,7 +682,7 @@ pastWeek(){
       }
       }
       else{
-        if (this.week[day] < 7  && this.week[0] > 7){
+        if (this.week[0] > 7){
 
           if (this.month == 0){
             this.week[day] = this.week[day] -7 +this.months_days[11]
@@ -738,7 +738,7 @@ showOthers(){
       if(!this.OneView){
         for (let appo of this.appointmentlist){
           // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
-          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note )
         }
       }
     }
@@ -786,7 +786,7 @@ async activetab(employee){
       }
     }else{
       for (let appo of this.appointmentlist){
-        this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
+        this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note )
       }
     }
   }
@@ -807,11 +807,10 @@ goToday(new_week){
   if(new_week){
     setTimeout(() => {
       this.getAppoitments()
-      console.log('new')
     }, 50);
   }else{
-    console.log('not_refesh')
-    setTimeout(() => {
+    setTimeout(async () => {
+      this.appointmentlist = await this.storage.getAppointmets(true)
     for (let appo of this.appointmentlist){
       this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
     }
@@ -837,11 +836,15 @@ saveNotStored(){
         }
       }
 }
-drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
+drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,note ){
   var height = end - start
   var div_height = (height*20)+'px'
   var div = document.createElement('div');
   div.ondragstart = this.drag
+  var has_note = false
+  if(note!='' && note!=null){
+    has_note = true
+  }
   var self = this
   // console.log(client_name, day ,week, month, year )
   div.onclick = function() {
@@ -855,7 +858,7 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     self.edit = true
     self.phone=appo.phone
     self.updateAppointmentId = id
-    self.appointment_notes = appo.note
+    self.appointment_notes = note
     }, 1);
 };
 var services = this.storage.getCatalog()
@@ -910,9 +913,15 @@ for (let service_el of services){
     if(hei%20>10){
       mod_div.style.height  = Math.ceil(hei/20)*20 +'px'
       hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/20)]
-      mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+      if(has_note){
+      mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
       <div class="task-name" id=${id} >${client_name}</div>`
+      }else{
+        mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+        <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+        <div class="task-name" id=${id} >${client_name}</div>`
+      }
       div.appendChild(div_resize)
       start = self.rows.indexOf(hour1)
       end = self.rows.indexOf(hour1) + self.times.indexOf(hour2)- self.times.indexOf(hour1)
@@ -925,9 +934,15 @@ for (let service_el of services){
     }else{
       mod_div.style.height  = Math.floor(hei/20)*20+'px'
       hour2 = self.times[self.times.indexOf(hour1)+Math.floor(hei/20)]
-      mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+      if(has_note){
+      mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
       <div class="task-name" id=${id} >${client_name}</div>`
+      }else{
+        mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+        <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+        <div class="task-name" id=${id} >${client_name}</div>`
+      }
       div.appendChild(div_resize)
       start = self.rows.indexOf(hour1)
       end = self.rows.indexOf(hour1) + self.times.indexOf(hour2) - self.times.indexOf(hour1)
@@ -946,9 +961,15 @@ for (let service_el of services){
     }
   }, false);
   // <div><img src='../assets/icons/info.svg'></div>
-  div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+  if(has_note){
+    div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
+    <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+    <div class="task-name" id=${id} >${client_name}</div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
+  }else{
+    div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
                   <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
                   <div class="task-name" id=${id} >${client_name}</div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
+  }
   div.appendChild(div_resize)
   if(this.week[6]<this.week[0]){1
     if(day<7){
@@ -1083,6 +1104,7 @@ for (let service_el of services){
   }, false);
   document.addEventListener("mouseup", async function(){
     if(res){
+    mod_div.draggable =true
     var hei = parseInt(mod_div.style.height.slice(0, -2))
     var appo: any = await self.storage.getAppointmet(id)
     if(hei%20>10){

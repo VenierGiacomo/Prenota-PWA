@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import {loadStripe} from '@stripe/stripe-js';
+import { ApiService } from '../services/api.service';
 declare var Stripe;
 // stripe.StripeStatic;
 @Component({
@@ -33,7 +34,7 @@ export class SepaPaymentComponent implements OnInit {
   displ_ammount:string
   loading = false;
   confirmation;
-  constructor() { }
+  constructor(private api:ApiService) { }
 
   async ngOnInit() {
     this.displ_ammount= this.amount/100 +'0'
@@ -273,14 +274,10 @@ async scroll(){
 
 }
 async stripeOutbound(){
-  const {error} = await this.striperedirect.redirectToCheckout({
-    lineItems: [{
-      price: 'price_HJ483KkKFlocQk', // Replace with the ID of your price
-      quantity: 1,
-    }],
-    mode: 'subscription',
-    successUrl: 'https://prenota.cc/payment_success',
-    cancelUrl: 'https://prenota.cc/business',
-  })
+  this.api.stripeSubscriptionSession().subscribe(async data=>{
+    var session:any = await data
+    await this.striperedirect.redirectToCheckout({ sessionId: session.session_id })
+})
 }
+
 }

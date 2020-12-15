@@ -22,7 +22,7 @@ export class EmployeesComponent implements OnInit {
   emplo_name=''
   ////
   first_name = ''
-  last_name = ''
+  last_name = '.'
   username = ''
   email = ''
   sex_emp = 'm'
@@ -87,8 +87,7 @@ export class EmployeesComponent implements OnInit {
         data=>{
           this.employees = data
           for(let empl of this.employees){
-            empl.first_name = empl.name.split(" ")[0]
-            empl.last_name = empl.name.split(" ")[1]
+            empl.first_name = empl.name
           }
         },
         err=>{
@@ -103,7 +102,6 @@ export class EmployeesComponent implements OnInit {
           for(let service of services){
             this.storage.setemployCatalog(service.employee, service.service_id)
           }
-          console.log(data)  
         },
         err=>{
           console.log(err)
@@ -140,7 +138,6 @@ export class EmployeesComponent implements OnInit {
       this.api.registeremployee(str, str1, new Date().getTime()+"@libero.it", 'm', 3312233645, "Omocaig"+ new Date().getTime()).subscribe(
             data=>{
               this.first_name=''
-              this.last_name=''
               this.createEmployee="none"
               Notiflix.Notify.Success('Collaboratore aggiunto con successo');
               this.getEmployees()
@@ -153,6 +150,7 @@ export class EmployeesComponent implements OnInit {
     }
 
     storeEverything(){
+      this.catalog="none"
       var opentimes=[]
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
       for (let i in times){
@@ -250,7 +248,9 @@ export class EmployeesComponent implements OnInit {
     service.active = !service.active
     
     }
-    changeTimetable(){
+    changeTimetable(emplo){
+      console.log(emplo)
+      this.employee = emplo.employee
       this.bk_empl="none"
       this.lun= ['','','','']
       this.mar= ['','','','']

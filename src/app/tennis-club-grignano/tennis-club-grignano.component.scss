@@ -298,14 +298,14 @@ margin:0
     color: #ffffff !important;
     background: #0061d5 !important;
     font-size: 24px !important;
-    font-family: "Comfortaa Bold";
+    font-family: "Comfortaa" , sans-serif;
     cursor: pointer;
 }
 .prenota-blue{
     color: #0061d5 !important;
     background: #fff !important;
     font-size: 24px !important;
-    font-family: "Comfortaa Bold";
+    font-family: "Comfortaa" , sans-serif;
 }
 .ccbox{
     top:10px;
@@ -329,7 +329,7 @@ margin:0
         width: 100%;
         display: block;
         text-align: center;
-        font-family: "Comfortaa Bold" !important;
+        font-family: "Comfortaa" , sans-serif !important;
         color: #0061d5;
         padding:0px 0px 20px 0px;
     }
@@ -354,7 +354,7 @@ margin:0
     background: white;
     z-index: 3;
     h1{
-        font-family: "Comfortaa Bold"!important;
+        font-family: "Comfortaa" , sans-serif!important;
     }
     label{
         color: #00479D;
@@ -425,7 +425,7 @@ margin:0
         margin-top: 10px;
     }
     h1{
-        font-family: "Comfortaa Bold" !important;
+        font-family: "Comfortaa" , sans-serif !important;
     }
     .header{
         height: 60px;
@@ -609,7 +609,7 @@ input:focus,
     width: 100%;
     font-size: 24px;
     display: block;
-    font-family: "Comfortaa Bold" !important;
+    font-family: "Comfortaa" , sans-serif !important;
     color: #0061d5;
     font-weight: 700;
     letter-spacing: 1px;
@@ -628,7 +628,7 @@ input:focus,
     padding: 5px 10x;
   }
   .switch {
-    top: -15px;
+    top: 2px;
     left: 10px !important;
       position: relative;
       display: inline-block;

@@ -1,6 +1,6 @@
 
 <div class="top-bar">
-        <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
+        <!-- <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div> -->
         <app-header></app-header>
         <div class="service" >
             <!-- <h2>Prenota ora</h2> -->
@@ -11,7 +11,7 @@
                             <!-- (mouseover)="ser='block'" -->
                             <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona uno o più servizi</h2>
                             <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                            <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span>
+                            <!-- <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span> -->
                             <span  *ngIf='service.length>0' (click)='showSpots()' class="time-available" style="color: #fff; background: #00479d;">Prosegui</span>
                     </span>
                     <div class="close" (click)='closeBooking()'>Annulla</div>
@@ -34,25 +34,30 @@
                     <span class="services-cont services-cont3"[style.display]='spots'>
                           
                     <span class="bookings-time" >
-                            <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2>
-                        <span *ngFor="let employee of employees_list, let ind =index ">
+                            <span class="time-available" *ngFor='let serv of service, let i = index '  >{{serv.name}} 
+                                <select class='select_no_margin_left' [(ngModel)]="filtr[i]"  (change)='filter_serv()'   >
+                                    <option *ngFor='let empl of empl_for_service[i]'  value={{empl.id}} >{{empl.name}}</option>
+                            </select></span>
+                            <!-- <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2> -->
+                        <!-- <span *ngFor="let employee of employees_list, let ind =index "> -->
                             <span class="employee-spot"  >
                                 <!-- *ngIf='employee.employee==2' -->
-                            <h3>{{employee.name}}</h3>
+                            <!-- <h3>{{employee.name}}</h3> -->
                             <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
                             <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
                             <span class="cont-timeslots">
+
                                     <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
-                                <span *ngFor='let spot of final_spots'>
-                                    <span class="time-available"  *ngIf="spot[0].employee == employee.employee" (click)="selectTime(spot)">{{times[spot[0].start]}}</span>
+                                <span *ngFor='let spot of final_spots_displ'>
+                                    <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 12px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
                                 </span>
                             </span>
                             <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
-                            <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
+                            <p class='nada' *ngIf='final_spots_displ.length==0'>Siamo spiacenti, nessuna disponibilità in questa data<br>Prova a cambiare data o selezionare un altro collaboratore </p>
                             <!-- <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span> -->
                         <!-- -->
                             </span>
-                        </span>
+                        <!-- </span> -->
                        
                     </span>
                     <div class="close" (click)='closeBooking()'>Annulla</div>
@@ -65,21 +70,24 @@
     </div>
 
 <div class="cont-template">
-                <div class="hero-wrap " style="background-image: url('../assets/trim/images/bg_2.jpg');" data-stellar-background-ratio="0.5">
-                    
+                <div class="hero-wrap " style="background-image: url('../assets/ezgif.com-gif-maker.jpg');" data-stellar-background-ratio="0.5">
+                    <!-- <div style="width: 100vw; height: 100%;background: rgba(#000000,0.8);"> -->
+
+            
                     <div class="container">
                       <div class="row no-gutters slider-text align-items-center justify-content-start" data-scrollax-parent="true">
                           <!-- <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
                               <span class="icon-play"></a>
                           </a> -->
                         <div class="col-md-6 ftco-animate" data-scrollax=" properties: { translateY: '70%' }">
-                          <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }">Test Giacomo</h1>
+                          <h1 class="mb-5" data-scrollax="properties: { translateY: '30%', opacity: 1.6 }" style="color: #00479d !important;">Dottor Antonello Bartoli</h1>
                           <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
                           <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  <!-- </div> -->
+                </div>
                   <section class="ftco-intro light-blue">
                         <div class="container-wrap">
                             <div class="wrap d-md-flex align-items-end">
@@ -123,7 +131,7 @@
                             <div class="container">
                                 <div class="row justify-content-center mb-4">
                               <div class="col-md-7 heading-section ftco-animate text-center">
-                                <h2 class="mb-4">Benvenuto da <span>Giacomo</span></h2>
+                                <h2 class="mb-4">Benvenuto nello studio <span>Bartoli</span></h2>
                                 <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
                               </div>
                             </div>

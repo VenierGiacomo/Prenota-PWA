@@ -15,7 +15,8 @@
                     <div class="appo_date">
                         <h4>{{appointment.day}} {{months_names[appointment.month]}} {{appointment.year}} ore {{rows[appointment.start]}} </h4>
                     </div>
-                  <img src='../../assets/icons/delete.svg' (click)='deletestorage(appointment)' >
+                    <div class="note_btn" (click)='AddNote(appointment)'>Aggiungi nota<img src='../../assets/icons/notes.svg'   alt="Aggiungi una nota" title="Aggiungi una nota"></div>
+                  <img  class='del_img' src='../../assets/icons/delete.svg' (click)='deletestorage(appointment)' alt="Elimina apputnamento" title="Elimina apputnamento">
                 </div>
             <div class="log_out" (click)='logout()'><img src="../assets/icons/logout_blue.svg"/> Esci</div>
             </div>
@@ -54,4 +55,17 @@
         <!-- </div> -->
     </div>
 </body>
+
+<div class="cont-reg" [style.display]="register_form">
+        <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+    <div class="login-form" > 
+            <h1>prenota</h1>
+            <div class='inputs'>
+            <p *ngIf='error!=""'></p>
+            <label class="label">Nota</label>
+            <input class="input--style-4"  type="text"  name="note" placeholder="La prenotazione è a nome di mio figlio Luca" [(ngModel)]='note'>
+                    <div class="button-reg">  <button (click)='updateAppo()'>Aggiungi nota</button></div>
+            </div> 
+        </div>
+</div>
 <app-footer></app-footer>

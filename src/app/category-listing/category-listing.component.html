@@ -1,0 +1,25 @@
+<body>
+
+    <app-header></app-header>
+    <section class="main-block categories">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                    <div class="styled-heading">
+                        <h3 class="cat-heading"> Seleziona un' attività</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="cards-list">
+
+                <div class="card 1" *ngFor="let shop of shops" (click)='navigate(shop.website)'>
+                  <div class="card_image"> <img src="{{shop.img_url}}" /> </div>
+                  <div class="card_title">
+                    <p>{{shop.store_name}}</p>
+                  </div>
+                </div>
+                </div>
+        </div>
+    </section>
+    <app-footer></app-footer>
+</body>

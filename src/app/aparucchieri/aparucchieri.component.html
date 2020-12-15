@@ -1,73 +1,78 @@
 
-<!-- <body> -->
-<div class="top-bar">
-    <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div>
-    <app-header></app-header>
-    <div class="service" >
-        <!-- <h2>Prenota ora</h2> -->
-        <!--   (mouseout)="ser='none'" -->
-        <div (click)="showServices()">
-            <span class="services-cont"[style.display]='serv_displ'>
-                <span class="services"  >
-                        <!-- (mouseover)="ser='block'" -->
-                        <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                        <span  (click)='closeBooking()' class="time-available" style="color: #263b56"s>Chiudi</span>
-                </span>
-                <div class="close" (click)='closeBooking()'>Annulla</div>
-            </span>
-            <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
-        </div>
-        <div  (click)="showCalendar()">
-                <span class="services-cont services-cont2"[style.display]='cal'>
-                <span class="time">
-                        <span class="month"><img class='img-start' (click)="pastMonth()" src="../assets/icons/last.svg"/>{{month_displayed}} {{year}}<img class='img-end' (click)="nextMonth()" src="../assets/icons/next.svg"/></span>
-                        <span class="day">Lun</span>
-                        <span class="day">Mar</span>
-                        <span class="day">Mer</span>
-                        <span class="day">Gio</span>
-                        <span class="day">Ven</span>
-                        <span class="day">Sab</span>
-                        <span class="day">Dom</span>
-                        <span *ngFor='let day of last_month_days' class="m-day m-day--disabled"></span>
-                        <span *ngFor='let day of current_month_days' class="m-day" (click)='selectDate(day)'> <p [class.highlight]="day>actual_day || month>actual_month">{{day}}</p> </span>
-                        <span *ngFor='let day of next_month_days' class="m-day m-day--disabled"></span>
-                     </span>
-                     <div class="close" (click)='closeBooking()'>Annulla</div>
-                </span>
-                <p style="font-size: 18px;">{{selected_date}}</p>
-        </div>
-        <div  (click)="showSpots()">
-                <p style="font-size: 18px;"> {{displ_hour}}</p>
-                <!--  -->
-                <span class="services-cont services-cont3"[style.display]='spots'>
-                <span class="bookings-time" >
-                    <span class="employee-spot" *ngFor="let employee of employees_list, let ind =index ">
-                        <h3>{{employee.name}}</h3>
-                        <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
-                        <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p>
-                        <span class="cont-timeslots"  >
-                                <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p>
-                            <span *ngFor='let spot of availableSpots'>
-                                <span class="time-available"  *ngIf="spot.employee == employee.employee" (click)="selectHour(spot)">{{times[spot.start]}}</span>
+
+    <div class="top-bar">
+            <!-- <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div> -->
+            <app-header></app-header>
+            <div class="service" >
+                <!-- <h2>Prenota ora</h2> -->
+                <!--   (mouseout)="ser='none'" -->
+                <div (click)="showServices()">
+                    <span class="services-cont"[style.display]='serv_displ'>
+                        <span class="services"  >
+                                <!-- (mouseover)="ser='block'" -->
+                                <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona uno o più servizi</h2>
+                                <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
+                                <!-- <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span> -->
+                                <span  *ngIf='service.length>0' (click)='showSpots()' class="time-available" style="color: #fff; background: #00479d;">Prosegui</span>
+                        </span>
+                        <div class="close" (click)='closeBooking()'>Annulla</div>
+                    </span>
+                    <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
+                </div>
+                <div  (click)="showCalendar()">
+                        <span class="services-cont services-cont2 "[style.display]='cal'>
+                              
+                            <span class="white_ss">
+                                    <h2 style="text-align: center; padding: 30px; font-size: 24px;"><span *ngIf='service.length>0'>Clicca su una data</span><span *ngIf='service.length==0'>Devi prima selezionare un servizio<br><br> <span (click)="showServices()"><span  class="btn btn-primary px-4 py-3">Seleziona un servizio</span></span></span> </h2>
+                                <span class="time-available1" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='active_date[ind]'>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</span>
+                                <div class="close" (click)='closeBooking()'>Annulla</div>
                             </span>
                         </span>
-                        <span class='nada' *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span>
-                        <!-- <p class='nada' *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona una data e un servizio</p> -->
-                        <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span>
-                    <!-- -->
-                       
+                        <p style="font-size: 18px;">{{selected_date}}</p>
+                </div>
+                <div  (click)="showSpots()">
+                        
+                        <p style="font-size: 18px;"> {{displ_hour}}</p>
+                        <!--  -->
+                        <span class="services-cont services-cont3"[style.display]='spots'>
+                               
+                        <span class="bookings-time" >
+                                <span class="time-available" *ngFor='let serv of service, let i = index '  ><p style="display: inline-block;">{{serv.name}}</p> 
+                                    <select class='select_no_margin_left' [(ngModel)]="filtr[i]"  (change)='filter_serv()'   >
+                                        <option *ngFor='let empl of empl_for_service[i]'  value={{empl.id}} >{{empl.name}}</option>
+                                </select></span>
+                                <!-- <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2> -->
+                            <!-- <span *ngFor="let employee of employees_list, let ind =index "> -->
+                                <span class="employee-spot"  >
+                                        <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona un orario</h2>
+                                    <!-- *ngIf='employee.employee==2' -->
+                                <!-- <h3>{{employee.name}}</h3> -->
+                                <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
+                                <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
+                                <span class="cont-timeslots">
+        
+                                        <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
+                                    <span *ngFor='let spot of final_spots_displ'>
+                                        <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 12px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
+                                    </span>
+                                </span>
+                                <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
+                                <p class='nada' *ngIf='final_spots_displ.length==0'>Siamo spiacenti, nessuna disponibilità in questa data<br>Prova a cambiare data o selezionare un altro collaboratore </p>
+                                <!-- <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span> -->
+                            <!-- -->
+                                </span>
+                            <!-- </span> -->
+                           
+                        </span>
+                        <div class="close" (click)='closeBooking()'>Annulla</div>
                     </span>
-                   
-                </span>
-                <div class="close" (click)='closeBooking()'>Annulla</div>
-            </span>
+                </div>
+                <div class="prenota-blue" (click)='book()'>
+                        <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
+                 </div>
+            </div>
         </div>
-        <div class="prenota-blue" (click)='book()'>
-                <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
-         </div>
-    </div>
-</div>
-
+                
 <div class="cont-template">
                 <div class="hero-wrap js-fullheight" style="background-image: url('../assets/aparucchieri_backgroud.jpg');" >
                 <div class="bg-black">
@@ -80,6 +85,7 @@
                           <h1 class="mb-5">APARRUCCHIERI</h1>
                           <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
                           <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                          <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota da sito</div></div>
                         </div>
                       </div>
                     </div>
@@ -87,25 +93,24 @@
                   </div>
                   <section class="ftco-intro light-blue">
                         <div class="container-wrap">
-                            <div class="wrap d-md-flex align-items-end">
+                            <div class="wrap col-md-12 align-items-end">
                                 <div class="info">
                                     <div class="row no-gutters">
-                                        <div class="col-md-3 d-flex ftco-animate">
-                                            <div class="icon"><span class="icon-phone"></span></div>
+                                        <div class="col-md-4 d-flex ftco-animate" style="text-align: center;">
+                                           
                                             <div class="text">
-                                                <h3>040 2652079</h3>
-                                                <p>Telefono</p>
+                                                <h3>Telefono</h3>
+                                                <p>040 2652079</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-3 d-flex ftco-animate">
-                                            <div class="icon"><span class="icon-my_location"></span></div>
+                                        <div class="col-md-4 d-flex ftco-animate" style="text-align: center;">
+                                           
                                             <div class="text">
                                                 <h3>Via Pirano 12</h3>
-                                                <p>34145 Trieste(TS) Italy</p>
+                                                <p>Via Pirano 12<br>34145 Trieste(TS) Italy</p>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 d-flex ftco-animate">
-                                            <div class="icon"><span class="icon-clock-o"></span></div>
+                                        <div class="col-md-4 d-flex ftco-animate" style="text-align: center;">
                                             <div class="text">
                                                 <h3>Orario di apertura</h3>
                                                 <p>Mar, Mer, Gio, Ven, Sab 
@@ -114,13 +119,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="social pl-md-5 p-4">
-                                    <ul class="social-icon">
-                              <li class="ftco-animate"><a href="#"><span class="icon-twitter"></span></a></li>
-                              <li class="ftco-animate"><a href="#"><span class="icon-facebook"></span></a></li>
-                              <li class="ftco-animate"><a href="#"><span class="icon-instagram"></span></a></li>
-                            </ul>
-                                </div>
+                                
                             </div>
                         </div>
                     </section>
@@ -153,7 +152,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Taglio & Shampoo uomo</span></h3>
-                                                <span class="price">€25.00</span>
+                                                <span class="price">da €25.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Taglio tradizionale fatto a forbice con tecnica a prisma</p>
@@ -162,7 +161,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Barba accorciata e rifilata</span></h3>
-                                                <span class="price">€15.00</span>
+                                                <span class="price">da €15.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Accorciatura e rifinitura barba a forbice e rasoio elettrico</p>
@@ -171,7 +170,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Colore</span></h3>
-                                                <span class="price">€40.00</span>
+                                                <span class="price">da €40.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Servizio di colorazione capelli</p>
@@ -179,8 +178,8 @@
                                         </div>
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
-                                                    <h3><span>Colore sensa Ammoniaca</span></h3>
-                                                    <span class="price">€42.00</span>
+                                                    <h3><span>Colore senza Ammoniaca</span></h3>
+                                                    <span class="price">€da 45.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                     <p>Servizio di colorazione capelli senza ammoniaca</p>
@@ -189,7 +188,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Piega</span></h3>
-                                                <span class="price">€18.00</span>
+                                                <span class="price">da €15.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Servizio di piega e styling finale</p>
@@ -198,7 +197,7 @@
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
                                                     <h3><span>Piega con piastra</span></h3>
-                                                    <span class="price"> €20.00</span>
+                                                    <span class="price">da €22.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                     <p>Servizio di piega e styling finale con l'utilizzo di piastra</p>
@@ -207,7 +206,7 @@
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
                                                     <h3><span>Stiraggio Naturale</span></h3>
-                                                    <span class="price">€40.00</span>
+                                                    <span class="price">da €40.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                     <p>Trattamento con piastra ed prodotti liscianti</p>
@@ -216,7 +215,7 @@
                                             <div class="pricing-entry ftco-animate">
                                                     <div class="d-flex text align-items-center">
                                                         <h3><span>Flamboyage</span></h3>
-                                                        <span class="price">€50.00</span>
+                                                        <span class="price">da €50.00</span>
                                                     </div>
                                                     <div class="d-block">
                                                         <p>Contrasti eseguiti usando delle pellicole adesive, per un risultato naturale</p>
@@ -228,7 +227,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Colpi di sole</span></h3>
-                                                <span class="price">€55.00</span>
+                                                <span class="price">da €60.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Decolorazione per capelli con tecnica di colpi di sole</p>
@@ -237,7 +236,7 @@
                                         <div class="pricing-entry ftco-animate">
                                             <div class="d-flex text align-items-center">
                                                 <h3><span>Ondulazione</span></h3>
-                                                <span class="price">€40.00</span>
+                                                <span class="price">da €40.00</span>
                                             </div>
                                             <div class="d-block">
                                                 <p>Trattamento di ondulazione permanente</p>
@@ -246,7 +245,7 @@
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
                                                     <h3><span>Colpi di Luce</span></h3>
-                                                    <span class="price">€40.00</span>
+                                                    <span class="price">da €35.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                     <p>Contrasti effetuati a mano libera per dare il vero effetto luce</p>
@@ -254,8 +253,8 @@
                                             </div>
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
-                                                    <h3><span>Colore + contrasti</span></h3>
-                                                    <span class="price">€80.00</span>
+                                                    <h3><span>Colore + Contrasti</span></h3>
+                                                    <span class="price">da €80.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                     <p>Color emotion + contrasti dai riflessi naturalu</p>
@@ -264,7 +263,7 @@
                                         <div class="pricing-entry ftco-animate">
                                                 <div class="d-flex text align-items-center">
                                                     <h3><span>Taglio donna</span></h3>
-                                                    <span class="price">€25.00</span>
+                                                    <span class="price">da €20.00</span>
                                                 </div>
                                                 <div class="d-block">
                                                         <p>Taglio tradizionale fatto a forbice</p>
@@ -273,7 +272,7 @@
                                             <div class="pricing-entry ftco-animate">
                                                     <div class="d-flex text align-items-center">
                                                         <h3><span>Shatush</span></h3>
-                                                        <span class="price">€40.00</span>
+                                                        <span class="price">da €40.00</span>
                                                     </div>
                                                     <div class="d-block">
                                                         <p>Cotonamento capelli ed effetto luce sulle punte.</p>
@@ -318,6 +317,8 @@
 </div>
 
 
+            
+            
 <div class="cont-reg" [style.display]="register_form">
         <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
     <div class="register-form" *ngIf="formType=='Register'">
@@ -403,11 +404,11 @@
             <div class='inputs'>
             <p *ngIf='error!=""'>{{error}}</p>
             <label class="label">Email</label>
-            <input class="input--style-4"  type="email" [(ngModel)]="email" name="email" placeholder="mario.rossi@email.com">
+            <input class="input--style-4"  type="email" [(ngModel)]="email1" name="email" placeholder="mario.rossi@email.com">
             <label class="label">Password</label>
-            <input class="input--style-4"  type="password" name="password" [(ngModel)]="password"  placeholder="********">
+            <input class="input--style-4"  type="password" name="password" [(ngModel)]="password1"  placeholder="********">
                     <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
             </div> 
         </div>
-</div>
+    </div>
 <!-- </body> -->

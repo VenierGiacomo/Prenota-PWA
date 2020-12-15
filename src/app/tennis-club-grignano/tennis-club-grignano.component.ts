@@ -559,11 +559,12 @@ items.forEach(function (a) {
           this.api.bookAppointmentNoOwner(start, end, this.today, this.month, this.year, client_name, this.user.phone,  this.total_service.name, this.selected_hour.employee, this.total_service.id,30).subscribe(data=>{
           this.register_form='none'
           this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.today,this.months_names[this.month],this.year,this.times[this.selected_hour.start],this.total_service.name,"Tennis Club Grignano")
-          this.toast_text= "Prenotazione andata a buon fine"
+          // this.toast_text= "Prenotazione andata a buon fine"
           this.user.first_name=this.first_name
           this.user.last_name=this.last_name
-          this.toastx="block"
-          Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
+          // this.toastx="block"
+          this.pay()
+          // Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
           this.selected_date='Seleziona data'
           this.displ_hour='Seleziona ora'
           this.selected_service='Seleziona servizio'
@@ -684,6 +685,46 @@ async pay(){
         document.getElementById('payment-request-button').style.display = 'none';
       }
     });
+    paymentRequest.on('paymentmethod', async (ev) => {
+      console.log('google applle',ev, ev.paymentMethod.id, ev.paymentMethod )
+
+      // Confirm the PaymentIntent without handling potential next actions (yet).
+      this.api.stripePaymentIntet(this.total_service.id).subscribe(async data=>{
+console.log('google applle',ev )
+
+        var res:any = await data
+      const {paymentIntent, error: confirmError} = await stripe.confirmCardPayment(
+        res.clientSecret,
+        {payment_method: ev.paymentMethod.id},
+        {handleActions: false}
+      );
+    
+      if (confirmError) {
+        // Report to the browser that the payment failed, prompting it to
+        // re-show the payment interface, or show an error message and close
+        // the payment interface.
+        ev.complete('fail');
+      } else {
+        // Report to the browser that the confirmation was successful, prompting
+        // it to close the browser payment method collection interface.
+        ev.complete('success');
+        // Check if the PaymentIntent requires any actions and if so let Stripe.js
+        // handle the flow. If using an API version older than "2019-02-11" instead
+        // instead check for: `paymentIntent.status === "requires_source_action"`.
+        if (paymentIntent.status === "requires_action") {
+          // Let Stripe.js handle the rest of the payment flow.
+          const {error} = await stripe.confirmCardPayment(res.clientSecret);
+          if (error) {
+            // The payment failed -- ask your customer for a new payment method.
+          } else {
+            // The payment has succeeded.
+          }
+        } else {
+          // The payment has succeeded.
+        }
+      }
+    });
+  })
     const style = {
       base: {
         color: '#32325d',
@@ -728,6 +769,7 @@ async pay(){
       event.preventDefault();
       this.api.stripePaymentIntet(this.total_service.id).subscribe(async data=>{
         var res:any = await data
+        console.log(res)
         stripe.confirmCardPayment(res.client_secret, {
           payment_method: {
             card: card,

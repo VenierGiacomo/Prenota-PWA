@@ -4,16 +4,15 @@
             <div class="menu-home" >Calendario</div>
             <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
             <div class="menu-settings" (click)='goNotifications()'>Area clienti</div>
-            <button (click)="freeSpots()">Posti liberi</button>
+            <!-- <button (click)="freeSpots()">Posti liberi</button> -->
             <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
-            <div class="menu-toggle">
+            <!-- <div class="menu-toggle">
                 Mostra appuntamenti dei colleghi
                     <label class="switch" >
                         <input type="checkbox" [(ngModel)]='show_others' (click)="showOthers()">
-                        <!-- <input type="checkbox" [(ngModel)]='show_others' (click)="setStoreserviceDefault()"> -->
                         <span class="slider round"></span>
                     </label>
-                </div>
+                </div> -->
         </div>
         <div class="calendar" *ngIf='!OneView'>
             <div class="date"> 
@@ -114,13 +113,35 @@
         </div>
             <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
         <p>Cellulare:</p>
+        <!-- <div class="dropdown">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
+            <span class="caret"></span></button>
+            <ul class="dropdown-menu">
+              <li><a tabindex="-1" href="#">HTML</a></li>
+              <li><a tabindex="-1" href="#">CSS</a></li>
+              <li class="dropdown-submenu ">
+                <a class="test dropdown-toggle" tabindex="-1" >New dropdown <span class="caret"></span></a>
+                <ul class="dropdown-menu ">
+                  <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                  <li><a tabindex="-1" href="#">2nd level dropdown</a></li>
+                  <li class="dropdown-submenu">
+                    <a class="test dropdown-toggle" >Another dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">3rd level dropdown</a></li>
+                      <li><a href="#">3rd level dropdown</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div> -->
         <input type="text" placeholder="3312233645" [(ngModel)]="phone">
         <p>Servizio:</p>
         <select class='select_no_margin_left' [(ngModel)]="info" >
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
+                <option value=-2 >chiudi tutto il giorno</option>
                 <option value=-1 >altro</option>
-                <option value=-2 >chiudi</option>
         </select>
         <p *ngIf='edit'>Aggiungi note:</p>
         <textarea class="lable-appointment-modal" *ngIf='edit' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>

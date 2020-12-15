@@ -6,6 +6,35 @@ width: 100%;
 height: 100%;
 margin:0
 }
+body{
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+     -khtml-user-select: none; 
+       -moz-user-select: none; 
+        -ms-user-select: none; 
+            user-select: none; 
+}
+select::-ms-expand {
+    display: none;
+}
+select{
+    display: inline-block;
+    color: #00468e;
+    border-radius: 5px;
+    text-align: center;
+    width:auto;
+    padding:  5px;
+    font-size: 14px;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;      
+    // appearance: none;
+    cursor: pointer;
+}
+.select_no_margin_left{
+    border: none;
+    padding: 4px !important;
+    margin:0px 0px 10px 0px !important;
+}
 .highlight:hover{
     color: #ffffff !important;
     background: #0061D5;
@@ -28,95 +57,7 @@ margin:0
 
 }
 
-.phone-services{
-    position: fixed;
-    bottom: 90px;
-    width: 100vw;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
-    display: block;
-    overflow: hidden;
-    background: white;
-    .phone-header{
-        background: #0061d5;
-        color: white !important;
-        text-align: center;
-        h4{
-            font-size: 21px;
-            color: white !important;
-        }
-    }
-    .date-phone{
-        display: block;
-        width: 100vw;
-        .day{
-            display: inline-block;
-            padding: 5px 0px;
-            width: calc(100% / 7);
-            text-align: center;
-        }
-        .day::selection {
-            color: #93a0c2;
-        }
-        .month{
-            display: block;
-            border-radius: 10px;
-            font-size: 16px;
-            height: 50px;
-            line-height: 50px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 1px 1px rgba(#2c59ac, 0.4);
-            img{
-                height: 16px;
-                margin-top:32px;
-            }
-            .img-start{
-                position: absolute;
-                top:17px;
-                left: 10px;
-            }
-            .img-end{
-                position: absolute;
-                top:17px;
-                right: 10px;
-            }
-        }
-        .month::selection {
-            color: #ccc;
-        }
-        .m-day{
-            display: inline-block;
-            padding: 5px 0px;
-            line-height: 30px;
-            width: calc(100% / 7);
-            text-align: center;
-        }
-        .m-day::selection {
-            color: #93a0c2;
-        }
-        .m-day:hover{
-            border-radius: 5px;
-            background: #0061d5;
-            color: #ffffff !important;
-        }
-    }
-    .time-available{
-        display: inline-block;
-        padding: 10px;
-        margin: 10px ;
-        background: white;
-        border-radius: 5px;
-        line-height: 20px;
-        text-align: center;
-        box-shadow: 0 5px 7px rgba(#2c59ac, 0.4);
-    }
-    .time-available:hover{
-        background: #0061d5;
-        color: #ffffff;
-    }
 
-}
 .top-bar{
     position: fixed;
     top:0px;
@@ -252,32 +193,34 @@ margin:0
 }
 .bookings-time{
     position: absolute;
+    overflow: scroll;
     display:block;
     background: #ffffff;
     top: 0px;
-    height: auto;
+    height: calc( 100vh - 210px);
     left: 0vw;
     width: 100vw;
     color: #6a7695;
     z-index: 2;
     box-shadow: 0 5px 7px rgba(#2c59ac, 0.4);
     .employee-spot{
-        margin:0xp;
-        padding: 0xp;
+        overflow: scroll;
+        margin:0px;
+        padding: 0px;
     }
     .cont-timeslots{
         width: 100%;
         display: block;
-        max-height: 200px;
+        // max-height: 200px;
         overflow: scroll;
     }
     .nada{
         display: block;
-        font-size: 13px;
-        line-height: 13px;
+        font-size: 18px;
+        // line-height: 13px;
         top:-10px;
-        margin: 5px;
-        padding:0px;
+        margin: 20px;
+        padding:20px;
     }
     h3{
         font-size: 18px;
@@ -285,22 +228,7 @@ margin:0
         margin: 5px;
         padding:0px
     }
-    .time-available{
-        display: inline-block;
-        margin: 10px ;
-        background: white;
-        border-radius: 5px;
-        line-height: 40px;
-        text-align: center;
-        width: 80px;
-        font-size: 13px;
-        box-shadow: 0 5px 7px rgba(#2c59ac, 0.4);
-    }
-    .time-available:hover{
-        background: #0061d5;
-        color: #ffffff;
-       
-    }
+  
 }
 .time-available1{
     font-size: 13px;
@@ -315,6 +243,23 @@ margin:0
      color: #6a7695
 }
 .time-available1:hover{
+    background: #0061d5;
+    color: #ffffff;
+   
+}
+.time-available2{
+    display: inline-block;
+    margin: 10px ;
+    background: white;
+    border-radius: 5px;
+    line-height: 40px;
+    text-align: center;
+    padding: 10px 15px;
+    // width: 80px;
+    font-size: 13px;
+    box-shadow: 0 5px 7px rgba(#2c59ac, 0.4);
+}
+.time-available2:hover{
     background: #0061d5;
     color: #ffffff;
    
@@ -355,7 +300,9 @@ margin:0
         font-size: 15px;
         left:-10px;
         width: 100vw;
-        border-radius: none;
+        // line-height: 30px;
+        // height: 30px;
+        border-radius: 0px;
     }
 }
 .white_ss{
@@ -385,49 +332,51 @@ margin:0
     z-index: 2;
     text-align: left;
     box-shadow: 0 5px 7px rgba(#2c59ac, 0.4);
-    .time-available{
-        position: relative;
-        text-align: left !important;
-        display: inline-block;
-        padding: 0px 20px;
-        width: calc(100vw / 3);
-        border: solid 1px #eeeeee;
-        text-transform: capitalize;
-        margin: 0;
-        background: white;
-        font-size: 15px;
-        text-align: center;
-        cursor: pointer;
-        .lefty{
-            position: absolute;
-            right: 10px;
-        }
-        span{
-            font-size: 10px;
-            text-transform: lowercase !important;
-            margin-left: 10px;
-        }
-    }
-    .time-available:hover{
-        background: #cae2ff;
-        color: #cae2ff;
-        cursor: pointer;
-    }
+    
 
 }
 
+.time-available{
+    position: relative;
+    text-align: left !important;
+    display: inline-block;
+    padding: 0px 20px;
+    width: calc(100vw / 3);
+    border: solid 1px #eeeeee;
+    text-transform: capitalize;
+    margin: 0;
+    background: white;
+    color: #263b56;
+    font-size: 15px;
+    text-align: center;
+    cursor: pointer;
+    .lefty{
+        position: absolute;
+        right: 10px;
+    }
+    span{
+        font-size: 10px;
+        text-transform: lowercase !important;
+        margin-left: 10px;
+    }
+}
+.time-available:hover{
+    background: #cae2ff;
+    color: #263b56;
+    cursor: pointer;
+}
 .prenota{
     color: #ffffff !important;
     background: #0061d5 !important;
     font-size: 24px !important;
-    font-family: "Comfortaa Bold";
+    font-family: "Comfortaa" , sans-serif;
     cursor: pointer;
 }
 .prenota-blue{
     color: #0061d5 !important;
     background: #fff !important;
     font-size: 24px !important;
-    font-family: "Comfortaa Bold";
+    font-family: "Comfortaa" , sans-serif;
 }
 .ccbox{
     top:10px;
@@ -451,7 +400,7 @@ margin:0
         width: 100%;
         display: block;
         text-align: center;
-        font-family: "Comfortaa Bold" !important;
+        font-family: "Comfortaa" , sans-serif !important;
         color: #0061d5;
         padding:0px 0px 20px 0px;
     }
@@ -476,7 +425,7 @@ margin:0
     background: white;
     z-index: 3;
     h1{
-        font-family: "Comfortaa Bold"!important;
+        font-family: "Comfortaa" , sans-serif!important;
     }
     label{
         color: #00479D;
@@ -553,7 +502,7 @@ margin:0
         margin-top: 10px;
     }
     h1{
-        font-family: "Comfortaa Bold" !important;
+        font-family: "Comfortaa" , sans-serif !important;
     }
     .header{
         height: 60px;
@@ -632,4 +581,13 @@ margin:0
 .cont-template{
 position: relative;
 margin-top:170px;
+}
+.mini{
+    width: 100%;
+    text-align: left;
+    line-height: 14px;
+    display: block;
+    font-size: 10px;
+    // color:#7f7f7f
+
 }

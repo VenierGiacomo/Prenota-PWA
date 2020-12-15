@@ -155,7 +155,7 @@ getemployeeHoursNoLogin(id): Observable<any>{
  
 }
 setStoreservice( name, duration, sex, max_n, color){
-var data = { 'name':name, 'duration':duration, 'sex':sex, 'max_n':max_n, 'color':color}
+var data = { 'name':name, 'duration':duration, 'sex':sex, 'max_n':max_n, 'color':color, 'price': 2000}
   return this.http.post(BASE_URL+'services/', data, {headers: this.newheader()})
 }
 setStoreserviceDefault(){
@@ -334,6 +334,12 @@ deleteService(id):Observable<any>{
 stripePaymentIntet(service){
   return this.http.post(BASE_URL+'webhooks/payment_intent', {services:service},{headers: this.newheader()})
 }
+stripeSubscriptionSession(){
+  return this.http.post(BASE_URL+'webhooks/session/stripe', {},{headers: this.newheader()})
+}
+stripePortalSession(){
+  return this.http.post(BASE_URL+'webhooks/portal/stripe', {},{headers: this.newheader()})
+}
 hasStore(){
   return this.http.get(BASE_URL+'store/owner/',  {headers: this.newheader()})
 }
@@ -352,6 +358,12 @@ getAppointmentsByshop(week,id):Observable<any>{
 getStoreservicebyStore(id){
   return this.http.get(BASE_URL+'services/byshop/',{headers: this.httpheader, params: {shop: id }})
 }
+getStores(){
+  return this.http.get(BASE_URL+'store/list',{headers: this.httpheader})
+}
+getStoresCategory(id){
+  return this.http.get(BASE_URL+'store/list/category/'+id+'/',{headers: this.httpheader})
+}
 
 parseJwt = (token) => {
 try {
@@ -361,3 +373,13 @@ return null;
 }
 };
 }
+
+// {"version":"EC_v1",
+// "data":
+// "/GUQLQWPAZzV1Z5bi6K1Vcs5L/CejVl0YYsccCJ2k03dX6vdYsSXcnJ5Jb+8IgQfAaR8MQ4aA7i4BiDYI89GnG8fs3z/Y3Raf/xO3Hp9aQNK5WuC1XVjoUPKPW+DJ6ABYCtmCjt4eyDB6pIUgxsJGIsenJrCqlTClAw+AWXbtX+utMuv9+bSUjeFehlnCq3svdvnRh/UyAU+NrNWFehaikZfV0v4rX++Pp5Hkmz8MaqHGRuYcxaejylumIXAXTlwCtM8J72PTVE+9RDFEVJBCoFQvMKAI2xC3jt7AJiOOVcvTBdaMa9wnt/LqQGtYYlHqJHuhUgCvmx9q6FpZMh6BectzjCeXCUhmDV2UItAKhtw5woyKnsUY1DGRYSHCq7BhU5Mrl+lgcMBUMWPbcTa2zeTvCVU9ru3A+WE5Rk/f7dp51BZo5KjzQSgwBNd6+FCFSCLSEiLVRSjEbe4+1IJ0U/qxPrxFytrUyESshxykgcBRT4vjfkqy8VZyhmm0ndQSsow8H1swbCTlyZU7Tn9aFvAskKF1aZafzv3WZClr4GeJ1EG2HFJoq0vzg==",
+// "signature":"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",
+// "header":{
+//   "ephemeralPublicKey":"MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAENxWbPerxKpcmXYI6Ted3q57H/EjcZXT3t4pX+weJ1+aiCaZiprkWTt3ZO7fJNICD1da+80gC5QFep49vB0M6Iw==",
+//   "publicKeyHash":"RZyadkrVEqVUN8h1cYjHzSldpJUF8pyFG1d/p/HgwhE=",
+//   "transactionId":"df63bb8893feb22ec1b9c221bf8a8d747e3d3d9b495e6be323dd269f1557836d"}
+// }

@@ -468,13 +468,30 @@
 
 <div class="bk-empl-sel" [style.display]='bk_empl'>
         <div class="close-catalog" (click)='bk_empl="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
-        <select [(ngModel)]="employee" class="sel-empl" (change)='changeTimetable()' >
-            <option value=0>Seleziona un collaboratore</option>
-            <option  *ngFor='let employee of employees' value={{employee.employee}}>{{employee.name}}</option>
-        </select>
+        <div class="container" >
+        <div class="row" style="margin-top:300px;">
+        <div class="col-lg-3 col-md-6" *ngFor='let employee of employees'>
+            <div class="card" (click)='changeTimetable(employee)'>
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-1">
+                            <img src="../assets/user.svg" height="50px">
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{employee.name}}</span></div>
+                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 </div>
  <div class="catalog" [style.display]='catalog'>
-        <div class="close-catalog" (click)='catalog="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+        <div class="close-catalog" (click)='storeEverything()'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
                 <table class="table-catalog">
                     <thead>
@@ -482,8 +499,8 @@
                             <th class="corner1">Nome Servizio</th>
                             <th>Durata</th>
                             <th>Sesso</th>
-                            <th>Max</th>
-                            <th class="corner2">Attivo</th>
+                            <!-- <th>Max</th> -->
+                            <th class="corner2"></th>
                         </tr>
                     </thead>  
                     <tbody>
@@ -491,9 +508,9 @@
                             <td>{{service.name}}</td>
                             <td>{{durations[service.duration]}}</td>
                             <td>{{sexs[service.sex]}}</td>
-                            <td>{{service.max_n}}</td>
-                            <td *ngIf='service.active' (click)='activate(service)'> <button class="active-service">Attivo</button></td>
-                            <td *ngIf='!service.active' (click)='activate(service)'> <button class="deactivated">Non attivo</button></td>
+                            <!-- <td>{{service.max_n}}</td> -->
+                            <td *ngIf='service.active' (click)='activate(service)' style="padding: 0px;"> <button class="active-service">Attivo</button></td>
+                            <td *ngIf='!service.active' (click)='activate(service)'  style="padding: 0px;"> <button class="deactivated">Non attivo</button></td>
                         </tr>
                        
                     </tbody>
@@ -576,20 +593,20 @@
                     <thead>
                         <tr> 
                             <th class="corner1">Nome</th>
-                            <th class="corner2">Cognome</th>
-                            <th >Elimina</th>
+                            <!-- <th class="corner2">Cognome</th> -->
+                            <th ></th>
                         </tr>
                     </thead>  
                     <tbody>
                         <tr *ngFor='let employee of employees'> 
                             <td>{{employee.first_name}}</td>
-                            <td>{{employee.last_name}}</td>
-                            <td  (click)='deleteEmployee(employee)'> <button class="delete">Elimina</button></td>
+                            <!-- <td>{{employee.last_name}}</td> -->
+                            <td  (click)='deleteEmployee(employee)' style="padding: 0px !important;"> <button class="delete">Elimina</button></td>
                         </tr>
                         <tr> 
-                            <td class="corner1"><input [(ngModel)]='first_name' placeholder="Mario "></td>
-                            <td class="corner2"><input [(ngModel)]='last_name' placeholder="Rossi"></td>
-                            <td  (click)='submit()'> <button class="active-service">Aggiungi</button></td>
+                            <td class="corner1"><input [(ngModel)]='first_name' placeholder="Inserisci il nome "></td>
+                            <!-- <td class="corner2"><input [(ngModel)]='last_name' placeholder="Inserisci il cognome "></td> -->
+                            <td  (click)='submit()' style="padding: 0px !important;"> <button class="active-service">Aggiungi</button></td>
                         </tr> 
                     </tbody>
                 </table>     

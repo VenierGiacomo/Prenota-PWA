@@ -59,11 +59,20 @@ navBusiness(){
     }
   }
 }
+isDeviceiPad(){ 
+  var userAgent = navigator.userAgent || navigator.vendor ;
+  return /iPad/i.test(userAgent) && !window.MSStream
+}
    
   navListing(){
     this.router.navigateByUrl('')
   }
   navLogin(){
-    this.router.navigateByUrl('login')
+    if(this.isDeviceiPad()){
+      window.location.href="https://ipad.prenota.cc"
+    }else{
+      this.router.navigateByUrl('login')
+    }
+  
   }
 }

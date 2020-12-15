@@ -35,6 +35,7 @@ import { SepaPaymentComponent } from './sepa-payment/sepa-payment.component';
 import { PaymentSuccessComponent } from './payment-success/payment-success.component';
 import { Page404Component } from './page404/page404.component';
 import { DlfComponent } from './dlf/dlf.component';
+import { CategoryListingComponent } from './category-listing/category-listing.component';
 
 
 
@@ -76,6 +77,7 @@ const routes: Routes = [
   {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
   {path: 'payment_success', component: PaymentSuccessComponent},
   {path: 'dopolavoroferroviario', component: DlfComponent},
+  {path: 'home/ricerca/parrucchieri', component: CategoryListingComponent},
 
   {path: '**', component: Page404Component}
 ];
