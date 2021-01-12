@@ -16,7 +16,7 @@
         </div>
         <div class="calendar" *ngIf='!OneView'>
             <div class="date"> 
-                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}}  {{year}}</div> <div *ngIf='week[0]>week[6]'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}}  {{year}}</div> <div *ngIf='week[0]>week[6] && month!=0'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6] && month==0'>{{months_names[11]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
                 <div class="today-date" (click)='goToday(false)' >Oggi</div>
                 <div class="selector-date">
                     <div  (click)='displayWeek(false)'[class.active]='display=="week" && !OneView'>Settimana</div>
@@ -140,6 +140,7 @@
         <select class='select_no_margin_left' [(ngModel)]="info" >
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
+                <option value=-3 >chiudi un'ora</option>
                 <option value=-2 >chiudi tutto il giorno</option>
                 <option value=-1 >altro</option>
         </select>
@@ -151,29 +152,29 @@
     <div class="time" >
         <div *ngIf='info == -1'>
         <select [(ngModel)]="time">
-                <option value=1>5 min</option>
-                <option value=2>10 min</option>
+                <!-- <option value=1>5 min</option>
+                <option value=2>10 min</option> -->
                 <option value=3>15 min</option>
-                <option value=4>20 min</option>
-                <option value=5>25 min</option>
+                <!-- <option value=4>20 min</option>
+                <option value=5>25 min</option> -->
                 <option value=6>30 min</option>
-                <option value=7>35 min</option>
-                <option value=8>40 min</option>
+                <!-- <option value=7>35 min</option>
+                <option value=8>40 min</option> -->
                 <option value=9>45 min</option>
-                <option value=10>50 min</option>
-                <option value=11>55 min</option>
-                <option value=12> 1ora</option>
-                <option value=13> 1 ora 5 min</option>
-                <option value=14> 1 ora 10 min</option>
+                <!-- <option value=10>50 min</option>
+                <option value=11>55 min</option> -->
+                <option value=12>1 ora</option>
+                <!-- <option value=13> 1 ora 5 min</option>
+                <option value=14> 1 ora 10 min</option> -->
                 <option value=15> 1 ora 15 min</option>
-                <option value=16> 1 ora 20 min</option>
-                <option value=17> 1 ora 25 min</option>
+                <!-- <option value=16> 1 ora 20 min</option>
+                <option value=17> 1 ora 25 min</option> -->
                 <option value=18> 1 ora 30 min</option>
-                <option value=19> 1 ora 35 min</option>
-                <option value=20> 1 ora 40 ora</option>
+                <!-- <option value=19> 1 ora 35 min</option>
+                <option value=20> 1 ora 40 ora</option> -->
                 <option value=21> 1 ora 45 min</option>
-                <option value=22> 1 ora 50 min</option>
-                <option value=23> 1 ora 55 min</option>
+                <!-- <option value=22> 1 ora 50 min</option>
+                <option value=23> 1 ora 55 min</option> -->
                 <option value=24> 2 ore</option>
 
         </select>

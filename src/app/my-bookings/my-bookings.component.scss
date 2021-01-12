@@ -49,6 +49,7 @@ h1{
      color: #263b5e;
      line-height: initial !important;
  }
+ 
  h3{
     font-size: 18px;
     color: #00479D;
@@ -83,8 +84,8 @@ h1{
     img{
         position: absolute;
         right: 20px;
-        top:25px;
-        height: 36px;
+        height: 40%;
+        top:30%;
     }
 }
 .appo-1:hover{
@@ -237,4 +238,40 @@ h1{
         height: 18px;
         margin: 0px 0px 0px 15px !important;
     }
+}
+
+.top_log{
+    margin-top: 60px;
+}
+@media(max-width: 500px){
+    .top_log{
+        margin-top: 20px !important;
+    }
+.appo{
+    width: 90% !important;
+    margin-left: 5%;
+        h1{
+            font-size: 21px !important;
+            color: #263b5e;
+            line-height: initial !important;
+        } 
+        h3{
+            font-size: 13px !important;
+            color: #00479D;
+            }
+        .appo_date{
+        h4{
+            font-size: 13px !important;
+        }
+        }
+    }
+.appo-1{
+    width: 90% !important;
+    margin-left: 5%;
+        h1{
+            max-width: 70%;
+            font-size: 21px !important;
+            line-height: initial !important;
+        } 
+ }
 }

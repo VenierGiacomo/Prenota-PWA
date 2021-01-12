@@ -102,7 +102,7 @@ export class CmassaggiComponent implements OnInit {
   appointments
   book_site= false
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota: Aparrucchieri - Parrucchiere Trieste. Prendi appuntamento online");
+    this.titleService.setTitle( "Prenota: CMASSAGGI - Centro massaggi a Trieste. Prendi appuntamento online e fatti coccolare dal miglior massaggio");
    }
    async ngOnInit() {
     // Notiflix.Block.Standard('.service', 'Caricamento serivzi...');

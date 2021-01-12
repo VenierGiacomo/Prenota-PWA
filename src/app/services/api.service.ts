@@ -195,7 +195,11 @@ deleteEmployeeservice(employee, service_id){
 }
 
 bookAppointment(start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
+  
   var week = this.getWeekNumber(new Date(year, month, day))
+  if(year==2021 && week==0 && day<4){
+    week=53
+  }
   var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': ''}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }

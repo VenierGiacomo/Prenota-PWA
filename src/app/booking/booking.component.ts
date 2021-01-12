@@ -122,14 +122,20 @@ export class BookingComponent implements OnInit {
   //  window.addEventListener('scroll', function(ev) {
 
    
-// },false);
+// },false
   for (let i=0;i<20;i++){
       if((day_number + i)<= this.months_days[month]){
         var day = {"number" :day_number + i, "week_day" : ((today+i-1)%7), "month":this.month}
         this.active_date.push(false)
         this.week.push(day)
       }else{
-        var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":this.month+1 }
+        if(this.month==11){
+          var x:any = 0
+          var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":x }
+        }else{
+          var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":this.month+1 }
+        }
+     
         this.active_date.push(false)
         this.week.push(day)
       }
@@ -230,7 +236,9 @@ export class BookingComponent implements OnInit {
     
   }
   async getAppointments(day){
-    console.log('called')
+    if(this.month==0){
+      this.year=2021
+    }
     var date = new Date(this.year, this.month, day)
     var week = this.getWeekNumber(date)
     if(this.last_selected_week==week){
@@ -392,11 +400,11 @@ export class BookingComponent implements OnInit {
        await this.api.getemployeeHoursByShop(this.id).subscribe(async data=>{
         this.empl_hours = await data
       var empl = await data
-      var x:any =[]
+      var x:any =[]    
       for(let work of empl){
         for(let day of this.week){
           if(day.week_day == work.wkday){
-            if(day.number<=this.day+1 && day.month==this.month){
+            if(day.number<=this.day && day.month==this.month){
             }else{
               x.push(day)
             }
@@ -574,17 +582,14 @@ items.forEach(function (a) {
             for (let day of week2){
               weeks1.push(day)
             }
-            
             weeks1 = await weeks1.filter( function( el ) {
               return weeks.indexOf( el ) < 0;
             } );
-            
           
        
               this.uniques = await this.unique.filter( function( el ) {
-                return weeks1.indexOf( el.number ) < 0;
+                return weeks1.indexOf( el.number ) <= 0;
               } );
-              
               this.DatePicker(this.uniques[0],0,false)
              //  Notiflix.Block.Remove('.all_spots');
               this.spin_spots = "none"
@@ -703,6 +708,7 @@ items.forEach(function (a) {
               var end = start+appointment.end -  appointment.start
               this.openhours = this.openhours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
             } 
+            
             for (let empl of this.employees_serivces){
               if( empl.service_id == this.service[0].id){                
                 var y = empl.employee

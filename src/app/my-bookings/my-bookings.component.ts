@@ -130,4 +130,7 @@ rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", 
     this.api.deleteAllData()
     this.logged = false
   }
+  goResetPassword(){
+    window.open('https://giacomovenier.pythonanywhere.com/api/auth/reset_password','_blank')
+  }
 }

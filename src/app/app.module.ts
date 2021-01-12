@@ -52,6 +52,7 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { Page404Component } from './page404/page404.component';
 import { DlfComponent } from './dlf/dlf.component';
 import { CategoryListingComponent } from './category-listing/category-listing.component';
+import { CovidCounterComponent } from './covid-counter/covid-counter.component';
 
 
 @NgModule({
@@ -96,6 +97,7 @@ import { CategoryListingComponent } from './category-listing/category-listing.co
     Page404Component,
     DlfComponent,
     CategoryListingComponent,
+    CovidCounterComponent,
     
   ],
   imports: [

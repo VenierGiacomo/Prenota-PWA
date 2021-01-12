@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
-import { Router } from '@angular/router';
+import { Router, NavigationStart } from '@angular/router';
 import *  as screenfull from 'screenfull'
 import { Title } from '@angular/platform-browser';
 import { ControlStateMixin } from '@vaadin/vaadin-control-state-mixin';
@@ -17,6 +17,15 @@ export class HomeComponent implements OnInit {
 // private cdRef:ChangeDetectorRef
   constructor(private api: ApiService, private storage: StorageService, private router: Router ,private titleService: Title) {
     this.titleService.setTitle( "Prenota: Agenda online - Il tuo gestionale");
+    this. router.events.forEach((event) => {
+      if(event instanceof NavigationStart) {
+        clearInterval(this.interval)
+      }
+      // NavigationEnd
+      // NavigationCancel
+      // NavigationError
+      // RoutesRecognized
+    });
    }
   resp:any
   bgModalDisp='none';
@@ -28,14 +37,14 @@ export class HomeComponent implements OnInit {
   appointmentlist=[]
   week = []
   today = new Date().getDate()
-  year =new Date().getFullYear()
+  year = new Date().getFullYear()
   months_days=[31, ((this.year%4==0 && this.year%100!=0)|| this.year%400==0)? 29 :28, 31 , 30, 31, 30, 31, 31, 30, 31, 30, 31]
   months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
   month 
   month_name 
   nome=""
   info=101010
-  time = 2
+  time = 12
   phone=''
   appointment_notes=''
   extra_desc=''
@@ -71,7 +80,9 @@ export class HomeComponent implements OnInit {
   }
   m_initial
   m_final
+  interval
 async ngOnInit() {
+
 // dispaly the appopriate days number and months
   var now = new  Date()
   var today = now.getDay() -1
@@ -85,7 +96,12 @@ async ngOnInit() {
     if( day_number - today  + i<= this.months_days[month]){
       var day = day_number - today  + i
       if(day<1){
-      day= day +this.months_days[month-1]
+        if(this.month==0){
+          day= day +this.months_days[11]
+        }else{
+          day= day +this.months_days[month-1]
+        }
+   
       }
     }else{
       var day = day_number - today  + i - this.months_days[month]
@@ -93,9 +109,15 @@ async ngOnInit() {
     this.week.push(day)
   }
   if(this.week[6]<this.week[0] && day_number>20){
-  this.month = month+1
-  this.month_name=this.months_names[month+1]
-}
+    if(this.month == 11){
+      this.month = 0
+      this.month_name=this.months_names[0]
+    }else{
+      this.month = month+1
+      this.month_name=this.months_names[month+1]
+    }
+    }
+  
 else{
   this.month = month
   this.month_name=this.months_names[month]
@@ -162,7 +184,61 @@ if(x.length==0){
     }
     this.catalog_list = this.storage.getCatalog()
   },500)
-console.log(this.month)
+
+  this.interval = setInterval(()=>{
+  var week 
+  if(this.OneView){
+    if(this.week[6]<this.week[0]){
+      if(this.today<7){
+        week = this.getWeekNumber(new Date(this.year, this.month, this.today))
+      }else{
+        week = this.getWeekNumber(new Date(this.year, this.month, this.today))
+    }
+  }else{
+    week = this.getWeekNumber(new Date(this.year, this.month, this.today))
+  }
+  }else{
+    if(this.week[6]<this.week[0]){
+      if(this.month==0){
+        week = this.getWeekNumber(new Date(this.year, 11, this.week[0]))
+      }else{
+        week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
+      }
+     
+  }else{
+    week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
+  }
+  }
+
+  this.api.getAppointments(week).subscribe(async (data)=>{
+    var just_downloaded_appo: any = []
+       just_downloaded_appo = await data
+       var just_downloaded_copy =just_downloaded_appo
+      var copy_appo_list = this.appointmentlist
+      for(let el of this.appointmentlist){
+        just_downloaded_appo = just_downloaded_appo.filter((value, index, arr)=>{ return (value.id != el.id) })
+     
+        }
+        for(let appo of just_downloaded_appo){
+          this.appointmentlist.push(appo)
+          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note )
+        
+        }
+      
+        for(let el of just_downloaded_copy){
+          copy_appo_list = copy_appo_list.filter((value, index, arr)=>{ return (value.id != el.id) })
+       
+          }
+          for(let appo of copy_appo_list){
+            var no_longer_exist = document.getElementById(appo.id);
+            no_longer_exist.parentNode.removeChild(no_longer_exist);
+            this.appointmentlist =this.appointmentlist.filter((value, index, arr)=>{ return (value.id != appo.id) })
+            } ​
+          Notiflix.Notify.Info('Appuntamenti sincronizzati');
+    })
+   
+    
+  },60000)
 }
 
 getWeekNumber(d) {
@@ -201,7 +277,7 @@ showCoords($event) {
   this.phone=""
   this.extra_desc=''
   this.info=101010
-  this.time=2
+  this.time=12
   this.edit = false
   if (this.point.disp == "none"){
     var x = $event.clientX;
@@ -239,9 +315,12 @@ addAppointment() {
       month=month-1
       if(month==-1){
         month=11
-        year-=1
       }
     }
+    if(this.week[6]<this.week[0]&& month==0 && this.week[this.currentBlock.col]<7){
+
+      year+=1
+ }
   }
   
   
@@ -249,8 +328,10 @@ addAppointment() {
   if(this.OneView){
     if (this.info == -1){
       this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.today, month, year, this.nome , this.phone, this.extra_desc, this.currentBlock.col, this.info)
-    }else if (this.info == -2){
+    }else {if (this.info == -2){
       this.setAppoitment(0, 204, this.today, month, year,"Chiuso", this.phone, "Chiuso", this.currentBlock.col, this.info)
+    }else {if (this.info == -3){
+      this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+11), this.today, month, year,"Chiuso", this.phone, "Chiuso", this.currentBlock.col, this.info)
     }else{
       var services = this.storage.getCatalog()
       var serv
@@ -261,12 +342,16 @@ addAppointment() {
       }
       this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration_book) , this.today, month, year, this.nome , this.phone, serv.name, this.currentBlock.col, this.info)
     }
+  }}
   }else{
   if (this.info == -1){
       this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+(this.time-1)), this.week[this.currentBlock.col], month, year, this.nome , this.phone, this.extra_desc, this.selected, this.info)
-    }else if (this.info == -2){
+    }else {if (this.info == -2){
       this.setAppoitment(0, 204, this.week[this.currentBlock.col], month, year, "Chiuso" , this.phone, "Chiuso", this.selected, this.info)
-    }else{
+    }else{if(this.info == -3){
+      this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row+11), this.week[this.currentBlock.col], month, year, "Chiuso" , this.phone, "Chiuso", this.selected, this.info)
+    }
+    else{
       var services = this.storage.getCatalog()
       var serv
       for(let service of services){
@@ -276,6 +361,8 @@ addAppointment() {
       }
       this.setAppoitment((this.currentBlock.row-1), (this.currentBlock.row-1)+Number(serv.duration_book) , this.week[this.currentBlock.col], month, year, this.nome , this.phone, serv.name, this.selected, this.info)
     }
+  }
+}
   }
 }
 // The next three functions allow to drag and drop the events
@@ -304,7 +391,7 @@ addAppointment() {
         document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
         ev.target.append(document.getElementById(data));
         document.getElementById(data).style.zIndex = "1"
-        var appointments = this.storage.getAllAppointmets()
+        var appointments = this.appointmentlist
       for (let appointment of appointments){
         if(appointment.id ==data){
           if (this.OneView){
@@ -355,7 +442,7 @@ addAppointment() {
        document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
        document.getElementById(parentId).append(document.getElementById(data));
        document.getElementById(data).style.zIndex = "10"
-       var appointments = this.storage.getAllAppointmets()
+       var appointments = this.appointmentlist
      for (let appointment of appointments){
        if(appointment.id ==data){
           this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note)
@@ -386,7 +473,12 @@ async getAppoitments(){
   }
   }else{
     if(this.week[6]<this.week[0]){
-      week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
+      if(this.month==0){
+        week = this.getWeekNumber(new Date(this.year, 11, this.week[0]))
+      }else{
+        week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
+      }
+     
   }else{
     week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
   }
@@ -431,6 +523,10 @@ async getAppoitments(){
 }
 // Function that stores appointments both locally and on server
 setAppoitment(start, end, day, month, year, client_name, phone, details, employee, service){
+  if(client_name==""){
+    client_name='~'
+  }
+  // if(this.week==53 && day<7)
   var week = this.getWeekNumber(new Date(year, month, day))
     this.point.disp="none"
     this.api.bookAppointment( start, end, day, month, year, client_name, this.phone, details, employee, service).subscribe(
@@ -461,7 +557,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
     )
 }
 updateAppointment(){
-var appointments = this.storage.getAllAppointmets()
+var appointments = this.appointmentlist
 var app
   for (let appointment of appointments){
     if(appointment.id ==this.updateAppointmentId){
@@ -502,6 +598,8 @@ if(this.info !=-1){
     element.className = element.className.replace(colors, '') 
     element.classList.add(`c${new_service.color}`)
     Notiflix.Notify.Success('Modifiche salvate con successo');
+    this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data.id})
+    this.appointmentlist.push(data)
     this.storage.dragUpdateAppointment(this.updateAppointmentId, app.start, app.end,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee, this.info, this.appointment_notes)
          },err =>{
           Notiflix.Notify.Failure("C'è stato un problema durante il salvataggio");
@@ -523,6 +621,9 @@ deleteAppointment(){
   this.closeModal()
   }
 nextWeek(){
+  if(this.week[0]==28 && this.month ==0 ){
+    this.year=2021
+  }
   //remove last week appoitments
   if(this.OneView){
     if(this.today<this.months_days[this.month]){
@@ -621,6 +722,9 @@ nextWeek(){
 }
 }  
 pastWeek(){
+  if(this.week[0]<=7 && this.month ==0 ){
+    this.year=2020
+  }
   //remove last week appoitments
   if(this.OneView){
     if(this.today>1){
@@ -777,7 +881,7 @@ async activetab(employee){
    this.openlist[hour.wkday].push(hour.start)
    this.openlist[hour.wkday].push(hour.end)      
   }
-  this.appointmentlist = await this.storage.getAppointmets(true)
+  this.appointmentlist 
   // console.log(this.appointmentlist)
   if (this.appointmentlist.length != 0){
     if(this.OneView){
@@ -846,11 +950,13 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     has_note = true
   }
   var self = this
+  var appo 
   // console.log(client_name, day ,week, month, year )
-  div.onclick = function() {
-    setTimeout(() => {
+  div.onclick = function(){
+    setTimeout(async() => {
     document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'
-    var appo: any = self.storage.getAppointmet(id)
+    appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
+    console.log( appo[0], appo)
     self.nome = appo.client_name
     self.time = appo.end-start
     self.info = Number(appo.service_n)
@@ -971,12 +1077,22 @@ for (let service_el of services){
                   <div class="task-name" id=${id} >${client_name}</div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
   }
   div.appendChild(div_resize)
-  if(this.week[6]<this.week[0]){1
+  if(this.week[6]<this.week[0]){
     if(day<7){
+      if(this.month==0){
+        if (this.week.indexOf(day)>=0 && this.selected ==employee){
+          document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+          }
+      }
       if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected ==employee){
         document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
         }
     }else{
+      if(this.month==0){
+        if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, 11, day)) == week && this.selected ==employee){
+          document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
+          }
+      }
       if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month-1, day)) == week && this.selected ==employee){
         document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
         }
