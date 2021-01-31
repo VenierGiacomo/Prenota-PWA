@@ -3,9 +3,9 @@
         <div class="side-menu">
             <div class="menu-home" >Calendario</div>
             <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
-            <div class="menu-settings" (click)='goNotifications()'>Area clienti</div>
+            <!-- <div class="menu-settings" (click)='goNotifications()'>Area clienti</div> -->
             <!-- <button (click)="freeSpots()">Posti liberi</button> -->
-            <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/> Schermo intero</div>
+            <div class="menu-logout" (click)="fullScreen()"> <img src="../assets/icons/multimedia.svg"/>&nbsp; Schermo intero</div>
             <!-- <div class="menu-toggle">
                 Mostra appuntamenti dei colleghi
                     <label class="switch" >
@@ -15,7 +15,7 @@
                 </div> -->
         </div>
         <div class="calendar" *ngIf='!OneView'>
-            <div class="date"> 
+            <div class="date" > 
                 <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}}  {{year}}</div> <div *ngIf='week[0]>week[6] && month!=0'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6] && month==0'>{{months_names[11]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
                 <div class="today-date" (click)='goToday(false)' >Oggi</div>
                 <div class="selector-date">
@@ -31,8 +31,8 @@
                                 <thead>
                                     <tr> 
                                         <td class="fst-col"><p class="ph">07:00</p></td>
-                                        <th>Lun<br><span>{{week[0]}}</span></th>
-                                        <th>Mar<br><span>{{week[1]}}</span></th>
+                                        <th (click)='setRecuringBooking()'>Lun<br><span>{{week[0]}}</span></th>
+                                        <th  (click)='deleteRecuringBooking()'>Mar<br><span>{{week[1]}}</span></th>
                                         <th>Mer<br><span>{{week[2]}}</span></th>
                                         <th>Gio<br><span>{{week[3]}}</span></th>
                                         <th>Ven<br><span>{{week[4]}}</span></th>
@@ -144,7 +144,7 @@
                 <option value=-2 >chiudi tutto il giorno</option>
                 <option value=-1 >altro</option>
         </select>
-        <p *ngIf='edit'>Aggiungi note:</p>
+        <p *ngIf='edit'>Nota:</p>
         <textarea class="lable-appointment-modal" *ngIf='edit' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
         <p *ngIf='info == -1' >Descrizione:</p>
             <textarea class="lable-appointment-modal" *ngIf='info == -1' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
@@ -181,9 +181,12 @@
         </div>
         <button  *ngIf='!edit'class="single-button " (click)='addAppointment()'>Salva</button>
         <div *ngIf='edit'>
-               
-                <button  class="two-buttons delete-app" (click)='deleteAppointment()'>Cancella</button>
-                <button  class="two-buttons modify-app" (click)='updateAppointment()'>Modifica</button>
+            <button  class="single-button " (click)='updateAppointment()'>Salva modifiche</button>
+            <button  class="single-button delete-app" (click)='deleteAppointment()' *ngIf='recurring>0' >Cancella</button>
+            <button  class="single-button delete-app" (click)='deleteRecuringBooking()' *ngIf='recurring>0' >Cancella ricorrenti</button>
+                <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0)' ><span *ngIf='!_loading'>Cancella</span></button>
+                <button  class="two-buttons-1 modify-app"  *ngIf='!(recurring>0)'> <span *ngIf='!_loading' (click)='setRecuringBooking()'>Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
+                
         </div>
     </div>
     </div>
@@ -228,7 +231,7 @@
                                 <option value=9>45 min</option>
                                 <option value=10>50 min</option>
                                 <option value=11>55 min</option>
-                                <option value=12> 1ora</option>
+                                <option value=12> 1 ora</option>
                                 <option value=13> 1 ora 5 min</option>
                                 <option value=14> 1 ora 10 min</option>
                                 <option value=15> 1 ora 15 min</option>
@@ -270,3 +273,127 @@
 </div>
 </div>
 </body>
+
+<style>
+
+/* loader */
+.loader-5 {
+    height: 32px;
+    width: 32px;
+    margin: 0px auto;
+    -webkit-animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-1 {
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes loader-5-1 {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .loader-5::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: auto;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-2 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-2 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(24px, 0, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: auto;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-3 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-3 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5 span {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    height: 32px;
+    width: 32px;
+  }
+  .loader-5 span::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: auto; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-4 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-4 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5 span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: auto; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-5 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-5 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+}</style>

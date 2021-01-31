@@ -16,8 +16,8 @@ export class LandingComponent implements OnInit {
   message=''
   last_selected = 'hero'
   make_website=false
-  price_SMALL = 39
-  price_MEDIUM = 59
+  price_SMALL = 0
+  price_MEDIUM = 0
   call_to_act='Richiedi informazioni'
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
     this.titleService.setTitle( "Prenota: Esplora la nostra Agenda online e inizia la prova gratuia ");
@@ -111,11 +111,11 @@ navigateToSection(el: string){
 website(){
   this.make_website = ! this.make_website
   if(this.make_website){ 
-    this.price_SMALL= 49
-    this.price_MEDIUM= 69
+    this.price_SMALL= 19
+    this.price_MEDIUM= 19
   }else{
-      this.price_SMALL= 39
-      this.price_MEDIUM=59
+      this.price_SMALL= 0
+      this.price_MEDIUM=0
   }
 }
   

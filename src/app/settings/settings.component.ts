@@ -17,6 +17,7 @@ export class SettingsComponent implements OnInit {
   toast= "none";
   catalog="none";
   color_show='none';
+  bussiness_type_stripe='none'
   business= this.storage.getbusinneType()
   colors_list=["#f2b3b3","#fccbbc","#fcecbe","#c2e9d7","#b3e1f7","#c5cbe9","#d7dbef","#ddbde6"]
   bgcolor='#f2b3b3'
@@ -30,14 +31,15 @@ export class SettingsComponent implements OnInit {
   sab= ['','','','']
   dom= ['','','','']
   ///catalog
-
+  month = new Date().getMonth()
+  year = new Date().getFullYear()
   color_top='0px'
   catalog_list=[]
   name=''
-  duration=5
+  duration=6
   sex=3 
   max=1
-
+  price
   durations=[ "durata assente","5 min",
   "10 min",
   "15 min",
@@ -65,19 +67,51 @@ export class SettingsComponent implements OnInit {
 ]
   sexs=['non spec','Donna', 'Uomo', 'Unisex' ]
   bussiness_selection='none'
+
+  ////// chart
+  view:any;
+  single:any
+  day_by_day
+  // options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = false;
+  labels = true;
+  showXAxisLabel = true;
+  showYAxisLabel = true;
+  xAxisLabel_services_general = 'Tipo di servizio';
+  yAxisLabel_services_general = 'Quantità';
+  xAxisLabel_services_per_emplo = 'Dipendenti';
+  yAxisLabel_services_per_emplo = 'Ore lavorate';
+  xAxisLabel_online_performance = 'Performace online';
+  yAxisLabel_online_performance = 'Risultati';
+  xAxisLabel_day_by_day= 'Giorni del mese';
+  yAxisLabel_day_by_day= 'Prenotazioni';
+
+  colorScheme = {
+    domain: ['#0061d5', '#00BBF9','#00479d' , '#00072D']
+  };
+
+  services_per_emplo
+  services_general
+  online_performance
+
+  week_days = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab']
+  months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
   constructor(private api: ApiService, private storage: StorageService, private router: Router, private titleService: Title) {
     this.titleService.setTitle( "Prenota: Imposta i settaggi e l'orario del tuo negozio");
    }
 
   async ngOnInit() {  
-    this.catalog = "none"
+  this.catalog = "none"
   var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
   
   var hours = this.storage.getOpenignhours()
   if(hours==0){
   await this.api.getopenHours().subscribe(data=>{
     this.storage.setOpenignhours(data)
-    console.log(data)
+
       },err=>{
         console.log(err)
       })
@@ -131,7 +165,159 @@ export class SettingsComponent implements OnInit {
   // print(){
   //   console.log(this.lun[0])
   // }
+  async charts_show(){
+    var date = new Date()
+    var month = date.getMonth()
+    var year = date.getFullYear()
+    document.getElementById('charts_cont').style.left='20vw'
+    var stats:Array<any> = await this.storage.getStats()
+    if(!(stats.length>0)){
+      this.api.getCharthsData(month, year).subscribe(async (data)=>{
+      await this.storage.setStats(data) 
+      stats = await this.storage.getStats()
+      await this.charts_draw()
+      
+      })
+    }else{
+      await this.charts_draw()
+    }
+  
 
+  }
+  charts_hide(){
+    document.getElementById('charts_cont').style.left='100vw'
+  }
+  async charts_draw(){
+    var date = new Date()
+    var month = date.getMonth()
+    var year = date.getFullYear()
+    var stats:Array<any> = await this.storage.getStats()
+    var services: Array<any> = await this.storage.getCatalog()
+    var new_arr =[]
+    for(let el of services){
+      var quantity = stats.filter((val) =>{return el.id== Number(val.service_n)})
+      var data ={
+        name: el.name,
+        value:quantity.length
+      }
+      new_arr.push(data)
+    }
+    this.services_general = new_arr 
+    
+    var new_arr1 =[]
+    var employess = await this.storage.getEmployeehours()
+    employess= employess.map(val => [val.id,val.name]) 
+    for(let emplo of employess){
+      var quantity = stats.filter((val) =>{return (emplo[0]== Number(val.employee)&& Number(val.service_n)>0)})
+      var value:any = quantity.reduce((accumulator, val)=>{
+        return accumulator + val.end - val.start;
+      },0)
+      value= value * 5
+      value = Math.floor(value/60) + ((value % 60)/100)
+ 
+      var data_empl ={
+        name: emplo[1],
+        value: value
+      }
+      new_arr1.push(data_empl)
+    }
+        this.services_per_emplo = new_arr1  
+      var new_arr2=[]
+      var quantity = stats.filter((val) =>{return (val.client!= 1 && Number(val.service_n)>0)})
+      var data_call = {
+        name: "Chiamate rispamiate",
+        value: quantity.length
+      }
+      var  serv_dict = {}
+      for(let ser of services ){
+        serv_dict[ser.id] = ser.price
+      }
+      var value:any = quantity.reduce((accumulator, val)=>{
+        return accumulator + serv_dict[val.service_n]
+      },0)
+      var data_money = {
+        name: "Incasso da prenotazioni online",
+        value: -value/100
+      }
+      var mins  = Math.floor(quantity.length * 3/60) + ((quantity.length * 3 % 60)/100)
+      var data_minutes = {
+        name: "Tempo risparmiato",
+        value: mins
+      }
+      new_arr2.push(data_call)  
+      new_arr2.push(data_money)       
+      new_arr2.push(data_minutes)   
+      this.online_performance = new_arr2  
+      
+      var new_arr3=[]
+      var quantity2 = stats.map((val) =>{ if (Number(val.service_n)>0 ){return val.day}})
+    var result = this.count_occurencies(quantity2);
+    var datas
+    for (let ind in result[0]){
+        datas={
+          name: result[0][ind],
+          value: result[1][ind]
+        }
+        new_arr3.push(datas)
+    }
+   new_arr3.sort(function(a, b){
+    if (a.name < b.name) return -1;
+    if (a.name > b.name) return 1;
+   })
+   if(new_arr3[new_arr3.length-1].name==undefined){
+    new_arr3.pop()
+   }
+   for(let el of new_arr3){
+     el.name =el.name+'/'+ (month+1)
+   }
+ 
+this.day_by_day = new_arr3
+  }
+  formatHour(val) {
+
+    val= parseFloat(val).toFixed(2);
+    var res = val.split('.')
+    return res[0] +' h ' + res[1]+ ' min'
+  } 
+nameToDate(val){
+      var day = val.split('/')
+      var week_day=new Date(this.year,this.month, day[0] ).getDay()
+      return this.week_days[week_day] + " "+ day[0]+ ' '+ this.months_names[this.month]
+  }
+
+count_occurencies(arr) {
+    var a = [],
+      b = [],
+      prev;
+  
+    arr.sort();
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] !== prev) {
+        a.push(arr[i]);
+        b.push(1);
+      } else {
+        b[b.length - 1]++;
+      }
+      prev = arr[i];
+    }
+  
+    return [a, b];
+  }
+   format_cardMoney(val){
+    if(val.value<0){
+      return -val.value +' €'
+    }else{
+      if(Number.isInteger(val.value)){
+        return val.value 
+      }else{
+        val.value = val.value.toString()
+        var res = val.value.split('.')
+        return res[0] +' h ' + res[1]+ ' min'
+      }
+     
+    }
+  
+  }
   storeEverything(){
     var opentimes=[]
     this.storage.setbusinneType(this.business)
@@ -197,11 +383,23 @@ export class SettingsComponent implements OnInit {
   }
   storeCatalogService(){
   
-    this.api.setStoreservice(this.name, this.duration, this.sex, this.max, this.colors_list.indexOf(this.bgcolor)).subscribe(
-      data=>{
+    this.api.setStoreservice(this.name, this.duration, this.sex, this.max, this.colors_list.indexOf(this.bgcolor), this.price).subscribe(
+      async data=>{
         var res:any = data
-        this.storage.setCatalog(res.id, res.name, res.duration, res.duration, res.sex, res.max_n, res.color)
-        this.catalog_list = this.storage.getCatalog()
+        await this.storage.setCatalog(res.id, res.name, res.duration, res.duration, res.price, res.max_n, res.color)
+        this.catalog_list = await this.storage.getCatalog()
+        for (let el of this.catalog_list){
+          console.log(el)
+          el.price_display = (el.price/100).toFixed(2)
+        // setTimeout(() => {
+        //  document.getElementById('input-price').addEventListener('keyup',(ev:any)=>{
+        //     ev.target.value =  ev.target.value*100
+        //     ev.target.value = Number(ev.target.value)/100
+        
+           
+        //   })
+        // }, 500);
+      }
         this.toast="block"
         setTimeout(() => {
           this.toast="none"
@@ -216,13 +414,29 @@ export class SettingsComponent implements OnInit {
     this.sex=3 
     this.max = 1
     this.bgcolor = this.colors_list[0]
-    setTimeout(() => {
-      this.catalog_list = this.storage.getCatalog()
+    setTimeout(async () => {
+    this.price=''
+      this.catalog_list = await this.storage.getCatalog()
+        for (let el of this.catalog_list){
+          el.price_display = (el.price/100).toFixed(2)
+      }
     }, 300);
   }
-  displayCatalog(){
+  async displayCatalog(){
     this.catalog = 'block'
-    this.catalog_list = this.storage.getCatalog()
+    this.catalog_list = await this.storage.getCatalog()
+    for (let el of this.catalog_list){
+      el.price_display = (el.price/100).toFixed(2)
+    // setTimeout(() => {
+    //  document.getElementById('input-price').addEventListener('keyup',(ev:any)=>{
+    //     ev.target.value =  ev.target.value*100
+    //     ev.target.value = Number(ev.target.value)/100
+    
+       
+    //   })
+    // }, 500);
+  }
+
   }
   changeColor(col_num){
     this.bgcolor=this.colors_list[col_num]
@@ -246,9 +460,23 @@ export class SettingsComponent implements OnInit {
   }
   displayColorPicker(){
     var col = document.getElementById('color')
-   
     this.color_top= (col.offsetHeight+ col.offsetTop+  window.innerHeight/5+10)+'px'
     this.color_show='block'
-    console.log(col.scrollTop, col.offsetHeight, col.offsetTop,)
+  }
+  showBusinessStripeType(){
+    // this.bussiness_type_stripe='block'
+    Notiflix.Notify.Warning('I pagamenti online sarano disponibili a breve');
+  }
+  openPaymentAccount(type){
+    
+    this.api.activatePayments(type).subscribe((res:any)=>{      
+      window.open(res.url,'_blank');
+    },err=>{
+      console.log(err)
+    })
+   
+  }
+  trunk5(val){
+    return val.substring(0,8)+'...'
   }
 }

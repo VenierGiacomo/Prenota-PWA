@@ -3,8 +3,8 @@
 
     <div class="home">
         <div class="appo_list">
-            <h1 style="text-align: center; padding: 10px;">I tuoi appuntamenti</h1>
-            <div class="appo-1" (click)="navListing()">
+            <h1 *ngIf="logged" style="text-align: center; padding: 10px;">I tuoi appuntamenti</h1>
+            <div *ngIf="logged" class="appo-1" (click)="navListing()">
                     <h1>Prenota un nuovo appuntamento</h1>
                     <img src="../../assets/icons/more_white.svg" >
                 </div>
@@ -18,14 +18,15 @@
                     <div class="note_btn" (click)='AddNote(appointment)'>Aggiungi nota<img src='../../assets/icons/notes.svg'   alt="Aggiungi una nota" title="Aggiungi una nota"></div>
                   <img  class='del_img' src='../../assets/icons/delete.svg' (click)='deletestorage(appointment)' alt="Elimina apputnamento" title="Elimina apputnamento">
                 </div>
-            <div class="log_out" (click)='logout()'><img src="../assets/icons/logout_blue.svg"/> Esci</div>
+            <div class="log_out" (click)='logout()'><img src="../assets/icons/logout.svg"/> Esci</div>
+            <div class="log_out1" (click)='logout()'><img src="../assets/icons/logout_blue.svg"/> Esci</div>
             </div>
             <div *ngIf="!logged" class="appos-1" >
                     <!-- <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins"> -->
                         <div class="wrapper wrapper--w680 top_log" >
                             <div class="card card-4">
                                 <div class="card-body">
-                                    <h2 class="title">Fai il login</h2>
+                                    <h2 class="title">Accedi per vedere i tuoi appuntamenti</h2>
                                     <form >
                                         <div class="row row-space">
                                             <p *ngIf='error!=""'>{{error}}</p>

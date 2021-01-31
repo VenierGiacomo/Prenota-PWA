@@ -31,8 +31,24 @@ img{
 .copyrights{
     display: block;
     margin-top:20px;
+    padding-bottom:10px;
     text-align: center;
     width: 100vw;
     font-size: 13px;
     color: #fff;
+}
+
+@media(max-width:500px){
+    .contacts{
+        margin:0px;
+        width: 100%;
+        display: block;
+        text-align: center;
+    }
+    .copyrights{
+        width: 100%;
+    }
+    .productivity_area{
+padding: 30px !important;
+    }
 }

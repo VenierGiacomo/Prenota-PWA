@@ -20,8 +20,8 @@ export class FirstpageComponent implements OnInit {
   navBusiness(){
 this.router.navigateByUrl('business')
   }
-  navListing(){
-    if(this.mobileCheck()){
+  async navListing(){
+    if(await this.mobileCheck()){
       window.location.href = 'https://mobile.prenota.cc'
     }else{
       this.router.navigateByUrl('home/ricerca')

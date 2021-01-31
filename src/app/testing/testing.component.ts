@@ -1,6 +1,6 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import '@vaadin/vaadin-time-picker';
-import { FormGroup, FormControl } from '@angular/forms';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-testing',
@@ -8,30 +8,37 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./testing.component.scss']
 })
 export class TestingComponent implements OnInit {
-  // Lun_time="08:00:00"
-  // form = new FormGroup({ 
-  //   Lun_time: new FormControl(''),
-  //   lastName: new FormControl('')
-  // });
-
-  constructor() { }
-  lun= ['08:00','12:00','','']
-  mar= ['08:00','12:00','','']
-  mer= ['08:00','12:00','','']
-  gio= ['08:00','12:00','','']
-  ven= ['08:00','12:00','','']
-  sab= ['08:00','12:00','','']
-  dom= ['08:00','12:00','','']
+  store_clients
+  look_up_word
+  show_client
+  constructor(private api: ApiService) { }
+ 
   ngOnInit() {
+    this.api.getStoreClients().subscribe((data)=>{
+      this.store_clients =data  
+      for(let el of this.store_clients ){
+        el.client_name = el.client_name.toLowerCase()
+      }
+      this.show_client =this.store_clients
+
+    })
+
   }
-  
-  printval(){
-    // this.lun[0]= '09:00:00'
-    // console.log(this.form.value,this.form.value)
-  }
-  dateChanged(ev){
-    console.log('Date changed', ev.target.__data.value);
-  }
+ type(){  
+  var x = this.look_up_word.toLowerCase()
+  this.show_client = this.store_clients.filter((val)=>{
+    if(val.client_name.search(x)==0){
+      return val
+    }    
+  }) 
+  // const terms = ev.term.split(/\s/)
+
+  // // Test all sub term
+  // const result = terms.reduce(function(previousValue, currentValue) {
+  //   if (test.search(currentValue) > -1) previousValue.push(currentValue)
+  //   return previousValue
+  // }, [])
+ }
 }
 
 

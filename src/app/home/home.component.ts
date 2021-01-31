@@ -65,6 +65,7 @@ export class HomeComponent implements OnInit {
   show_others=false
   updateAppointmentId
   free_hours:any
+  recurring
   availableSpots:any=[]
   spot_show = 'none'
   openlist = [[],[],[],[],[],[],[],]
@@ -81,6 +82,8 @@ export class HomeComponent implements OnInit {
   m_initial
   m_final
   interval
+  _loading=false
+  store_clients
 async ngOnInit() {
 
 // dispaly the appopriate days number and months
@@ -160,7 +163,7 @@ if(x.length==0){
   this.api.getStoreservice().subscribe(data=>{
     var services:any = data
     for(let service of services){
-      this.storage.setCatalog(service.id, service.name, service.duration, service.duration_book, service.sex, service.max_n, service.color)
+      this.storage.setCatalog(service.id, service.name, service.duration, service.duration_book, service.price, service.max_n, service.color)
     }
   },err=>{
     console.log(err)
@@ -239,6 +242,13 @@ if(x.length==0){
    
     
   },60000)
+  this.api.getStoreClients().subscribe((data)=>{
+    this.store_clients =data
+    console.log(this.store_clients)
+
+  })
+
+  
 }
 
 getWeekNumber(d) {
@@ -287,7 +297,7 @@ showCoords($event) {
   var height = Math.max( body.scrollHeight, body.offsetHeight, 
                         html.clientHeight, html.scrollHeight, html.offsetHeight );
   if( height-y < 432){
-      y =  height-460
+      y =  height-670
   }else{
     y = Math.max(y -260,0)
   }
@@ -956,12 +966,12 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     setTimeout(async() => {
     document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
-    console.log( appo[0], appo)
     self.nome = appo.client_name
     self.time = appo.end-start
     self.info = Number(appo.service_n)
     self.extra_desc = appo.details
     self.edit = true
+    self.recurring = appo.recurring_id
     self.phone=appo.phone
     self.updateAppointmentId = id
     self.appointment_notes = note
@@ -973,6 +983,9 @@ for (let service_el of services){
   if (service_el.id == service){
     color = service_el.color
   }
+}
+if(service==-1){
+  var color = 6
 }
   div.draggable =true
   div.classList.add('task','task--primary', `c${color}`) 
@@ -1007,12 +1020,18 @@ for (let service_el of services){
     res =true
       m_pos = e.y;
       mod_div = await document.getElementById(id)
-      mod_div.draggable =false
+      if(mod_div!=undefined){
+        mod_div.draggable =false
+      }
+     
       initial_h =  parseInt(mod_div.style.height.slice(0, -2))
       document.addEventListener("mousemove", resize, false);
   }, false);
   document.addEventListener("mouseup", async function(){
-    mod_div.draggable =true
+    if(mod_div!=undefined){
+      mod_div.draggable =true
+    }
+    
     if(res){
     var hei = parseInt(mod_div.style.height.slice(0, -2))
     var appo: any = await self.storage.getAppointmet(id)
@@ -1022,11 +1041,11 @@ for (let service_el of services){
       if(has_note){
       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-      <div class="task-name" id=${id} >${client_name}</div>`
+      <div class="task-name" id=${id} >${client_name}  </div>`
       }else{
         mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
         <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-        <div class="task-name" id=${id} >${client_name}</div>`
+        <div class="task-name" id=${id} >${client_name} </div>`
       }
       div.appendChild(div_resize)
       start = self.rows.indexOf(hour1)
@@ -1043,11 +1062,11 @@ for (let service_el of services){
       if(has_note){
       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-      <div class="task-name" id=${id} >${client_name}</div>`
+      <div class="task-name" id=${id} >${client_name}  </div>`
       }else{
         mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
         <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-        <div class="task-name" id=${id} >${client_name}</div>`
+        <div class="task-name" id=${id} >${client_name} </div>`
       }
       div.appendChild(div_resize)
       start = self.rows.indexOf(hour1)
@@ -1070,11 +1089,11 @@ for (let service_el of services){
   if(has_note){
     div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
     <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-    <div class="task-name" id=${id} >${client_name}</div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
+    <div class="task-name" id=${id} >${client_name}  </div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
   }else{
     div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
                   <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-                  <div class="task-name" id=${id} >${client_name}</div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
+                  <div class="task-name" id=${id} >${client_name} </div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
   }
   div.appendChild(div_resize)
   if(this.week[6]<this.week[0]){
@@ -1115,6 +1134,9 @@ for (let service_el of services){
     if (service_el.id == service){
       color = service_el.color
     }
+  }
+  if(service==-1){
+    var color = 6
   }
     div.classList.add('task','task--primary', `c${color}`) 
     div.id= id
@@ -1178,6 +1200,9 @@ for (let service_el of services){
     if (service_el.id == service){
       color = service_el.color
     }
+  }
+  if(service==-1){
+    var color = 6
   }
     div.draggable =true
     div.classList.add('task','task--primary', `c${color}`) 
@@ -1666,6 +1691,28 @@ pastWeSpots(){
   
 }
 }    
+setRecuringBooking(){
+  this._loading=true
+  this.api.setRecuringBooking(this.updateAppointmentId).subscribe(data=>  {
+     Notiflix.Notify.Success('Appuntamento ricorrente creato'),this.closeModal()
+     var new_appo =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id == this.updateAppointmentId})
+     new_appo[0].recurring_id=this.updateAppointmentId
+     this._loading=false
+    //  this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != this.updateAppointmentId})
+    },err=> {
+      this._loading=false
+      Notiflix.Notify.Warning("C'è stato un problem durante la cancellazione"),this.closeModal()})
+}
+deleteRecuringBooking(){
+  this.api.deleteRecuringBooking(this.recurring).subscribe(data=>{ 
+    var paras = document.getElementById(this.updateAppointmentId);
+    paras.parentNode.removeChild(paras);
+    this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != this.updateAppointmentId}),
+     Notiflix.Notify.Success('Appuntamenti ricorrenti cancellati')
+     this.closeModal()}
+     ,err=>{Notiflix.Notify.Warning("C'è stato un problem durante la cancellazione"),this.closeModal()})
+}
+
 }
 
 

@@ -23,6 +23,7 @@
     "@angular/platform-browser-dynamic": "~9.1.9",
     "@angular/router": "~9.1.9",
     "@stripe/stripe-js": "^1.5.0",
+    "@swimlane/ngx-charts": "^17.0.0",
     "@types/jquery": "^3.3.38",
     "@vaadin/vaadin-checkbox": "^2.4.0-alpha3",
     "@vaadin/vaadin-time-picker": "^2.2.0",

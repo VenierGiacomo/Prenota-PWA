@@ -71,7 +71,7 @@ const routes: Routes = [
   // {path: 'month', component: MonthviewComponent},
   {path: 'subscription', component: SubscriptionComponent},
   //da eliminare
-  // {path: 'test', component: TestingComponent},
+  {path: 'test', component: TestingComponent},
   // {path: '.well-known/assetlinks.json', component: GoogleDeepLinksComponent},
   // {path: 'store/setup', component: StoreSetupComponent, canActivate: [AuthGuard]},
   //da eliminare

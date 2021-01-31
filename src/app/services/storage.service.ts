@@ -55,7 +55,7 @@ export class StorageService {
     localStorage.setItem('employeehours',JSON.stringify(timetable_new))
     
   }
-  setCatalog(id, name, duration, duration_book, sex, max, color){
+  setCatalog(id, name, duration, duration_book, price, max, color){
     // if(services.length==0){
     //   this.nextId =0
     // }else {
@@ -63,7 +63,7 @@ export class StorageService {
     //   this.nextId = maxId + 1
     // }
 
-    var newservice= new NewCatalogService(id, name, duration, duration_book, sex, max, color)
+    var newservice= new NewCatalogService(id, name, duration, duration_book, price, max, color)
 
     
     let catalog = this.getCatalog()
@@ -191,5 +191,13 @@ getWeekNumber(d) {
   var weekNo = Math.ceil(( ( (d - yearStart) / 86400000) + 1)/7);
   // Return array of year and week number
   return  weekNo
+}
+
+setStats(array){
+  localStorage.setItem('stats',JSON.stringify({ 'data': array}))
+}
+getStats(){
+  var stats = JSON.parse(localStorage.getItem('stats'));
+  return stats == null ? [] : stats.data;
 }
 }

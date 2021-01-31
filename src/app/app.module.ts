@@ -53,7 +53,7 @@ import { Page404Component } from './page404/page404.component';
 import { DlfComponent } from './dlf/dlf.component';
 import { CategoryListingComponent } from './category-listing/category-listing.component';
 import { CovidCounterComponent } from './covid-counter/covid-counter.component';
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 @NgModule({
   declarations: [
@@ -106,6 +106,7 @@ import { CovidCounterComponent } from './covid-counter/covid-counter.component';
     FormsModule,
     AppRoutingModule,
     MatDatepickerModule,
+    NgxChartsModule,
     NgxMatNativeDateModule, 
     MatNativeDateModule,
     NgxMatTimepickerModule,

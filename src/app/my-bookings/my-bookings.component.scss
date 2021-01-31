@@ -10,7 +10,7 @@ body{
     background-image: url(./../../assets/applab/img/about/Waves-multiple.svg);
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    // height: 100vh;
 }
 .appo_list{
     // background: #fcfcfc;
@@ -23,25 +23,30 @@ h1{
 .appos{
     overflow: scroll;
     width: 100%;
-    margin: 20px 0px;
+    margin: 20px 0px  0px ;
     padding: 0px 0px 20px 0px;
     height: calc(100vh - 230px);
 }
 .appos-1{
     overflow: hidden;
     width: 100%;
-    margin: 20px 0px;
-    padding: 0px 0px 20px 0px;
+    margin:  0px;
+    padding: 40px 0px 60px 0px;
     height: calc(100vh - 190px);
+}
+.appo:nth-child(odd){
+    margin:20px 5% 0px 15%;
+}
+.appo:nth-child(even){
+    margin:20px 15% 0px 5% ;
 }
 .appo{
  position: relative;
- width: 70%;
- margin-top: 20px;
+ width: 30% !important;
+ display: inline-block;
+
  padding: 20px;
- margin-left: 15%;
  border-radius: 10px;
- display: block;
  background: #fff;
  box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
  h1{
@@ -108,11 +113,13 @@ h1{
 .log_out{
     position: absolute;
     height: 30px;
-    top:calc(100vh - 60px);
+    top: 10px;
     right: 30px;
-    color: #00479D;
+    font-size: 24px;
+    color: #fff;
     img{
-        height: 20px;
+        margin-top: -5px;
+        height:  30px;
     };
 }
 
@@ -121,7 +128,7 @@ h1{
     position: fixed;
     top: 0vw;
     width: 100vw;
-    height: 100vh;
+    // height: 100vh;
     display: block;
     z-index: 1000;
     overflow: hidden;
@@ -243,13 +250,36 @@ h1{
 .top_log{
     margin-top: 60px;
 }
+.log_out1{
+    display: none;
+}
 @media(max-width: 500px){
     .top_log{
+        padding: 0 20px;
         margin-top: 20px !important;
     }
+    .log_out{
+        display: none !important;
+    }
+    .log_out1{
+        display: block !important;
+        position: absolute;
+        /* height: 30px; */
+        width: 100vw;
+        text-align: center;
+        top: 90vh;
+        /* right: 30px; */
+        font-size: 24px;
+        color: #0061d5;
+        img{
+            margin-top: -5px;
+            height:  30px;
+        };
+    }
+ 
 .appo{
     width: 90% !important;
-    margin-left: 5%;
+    margin: 20px 5% !important;
         h1{
             font-size: 21px !important;
             color: #263b5e;
@@ -264,6 +294,10 @@ h1{
             font-size: 13px !important;
         }
         }
+    }
+
+    .appos{
+        height: calc(100vh - 290px) !important;
     }
 .appo-1{
     width: 90% !important;

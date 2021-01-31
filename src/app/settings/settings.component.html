@@ -4,7 +4,7 @@
         <div class="side-menu">
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
-            <div class="menu-data" (click)='goData()'>Area clienti</div>
+            <!-- <div class="menu-data" (click)='goData()'>Area clienti</div> -->
             <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
             <!-- <button>Logout</button> -->
         </div>  
@@ -17,25 +17,23 @@
                                 <!-- Animated -->
                                 <div class="animated fadeIn">
                          <div class="row">
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="card" (click)='bussiness_selection="block"'>
                                             <div class="card-body">
                                                 <div class="stat-widget-five">
                                                     <div class="stat-icon dib flat-color-1">
                                                         <img src="../assets/icons/company.svg" height="50px">
                                                     </div>
-                                                    <div class="stat-content">
-                                                        <div class="text-left dib">
+                                                  
                                                             <div class="stat-text"><span class="count">Tipo di attività</span></div>
                                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                        </div>
-                                                    </div>
+                                                    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                 
-                                    <div class="col-lg-3 col-md-6">
+                                    <div class="col-lg-4 col-md-6">
                                         <div class="card" (click)='displayCatalog()'>
                                             <div class="card-body">
                                                 <div class="stat-widget-five">
@@ -43,35 +41,31 @@
                                                         <i class="pe-7s-cart"></i>
                                                         <img src="../assets/icons/work.svg" height="50px">
                                                     </div>
-                                                    <div class="stat-content">
-                                                        <div class="text-left dib">
+                                                   
                                                             <div class="stat-text"><span class="count">Modifica servizi</span></div>
                                                              <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                        </div>
-                                                    </div>
+                                                       
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="col-lg-3 col-md-6">
-                                            <div class="card" (click)='goEmployees()'>
+                                    <div class="col-lg-4 col-md-6">
+                                            <div class="card" (click)='charts_show()'>
                                                 <div class="card-body">
                                                     <div class="stat-widget-five">
                                                         <div class="stat-icon dib flat-color-1">
-                                                            <img src="../assets/icons/group.svg" height="50px">
+                                                            <img src="../assets/icons/profits.svg" height="50px">
                                                         </div>
-                                                        <div class="stat-content">
-                                                            <div class="text-left dib">
-                                                                <div class="stat-text"><span class="count">I tuoi collaboratori</span></div>
+                                                     
+                                                                <div class="stat-text"><span class="count">Statistiche</span></div>
                                                                 <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                            </div>
-                                                        </div>
+                                                      
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-lg-3 col-md-6">
+                                        <!-- <div class="col-lg-3 col-md-6">
                                                 <div class="card" (click)='portalStripe()'>
                                                     <div class="card-body">
                                                         <div class="stat-widget-five">
@@ -79,42 +73,114 @@
                                                                 <i class="pe-7s-cart"></i>
                                                                 <img src="../assets/policy.svg" height="50px">
                                                             </div>
-                                                            <div class="stat-content">
-                                                                <div class="text-left dib">
+                                                            
+                                                                
                                                                     <div class="stat-text"><span class="count">Info Abbonamento</span></div>
-                                                                     <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                 </div>
-                      
-            <!-- <div class="business-type">
-                <h4>Tipo di business:</h4> 
-                <select [(ngModel)]="business">
-                    <option value=0>Seleziona il tuo business </option>
-                    <option value=1>Studio medico</option>
-                    <option value=2 selected >Studio dentistico</option>
-                    <option value=3>Studio Parucchieria</option>
-                    <option value=4>Studio Estetico</option>
-                    <option value=5>Baby sitter</option>
-                    <option value=6>Fisioterapista</option>
-                    <option value=7>Psicologo</option>
-                    <option value=8>Palestra</option>
-                </select>
-                <div class="save" (click)='storeEverything()'>Salva modifiche</div>
-            </div> -->
-            <div class="opening-hours">
-                <!-- <div class="head-form"> -->
+                                <div class="activate-payments"><div> <img src='../assets/undraw_pay_online_b1hk.svg'></div>
+                                <span><button (click)='showBusinessStripeType()'>Accetta pagamenti online</button></span>
+                            
+                            </div>
+                            <!-- <div class="list-payments">
+                                <h2>Vendite</h2>
+                                <div class="row">
+                                <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Rinnovo patente</h5>
+                                     <p>19:05 10/01/2021 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >60,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Nuova patente</h5>
+                                     <p>17:35 15/12/2020 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >120,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Nuova patente</h5>
+                                     <p>12:00 13/12/2020 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >120,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Rinnovo patente</h5>
+                                     <p>15:55 01/12/2020 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >60,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Porto d'armi</h5>
+                                     <p>09:50 29/11/2020 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >200,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 " style="padding: 10px;">
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5>Rinnovo patente</h5>
+                                     <p>12:35 17/12/2020 </p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >60,00 €</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                                
+                        </div>
+                                         
+                                 
+                                 
+                                
+                            </div> -->
+        
+        
+        
+        
+        
+        
+                            <!-- <div class="opening-hours">
+            
                         <h4>Orario del negozio:</h4> 
-                        <!-- <div class="save">Salva </div> -->
-                <!-- </div> -->
-                <!-- <vaadin-time-picker *ngIf='closed_days[0]' [(ngModel)]='lun[0]' id="time-picker-basic-demos-value-resolution" 
-min="06:30" max="22:00" step="900" label="Apertura"></vaadin-time-picker> -->
-                <!-- <vaadin-time-picker [value]='value_t'  id="time-picker-basic-demos-value-resolution" 
-min="06:30" max="22:00" step="900" label="Apertura"></vaadin-time-picker> -->
+                        
+           
 
 <form> 
         <h1>Lunedì</h1>
@@ -166,7 +232,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[0]' (change)='double_turn[0]=!double_turn[0]' [checked]="double_turn[0]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[0]'(change)='closed_days[0]=!closed_days[0]'[checked]="!closed_days[0]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Martedì</h1>
             <div *ngIf='!closed_days[1]'></div>
             <div *ngIf='!closed_days[1]'></div>
@@ -214,7 +280,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[1]' (change)='double_turn[1]=!double_turn[1]' [checked]="double_turn[1]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[1]'(change)='closed_days[1]=!closed_days[1]'[checked]="!closed_days[1]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Mercoledì</h1>
             <div *ngIf='!closed_days[2]'></div>
             <div *ngIf='!closed_days[2]'></div>
@@ -261,7 +327,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[2]' (change)='double_turn[2]=!double_turn[2]' [checked]="double_turn[2]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[2]'(change)='closed_days[2]=!closed_days[2]'[checked]="!closed_days[2]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Giovedì</h1>
             <div *ngIf='!closed_days[3]'></div>
             <div *ngIf='!closed_days[3]'></div>
@@ -308,7 +374,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[3]' (change)='double_turn[3]=!double_turn[3]' [checked]="double_turn[3]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[3]'(change)='closed_days[3]=!closed_days[3]'[checked]="!closed_days[3]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Venerdì</h1>
             <div *ngIf='!closed_days[4]'></div>
             <div *ngIf='!closed_days[4]'></div>
@@ -355,7 +421,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[4]' (change)='double_turn[4]=!double_turn[4]' [checked]="double_turn[4]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[4]'(change)='closed_days[4]=!closed_days[4]'[checked]="!closed_days[4]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Sabato</h1>
             <div *ngIf='!closed_days[5]'></div>
             <div *ngIf='!closed_days[5]'></div>
@@ -402,7 +468,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='closed_days[5]' (change)='double_turn[5]=!double_turn[5]' [checked]="double_turn[5]">2 turni</vaadin-checkbox>
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[5]'(change)='closed_days[5]=!closed_days[5]'[checked]="!closed_days[5]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
-            <!--  -->
+         
             <h1>Domenica</h1>
             <div *ngIf='!closed_days[6]'></div>
             <div *ngIf='!closed_days[6]'></div>
@@ -450,7 +516,7 @@ min="06:30" max="22:00"
                     <vaadin-checkbox value="Option" *ngIf='!double_turn[6]'(change)='closed_days[6]=!closed_days[6]'[checked]="!closed_days[6]">chiuso</vaadin-checkbox>
             </vaadin-checkbox-group>
     </form>
-        </div>
+        </div> -->
     </div>
 </div>
             <!-- <div class="services">
@@ -472,9 +538,9 @@ min="06:30" max="22:00"
                     <thead>
                         <tr> 
                             <th class="corner1">Nome Servizio</th>
-                            <th>Durata</th>
-                            <th>Sesso</th>
-                            <th>Max</th>
+                            <th style="text-align: center;">Durata</th>
+                            <!-- <th>Sesso</th> -->
+                            <th style="text-align: center;">Prezzo</th>
                             <th>Colore</th>
                             <th class="corner2"></th>
                         </tr>
@@ -482,14 +548,14 @@ min="06:30" max="22:00"
                     <tbody>
                         <tr *ngFor='let service of catalog_list'> 
                             <td>{{service.name}}</td>
-                            <td>{{durations[service.duration]}}</td>
-                            <td>{{sexs[service.sex]}}</td>
-                            <td>{{service.max_n}}</td>
+                            <td style="text-align: center;">{{durations[service.duration]}}</td>
+                            <!-- <td>{{sexs[service.sex]}}</td> -->
+                            <td style="text-align: center;">{{service.price_display}}€</td>
                             <td><div class="color-serv" [style.background]='colors_list[service.color]'></div></td>
                             <td> <button class="delete" (click)='deleteservice(service.id)'>Elimina</button></td>
                         </tr>
                         <tr> 
-                            <td style="padding: 0px;"><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name"></td>
+                            <td style="padding: 0px;"><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name" style="text-align: left !important"></td>
                             <td style="padding: 0px;">
                                 <select [(ngModel)]="duration">
                                     <option value=1>5 min</option>
@@ -503,7 +569,7 @@ min="06:30" max="22:00"
                                     <option value=9>45 min</option>
                                     <option value=10>50 min</option>
                                     <option value=11>55 min</option>
-                                    <option value=12> 1ora</option>
+                                    <option value=12> 1 ora</option>
                                     <option value=13> 1 ora 5 min</option>
                                     <option value=14> 1 ora 10 min</option>
                                     <option value=15> 1 ora 15 min</option>
@@ -518,14 +584,14 @@ min="06:30" max="22:00"
                                     <option value=24> 2 ore</option>
                                 </select>
                             </td>
-                            <td style="padding: 0px;">
+                            <!-- <td style="padding: 0px;">
                                 <select [(ngModel)]="sex">
                                     <option value=1>Donna</option>
                                     <option value=2>Uomo</option>
                                     <option value=3>Unisex</option>
                                 </select>
-                            </td>
-                            <td style="padding: 0px;"><input class='input-price' type="number" placeholder="1" [(ngModel)]="max"></td>
+                            </td> -->
+                            <td style="padding: 0px;"><input id='input-price' type="number" placeholder="0.00" [(ngModel)]="price"></td>
                             <td style="padding: 0px;" id='color'><div class="color-serv" [style.background]='bgcolor' (click)='displayColorPicker()'></div></td>
                             <td style="padding: 0px auto;"><button  class="active-service" (click)='storeCatalogService()'>Aggiungi</button></td>
                         </tr>
@@ -557,12 +623,11 @@ min="06:30" max="22:00"
                                 <div class="stat-icon dib flat-color-1">
                                     <img src="../assets/icons/doctor.svg" height="50px">
                                 </div>
-                                <div class="stat-content">
-                                    <div class="text-left dib">
+                                
+                                    
                                         <div class="stat-text"><span class="count">Salute</span></div>
                                         <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                    </div>
-                                </div>
+                                    
                             </div>
                         </div>
                     </div>
@@ -574,12 +639,11 @@ min="06:30" max="22:00"
                                     <div class="stat-icon dib flat-color-1">
                                         <img src="../assets/icons/hair.svg" height="50px">
                                     </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
+                                    
+                                        
                                             <div class="stat-text"><span class="count">Cura capelli e viso</span></div>
                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                        </div>
-                                    </div>
+                                        
                                 </div>
                             </div>
                         </div>
@@ -591,12 +655,11 @@ min="06:30" max="22:00"
                                         <div class="stat-icon dib flat-color-1">
                                             <img src="../assets/icons/massage.svg" height="50px">
                                         </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib">
+                                        
+                                            
                                                 <div class="stat-text"><span class="count">Centro Massaggi</span></div>
                                                 <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                            </div>
-                                        </div>
+                                           
                                     </div>
                                 </div>
                             </div>
@@ -608,12 +671,11 @@ min="06:30" max="22:00"
                                         <div class="stat-icon dib flat-color-1">
                                             <img src="../assets/icons/nails.svg" height="50px">
                                         </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib">
+                                        
+                                            
                                                 <div class="stat-text"><span class="count">Estetisti</span></div>
                                                 <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                            </div>
-                                        </div>
+                                       
                                     </div>
                                 </div>
                             </div>
@@ -627,12 +689,10 @@ min="06:30" max="22:00"
                                             <div class="stat-icon dib flat-color-1">
                                                 <img src="../assets/icons/physiotherapy.svg" height="50px">
                                             </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
+                                            
                                                     <div class="stat-text"><span class="count">Fisioterapia</span></div>
                                                     <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                </div>
-                                            </div>
+                                              
                                         </div>
                                     </div>
                                 </div>
@@ -645,12 +705,11 @@ min="06:30" max="22:00"
                                     <div class="stat-icon dib flat-color-1">
                                         <img src="../assets/icons/dentist.svg" height="50px">
                                     </div>
-                                    <div class="stat-content">
-                                        <div class="text-left dib">
+                                    
+                                        
                                             <div class="stat-text"><span class="count">Dentisti</span></div>
                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                        </div>
-                                    </div>
+                                        
                                 </div>
                             </div>
                         </div>
@@ -662,12 +721,11 @@ min="06:30" max="22:00"
                                         <div class="stat-icon dib flat-color-1">
                                             <img src="../assets/icons/gym.svg" height="50px">
                                         </div>
-                                        <div class="stat-content">
-                                            <div class="text-left dib">
-                                                <div class="stat-text"><span class="count">Personal trainer</span></div>
+                                        
+                                            
+                                                <div class="stat-text"><span class="count">Centro sportivo</span></div>
                                                 <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                            </div>
-                                        </div>
+                                           
                                     </div>
                                 </div>
                             </div>
@@ -679,12 +737,10 @@ min="06:30" max="22:00"
                                             <div class="stat-icon dib flat-color-1">
                                                 <img src="../assets/icons/lawyer.svg" height="50px">
                                             </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
+                                            
                                                     <div class="stat-text"><span class="count">Avvocati</span></div>
                                                     <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                </div>
-                                            </div>
+                                                
                                         </div>
                                     </div>
                                 </div>
@@ -692,4 +748,143 @@ min="06:30" max="22:00"
                          
                 </div>
     </div>
+</div>
+
+<div class="catalog" [style.display]='bussiness_type_stripe'>
+    <div class="close-catalog" (click)='bussiness_type_stripe="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+    <h1 style="width: 100vw; color: #fff; text-align: center;margin-top: 30px;">Seleziona la tipologia di attività:</h1>
+<div class="content" style="position: absolute; margin-top: 24vh;">
+    <div class="row" >
+            <div class="col-md-5 offset-md-1">
+                <div class="card" (click)='openPaymentAccount("individual")'>
+                    <div class="card-body">
+                        <div class="stat-widget-five">
+                            <div class="stat-icon dib flat-color-1">
+                                <img src="../assets/icons/doctor.svg" height="50px">
+                            </div>
+                            
+                                
+                                    <div class="stat-text"><span class="count">Partita IVA o Azienda individuale</span></div>
+                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 ">
+                    <div class="card" (click)='openPaymentAccount("company")'>
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <img src="../assets/icons/hair.svg" height="50px">
+                                </div>
+                                
+                                    
+                                        <div class="stat-text"><span class="count">Azienda di persone</span></div>
+                                        <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+</div>
+</div>
+
+<div class="charts" id='charts_cont' (click)='charts_hide()'>
+    <div>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorScheme"
+          [results]="services_general"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel_services_general"
+          [yAxisLabel]="yAxisLabel_services_general"
+          [xAxisTickFormatting]='trunk5'
+          
+          >
+        </ngx-charts-bar-vertical>
+        </div>
+        <!-- <div>
+            <ngx-charts-pie-chart
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="services_general"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [labels]="labels"
+              [xAxisLabel]="xAxisLabel_services_general"
+              [yAxisLabel]="yAxisLabel_services_general"              
+              >
+            </ngx-charts-pie-chart>
+            </div> -->
+        <div>
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="services_per_emplo"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel_services_per_emplo"
+              [yAxisLabel]="yAxisLabel_services_per_emplo"
+              [xAxisTickFormatting]='trunk5'
+              >
+              <ng-template #tooltipTemplate let-model="model">
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:10px 20px 0px 20px;">
+                  {{ model.name }}
+                </p>
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:0px 20px;">{{ formatHour(model.value) }}</p>
+              </ng-template>
+              </ngx-charts-bar-vertical>
+            </div>
+            <div>
+                <ngx-charts-number-card
+                  [view]="view"
+                  [scheme]="colorScheme"
+                  [results]="online_performance"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel_online_performance"
+                  [yAxisLabel]="yAxisLabel_online_performance"                  
+                  [valueFormatting]='format_cardMoney'
+                  >
+                </ngx-charts-number-card>
+                </div>
+                <div>
+                    <ngx-charts-bar-vertical
+                      [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="day_by_day"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel_day_by_day"
+                      [yAxisLabel]="yAxisLabel_day_by_day"
+                      >
+                      <ng-template #tooltipTemplate let-model="model">
+                        <p style="color: white; font-size: 11px; line-height: 13px; padding:10px 20px 0px 20px;">
+                          {{ nameToDate(model.name) }}
+                        </p>
+                        <p style="color: white; font-size: 11px; line-height: 13px; padding:0px 20px;">{{model.value}} appuntamenti</p>
+                      </ng-template>
+                    </ngx-charts-bar-vertical>
+                    </div>
 </div>

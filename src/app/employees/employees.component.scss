@@ -159,6 +159,22 @@ input:focus, textarea:focus, select:focus{
             }
         }
     }
+
+    .card{
+        cursor: pointer;
+        .card-body{
+            padding: 25px !important;
+        }
+        .stat-text{
+            position: absolute;
+            left:90px;
+            height: 60px;
+            line-height: 60px;
+            span{
+                line-height: 60px;
+            }
+        }
+    }
     // .services{
     //     min-width: 600px;
     //     padding: 10px 40px;
@@ -221,7 +237,7 @@ input:focus, textarea:focus, select:focus{
 .cont-table{
     margin: 20vh auto;
     display: block;
-    // height: 60vh;
+    max-height: 60vh;
     border-radius: 5px;
     width: max-content;
     overflow: auto;
@@ -266,6 +282,7 @@ input:focus, textarea:focus, select:focus{
         border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
     }
     button{
+        width: max-content;
         padding: 5px;
         border-radius: 5px;
         margin: 0px 10px;
@@ -282,12 +299,13 @@ input:focus, textarea:focus, select:focus{
     }
     .active-service{
         background: #003FDE;
-           
+        width: max-content;
             box-shadow: 0 5px 7px rgba(#4786ff, 0.4);
     }
     .deactivated{
         background: #d7dbef;
         justify-content: center;
+        width: max-content;
         color: #444e7e;
     }
     .corner1{
@@ -343,6 +361,7 @@ input:focus, textarea:focus, select:focus{
         width: 8vw;
     }
     button{
+        width: max-content;
         padding: 5px;
         border-radius: 5px;
         margin: 0px 10px;

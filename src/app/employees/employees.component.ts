@@ -16,7 +16,7 @@ export class EmployeesComponent implements OnInit {
   toast="none";
   emplo = "none";
   catalog="none";
-  bk_empl='none';
+  bk_empl=true;
   createEmployee = "none";
   employee= 0
   emplo_name=''
@@ -108,10 +108,12 @@ export class EmployeesComponent implements OnInit {
         }
       )
     }
-    goHome(){
+    async goHome(){
+      await this.storeEverything()
       this.router.navigateByUrl('/home')
     }
-    goData(){
+    async goData(){
+      await this.storeEverything()
       this.router.navigateByUrl('/notifications')
     }
     deleteEmployee(employee){
@@ -127,7 +129,8 @@ export class EmployeesComponent implements OnInit {
       )
       
     }
-    goSettings(){
+    async goSettings(){
+      await this.storeEverything()
       this.router.navigateByUrl('/settings')
     }
     submit(){
@@ -251,7 +254,7 @@ export class EmployeesComponent implements OnInit {
     changeTimetable(emplo){
       console.log(emplo)
       this.employee = emplo.employee
-      this.bk_empl="none"
+      this.bk_empl=false
       this.lun= ['','','','']
       this.mar= ['','','','']
       this.mer= ['','','','']
@@ -289,12 +292,18 @@ export class EmployeesComponent implements OnInit {
       var times=[this.lun, this.mar,this.mer,this.gio,this.ven,this.sab,this.dom]
       times[day][spot] = ev.target.__data.value
     }
-    selectEmpl(){
+    async selectEmpl(){
+      await this.storeEverything()
       this.emplo = "block"
     }
-    logout(){
+    async logout(){
+      await this.storeEverything()
       this.api.deleteAllData()
       this.router.navigateByUrl('login')
+    }
+    async changeColab(){
+      await this.storeEverything()
+      this.bk_empl=true
     }
   }
 

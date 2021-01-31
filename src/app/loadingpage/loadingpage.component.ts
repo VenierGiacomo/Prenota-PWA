@@ -117,7 +117,7 @@ anime.timeline({loop: false})
   await this.api.getStoreservice().subscribe(data=>{
     var services:any = data
     for(let service of services){
-      this.storage.setCatalog(service.id, service.name, service.duration, service.duration_book, service.sex, service.max_n, service.color)
+      this.storage.setCatalog(service.id, service.name, service.duration, service.duration_book, service.price, service.max_n, service.color)
     }
   },err=>{
     Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 

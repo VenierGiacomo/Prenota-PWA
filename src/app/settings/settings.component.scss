@@ -24,6 +24,18 @@
 
 .card{
     cursor: pointer;
+    .card-body{
+        padding: 25px !important;
+    }
+    .stat-text{
+        position: absolute;
+        left:120px;
+        height: 60px;
+        line-height: 60px;
+        span{
+            line-height: 60px;
+        }
+    }
 }
 // 
 
@@ -146,9 +158,11 @@
     width: 100vw;
     height: 100vh;
     z-index: 10;
+    text-align: center;
     backdrop-filter: blur(16px);
     background: rgba($color: rgb(1, 28, 83), $alpha: 0.8);
     .count{
+        text-align: center;
         padding-left: 20px;
         line-height: 60px !important;
     }
@@ -158,7 +172,7 @@
 .cont-table{
     margin: 20vh auto;
     display: block;
-    // height: 60vh;
+    max-height: 60vh;
     border-radius: 5px;
     width: max-content;
     overflow: auto;
@@ -166,7 +180,8 @@
     backdrop-filter: blur(16px);
  
     input{
-        text-align: left !important;
+        // -webkit-appearance: none;
+        text-align: center;
         background: transparent;
     }
 }
@@ -193,7 +208,8 @@
     }
     input, select{
         color: #263b5e;
-        text-align: left !important;
+        text-align-last:center;
+        -webkit-appearance: none;
         padding: 0px 30px;
         background: transparent;
         border: none;
@@ -203,7 +219,7 @@
         border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
     }
     td, th{
-        text-align: left !important;
+       
         padding: 0px 30px;
         font-size: 13px;
         border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
@@ -266,6 +282,7 @@
 
 /// color picker
 .color-serv{
+    border: 1px solid #aaa;
     display: block;
     height: 20px;
     width: 20px;
@@ -369,7 +386,6 @@ form{
 
   .topbar{
     position: fixed;
-    left:20vw;
     width: 80vw;
     height: 6vh;
     display:grid;
@@ -403,3 +419,135 @@ form{
     display: block;
     z-index: 10;
    }
+
+   .activate-payments{
+    width: 100%;
+       height: 100%;
+       text-align: center;
+       div{
+           top:0px;
+           display: block;
+           width: 100%;
+           height: 36vh;
+           text-align: center;
+           img{
+            display: block;
+            text-align: center;
+            object-fit: cover;
+            height: 100%;
+            top: 0;
+            margin: 50px auto;
+        }
+       }
+       span{
+        width: 100%;
+        text-align: center;
+        button{
+            margin-top:80px;
+            padding: 10px 25px;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #fff;
+            background: #0061d5;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+        }
+       }
+       
+   }
+
+   .list-payments{
+       h2{
+        margin-top:30px;
+        font-size: 24px;
+        line-height: 24px;
+        font-weight: 700;
+         color: #1a1a1a;
+       }
+   }
+   .payment-container{
+    background: white;
+    border-radius: 5px;
+    height: 80px;
+    // padding: 16px;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    h5{
+        line-height: 16px;
+        font-size: 16px;
+        color: #1a1a1a;
+    }
+    p{
+        line-height: 13px;
+        font-size: 13px;
+        color: #666666;
+    }
+    .left_data{
+
+        position: relative;
+        width: 50%; 
+        height: 80px;
+        display: inline-block;
+        h5{
+            position : absolute;
+            top:16px;
+            left: 16px;
+        }
+        p{
+            position : absolute;
+            bottom:0px;
+            left: 16px;
+        }
+    }
+    .right_data{
+        position: relative;
+        width: 50%; 
+        height: 80px;
+        display: inline-block;
+        svg{
+            position : absolute;
+            top:28px;
+            right: 12px;
+        }
+        h5{
+            position : absolute;
+            top:32px;
+            right: 42px;
+        }
+    
+    }
+   }
+
+
+
+   input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+
+  .charts{
+      position: absolute;
+      top: calc( 6vh + 10px );
+      left: 100vw;
+      transition: 600ms;
+      width: 80vw;
+      height: calc( 94vh - 10px );
+      display: block;
+      background: white;
+      overflow: scroll;
+      div{
+        margin: 4vh 0vw 4vh 4vw;
+        width: 32vw ;
+        padding: 20px ;
+        text-align: center;
+        display: inline-block;
+        height:34vh;
+        font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
+    }
+
+  }

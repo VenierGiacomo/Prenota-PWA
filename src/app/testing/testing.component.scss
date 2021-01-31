@@ -1,20 +1,13 @@
-form{
-  display: grid;
-  width:100%;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr ;
-  h1{
-    width: 100%;
-    line-height: 24px;
-    text-align: center;
-    font-size: 24px;
-    font-weight: 700;
-    margin-bottom: 10px;
-    align-self: flex-end;
-
-  }
+div{
+  display:block;
+  padding:20px;
+  margin:10px;
+  background:#0061d5;
+  color:white
 }
-vaadin-time-picker{
-  width: 120px;
-  margin: 0 20px;
-
+input{
+  background:#ccc;
+  display:block;
+  padding:20px;
+  margin:10px
 }

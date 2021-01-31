@@ -23,7 +23,7 @@
         <div class="side-menu">
             <div class="menu-home" (click)='goHome()'>Calendario</div>
             <div class="menu-settings">Impostazioni</div>
-            <div class="menu-home" style="margin-top: 5vh;" (click)='goData()'>Area clienti</div>
+            <!-- <div class="menu-home" style="margin-top: 5vh;" (click)='goData()'>Area clienti</div> -->
             <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
         </div>   
         <div class="settings">
@@ -31,87 +31,98 @@
                         <div (click)="goSettings()">Attività</div>
                         <div class="not" >Collaboratori</div>
                 </div>
-                <div style='margin-top: 8vh'  class="content">
+                <div style='margin-top: 8vh'  class="content" >
                         <!-- Animated -->
                         <div class="animated fadeIn">
-                 <div class="row">
-                        <div class="col-lg-3 col-md-6">
-                                <div class="card" (click)='bk_empl="block"'>
+                 <div class="row" *ngIf='!bk_empl'>
+                        <div class="col-lg-4 col-md-6 offset-md-2">
+                                <div class="card" (click)='changeColab()'>
                                     <div class="card-body">
                                         <div class="stat-widget-five">
                                             <div class="stat-icon dib flat-color-2">
                                                 <i class="pe-7s-cart"></i>
-                                                <img src="../assets/icons/group.svg" height="50px">
+                                                <img src="../assets/icons/group.svg" height="40px">
                                             </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
-                                                    <div class="stat-text"><span class="count">Seleziona collaboratore</span></div>
+                                   
+                                                    <div class="stat-text"><span class="count">Cambia collaboratore</span></div>
                                                      <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        <div class="col-lg-3 col-md-6">
-                                <div class="card" (click)='emplo="block"'>
-                                    <div class="card-body">
-                                        <div class="stat-widget-five">
-                                            <div class="stat-icon dib flat-color-1">
-                                                <img src="../assets/icons/icons8-edit.svg" height="40px">
-                                            </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
-                                                    <div class="stat-text"><span class="count">Modifica collaboratori</span></div>
-                                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                        </div>
-                        <div class="col-lg-3 col-md-6">
+                        <div class="col-lg-4 col-md-6">
                                 <div class="card" (click)='displayCatalog()'>
                                     <div class="card-body">
                                         <div class="stat-widget-five">
                                             <div class="stat-icon dib flat-color-1">
-                                                <img src="../assets/icons/support.svg" height="50px">
+                                                <img src="../assets/icons/support.svg" height="40px">
                                             </div>
-                                            <div class="stat-content">
-                                                <div class="text-left dib">
+                                            
                                                     <div class="stat-text"><span class="count">Servizi collaboratore</span></div>
                                                     <!-- <div class="stat-heading">Elimina collaboratore</div> -->
-                                                </div>
-                                            </div>
+                                               
                                         </div>
                                     </div>
                                 </div>
                             </div>
                            
               
-                                    <div class="col-lg-3 col-md-6">
+                                    <!-- <div class="col-lg-4 col-md-6">
                                             <div class="card" (click)='storeEverything()'>
                                                 <div class="card-body">
                                                     <div class="stat-widget-five">
                                                         <div class="stat-icon dib flat-color-2">
                                                             <i class="pe-7s-cart"></i>
-                                                            <img src="../assets/icons/save.svg" height="50px">
+                                                            <img src="../assets/icons/save.svg" height="40px">
                                                         </div>
-                                                        <div class="stat-content">
-                                                            <div class="text-left dib">
+                                                  
                                                                 <div class="stat-text"><span class="count">Salva modifiche</span></div>
-                                                                 <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                 
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf='bk_empl'>
+                                            <div class="col-lg-4 col-md-6" *ngFor="let empl of employees">
+                                                    <div class="card" (click)='changeTimetable(empl)'>
+                                                        <div class="card-body">
+                                                            <div class="stat-widget-five">
+                                                                <div class="stat-icon dib flat-color-2">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                    <img src="../assets/user.svg" height="40px">
+                                                                </div>
+                                                                
+                                                                        <div class="stat-text"><span class="count">{{empl.first_name}}</span></div>
+                                                                         <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                              
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
+                                                <div class="col-lg-4 col-md-6" >
+                                                        <div class="card" (click)='emplo="block"'>
+                                                            <div class="card-body">
+                                                                <div class="stat-widget-five">
+                                                                    <div class="stat-icon dib flat-color-2">
+                                                                        <i class="pe-7s-cart"></i>
+                                                                        <img src="../assets/icons/icons8-edit.svg" height="40px">
+                                                                    </div>
+                                                                   
+                                                                            <div class="stat-text"><span class="count">Aggiungi o rimovi</span></div>
+                                                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
                                             </div>
-                                        </div>
-                                    </div>
             <!-- <div class='title-sect'>
                 <h1>Collaboratori</h1>
             </div> -->       
-            <div class="opening-hours" *ngIf='employee!=0'>
+            <div class="opening-hours" *ngIf='employee!=0  &&!bk_empl'>
                 <!-- <div class="head-form"> -->
                         <h4>Orario di lavoro di {{emplo_name}}:</h4> 
                         <!-- <div class="save">Salva </div> -->
@@ -466,7 +477,7 @@
     </div>
 </body>
 
-<div class="bk-empl-sel" [style.display]='bk_empl'>
+<!-- <div class="bk-empl-sel" [style.display]='bk_empl'>
         <div class="close-catalog" (click)='bk_empl="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
         <div class="container" >
         <div class="row" style="margin-top:300px;">
@@ -475,12 +486,12 @@
                 <div class="card-body">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-1">
-                            <img src="../assets/user.svg" height="50px">
+                            <img src="../assets/user.svg" height="40px">
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{employee.name}}</span></div>
-                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                              
                             </div>
                         </div>
                     </div>
@@ -489,7 +500,7 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->
  <div class="catalog" [style.display]='catalog'>
         <div class="close-catalog" (click)='storeEverything()'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
@@ -498,7 +509,7 @@
                         <tr> 
                             <th class="corner1">Nome Servizio</th>
                             <th>Durata</th>
-                            <th>Sesso</th>
+                            <!-- <th>Sesso</th> -->
                             <!-- <th>Max</th> -->
                             <th class="corner2"></th>
                         </tr>
@@ -506,11 +517,11 @@
                     <tbody>
                         <tr *ngFor='let service of catalog_list'> 
                             <td>{{service.name}}</td>
-                            <td>{{durations[service.duration]}}</td>
-                            <td>{{sexs[service.sex]}}</td>
+                            <td style='text-align: center;'>{{durations[service.duration]}}</td>
+                            <!-- <td>{{sexs[service.sex]}}</td> -->
                             <!-- <td>{{service.max_n}}</td> -->
-                            <td *ngIf='service.active' (click)='activate(service)' style="padding: 0px;"> <button class="active-service">Attivo</button></td>
-                            <td *ngIf='!service.active' (click)='activate(service)'  style="padding: 0px;"> <button class="deactivated">Non attivo</button></td>
+                            <td *ngIf='service.active' (click)='activate(service)' style="padding: 0px; text-align: center;" > <button class="active-service">Attivo</button></td>
+                            <td *ngIf='!service.active' (click)='activate(service)'  style="padding: 0px; text-align: center;" > <button class="deactivated">Non attivo</button></td>
                         </tr>
                        
                     </tbody>
