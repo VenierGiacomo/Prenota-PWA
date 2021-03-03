@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import Notiflix from "notiflix";
+import { StorageService } from '../services/storage.service';
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
@@ -16,22 +17,36 @@ phone
 avarage_expense
  last_service
  clients:any=[]
-  constructor(private router: Router, private api: ApiService) { }
+  constructor(private storage: StorageService,private router: Router, private api: ApiService) { }
 
  ngOnInit(){
    this.getClient()
+   console.log( new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(1000))
   }
   getClient(){
-    this.api.getStoreClients().subscribe(data=>{
-this.clients=data
-this.spin="none"
-    },err=>{
+    this.api.getStoreClients().then(data=>{
+    this.clients=data
+    for(let client of this.clients){
+      client.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(client.credit/100)
+    }
+    this.spin="none"
+    }).catch(err=>{
       this.spin="none"
       console.log(err)
+      Notiflix.Notify.Failure("C'è stato un problema nel caricate i tuoi clienti");
     })
   }
+  reverseFormatNumber(val,locale){
+    var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
+    var decimal = new Intl.NumberFormat(locale).format(1.1).replace(/1/g, '');
+    var reversedVal = val.replace(new RegExp('\\' + group, 'g'), '');
+    reversedVal = reversedVal.replace(new RegExp('\\' + decimal, 'g'), '.');
+    return Number.isNaN(reversedVal)?0:reversedVal;
+}
   update(client){
-    this.api.updateClientStore(client.id, client.client_name, client.hair_color, client.hair_lenght, client.phone, client.avarage_expense, client.last_service).subscribe(data=>{
+    var credit = this.reverseFormatNumber(client.credit.slice(0,-2),'it')*100
+    this.api.updateClientStore(client.id, client.client_name, client.phone, credit, client.note, client.isMember).subscribe(async data=>{
+      await this.storage.updateClient(data)
       Notiflix.Notify.Success('I dati sono stati aggiornati con successo');
     },err=>{
       console.log(err)

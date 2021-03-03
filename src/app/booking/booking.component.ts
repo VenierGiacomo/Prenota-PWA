@@ -79,7 +79,7 @@ export class BookingComponent implements OnInit {
   all_app_week1:any=[]
   show_something= false
   text_c ='#0061d5'
-  time_duration: string[] = ["5 min","10 min","15 min","20 min","25 min", "30 min","35 min", "40 min", "45 min", "50 min", "55 min", "1 ora","1 ora e 5 min", "1 ora e 10 min", "1 ora e 15 min","1 ora e 20 min", "1 ora e 25 min","1 ora e 30 min","1 ora e 35 min","1 ora e 40 min","1 ora e 45 min","1 ora e 50 min","1 ora e 55 min","2 ore"];
+  time_duration: string[] = ["0 min","5 min","10 min","15 min","20 min","25 min", "30 min","35 min", "40 min", "45 min", "50 min", "55 min", "1 ora","1 ora e 5 min", "1 ora e 10 min", "1 ora e 15 min","1 ora e 20 min", "1 ora e 25 min","1 ora e 30 min","1 ora e 35 min","1 ora e 40 min","1 ora e 45 min","1 ora e 50 min","1 ora e 55 min","2 ore"];
   week_name = ["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]
   months_days=[31, ((this.year%4==0 && this.year%100!=0)|| this.year%400==0)? 29 :28, 31 , 30, 31, 30, 31, 31, 30, 31, 30, 31]
   months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
@@ -110,6 +110,12 @@ export class BookingComponent implements OnInit {
   available_days = []
   interval_insurance
   called =false
+  booking_left='100vw'
+  limit=10
+  services_list=[]
+  show_scroll=false
+  position_book='absolute'
+  loading=false
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
     this.titleService.setTitle( "Prenota una Visita medica a Trieste  - Visita sportiva agonistica. Prendi appuntamento online");
    }
@@ -125,7 +131,13 @@ export class BookingComponent implements OnInit {
     var now = new  Date()
     var month = now.getMonth()
     var day_number = now.getDate()
+    for(let i=0; i< this.limit; i++){
 
+      this.services_list.push({name:'service ' +i, duration:'1 ora'})
+    }
+    if(this.services_list.length>=7){
+      this.show_scroll=true
+    }
   //  window.addEventListener('scroll', function(ev) {
 
    
@@ -170,12 +182,36 @@ for (let i=0;i<31;i++){
           this.button_text="Prenota appuntamento"
           this.book_site= false
           }
+          Notiflix.Report.Init(
+            {success: 
+              {svgColor:'#0061d5',
+              titleColor:'#1e1e1e',
+              messageColor:'#242424',
+              buttonBackground:'#0061d5',
+              buttonColor:'#fff'
+              ,backOverlayColor:'rgba(#00479d,0.2)',},
+            })
   }
   mobileCheck() {
     let check = false;
     (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor);
     return check;
   };
+  scrollInfo(){
+    var viewportHeight = window.innerHeight;
+    document.getElementById('cont-scroll').scrollTop = viewportHeight;
+  }
+  scroll(forward,id){
+    if(forward){
+     document.getElementById(id).scrollLeft += 420;
+    }else{
+     document.getElementById(id).scrollLeft -= 420;
+    }
+  }
+  closeBook(){
+    this.position_book='absolute'
+    this.booking_left='100vw'
+  }
   getEmployees(){
    
       this.api.getEmployeesfromshop(this.id).subscribe( async data=>{
@@ -227,11 +263,9 @@ for (let i=0;i<31;i++){
         window.location.href="https://apps.apple.com/app/id1523525291"
       }
     }else{
-      // setTimeout(() => {
-        this.serv_displ= 'block'
-        this.cal='none'
-        this.spots='none'
-      // }, 100);
+      this.position_book ='fixed'
+        this.booking_left= '0px'
+    
     }
   }
   async tokenValidation(){
@@ -300,6 +334,11 @@ for (let i=0;i<31;i++){
       memo[x[property]].push(x);
       return memo;
     }, {});
+  }
+
+  checkServActive(id){
+    var is_present = this.service.filter(val=>{return val.id ==id})
+    return   is_present.length>0
   }
   selectService(service,i){
     this.uniques=[]
@@ -984,6 +1023,7 @@ async filter_serv(){
 
 
 async book(){
+  this.loading =true
   var appointment = {
     studio: this.name,
     date: this.today,
@@ -1015,17 +1055,20 @@ async book(){
             this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
           }
       Notiflix.Block.Remove('.cont');
+      this.loading = false
        Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
        var ok_btn = document.getElementById('NXReportButton')
-       ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
+       ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti') },false) 
     },
       err=>{
+        this.loading = false
         Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
         console.log(err)
         Notiflix.Block.Remove('.cont');
         })
       }
     }else{
+      this.loading=false
       this.presentRegisterModal()
     }
   }
@@ -1153,6 +1196,7 @@ async book(){
     )
   }
   async bookfromLogin(email,first_name,last_name){
+    this.loading=true
     var appointment = {
       studio: this.name,
       date: this.today,
@@ -1189,11 +1233,12 @@ async book(){
        Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
        var ok_btn = document.getElementById('NXReportButton')
           ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
-   
+          this.loading=false
       //  await this.pay()
    
       },
       err=>{
+        this.loading=false
         Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
         console.log(err)
         Notiflix.Block.Remove('.cont');
@@ -1216,11 +1261,17 @@ async book(){
 }
 
 presentRegisterModal(){
+  this.loading=false
   this.register_form="block"
   this.disabled_btn=false
 }
 
-
+closeConfirm(ev){
+  if(ev.target.id =='confirm'){
+    this.confirm='none'
+  }
+ 
+}
 
 logScrolling(ev){
   if (ev.detail.scrollTop>100){
@@ -1234,5 +1285,8 @@ goBookSite(){
     window.location.href = 'https://mobile.prenota.cc/business/18'
   // }
 }
-
+closeBookingPage(){
+  this.booking_left='100vw'
+  this.position_book='absolute'
+}
 }

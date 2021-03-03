@@ -13,7 +13,8 @@ export class Appointment {
     public details: string,
     public employee: string,
     public service_n: string,
-    public note: string){}
+    public note: string,
+    public payed: boolean){}
   }
 
   export class NewCatalogService {

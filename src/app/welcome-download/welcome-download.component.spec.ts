@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CovidCounterComponent } from './covid-counter.component';
+import { WelcomeDownloadComponent } from './welcome-download.component';
 
-describe('CovidCounterComponent', () => {
-  let component: CovidCounterComponent;
-  let fixture: ComponentFixture<CovidCounterComponent>;
+describe('WelcomeDownloadComponent', () => {
+  let component: WelcomeDownloadComponent;
+  let fixture: ComponentFixture<WelcomeDownloadComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CovidCounterComponent ]
+      declarations: [ WelcomeDownloadComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CovidCounterComponent);
+    fixture = TestBed.createComponent(WelcomeDownloadComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,14 +8,19 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./firstpage.component.scss']
 })
 export class FirstpageComponent implements OnInit {
-
+  show_sublinks=true
   constructor(private router:Router, private titleService: Title) {
-    this.titleService.setTitle( " Prenota : Prendi appuntamento online con parrucchieri e medici a Trieste");
+    this.titleService.setTitle( " Prenota : Prendi appuntamento a Trieste con medici sportivi, parrucchieri, oculisti, campi da tennis, campi da calcio ");
    }
    
 
 
   ngOnInit(): void { 
+    if(this.mobileCheck()){
+      this.show_sublinks=false
+    }else{
+      this.show_sublinks=true
+    }
   }
   navBusiness(){
 this.router.navigateByUrl('business')
@@ -34,4 +39,7 @@ this.router.navigateByUrl('business')
     return check;
   };
   
+  goPage(page){
+    this.router.navigateByUrl(page)
+  }
 }

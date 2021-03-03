@@ -17,6 +17,7 @@ password=''
 note=''
 appo:any
 register_form='none'
+button_text='Aggiungi nota'
 appointments_list:any = []
 months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
 rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "24:00"]
@@ -74,6 +75,15 @@ rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", 
       function(){ // Yes button callback 
         self.api.deleteAppointment(appo.id).subscribe(data=>{
             self.getAppointmets()
+            Notiflix.Report.Init(
+              {success: 
+                {svgColor:'#0061d5',
+                titleColor:'#1e1e1e',
+                messageColor:'#242424',
+                buttonBackground:'#0061d5',
+                buttonColor:'#fff'
+                ,backOverlayColor:'rgba(#00479d,0.2)',},
+              })
             Notiflix.Report.Success("Appuntamento cancellato", "L'appuntamento è stato cancellato con successo!", 'Continua')
           },err=>{
             Notiflix.Report.Failure("Errore durante la cancellazione", "L'appuntamento non è stato cancellato. Controlla la tua connessione e riprova.", 'Annulla');
@@ -88,14 +98,33 @@ rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", 
   }
   AddNote(appo){
    this.appo=appo 
+   this.note = this.appo.note
     this.register_form='block'
+    if(this.note=='' || this.note==undefined ){
+      this.button_text= 'Aggiungi nota'
+    }else{
+      this.button_text= 'Modifica nota'
+    
+    }
+   
   }
   updateAppo(){
-
-    console.log(this.appo,this.note)
-    this.api.updateAppointment(this.appo.id, this.appo.start, this.appo.end, this.appo.day, this.appo.month, this.appo.year, this.appo.client_name, this.appo.phone, this.appo.details, this.appo.employee, this.appo.service_n, this.note).subscribe(data =>{
-      Notiflix.Notify.Success('Modifiche salvate con successo');
+    this.api.updateAppointment(this.appo.id, this.appo.start, this.appo.end, this.appo.day, this.appo.month, this.appo.year, this.appo.client_name, this.appo.phone, this.appo.details, this.appo.employee, this.appo.service_n, this.note).subscribe(async res =>{
+     this.note =''
+     this.appointments_list = this.appointments_list.filter((val)=>{return val.id!= this.appo.id})
+     await this.appointments_list.push(res)
       this.register_form='none'
+      Notiflix.Report.Init(
+        {success: 
+          {svgColor:'#0061d5',
+          titleColor:'#1e1e1e',
+          messageColor:'#242424',
+          buttonBackground:'#0061d5',
+          buttonColor:'#fff'
+          ,backOverlayColor:'rgba(#00479d,0.2)',},
+        })
+      Notiflix.Report.Success("Nota aggiunta", "La tua nota è stata registrata", 'Continua')
+    
     },err=>{
       Notiflix.Notify.Failure("C'è stato un problema durante il salvataggio");
       console.log(err)

@@ -109,7 +109,7 @@ export class TennisClubGrignanoComponent implements OnInit {
   interval_insurance
   called =false
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota una Visita medica a Trieste  - Visita sportiva agonistica. Prendi appuntamento online");
+    this.titleService.setTitle( "Tennis Grignano - Prenota un campo da Tennis a Trieste  - 2 campi da tennis coperti ed 1 all'aperto. Prendi appuntamento online");
    }
    async ngOnInit() {
     // Notiflix.Block.Standard('.service', 'Caricamento serivzi...');

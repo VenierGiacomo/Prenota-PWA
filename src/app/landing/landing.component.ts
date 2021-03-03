@@ -20,7 +20,7 @@ export class LandingComponent implements OnInit {
   price_MEDIUM = 0
   call_to_act='Richiedi informazioni'
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota: Esplora la nostra Agenda online e inizia la prova gratuia ");
+    this.titleService.setTitle( "Prenota : Agenda online gratuia per attività di Trieste");
    }
   ngOnInit() {
     if(this.mobileCheck()){

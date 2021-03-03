@@ -15,8 +15,9 @@
                     <div class="appo_date">
                         <h4>{{appointment.day}} {{months_names[appointment.month]}} {{appointment.year}} ore {{rows[appointment.start]}} </h4>
                     </div>
-                    <div class="note_btn" (click)='AddNote(appointment)'>Aggiungi nota<img src='../../assets/icons/notes.svg'   alt="Aggiungi una nota" title="Aggiungi una nota"></div>
-                  <img  class='del_img' src='../../assets/icons/delete.svg' (click)='deletestorage(appointment)' alt="Elimina apputnamento" title="Elimina apputnamento">
+                    <div class="note_btn" (click)='AddNote(appointment)'> <span *ngIf="appointment.note=='' || appointment.note==undefined ">Aggiungi nota</span> <span *ngIf='appointment.note!="" && appointment.note!=undefined'>Modifica nota</span><img src='../../assets/icons/notes.svg'   alt="Aggiungi una nota" title="Aggiungi una nota"></div>
+                    <div class="delete_btn" (click)='deletestorage(appointment)'>Cancella appuntamento  <img src='../../assets/icons/delete_white.svg'> </div>
+
                 </div>
             <div class="log_out" (click)='logout()'><img src="../assets/icons/logout.svg"/> Esci</div>
             <div class="log_out1" (click)='logout()'><img src="../assets/icons/logout_blue.svg"/> Esci</div>
@@ -60,14 +61,15 @@
 </body>
 
 <div class="cont-reg" [style.display]="register_form">
-        <div class="close-cont-reg" (click)='register_form="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
-    <div class="login-form" > 
+      
+    <div class="login-form" >
+            <div class="close-note" (click)='register_form="none"'>  <img src="../assets/icons/close.svg"/></div>
             <h1>prenota</h1>
             <div class='inputs'>
             <p *ngIf='error!=""'></p>
             <label class="label">Nota</label>
             <input class="input--style-4"  type="text"  name="note" placeholder="La prenotazione è a nome di mio figlio Luca" [(ngModel)]='note'>
-                    <div class="button-reg">  <button (click)='updateAppo()'>Aggiungi nota</button></div>
+                    <div class="button-reg">  <button (click)='updateAppo()'>{{button_text}}</button></div>
             </div> 
         </div>
 </div>

@@ -11,6 +11,11 @@
   margin:0px;
 background: rgba(0, 0, 0, 0.5);
  }
+ .bg-black-custom{
+  width:100vw;
+  height: 100%;
+  margin:0px;
+ }
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -7264,8 +7269,7 @@ h1, h2, h3, h4, h5,
 
 .hero-wrap {
   width: 100%;
-  height: 750px;
-  min-height: 750px;
+  height: calc(100vh - 90px);
   position: relative;
   z-index: 0; }
   @media (max-width: 1199.98px) {
@@ -7497,7 +7501,7 @@ h1, h2, h3, h4, h5,
 
 @media (min-width: 768px) {
   .ftco-intro {
-    margin-top: -100px; } }
+     } }
 
 .ftco-intro .container-wrap {
   z-index: 2 !important;
@@ -7537,15 +7541,27 @@ h1, h2, h3, h4, h5,
             color: #fff;
             font-size: 20px; }
   .ftco-intro .wrap h3 {
-    font-size: 16px; }
+      display: -webkit-inline-box;
+    font-size: 16px; 
+    margin-left: -15px;}
   .ftco-intro .wrap .text {
-    width: calc(100% - 40px); }
+    width: calc(100%); }
   .ftco-intro .wrap .icon {
     width: 40px; }
     .ftco-intro .wrap .icon span {
       color: #0061d5;
       font-size: 20px; }
-
+      @media(max-width: 570px){
+        .ftco-intro .wrap h3 {
+      
+        margin-left: 0px;}
+        .ftco-intro .wrap .icon{
+          display: none !important;
+        }
+        .ftco-intro .wrap .text{
+          width: 100% !important;
+        }
+      }
 .services h3 {
   font-size: 18px;
   margin-bottom: 20px;
@@ -8053,8 +8069,7 @@ textarea.form-control {
   @media (max-width: 767.98px) {
     .heading-section h2 {
       font-size: 28px; } }
-  .heading-section h2 span {
-    color: #0061d5; }
+ 
 
 .heading-section p.flip {
   position: relative;
@@ -8090,7 +8105,7 @@ textarea.form-control {
       width: 6px;
       height: 6px;
       content: '';
-      background: #0061d5;
+      background: #212121;
       -webkit-transform: rotate(135deg);
       -ms-transform: rotate(135deg);
       transform: rotate(135deg);
@@ -8103,7 +8118,7 @@ textarea.form-control {
       width: 10px;
       height: 10px;
       content: '';
-      background: #0061d5;
+      background: #212121;
       -webkit-transform: rotate(135deg);
       -ms-transform: rotate(135deg);
       transform: rotate(135deg);
@@ -8116,7 +8131,7 @@ textarea.form-control {
       width: 6px;
       height: 6px;
       content: '';
-      background: #0061d5;
+      background: #212121;
       -webkit-transform: rotate(135deg);
       -ms-transform: rotate(135deg);
       transform: rotate(135deg);

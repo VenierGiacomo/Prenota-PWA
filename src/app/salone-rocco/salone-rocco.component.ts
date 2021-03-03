@@ -97,12 +97,19 @@ export class SaloneRoccoComponent implements OnInit {
   //automante
   max_spots=-1
   id =29
-  name ="Salone Rocco"
-  last_selected_week=0
+  name ="Salone Rocco "
+  last_selected_week
   appointments
   book_site= false
+ 
+  place_holder
+  has_spot = true
+  date_vis='hidden'
+  available_days = []
+  interval_insurance
+  called =false
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota: Aparrucchieri - Parrucchiere Trieste. Prendi appuntamento online");
+    this.titleService.setTitle( "Prenota una Visita medica a Trieste  - Visita sportiva agonistica. Prendi appuntamento online");
    }
    async ngOnInit() {
     // Notiflix.Block.Standard('.service', 'Caricamento serivzi...');
@@ -120,18 +127,28 @@ export class SaloneRoccoComponent implements OnInit {
   //  window.addEventListener('scroll', function(ev) {
 
    
-// },false);
-  for (let i=0;i<20;i++){
-      if((day_number + i)<= this.months_days[month]){
-        var day = {"number" :day_number + i, "week_day" : ((today+i-1)%7), "month":this.month}
-        this.active_date.push(false)
-        this.week.push(day)
-      }else{
-        var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":this.month+1 }
-        this.active_date.push(false)
-        this.week.push(day)
-      }
+// },false
+for (let i=0;i<31;i++){
+  if((day_number + i)<= this.months_days[month]){
+    var day = {"number" :day_number + i, "week_day" : ((today+i-1)%7), "month":+this.month, "year": this.year}
+    this.active_date.push(false)
+    this.active_date.push(false)
+    this.week.push(day)
+  }else{
+    if(((this.month+1)%12)==0){
+      var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":((this.month+1)%12), "year": this.year+1 }
+      this.active_date.push(false)
+      this.active_date.push(false)
+      this.week.push(day)
+    }
+    else{
+      var day = {"number" :day_number + i - this.months_days[month], "week_day" : ((today+i-1)%7), "month":((this.month+1)%12), "year": this.year}
+      this.active_date.push(false)
+      this.active_date.push(false)
+      this.week.push(day)
+    }
   }
+}
     await this.getservices()
     // this.getAppointments(this.day)
     await this.tokenValidation()
@@ -190,17 +207,30 @@ export class SaloneRoccoComponent implements OnInit {
   }
   closeBooking(){
     setTimeout(() => {
-      this.serv_displ='none'
+    this.serv_displ='none'
     this.cal='none'
     this.spots='none'
   
-    }, 200);
+    }, 300);
     
   }
   showServices(){
-    this.serv_displ= 'block'
-    this.cal='none'
-    this.spots='none'
+    if(this.mobileCheck()){
+      var userAgent = navigator.userAgent || navigator.vendor ;
+      if (/android/i.test(userAgent)) {
+        window.location.href="http://play.google.com/store/apps/details?id=io.prenota.client"
+      }
+      // iOS detection from: http://stackoverflow.com/a/9039885/177710
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href="https://apps.apple.com/app/id1523525291"
+      }
+    }else{
+      // setTimeout(() => {
+        this.serv_displ= 'block'
+        this.cal='none'
+        this.spots='none'
+      // }, 100);
+    }
   }
   async tokenValidation(){
    
@@ -214,12 +244,14 @@ export class SaloneRoccoComponent implements OnInit {
     
     
   }
-  async getAppointments(day){
-    console.log('called')
+  async getAppointments(day,bool){
+   
     var date = new Date(this.year, this.month, day)
-    var week = this.getWeekNumber(date)
-    if(this.last_selected_week==week){
-      this.last_selected_week=week
+   
+    var week = await this.getWeekNumber(date)
+    this.list_appointments=[]
+    if(this.last_selected_week==week-4 || this.last_selected_week==week-3 || this.last_selected_week==week-2 || this.last_selected_week==week-1 || this.last_selected_week==week){
+      // this.last_selected_week=week
       for (let appointment of this.appointments){
         if (day == appointment.day){
          this.list_appointments.push(appointment)
@@ -229,14 +261,16 @@ export class SaloneRoccoComponent implements OnInit {
       for(let ind in this.service){
         this.service = await all_serv.slice(0,+ind+1)
 
-         await this.calculateAvailability(date)
+         await this.calculateAvailability(date, bool)
   
       }
     }else{
-      this.last_selected_week=week
+      
       this.list_appointments=[]
-      this.api.getAppointmentsByshop(week,this.id).subscribe(
+      this.api.getAppointmentsByshop5(week,this.id).subscribe(
         async data=>{
+          this.last_selected_week=week
+          this.called=true
          this.appointments =  await data
          for (let appointment of this.appointments){
            if (day == appointment.day){
@@ -246,7 +280,7 @@ export class SaloneRoccoComponent implements OnInit {
          var all_serv = this.service
         for(let ind in this.service){
           this.service =await all_serv.slice(0,+ind+1)   
-           await this.calculateAvailability(date)
+           await this.calculateAvailability(date,bool)
      
         }
          
@@ -254,9 +288,9 @@ export class SaloneRoccoComponent implements OnInit {
           console.log(err)
         }
       })
-    }
     
-    
+  }
+
   }
   groupBy(arr, property) {
     return arr.reduce(function(memo, x) {
@@ -313,34 +347,27 @@ export class SaloneRoccoComponent implements OnInit {
     }
     if( this.service.length!=0){
       this.selected_services = ' selec'
-      this.getAppointments(this.day)
+      this.getAppointments(this.day,this.called)
     }
     this.firstweek_availability()
     // this.calculateAvailability(date)
   }
 
   async DatePicker(date_avi, ind, bool) {
-    // this.final_spots =[]
-    // Notiflix.Block.Standard('.time', 'Calcolando disponibilità...');
-    // this.spin_spots1='block'
-    // this.spin_spots1_neg='hidden'
-      for (let indd in this.active_date){
-        this.active_date[indd]=false
-      }
+    this.timeslot=undefined
+    this.displ_hour='Seleziona ora'
+  
       this.today= `${date_avi.number} ${this.months[date_avi.month]} ${this.year}`
       this.day = date_avi.number
       this.month = date_avi.month
-      this.active_date[ind] = true
-      this.getAppointments(this.day)
+      // this.active_date[ind] = true
+      await this.getAppointments(this.day,bool)
       this.selected_date = this.today
       if(bool){
         setTimeout(() => {
           this.showSpots()
         }, 100);
       }
-   
-      // await this.calculateAvailability(date)
-      
   }
   getOptionsArrray(array){
     let options = [];
@@ -368,12 +395,12 @@ export class SaloneRoccoComponent implements OnInit {
       this.serv_displ='none'
       this.cal='none'
       this.spots='block'
-    }, 100);
+    }, 200);
     
     
   }
   async calculateWorkdates(){
-   
+ 
        await this.api.getemployeeHoursByShop(this.id).subscribe(async data=>{
         this.empl_hours = await data
       var empl = await data
@@ -381,7 +408,7 @@ export class SaloneRoccoComponent implements OnInit {
       for(let work of empl){
         for(let day of this.week){
           if(day.week_day == work.wkday){
-            if(day.number<=this.day+1 && day.month==this.month){
+            if(day.number<=this.day && day.month==this.month){
             }else{
               x.push(day)
             }
@@ -390,17 +417,18 @@ export class SaloneRoccoComponent implements OnInit {
       }
       this.unique= [...new Set(x)];
       this.unique.sort(function(a, b){
+        if (a.year < b.year) return -1;
+        if (a.year > b.year) return 1;
         if (a.month < b.month) return -1;
         if (a.month > b.month) return 1;
         if (a.number > b.number) return 1;
         if (a.number < b.number) return -1;
       })
       this.day=this.unique[0].number
-      this.month =this.unique[0].month
-      // console.log(this.unique)
+      this.month =this.unique[0].month      
       this.today= `${this.day} ${this.months[this.month]} ${this.year}`
       this.spin = 'none'
-      this.getAppointments(this.day)
+      this.getAppointments(this.day,true)
     },err =>{
       console.log(err) 
   }) 
@@ -457,7 +485,7 @@ items.forEach(function (a) {
   async firstweek_availability(){
     this.uniques=[]
     this.availableSpots1=[]
-    // this.final_spots =[]
+    this.final_spots =[]
     var now = new  Date()
     var today = now.getDay() -1
     var month = now.getMonth()
@@ -506,7 +534,7 @@ items.forEach(function (a) {
         }
       }
       this.list_work = list1
- 
+      
        if (this.just_entered == 0){
 
     
@@ -568,12 +596,13 @@ items.forEach(function (a) {
        
               this.uniques = await this.unique.filter( function( el ) {
                 return weeks1.indexOf( el.number ) < 0;
+            
               } );
               
-              this.DatePicker(this.uniques[0],0,false)
+              await this.DatePicker(this.uniques[0],0,true)
+             
              //  Notiflix.Block.Remove('.all_spots');
-              this.spin_spots = "none"
-              this.spin_spots_neg = "visible"
+   
           
         },err=>{
           console.log(err)
@@ -636,241 +665,291 @@ items.forEach(function (a) {
            
              } );
             //  Notiflix.Block.Remove('.all_spots');
-             this.spin_spots = "none"
-             this.spin_spots_neg = "visible"
-        }
-      
-     
-      
+        
+      }
   }
-  async calculateAvailability(date){
-    // this.itsemploJob()
-      this.total_service.duration=0
-      this.total_service.name=''
-          for(let service of this.service){
-            if(this.service.indexOf(service) == this.service.length-1){
-              this.total_service.name = this.total_service.name+service.name
-            }else{
-              this.total_service.name = this.total_service.name+service.name+' + '
-              this.total_service.id = -1
-            }
-          }
-          if(this.service.length==1){
-             this.total_service.id = this.selected_services[0].id
+  async calculateAvailability(date, bool){
+    this.total_service.duration=0
+    this.total_service.name=''
+        for(let service of this.service){
+          if(this.service.indexOf(service) == this.service.length-1){
+            this.total_service.name = this.total_service.name+service.name
           }else{
+            this.total_service.name = this.total_service.name+service.name+' + '
             this.total_service.id = -1
           }
-      var serv_ind = this.service.length-1
-      if(serv_ind == 0){
-        var day_of_week = date.getDay()-1
-        if (day_of_week == -1){
-          day_of_week= 6
         }
-        this.availableSpots=[]
-        // this.api.getemployeeHoursByShop(this.id).subscribe(async  data=>{
-        //     this.empl_hours =  await data
-            var list = [];
-            var app
-            for (let day of this.empl_hours){
+        if(this.service.length==1){
+           this.total_service.id = this.selected_services[0].id
+        }else{
+          this.total_service.id = -1
+        }
+    var serv_ind = this.service.length-1
+    if(serv_ind == 0){
+      var day_of_week = date.getDay()-1
+      if (day_of_week == -1){
+        day_of_week= 6
+      }
+      this.availableSpots=[]
+      // this.api.getemployeeHoursByShop(this.id).subscribe(async  data=>{
+      //     this.empl_hours =  await data
+          var list = [];
+          var app
+          for (let day of this.empl_hours){
 
-              if(day_of_week == day.wkday){
-                var start = this.times.indexOf(this.rows[day.start])
-                var end =  this.times.indexOf(this.rows[day.end])
-                for (var i = start; i <= end; i++) {
-                  list.push({time: i  , employee: day.employee });
+            if(day_of_week == day.wkday){
+              var start = this.times.indexOf(this.rows[day.start])
+              var end =  this.times.indexOf(this.rows[day.end])
+              for (var i = start; i <= end; i++) {
+                list.push({time: i  , employee: day.employee });
+              }
+            }
+
+          }
+          this.openhours = await list
+          for(let appointment of this.list_appointments){
+            var start = this.times.indexOf(this.rows[appointment.start])
+            var end = start+appointment.end -  appointment.start
+            this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+          } 
+          for (let empl of this.employees_serivces){
+            if( empl.service_id == this.service[0].id){                
+              var y = empl.employee
+              var empl_name = await this.employees_list.find(x => x.employee === y).name;
+              var service_name = await this.services.find(x => x.id === empl.service_id).name;
+              var max_ind = this.openhours.length-1
+              // let _mid =0
+              for(let idx in this.openhours){
+                // console.log(idx ,this.openhours[idx].employee)
+                if(this.openhours[idx].employee==y){
+                  let id:any = idx
+                  // console.log(id , this.openhours[id] , this.openhours[id-1] , this.openhours[id], this.openhours[id-1],  app , this.service[serv_ind])
+                  if(id ==0 || id == max_ind || this.openhours[id].time-this.openhours[id-1].time> 1  || this.openhours[id].employee-this.openhours[id-1].employee!= 0 || app == undefined || app.duration == this.service[serv_ind].duration_book){
+                    if (app != undefined){
+                      if(app.duration >=   this.service[serv_ind].duration_book){
+                        this.availableSpots.push(app)
+                        // console.log(app)
+                      }
+                    }
+                    if(this.rows.indexOf(this.times[this.openhours[id].time])!=-1){
+                      app = {start: this.openhours[id].time, duration: 1, employee:y, emplo_name:empl_name, service: this.service[0].id , service_name: service_name}
+                    }
+                
+                  }else{
+                      app.duration +=1
+                  }
+                }
                 }
               }
-
+             
             }
-            this.openhours = await list
-            for(let appointment of this.list_appointments){
-              var start = this.times.indexOf(this.rows[appointment.start])
-              var end = start+appointment.end -  appointment.start
-              this.openhours = this.openhours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
-            } 
-            for (let empl of this.employees_serivces){
-              if( empl.service_id == this.service[0].id){                
-                var y = empl.employee
-                var empl_name = this.employees_list.find(x => x.employee === y).name;
-                var service_name = this.services.find(x => x.id === empl.service_id).name;
-                var max_ind = this.openhours.length-1
-                // let _mid =0
-                for(let idx in this.openhours){
-                  // console.log(idx ,this.openhours[idx].employee)
-                  if(this.openhours[idx].employee==y){
-                    let id:any = idx
-                    // console.log(id , this.openhours[id] , this.openhours[id-1] , this.openhours[id], this.openhours[id-1],  app , this.service[serv_ind])
-                    if(id ==0 || id == max_ind || this.openhours[id].time-this.openhours[id-1].time> 1  || this.openhours[id].employee-this.openhours[id-1].employee!= 0 || app == undefined || app.duration == this.service[serv_ind].duration_book){
-                      if (app != undefined){
-                        if(app.duration >=   this.service[serv_ind].duration_book){
-                          this.availableSpots.push(app)
-                          // console.log(app)
-                        }
-                      }
-                      if(this.rows.indexOf(this.times[this.openhours[id].time])!=-1){
-                        app = {start: this.openhours[id].time, duration: 1, employee:y, emplo_name:empl_name, service: this.service[0].id , service_name: service_name}
-                      }
-                  
-                    }else{
-                        app.duration +=1
-                    }
-                  }
-                  }
+                this.final_spots=[] 
+
+              this.availableSpots= await [...new Set(this.availableSpots)]
+         
+              for(let spot of this.availableSpots ){
+                  this.final_spots.push([spot])
                 }
+              this.final_spots=await [...new Set(this.final_spots)]
                
-              }
-                  this.final_spots=[]
- 
-                this.availableSpots= await [...new Set(this.availableSpots)]
-                if(this.max_spots!=-1){
-                  if(this.service.length==1){
-                    for(let emplo of this.employees_list){
-                      var d_final = this.availableSpots.filter(function(value, index, arr){ return (value.employee == emplo.employee )})
-                      var limit = Math.min((d_final.length),this.max_spots)
-                      for(let i=0;i<limit;i++){
-                          var x =Math.round( Math.random()*(d_final.length-1))
-                          this.final_spots.push([d_final[x]])  
-                          d_final.splice(x,1)    
-                         
-                      }
-                    }
-                }
-                // console.log(this.final_spots)
-                this.final_spots=await [...new Set(this.final_spots)]
-                 
-                this.final_spots.sort(function(a, b) {
-                  return a[0].start - b[0].start;
-               });
-               this.final_spots_displ =this.final_spots
-               this.filtr =  []
-               var g = this.final_spots_displ[0][0].employee
-               this.filtr.push(g)
-               this.final_spots_displ = this.final_spots.filter((v, i)=> {
-                var c = true
-                for(let i = 0;i< v.length; i++){
-                  
-                  if(v[i]["employee"] != this.filtr[i]){
-                      c=false
-                      
-                  }
-                }
-                return (c);
-              })
-       
-              }else{
-                for(let spot of this.availableSpots ){
-                    this.final_spots.push([spot])
-                  }
-                this.final_spots=await [...new Set(this.final_spots)]
-                 
-                this.final_spots.sort(function(a, b) {
-                  return a[0].start - b[0].start;
-               });
-               this.filtr =  []
-               this.final_spots_displ =this.final_spots               
-               var g = this.final_spots_displ[0][0].employee
-               this.filtr.push(g)
-               await this.filter_serv()
-              }
-            //  console.log('run first')
+              await this.final_spots.sort(function(a, b) {
+                return a[0].start - b[0].start;
+             });
+             this.filtr =  []
+             this.place_holder = []   
+            //  if(this.final_spots.length<1 || this.final_spots==undefined ||this.final_spots == null ) {
+            //   if(this.uniques.length>0){
+            //     if(date.getDate()==this.uniques[0].number){
+            //       // this.just_entered =0
+            //       this.uniques.shift()
+            //       await this.DatePicker(this.uniques[0],0) 
+            //      }else{
+            //       this.has_spot=false
+            //       console.log(this.uniques, this.count, this.final_spots)
+            //       await this.filter_serv()
+            //      }
+            //   }
               
-      }else{
-        var day_of_week = date.getDay()-1
-        if (day_of_week == -1){
-          day_of_week= 6
-        }
-        // Notiflix.Block.Standard('.bookings-time', 'Verificando la disponibilità...');
-        // console.log(this.final_spots, serv_ind)
-        this.availableSpots = this.final_spots
-        // console.log(this.availableSpots, this.final_spots)
-        var list = [];
-        var app
-        for (let day of this.empl_hours){
-          if(day_of_week == day.wkday){
-            var start = this.times.indexOf(this.rows[day.start])
-            var end =  this.times.indexOf(this.rows[day.end])
-            for (var i = start; i <= end; i++) {
-              list.push({time: i  , employee: day.employee });
-            }
+
+              
+            //  }else{
+              if(this.final_spots[0]){
+                this.has_spot=true
+                var g = this.final_spots[0][0].employee
+                var f = this.final_spots[0][0].emplo_name
+                this.filtr.push(g)
+                this.place_holder.push(f)
+                // console.log( this.final_spots)
+                await this.filter_serv()
+                if(bool && this.available_days.length>0){
+                  this.date_vis='visible'
+                  this.spin_spots_neg='visible'
+                  this.spin_spots='none'
+                }
+              }else{
+                this.has_spot=false
+                if(bool && this.available_days.length>0){
+                  this.date_vis='visible'
+                  this.spin_spots_neg='visible'
+                  this.spin_spots='none'
+                }
+              }
+    }else{
+      var day_of_week = date.getDay()-1
+      if (day_of_week == -1){
+        day_of_week= 6
+      }
+      // Notiflix.Block.Standard('.bookings-time', 'Verificando la disponibilità...');
+      // console.log(this.final_spots, serv_ind)
+      this.availableSpots = this.final_spots
+      // console.log(this.availableSpots, this.final_spots)
+      var list = [];
+      var app
+      for (let day of this.empl_hours){
+        if(day_of_week == day.wkday){
+          var start = this.times.indexOf(this.rows[day.start])
+          var end =  this.times.indexOf(this.rows[day.end])
+          for (var i = start; i <= end; i++) {
+            list.push({time: i  , employee: day.employee });
           }
         }
-        this.openhours = list
-        
-        for(let appointment of this.list_appointments){
-          var start = this.times.indexOf(this.rows[appointment.start])
-          var end = start+appointment.end -  appointment.start
-          this.openhours = this.openhours.filter(function(value, index, arr){ return (value.time <= start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
-        } 
-        var o:any = this.groupBy( this.openhours, 'employee')
-      // setTimeout(async () => {
-        this.final_spots=[]
-        var last_spot_ind = +serv_ind - 1
-        var dur_client =this.service[last_spot_ind].duration
-        var duration = this.service[serv_ind].duration_book
-       
-        for (let empl of this.employees_serivces){
-          if( empl.service_id == this.service[serv_ind].id){
-               x = empl.employee
-              var empl_name = this.employees_list.find(l => l.employee === x).name;
-              var service_name = this.services.find(x => x.id === empl.service_id).name; 
-              for(let spot of this.availableSpots){
-                let time_spot = JSON.parse(JSON.stringify(spot));
-                let obj = this.openhours.find(obj => obj.time == (Math.ceil(dur_client/3)*3)+spot[last_spot_ind].start && obj.employee == empl.employee && spot.length == last_spot_ind+1 );
-                // console.log(obj)
-                if(obj!=undefined){
-                  var ind = this.openhours.indexOf(obj)
-                  if(ind+duration<this.openhours.length){
-                    if (obj.time+duration == this.openhours[ind+duration].time && x!=undefined){
-                      time_spot.push({start: obj.time, duration: duration,employee:x,emplo_name:empl_name, service: this.service[serv_ind].id,service_name: service_name})
-                      this.final_spots.push(time_spot)
-                    }
+      }
+      this.openhours = list
+      
+      for(let appointment of this.list_appointments){
+        var start = this.times.indexOf(this.rows[appointment.start])
+        var end = start+appointment.end -  appointment.start
+        this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time <= start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+      } 
+      var o:any = await this.groupBy( this.openhours, 'employee')
+    // setTimeout(async () => {
+      this.final_spots=[]
+      var last_spot_ind = +serv_ind - 1
+      var dur_client =this.service[last_spot_ind].duration
+      var duration = this.service[serv_ind].duration_book
+     
+      for (let empl of this.employees_serivces){
+        if( empl.service_id == this.service[serv_ind].id){
+             var x = empl.employee
+            var empl_name = await this.employees_list.find(l => l.employee === x).name;
+            var service_name = this.services.find(x => x.id === empl.service_id).name; 
+            for(let spot of this.availableSpots){
+              let time_spot = JSON.parse(JSON.stringify(spot));
+              let obj = await this.openhours.find(obj => obj.time == (Math.ceil(dur_client/3)*3)+spot[last_spot_ind].start && obj.employee == empl.employee && spot.length == last_spot_ind+1 );
+              // console.log(obj)
+              if(obj!=undefined){
+                var ind = this.openhours.indexOf(obj)
+                if(ind+duration<this.openhours.length){
+                  if (obj.time+duration == this.openhours[ind+duration].time && x!=undefined){
+                    time_spot.push({start: obj.time, duration: duration,employee:x,emplo_name:empl_name, service: this.service[serv_ind].id,service_name: service_name})
+                    this.final_spots.push(time_spot)
                   }
                 }
               }
-          }
-
-        
-      }
-      if(this.max_spots!=-1){
-          for(let emplo of this.employees_list){
-            var d_final = this.final_spots.filter(function(value, index, arr){ return (value.employee == emplo.employee )})
-            var limit = Math.min((d_final.length),this.max_spots)
-            for(let i=0;i<limit;i++){
-                 y =Math.random()*(d_final.length-1)
-                this.final_spots.push([d_final[y]])
-                d_final.splice(y,1)
             }
-           
-        
-      }
+        }
+
+      
     }
-   
-      // this.final_spots=[...new Set(this.final_spots)]
+  //   if(this.max_spots!=-1){
+  //       for(let emplo of this.employees_list){
+  //         var d_final = this.final_spots.filter(function(value, index, arr){ return (value.employee == emplo.employee )})
+  //         var limit = Math.min((d_final.length),this.max_spots)
+  //         for(let i=0;i<limit;i++){
+  //              y =Math.random()*(d_final.length-1)
+  //             this.final_spots.push([d_final[y]])
+  //             d_final.splice(y,1)
+  //         }
+         
+      
+  //   }
+  // }
+ 
+  // if(this.final_spots.length<1 || this.final_spots==undefined ||this.final_spots == null ) {
+  //   if(this.uniques.length>0){
+  //     if(date.getDate()==this.uniques[0].number){
+  //       // this.just_entered =0
+  //       this.uniques.shift()
+  //       await this.DatePicker(this.uniques[0],0) 
+  //      }else{
+  //       this.has_spot=false
+  //       console.log(this.uniques,this.final_spots, this.count)
+  //       await this.filter_serv()
+  //      }
+  //   }
+  // }else{
+
+
+    if(this.final_spots[0]){
       await  this.final_spots.sort(function(a, b) {
         return a[0].start - b[0].start;
      });
     this.filtr =  []
+    this.place_holder =  []
     for( let el of  this.final_spots[0]){
       this.filtr.push(el.employee)
+      this.place_holder.push(el.emplo_name)
+
     }
-    // console.log( this.final_spots)
+
     await this.filter_serv()
-    // await this.emploShow()
-    // }, 700);
-  }
-    // }
-      
-}
-filter_serv(){
-  this.final_spots_displ = this.final_spots.filter((v, i)=> {
-    var c = true
-    for(let i = 0;i< v.length; i++){
-      if(v[i]["employee"] != this.filtr[i]){
-          c=false
+    this.has_spot=true
+    if(bool && this.available_days.length>0){
+      this.date_vis='visible'
+      this.spin_spots_neg='visible'
+      this.spin_spots='none'
+    }
+    }else{
+      this.has_spot=false
+        if(bool && this.available_days.length>0){
+        this.date_vis='visible'
+        this.spin_spots_neg='visible'
+        this.spin_spots='none'
       }
     }
-    return (c);
+    
+
+
+  // }
+ 
+    // this.final_spots=[...new Set(this.final_spots)]
+  
+  // await this.emploShow()
+  // }, 700);
+
+}
+  // }
+    
+}
+async filter_serv(){
+  var final_spots_displ = await this.final_spots.filter((v, i)=> {
+      var c = true
+      for(let i = 0;i< v.length; i++){
+        if(v[i]["employee"] != this.filtr[i]){
+            c=false
+        }
+      }
+      return (c);
+
+    
   })
+  if(this.max_spots!=-1){
+    this.final_spots_displ=[]
+    
+     var limit = Math.min((final_spots_displ.length),this.max_spots)
+
+     for(let i=0;i<limit;i++){
+         var x =Math.round( Math.random()*(final_spots_displ.length-1))
+         this.final_spots_displ.push(final_spots_displ[x])  
+         final_spots_displ.splice(x,1)     
+     }
+     await  this.final_spots_displ.sort(function(a, b) {
+      return a[0].start - b[0].start;
+   });
+   }else{
+     this.final_spots_displ= final_spots_displ
+   }
+   this.final_spots_displ= [...new Set( this.final_spots_displ)]
 }
   getWeekNumber(d) {
     // Copy date so don't modify original
@@ -888,12 +967,7 @@ filter_serv(){
 
 
 async book(){
-  var appointment = {
-    studio: this.name,
-    date: this.today,
-    service: this.total_service.name,
-    time: this.timeslot,
-  }
+ 
         var month = this.month
         var day = this.day
       if (day!=1){
@@ -1135,7 +1209,7 @@ this.text_c='#fff'
 }
 goBookSite(){
   // if(this.mobileCheck()){
-    window.location.href = 'https://mobile.prenota.cc/business/29'
+    window.location.href = 'https://mobile.prenota.cc/business/18'
   // }
 }
 

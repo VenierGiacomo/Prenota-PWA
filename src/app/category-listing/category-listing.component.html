@@ -3,10 +3,12 @@
     <app-header></app-header>
     <section class="main-block categories">
         <div class="container">
+                <span (click)='back()' style="cursor: pointer;" class="back-search"><img src='../assets/icons/chevron-back-outline_black.svg'  style="height: 20px; color: #212121;"> <span style="padding: 12px 8px 0px 8px;">Indietro</span></span> 
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="styled-heading">
-                        <h3 class="cat-heading"> Seleziona un' attività</h3>
+                        <h1 class="cat-heading"> I migliori {{categories_name[business_type]}} a Trieste</h1>
+                        <p class="text-muted" style="text-align: center;">Clicca su un attività per prenotare</p>
                     </div>
                 </div>
             </div>

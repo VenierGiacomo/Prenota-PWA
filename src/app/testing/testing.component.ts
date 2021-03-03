@@ -8,37 +8,36 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./testing.component.scss']
 })
 export class TestingComponent implements OnInit {
-  store_clients
-  look_up_word
-  show_client
+  limit=10
+  services_list=[]
+  show_scroll=false
+  new_customer_modal_top='-200px'
   constructor(private api: ApiService) { }
  
   ngOnInit() {
-    this.api.getStoreClients().subscribe((data)=>{
-      this.store_clients =data  
-      for(let el of this.store_clients ){
-        el.client_name = el.client_name.toLowerCase()
-      }
-      this.show_client =this.store_clients
+    setTimeout(()=>{
+      this.new_customer_modal_top='20px'
 
-    })
+    },3000)
+    for(let i=0; i< this.limit; i++){
 
-  }
- type(){  
-  var x = this.look_up_word.toLowerCase()
-  this.show_client = this.store_clients.filter((val)=>{
-    if(val.client_name.search(x)==0){
-      return val
-    }    
-  }) 
-  // const terms = ev.term.split(/\s/)
-
-  // // Test all sub term
-  // const result = terms.reduce(function(previousValue, currentValue) {
-  //   if (test.search(currentValue) > -1) previousValue.push(currentValue)
-  //   return previousValue
-  // }, [])
+      this.services_list.push({name:'service ' +i, duration:'1 ora'})
+    }
+    if(this.services_list.length>=7){
+      this.show_scroll=true
+    }
+    
  }
+ 
+ scroll(forward,id){
+  if(forward){
+   document.getElementById(id).scrollLeft += 420;
+  }else{
+   document.getElementById(id).scrollLeft -= 420;
+  }
+ 
+}
+ 
 }
 
 

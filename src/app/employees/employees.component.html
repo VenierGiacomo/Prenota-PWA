@@ -29,7 +29,7 @@
         <div class="settings">
                 <div class="topbar">
                         <div (click)="goSettings()">Attività</div>
-                        <div class="not" >Collaboratori</div>
+                        <div class="not"> <span *ngIf='store_type!=7'>Collaboratori</span> <span *ngIf='store_type==7'>Campi</span></div>
                 </div>
                 <div style='margin-top: 8vh'  class="content" >
                         <!-- Animated -->
@@ -44,7 +44,7 @@
                                                 <img src="../assets/icons/group.svg" height="40px">
                                             </div>
                                    
-                                                    <div class="stat-text"><span class="count">Cambia collaboratore</span></div>
+                                                    <div class="stat-text"><span class="count">Cambia <span *ngIf='store_type!=7'>collaboratore</span> <span *ngIf='store_type==7'>campo</span></span></div>
                                                      <!-- <div class="stat-heading">Tipo di studio</div> -->
                                             
                                         </div>
@@ -59,7 +59,7 @@
                                                 <img src="../assets/icons/support.svg" height="40px">
                                             </div>
                                             
-                                                    <div class="stat-text"><span class="count">Servizi collaboratore</span></div>
+                                                    <div class="stat-text"><span class="count">Servizi <span *ngIf='store_type!=7'>collaboratore</span> <span *ngIf='store_type==7'>campo</span></span></div>
                                                     <!-- <div class="stat-heading">Elimina collaboratore</div> -->
                                                
                                         </div>
@@ -528,7 +528,7 @@
                 </table>     
         </div>
     </div>
-<div class="catalog" [style.display]='createEmployee'>
+<!-- <div class="catalog" [style.display]='createEmployee'>
         <div class="close-catalog" (click)='createEmployee="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
     <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins" >
         <div class="wrapper wrapper--w680">
@@ -595,7 +595,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="catalog"  [style.display]='emplo'>
         <div class="close-catalog" (click)='emplo="none"'>  <img src="../assets/icons/closewhite.svg"/></div>

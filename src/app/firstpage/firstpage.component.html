@@ -3,13 +3,13 @@
         <app-header></app-header>
         <div class="banner">
           <div class="container">
-            <h1 class="font-weight-semibold"><br>Prenotare, reso semplice</h1>
-            <!-- <h6 class="font-weight-normal text-muted pb-3">
-              <br>
-              Ricevi prenotazioni online! <br><br>I tuoi clienti potranno prenotare dalla nostra applicazione e dal sito. <br> Inoltre avrai un'agenda online semplicissima da usare. 
-            </h6> -->
+            <h1 class="font-weight-semibold"><br>Prenotazioni online a Trieste</h1>
+            <h6 *ngIf='show_sublinks' class="font-weight-normal text-muted pb-3" style="padding:30px auto !important;" >
+              
+              <a  (click)='goPage("/booking")'>Medico Sportivo</a> &nbsp;- &nbsp;<a (click)='goPage("/appuntamento/Dott_Michelone")'>Oculista</a>&nbsp; - &nbsp;<a (click)='goPage("/home/ricerca/parrucchieri")'>Parrucchiere</a> &nbsp; - &nbsp;  <a  (click)='goPage("/tennis_club_grignano")'>Campo da tennis</a> &nbsp; - &nbsp; <a (click)='goPage("/appuntamento/TK_Business")'>Consulenza digitale</a> &nbsp; - &nbsp;<a  (click)='goPage("/appuntamento/Cmassaggi")'>Massaggio rigenerante</a>
+            </h6>
             <div>
-              <button class="btn btn-opacity-light mr-1" (click)="navBusiness()">Gestisco un'attività</button>
+              <button class="btn btn-opacity-light mr-1" (click)="navBusiness()">Gestisco un'<br>attività</button>
               <button class="btn btn-opacity-success ml-1" (click)="navListing()">Prenota ora</button>
             </div>
             <img src="../assets/landing/images/Group171.svg" alt="" class="img-fluid" />

@@ -36,7 +36,9 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { Page404Component } from './page404/page404.component';
 import { DlfComponent } from './dlf/dlf.component';
 import { CategoryListingComponent } from './category-listing/category-listing.component';
-import { CovidCounterComponent } from './covid-counter/covid-counter.component';
+import { WelcomeDownloadComponent } from './welcome-download/welcome-download.component';
+import { AnticaBarbariaNapoletanaComponent } from './antica-barbaria-napoletana/antica-barbaria-napoletana.component';
+import { GetappComponent } from './getapp/getapp.component';
 
 
 
@@ -49,7 +51,7 @@ const routes: Routes = [
   {path: 'business', component: LandingComponent, },
   {path: 'register', component: RegisterComponent},
   {path: 'kajsndvkjbnslvjbnsojdbncjo', component: CreateStoreComponent},
-  {path: 'booking', component: BookingComponent},
+  {path: 'booking', redirectTo: 'appuntamento/Wellness_Clinic' },
   {path: 'login', component: LoginComponent},
   {path: 'privacy', component: PrivacyComponent},
   {path: 'loading', component: LoadingpageComponent},
@@ -57,29 +59,30 @@ const routes: Routes = [
   {path: 'data', component: TableComponent},
   {path: 'notifications', component: NotificPageComponent},
   {path: 'termofuse', component: TermofuseComponent},
-  {path: 'aparrucchieri', component: AparucchieriComponent},
-  {path: 'cmassaggi', component: CmassaggiComponent},
+  {path: 'aparrucchieri', redirectTo: 'appuntamento/Aparrucchieri'},
+  {path: 'cmassaggi', redirectTo: 'appuntamento/Cmassaggi', pathMatch:'prefix'},
   {path: 'aquaesale', component: AquaesaleComponent},
   {path: 'thegreenfactory', component: TheGreenFactoryComponent},
-  {path: 'tennis_club_grignano', component: TennisClubGrignanoComponent},
+  {path: 'tennis_club_grignano', redirectTo: 'appuntamento/Tennis_Grignano'},
+  {path: 'antica_barberia_napoletana', component: AnticaBarbariaNapoletanaComponent},
   // {path: 'nitrogym', component: NitrogymComponent},
   {path: 'i_miei_appuntamenti', component: MyBookingsComponent},
   {path: 'istruzioni', component: HowtouseComponent},
   {path: 'book-test', component: BooktestComponent},
   {path: 'salonerocco', component: SaloneRoccoComponent},
-  // {path: 'booking/templ', component: BookingTemplComponent},
+  {path: 'appuntamento/:slug', component: BookingTemplComponent},
   // {path: 'month', component: MonthviewComponent},
   {path: 'subscription', component: SubscriptionComponent},
   //da eliminare
-  {path: 'test', component: TestingComponent},
-  // {path: '.well-known/assetlinks.json', component: GoogleDeepLinksComponent},
+  {path: 'test', component: TestingComponent},  
+  {path: 'app', component: GetappComponent},  
   // {path: 'store/setup', component: StoreSetupComponent, canActivate: [AuthGuard]},
   //da eliminare
-  {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
-  {path: 'payment_success', component: PaymentSuccessComponent},
+  {path: 'register/:first_name/:last_name/:email/:phone/:store', component: WelcomeDownloadComponent, },
+  // {path: 'stripe', component: SepaPaymentComponent, canActivate: [AuthGuard]},
+  // {path: 'payment_success', component: PaymentSuccessComponent},
   {path: 'dopolavoroferroviario', component: DlfComponent},
-  {path: 'home/ricerca/parrucchieri', component: CategoryListingComponent},
-  {path: 'vacino/covid', component: CovidCounterComponent},
+  {path: 'home/ricerca/:slug', component: CategoryListingComponent},
   {path: '**', component: Page404Component}
 ];
 

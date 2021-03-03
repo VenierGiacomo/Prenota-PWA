@@ -72,6 +72,7 @@ export class EmployeesComponent implements OnInit {
   " 2 ore"
 ]
   sexs=['non spec','Uomo', 'Donna', 'Unisex' ]
+  store_type
   constructor(private api: ApiService, private storage: StorageService, private router: Router,private cdRef:ChangeDetectorRef, private titleService: Title) {
     this.titleService.setTitle( "Prenota: Imposta i dati dei tuoi dipendenti e il loro orario di lavoro");
    }
@@ -81,6 +82,10 @@ export class EmployeesComponent implements OnInit {
     this.createEmployee = "none";
     this.getEmployees()
     this.getemployeeServices()
+    let store_info = JSON.parse( localStorage.getItem('shop_data'))
+
+    this.store_type =store_info.business_type
+
     }
     getEmployees(){
       this.api.getEmployees().subscribe(

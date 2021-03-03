@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Prenota - prenotare reso semplice'`, () => {
+  it(`should have as title 'Prenota - Prenotazioni online a Trieste'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Prenota - prenotare reso semplice');
+    expect(app.title).toEqual('Prenota - Prenotazioni online a Trieste');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Prenota - prenotare reso semplice');
+    expect(compiled.querySelector('.content span').textContent).toContain('Prenota - Prenotazioni online a Trieste');
   });
 });

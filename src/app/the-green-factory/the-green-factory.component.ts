@@ -97,12 +97,12 @@ export class TheGreenFactoryComponent implements OnInit {
   //automante
   max_spots=-1
   id =31
-  name ="MaClì"
+  name ="The Green Factory"
   last_selected_week=0
   appointments
   book_site= false
   constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota: MaClì - Parrucchiere Trieste. Prendi appuntamento online");
+    this.titleService.setTitle( "Prenota: The Green Factory - Parrucchiere Trieste. Prendi appuntamento online");
    }
    async ngOnInit() {
     // Notiflix.Block.Standard('.service', 'Caricamento serivzi...');

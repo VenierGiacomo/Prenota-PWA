@@ -57,7 +57,12 @@ body{
     margin: 0;
     height: 100vh;
     width: 100vw;
+    
     font-family:  'Open Sans', sans-serif !important;
+}
+html{
+  overflow-x: hidden;
+  
 }
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

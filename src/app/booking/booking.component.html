@@ -1,80 +1,10 @@
+<app-header></app-header>
+  
 
- <div class="top-bar">
-    <!-- <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div> -->
-    <app-header></app-header>
-    <div class="service" >
-        <!-- <h2>Prenota ora</h2> -->
-        <!--   (mouseout)="ser='none'" -->
-        <div (click)="showServices()">
-            <span class="services-cont"[style.display]='serv_displ'>
-                <span class="services"  >
-                        <!-- (mouseover)="ser='block'" -->
-                        <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona uno o più servizi</h2>
-                        <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                        <!-- <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span> -->
-                        <span  *ngIf='service.length>0' (click)='showSpots()' class="time-available" style="color: #fff; background: #00479d;">Prosegui</span>
-                </span>
-                <div class="close" (click)='closeBooking()'>Annulla</div>
-            </span>
-            <p style="overflow:hidden; text-overflow:ellipsis; height: 60px; font-size: 18px;"> {{selected_service}}</p>
-        </div>
-        <div  (click)="showCalendar()">
-                <span class="services-cont services-cont2 "[style.display]='cal'>
-                      
-                    <span class="white_ss">
-                            <h2 style="text-align: center; padding: 30px; font-size: 24px;"><span *ngIf='service.length>0'>Clicca su una data</span><span *ngIf='service.length==0'>Devi prima selezionare un servizio<br><br> <span (click)="showServices()"><span  class="btn btn-primary px-4 py-3">Seleziona un servizio</span></span></span> </h2>
-                        <span class="time-available1" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='active_date[ind]'>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</span>
-                        <div class="close" (click)='closeBooking()'>Annulla</div>
-                    </span>
-                </span>
-                <p style="font-size: 18px;">{{selected_date}}</p>
-        </div>
-        <div  (click)="showSpots()">
-                
-                <p style="font-size: 18px;"> {{displ_hour}}</p>
-                <!--  -->
-                <span class="services-cont services-cont3"[style.display]='spots'>
-                       
-                <span class="bookings-time" >
-                        <span class="time-available" *ngFor='let serv of service, let i = index '  ><p style="display: inline-block;">{{serv.name}}</p> 
-                            <select class='select_no_margin_left' [(ngModel)]="filtr[i]"  (change)='filter_serv()'   >
-                                <option *ngFor='let empl of empl_for_service[i]'  value={{empl.id}} >{{empl.name}}</option>
-                        </select></span>
-                        <!-- <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2> -->
-                    <!-- <span *ngFor="let employee of employees_list, let ind =index "> -->
-                        <span class="employee-spot"  >
-                                <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona un orario</h2>
-                            <!-- *ngIf='employee.employee==2' -->
-                        <!-- <h3>{{employee.name}}</h3> -->
-                        <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
-                        <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
-                        <span class="cont-timeslots">
-
-                                <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
-                            <span *ngFor='let spot of final_spots_displ'>
-                                <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 11px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
-                            </span>
-                        </span>
-                        <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
-                        <p class='nada' *ngIf='final_spots_displ.length==0'>Siamo spiacenti, nessuna disponibilità in questa data<br>Prova a cambiare data o selezionare un altro collaboratore </p>
-                        <!-- <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span> -->
-                    <!-- -->
-                        </span>
-                    <!-- </span> -->
-                   
-                </span>
-                <div class="close" (click)='closeBooking()'>Annulla</div>
-            </span>
-        </div>
-        <div class="prenota-blue" (click)='book()'>
-                <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
-         </div>
-    </div>
-</div>
 
             
-            <div class="cont-template">
-                            <div class="hero-wrap js-fullheight" style="background-image: url('../assets/ddd.jpg');" >
+            <div class="cont-template" id='cont-scroll'>
+                            <div class="hero-wrap " style="background-image: url('../assets/ddd.jpg');" >
                             <div class="bg-black">
                                 <div class="container">
                                   <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start">
@@ -85,6 +15,7 @@
                                       <h1 class="mb-5">Wellness Clinic</h1>
                                       <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
                                       <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                                      <!-- <div (click)="scrollInfo()" *ngIf='!book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Informazioni</div></div> -->
                                       <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota da sito</div></div>
                                     
                                     </div>
@@ -310,7 +241,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="button-reg">  <button (click)='SendBooking("register")'>Conferma prenotazione</button></div>
+                        <div class="button-reg">  <button (click)='SendBooking("register")'> <span *ngIf="!loading" style='font-family: "Comfortaa Bold" , sans-serif !important;'> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
                 </div> 
             </div>
             <div class="login-form" *ngIf="formType=='Login'"> 
@@ -329,7 +260,66 @@
                     <input class="input--style-4"  type="email" [(ngModel)]="email1" name="email" placeholder="mario.rossi@email.com">
                     <label class="label">Password</label>
                     <input class="input--style-4"  type="password" name="password" [(ngModel)]="password1"  placeholder="********">
-                            <div class="button-reg">  <button (click)='SendBooking("login")'>Conferma prenotazione</button></div>
+                            <div class="button-reg">  <button (click)='SendBooking("login")' > <span *ngIf="!loading" style='font-family: "Comfortaa Bold" , sans-serif !important;'> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
                     </div> 
                 </div>
             </div>
+
+            <div class="book_modal" [style.left]="booking_left" >
+                    <div class="left">
+                           <span (click)='closeBookingPage()' style="cursor: pointer;"><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"> <span style="color: white !important; padding: 12px 8px 0px 8px;">Indietro</span></span> 
+                        <h2 class="name" (click)='closeBook()'>{{name}}</h2>
+                        <h4>Seleziona uno o più servizi</h4>
+                        <p *ngIf='show_scroll'>Scorri per vedere altri servizi</p>
+                        <div class="list_cont" >
+                            <div class="list_el_pos" *ngFor='let service of services, let i = index ' (click)="selectService(service,i)" [class.active]='checkServActive(service.id)'>
+                            <div class="list_el" >
+                               <div> {{service.name}}</div>
+                               <div class="duration"> {{time_duration[service.duration]}}</div>
+                            </div>
+                        </div>
+                        </div>
+                    
+                    </div>
+                    <div class="right" *ngIf="service.length>0 && uniques.length>0">
+                        <div class="date">
+                            <h4>Seleziona una data</h4>
+                            <p >Scorri lateralmente per vedere altri servizi</p>
+                            <div class="list_cont" id='date'>
+                                <div  [style.position]="position_book" style='right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "date")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
+                                <div  [style.position]="position_book" style='left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "date")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
+                            <div class="date_el" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='date_avi.number == day && date_avi.month == month' >
+                                    <div>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</div>
+                            </div>
+                            </div>
+                        </div>
+                      
+                    <!-- <div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
+                    <div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
+                    <div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
+                    <div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div> -->
+                        
+                        <div class="time">
+                            <h4>Seleziona un orario disponibile</h4>
+                            <p >Scorri lateralmente per vedere altri orari</p>
+                            <div class="list_cont" id='time'>
+                                    <div  [style.position]="position_book" style=' right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "time")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
+                                    <div   [style.position]="position_book"style='  left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "time")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
+                            <div class="date_el" *ngFor='let spot of final_spots_displ' (click)="selectTime(spot)">
+                                    <div>{{times[spot[0].start]}} </div>
+                                    
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+            <div class="confirm" [style.display]='confirm' (click)='closeConfirm($event)' id='confirm'>
+                <span class="modal">
+                        <h4 >Riassunto prenotazione</h4>
+                        <p><b>Servizio:</b> {{total_service.name}}</p>
+                        <p><b>Data:</b> {{today}}</p>
+                        <p><b>Orario:</b> {{timeslot}}</p>
+                        <button (click)='book()'> <span *ngIf="!loading"> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button>
+                </span>
+        </div>

@@ -123,12 +123,12 @@ export class StorageService {
     var AllAppointmets = appointments.concat(unstoredAppointments)
     return AllAppointmets == null ? [] : AllAppointmets;
   }
-  addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, bool, note){
+  addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, bool, note, payed){
     var week = this.getWeekNumber(new Date(year, month, day))
     if(note=='' || note == null ){
       note= " "
     }
-    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, phone,  details, employee, service, note)
+    var appointment = new Appointment(id ,start, end,  day, week, month, year, name, phone,  details, employee, service, note, payed)
     let oldAppointments = this.getAppointmets(bool)
     oldAppointments.push(appointment)
     
@@ -151,13 +151,13 @@ deleteAppointmet(id){
   this.setAppointmentsStorage(stored,true)
 }
 
-updateAppointment(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note){
+updateAppointment(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note, payed){
   var update =false
   var stored = this.getAppointmets(bool)
   for (let appointment of stored){
     if (appointment.id== id){
       var week = this.getWeekNumber(new Date(year, month, day))
-      appointment = new Appointment(id ,start, end,  day, week,month, year, name, phone, details, employee, service, note)
+      appointment = new Appointment(id ,start, end,  day, week,month, year, name, phone, details, employee, service, note, payed)
       update = true
     }
   }
@@ -165,16 +165,16 @@ updateAppointment(id, start, end,  day, month, year, name,phone, details,employe
     return
   }
   else{
-    this.addAppointmet(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note)
+    this.addAppointmet(id, start, end,  day, month, year, name,phone, details,employee, service, bool, note, payed)
   }
 }
 
-dragUpdateAppointment(id, start, end,  day, month, year, name, phone, details, employee, service, note){
+dragUpdateAppointment(id, start, end,  day, month, year, name, phone, details, employee, service, note, payed){
   // console.log(id, start, end,  day, month, year, name, phone, details, employee, service, note)
       this.deleteAppointmet(id)
       id =+id
       setTimeout(() => {
-        this.addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, true, note)
+        this.addAppointmet(id, start, end,  day, month, year, name, phone, details, employee, service, true, note, payed)
       }, 500);
      
  
@@ -199,5 +199,20 @@ setStats(array){
 getStats(){
   var stats = JSON.parse(localStorage.getItem('stats'));
   return stats == null ? [] : stats.data;
+}
+getStoredata(){
+  var stats = JSON.parse(localStorage.getItem('shop_data'));
+  return stats 
+}
+async updateClient(client_upd){
+  var clients = JSON.parse(await localStorage.getItem('client_list'));
+  clients.list = await clients.list.filter((val)=>{return val.id != client_upd.id})
+  clients.list.unshift(client_upd)
+  await localStorage.setItem('client_list', JSON.stringify({'list':  clients.list}))
+}
+async addClient(new_client){
+  var clients = JSON.parse(await localStorage.getItem('client_list'));
+  clients.list.unshift(new_client)
+  await localStorage.setItem('client_list', JSON.stringify({'list':  clients.list}))
 }
 }

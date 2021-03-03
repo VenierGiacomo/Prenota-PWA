@@ -194,13 +194,13 @@ deleteEmployeeservice(employee, service_id){
   return this.http.delete(BASE_URL+'employee/services/'+employee+'/'+service_id+'/', {headers: this.newheader()})
 }
 
-bookAppointment(start, end, day, month, year,name, phone, details, employee, service):Observable<any>{
+bookAppointment(start, end, day, month, year,name, phone, details, employee, service, client_id?):Observable<any>{
   
   var week = this.getWeekNumber(new Date(year, month, day))
   if(year==2021 && week==0 && day<4){
     week=53
   }
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': ''}
+  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
@@ -208,12 +208,47 @@ addClientStore(client_name, hair_color, hair_lenght, phone, avarage_expense, las
   var data = {'client_name': client_name , 'hair_color': hair_color, 'hair_lenght': hair_lenght, 'phone':phone, 'avarage_expense':avarage_expense, 'last_service' : last_service}
     return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
 }
-updateClientStore(id, client_name, hair_color, hair_lenght, phone, avarage_expense, last_service):Observable<any>{
-  var data = {'client_name': client_name , 'hair_color': hair_color, 'hair_lenght': hair_lenght, 'phone':phone, 'avarage_expense':avarage_expense, 'last_service' : last_service}
+updateClientStore(id, client_name,  phone,  credit, note, isMember):Observable<any>{
+  if(note==''){
+    note =' '
+  }
+  var data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note, 'isMember':isMember}
+  
     return this.http.put(BASE_URL+'store/clients/'+id+'/', data,{headers: this.newheader()})
 }
-getStoreClients():Observable<any>{
-    return this.http.get(BASE_URL+'store/clients/',{headers: this.newheader()})
+setClientStore( client_name,  phone,  credit, note):Observable<any>{
+  var data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note}
+    return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
+}
+setClientStorebyId( client_id):Observable<any>{
+  var data = {'client_name':'temporary_name','client_id': client_id }
+    return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
+}
+ async getStoreClients(force?){
+    var last_download 
+    if(JSON.parse(await localStorage.getItem('last_clients_update'))!= null && JSON.parse(localStorage.getItem('last_clients_update'))!= undefined){
+      last_download = await Number(JSON.parse(localStorage.getItem('last_clients_update')).time)  
+    }else{
+      last_download=0
+    }
+    if(force){
+      var x = await this.http.get(BASE_URL+'store/clients/',{headers: this.newheader()}).pipe().toPromise()
+      await localStorage.setItem('last_clients_update', JSON.stringify({ 'time': Number(new Date())}))
+      await localStorage.setItem('client_list', JSON.stringify({'list':  x}))
+      return  x
+    }
+    if(Number(new Date())-last_download>1200000 ||  JSON.parse(localStorage.getItem('client_list'))==null ||  JSON.parse(localStorage.getItem('client_list'))==undefined){
+      var x = await this.http.get(BASE_URL+'store/clients/',{headers: this.newheader()}).pipe().toPromise()
+      await localStorage.setItem('last_clients_update', JSON.stringify({ 'time': Number(new Date())}))
+      await localStorage.setItem('client_list', JSON.stringify({'list':  x}))
+      return  x
+    }else{
+      var stored = await JSON.parse(await localStorage.getItem('client_list'))
+      return stored.list
+    }
+    
+    
+    
 }
 bookAppointmentNoOwner(start, end, day, month, year,name, phone, details, employee, service, shop):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
@@ -260,6 +295,9 @@ updateAppointment(id, start, end, day, month, year,name, phone, details, employe
   var week = this.getWeekNumber(new Date(year, month, day))
   var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
+}
+payBookingFromShop(id){
+  return this.http.get(BASE_URL+'bookings/pay/shop/?id='+id, {headers: this.newheader()})   
 }
 
 deleteAppointment(id):Observable<any>{
@@ -377,15 +415,62 @@ activatePayments(business_type){
   }
   return this.http.post(BASE_URL+'webhooks/activate_account/',data,{headers: this.newheader()})
 }
-getCharthsData(month,year){
+listBusinessTransactions(){
+  return this.http.get(BASE_URL+'webhooks/list/transactions',{headers: this.newheader()})
+}
+
+ getCharthsData(month,year){
   return this.http.get(BASE_URL+'bookings/charts_data/?month='+month+'&year='+year,{headers: this.newheader()})
+
+  // var last_download 
+  // if(JSON.parse(await localStorage.getItem('last_stat_update'))!= null && JSON.parse(localStorage.getItem('last_stat_update'))!= undefined){
+  //   last_download = await Number(JSON.parse(localStorage.getItem('last_stat_update')).time)  
+  // }else{
+  //   last_download=0
+  // }
+  // if(Number(new Date())-last_download>300000 ||  JSON.parse(localStorage.getItem('stat_list'))==null ||  JSON.parse(localStorage.getItem('stat_list'))==undefined){
+  //   var x = await this.http.get(BASE_URL+'bookings/charts_data/?month='+month+'&year='+year,{headers: this.newheader()}).pipe().toPromise()
+  //   await localStorage.setItem('last_stat_update', JSON.stringify({ 'time': Number(new Date())}))
+  //   await localStorage.setItem('stat_list', JSON.stringify({'list':  x}))
+  //   return  x
+  // }else{ 
+  //   var stored = await JSON.parse(await localStorage.getItem('stat_list'))
+  //   return stored.list
+  // } 
   
 }
-setRecuringBooking(id){
-  return this.http.post(BASE_URL+'bookings/recurring/',{id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021},{headers: this.newheader()})
+setRecuringBooking(id, weeks){
+  var data
+  if(weeks){
+    data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021, weeks:weeks}
+  }else{
+  data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021}
+  }
+  return this.http.post(BASE_URL+'bookings/recurring/',data,{headers: this.newheader()})
 }
 deleteRecuringBooking(id){
   return this.http.delete(BASE_URL+'bookings/recurring/delete/'+id,{headers: this.newheader()})
+}
+registerClientWithEmail(first_name, last_name, phone ,email?  ):Observable<any>{
+  var data 
+  if(email){
+    data={
+      "first_name": first_name,
+      "last_name": last_name,
+      "email": email,
+      "phone": phone,
+      'client_name': first_name+' '+last_name
+    }
+  }else{
+    data={
+      "first_name": first_name,
+      "last_name": last_name,
+      "phone": phone,
+      'client_name': first_name+' '+last_name,
+    }
+  }
+ 
+  return this.http.post(BASE_URL+'store/clients/email/', data,{headers: this.newheader() })
 }
 
 

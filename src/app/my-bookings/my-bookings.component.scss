@@ -65,14 +65,23 @@ h1{
      }
  }
  .del_img{
+     cursor: pointer;
     position: absolute;
     right: 20px;
     top: calc(50% - 13px);
     height: 26px;
 }
+.del_img:hover{
+    cursor: pointer;
+   position: absolute;
+   right: 20px;
+   top: calc(50% - 13px);
+   height: 32px;
+}
 }
 .appo-1{
     position: relative;
+    cursor: pointer;
     width: 70%;
     margin-top: 20px;
     padding: 20px;
@@ -117,6 +126,7 @@ h1{
     right: 30px;
     font-size: 24px;
     color: #fff;
+    cursor: pointer;
     img{
         margin-top: -5px;
         height:  30px;
@@ -128,7 +138,8 @@ h1{
     position: fixed;
     top: 0vw;
     width: 100vw;
-    // height: 100vh;
+    display: block;
+    height: 100vh;
     display: block;
     z-index: 1000;
     overflow: hidden;
@@ -157,12 +168,23 @@ h1{
     padding: 2vw;
     border-radius: 10px;
     position: absolute;
-    top: 10vh;
+    top: 25vh;
     width: 50vw;
     left: 25vw;
     display: block;
     background: white;
     z-index: 3;
+    .close-note{
+        position: absolute;
+        top: 2vw;
+        width: 2vw;
+        left: 46vw;
+        img{
+            object-fit: cover;
+            width: 100%;
+            display: block;
+        }
+    }
     label{
         color: #00479D;
         margin-top: 10px;
@@ -236,15 +258,46 @@ h1{
 .note_btn{
     background: #00479D;
     color: #fff;
-    padding: 10px 20px;
-    font-size: 15px;
+    display: inline-block;
+    margin:10px 10px 0px 0px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 13px;
     border-radius: 5px;
-    width: 20ch;
+    // width: auto;
+    transition: 200ms;
     box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.08);
     img{
         height: 18px;
         margin: 0px 0px 0px 15px !important;
     }
+}
+.note_btn:hover{
+    background: #0061d5;
+
+box-shadow: 0 10px 14px rgba(#092457, 0.4)!important;
+}
+.delete_btn{
+    background: #a1020a;
+    color: #fff;
+    display: inline-block;
+    margin:10px 10px 0px 0px;
+    padding: 10px 15px;
+    cursor: pointer;
+    font-size: 13px;
+    border-radius: 5px;
+    // width: auto;
+    transition: 200ms;
+    box-shadow: 0 0 20px 0px rgba(0, 0, 0, 0.08);
+    img{
+        height: 18px;
+        margin: 0px 0px 0px 15px !important;
+    }
+}
+.delete_btn:hover{
+    background: #bb020b;
+
+box-shadow: 0 10px 14px rgba(#092457, 0.4)!important;
 }
 
 .top_log{
@@ -254,6 +307,21 @@ h1{
     display: none;
 }
 @media(max-width: 500px){
+    .login-form{
+        width: 96vw !important;
+        left: 2vw;
+        .close-note{
+            position: absolute;
+            top: 5vw;
+            width: 4vw;
+            left: 86vw;
+            img{
+                object-fit: cover;
+                width: 100%;
+                display: block;
+            }
+        }
+    }
     .top_log{
         padding: 0 20px;
         margin-top: 20px !important;

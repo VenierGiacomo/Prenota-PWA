@@ -1,0 +1,71 @@
+.cont{
+    width: 100vw !important;
+   display: block;
+    // margin-top: 90px;
+    margin-top: 40px;
+    padding: 20px 20px;
+    text-align: center;
+    // overflow: scroll;
+    overflow-x: hidden;
+    // height: calc(100vh - 90px );
+    h2{
+        font-weight: 900;
+    }
+
+  
+    .adv{
+        p{
+             margin:0px
+        }
+        transition: 600ms;
+        color:white;
+        position: absolute;
+        top:0px;
+        padding:  20px ;
+        width: calc(94vw - 40px);
+        margin:20px auto 0px auto;
+        font-weight: 700;
+        font-size: 21px;
+        border-radius: 5px;
+        background: #0061d5;
+        background: -moz-linear-gradient(45deg, rgba(4,0,65,1) 0%, rgba(0,97,213,1) 40%, rgba(0,212,255,1) 100%);
+        background: -webkit-linear-gradient(45deg, rgba(4,0,65,1) 0%, rgba(0,97,213,1) 40%, rgba(0,212,255,1) 100%);
+        background: linear-gradient(45deg, rgba(4,0,65,1) 0%, rgba(0,97,213,1) 40%, rgba(0,212,255,1) 100%);
+        
+    }
+    .button_blue{
+        font-size: 15px;
+        border: none;
+        width: 80vw;
+        text-align: center;
+        // font-weight: 700;
+        text-transform: uppercase;
+        margin: 15px auto;
+        border-radius: 5px;
+        background: #0061d5;
+        padding:10px 15px!important;
+        display: inline-block;
+        color: white;
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+        -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,50.17);
+        box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+    }
+    .button_white{
+        -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,50.17);
+  box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+        font-size: 15px;
+        border: none;
+        width: 80vw;
+        text-align: center;
+        // font-weight: 700;
+        text-transform: uppercase;
+        margin: 15px auto;
+        border-radius: 5px;
+        background: #fff;
+        padding:10px 15px!important;
+        display: inline-block;
+        color: #313131;
+
+    }
+}

@@ -6,7 +6,8 @@
     padding: 8px 20px;
     margin: 5px 10px;
     font-size: 16px;
-    background: #019aff;
+    background: #00000099;
+    backdrop-filter: blur(16px);
     border: 0;
     border-radius: 8px;
     grid-column: 3 / span 3;
@@ -14,12 +15,13 @@
     align-self: end;
     color: #fff;
     text-align: left;
-    box-shadow: 0 10px 14px rgba(#4786ff, 0.4);
+    -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+    -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,50.17);
+    box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
 
      &-date  {
         left: 20vw;
         bottom:10vh;
-        // height: 420px !important;
       }
     input, textarea, p{
         display: block;
@@ -39,7 +41,7 @@
         display: inline-block;
         padding: 8px 0px;
         margin: 0px;
-        padding-bottom: 0px;;
+        padding-bottom: 0px;
     }
     textarea{
         color: #00468e;
@@ -58,21 +60,19 @@
         border: none;
         
         background: #00468e;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
+    
         color: white;
         transition: 600ms;
     }
     .single-button:hover{
         color: #00468e;
         background: #fff;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.3);
+ 
         
     }
     .two-buttons{
         width: 45%;
-        margin-right: 0%;
-        margin-left: 0%;
-        margin-top: 5px;
+        margin: 5px 0% auto 0%;
         border-radius: 5px;
         font-size: 14px;
         line-height: 35px;
@@ -100,30 +100,28 @@
         
        
     }
+    button{
+        transition: 600ms;
+    }
     .modify-app{
         background: white;
-        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
         color: #00468e;
         transition: 600ms;
     }
     .modify-app:hover{
         background: #00468e;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
         color: #fff;
-        transition: 600ms;
     }
     .delete-app{
         margin: 5px 0px 10px 0px !important;
         background: #bd0026;
-        box-shadow: 0 3px 5px rgba(#00468e, 0.6);
         color: white;
-        transition: 600ms;
+  
     }
     .delete-app:hover{
         background: #fff;
-        box-shadow: 0 10px 14px rgba(#00468e, 0.6);
         color: #bd0026;
-        transition: 600ms;
+
     }
     select::-ms-expand {
         display: none;
@@ -157,17 +155,17 @@ button:focus {
     
     ::placeholder { 
         color: #00468e;
-        opacity: 0.7; 
+        opacity: 0.3; 
       }
       
       :-ms-input-placeholder { 
         color: #00468e;
-        opacity: 0.7;
+        opacity: 0.3;
       }
       
       ::-ms-input-placeholder { 
         color: #00468e;
-        opacity: 0.7;
+        opacity: 0.3;
       }
       .close-appointment-modal{
         position: absolute;
@@ -192,7 +190,7 @@ button:focus {
     top: 20vh ;
     left: 20vw;
     width: 60vw;
-    border-radius: 30px;
+    border-radius: 10px;
     height: 60vh;
 }
 .close-modal-cont{
@@ -244,12 +242,12 @@ body{
     background: #0061d5 !important;
     color: #fff !important;
 }
-// 
+
 .free_spots{
 
     position: absolute;
     left: 0;
-    z-index: 100000;
+    z-index: 100;
     top:0;
     width: 100vw;
     overflow: hidden;
@@ -389,7 +387,7 @@ body{
         top:3vh;
         right: 30vw;
         font-size: 1vw;
-        border-radius: 10px;
+        border-radius: 5px;
         margin: 0 ;
         padding: 1vh 1.5vw;
         text-align: center;
@@ -403,14 +401,14 @@ body{
         background: white;
         top:3vh;
         right:4vw;
-        border-radius: 10px;
+        border-radius: 5px;
         font-size: 1vw;
         align-self:end;
         display:grid;
         grid-template-columns: 3fr 3fr ;
         div{
             font-size: 1vw;
-            border-radius: 10px;
+            border-radius: 5px;
             background: white;
             margin: 0 ;
             padding: 1vh 1.5vw;
@@ -436,11 +434,11 @@ body{
     overflow: scroll;
     position: relative;
     display: block;
-    height: 84vh;
-    width: 100%;
+    max-height: 84vh;
+    width: 72.1vw;
   
-    border-radius: 30px;
-    border-top-left-radius: 0px;
+    border-radius: 10px;
+
     background: white;
 
 }
@@ -488,42 +486,43 @@ body{
 
 
 ///calendar
+html{
+    --cell-height: 60px
+}
 
 thead, table{
-width: 100%;
+width: 72.1vw;
 border-collapse: collapse;
 table-layout: fixed;
 }
 .cell{
     position: relative;
     pointer-events: inherit;
-    height: 60px;
+    height: var(--cell-height);
     width: 100%;
     overflow: visible;
 }
 .cell-blocked{
-    height: 60px;
+    height: var(--cell-height);
     width: 100%;
     color: rgba(#98a0a6, 0.6);
     background-color: #ffffff;
     background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23f2f2fe' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
     cursor: not-allowed;
     background-size: 20px 20px;
-    // background: rgb(36, 47, 56);
-    // overflow: visible;
 }
 td {
-    color: #0061d5;
     padding: 0;
-    height:47px;
+    color: #0061d5;
+    height:var(--cell-height);
     overflow: visible;
-    // border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
     border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
     border-radius: 10px;
     vertical-align: top;
+    font-size: var(--cell-font-size);
 }
 th{
-    font-size: 1.5vw;
+    font-size: var(--cell-font-size);
     color:#0061d5;
     text-align: center;
     font-weight: 300;
@@ -535,68 +534,31 @@ th{
     }
 }
 .rows:nth-child(even){
-    height: 40px;
+    display: var(--quarter-displ);
+    height: var(--cell-height);
     border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
 }
 .rows:nth-child(odd){
+   
     border-top: 1px solid rgba($color: #019aff, $alpha: 0.5);
 }
-.fst-col{
-    width: 4vw !important;
-    background: white;
-    font-size: 15px;
-    text-align: right;
-    padding: 0;
-    border: none !important;
-    vertical-align: bottom;
-    p{
-        background: white;
-        position: relative;
-        bottom: -10px;
-    }
-    .ph{
-        position: relative;
-        color: white;
-        bottom: 1vh;
-    }
-    border: 0px solid white !important;
-}
-.fixed-table{
-    z-index: 3;
-    position: fixed;
-    width: 72.1vw;
-    border-radius: 10px;
-    border-top-left-radius: 0px;
-    background: white;
-    margin-top:30px;
-}
-.fixed-table1{
-    z-index: 3;
-    position: fixed;
-    width: 72.1vw;
-    border-radius: 10px;
-    background: white;
-    margin-top:0px;
-}
+
+
 .autoscroll{
     margin-top:40px;
     autoscroll: 1;
 }
 
-/////modal
 
-
-///// appointment
 
 
 :host ::ng-deep .task {
 
     z-index: 1;
-    border-left-width: 3px;
+    
     text-overflow: ellipsis;
     padding: 8px 12px;
     margin: 0px 5px;
-    border-left-style: solid;
     font-size: 12px;
     position: relative;
 
@@ -640,19 +602,34 @@ th{
         bottom: 5px;
         right:5px;
         text-align: right;
-        font-size: 11px;
+        font-size: calc(var(--cell-font-size) - 2px);
         font-family:  'Open Sans', sans-serif !important;
     }
     .task-details{
         font-weight: 500;
         line-height: 1.2;
-        font-size: 13px;
+        font-size: var(--cell-font-size);
         overflow: hidden;
         text-overflow: ellipsis;
         margin: 5px 0px;
         font-family:  'Open Sans', sans-serif !important;
     }
 }
+
+    :host ::ng-deep .oneView .task{
+        padding: 5px !important;
+        .task-details{ 
+            line-height: 1;       
+            font-size: 11px;
+            margin:0px !important;
+        }
+        .task-name{
+            text-transform: capitalize;
+            bottom: 1px;            
+            font-family:  'Open Sans', sans-serif !important;
+        }
+    }  
+
 
 :host ::ng-deep .c{
     &0{
@@ -708,68 +685,3 @@ th{
     background: transparent;
     cursor: ns-resize;
 }
-
-
-
-
-// .switch {
-//     position: relative;
-//     display: inline-block;
-//     width: 60px;
-//     height: 34px;
-//   }
-  
-
-//   .switch input {
-//     opacity: 0;
-//     width: 0;
-//     height: 0;
-//   }
-  
- 
-//   .slider {
-//     position: absolute;
-//     cursor: pointer;
-//     top: 0;
-//     left: 0;
-//     right: 0;
-//     bottom: 0;
-//     background-color: #ccc;
-//     -webkit-transition: .4s;
-//     transition: .4s;
-//   }
-  
-//   .slider:before {
-//     position: absolute;
-//     content: "";
-//     height: 26px;
-//     width: 26px;
-//     left: 4px;
-//     bottom: 4px;
-//     background-color: white;
-//     -webkit-transition: .4s;
-//     transition: .4s;
-//   }
-  
-//   input:checked + .slider {
-//     background-color: #00479D;
-//   }
-  
-//   input:focus + .slider {
-//     box-shadow: 0 0 1px #00479D;
-//   }
-  
-//   input:checked + .slider:before {
-//     -webkit-transform: translateX(26px);
-//     -ms-transform: translateX(26px);
-//     transform: translateX(26px);
-//   }
-  
-
-//   .slider.round {
-//     border-radius: 34px;
-//   }
-  
-//   .slider.round:before {
-//     border-radius: 50%;
-//   }

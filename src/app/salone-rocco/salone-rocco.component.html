@@ -1,4 +1,5 @@
-<div class="top-bar">
+
+ <div class="top-bar">
     <!-- <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div> -->
     <app-header></app-header>
     <div class="service" >
@@ -19,7 +20,9 @@
         </div>
         <div  (click)="showCalendar()">
                 <span class="services-cont services-cont2 "[style.display]='cal'>
+                      
                     <span class="white_ss">
+                            <h2 style="text-align: center; padding: 30px; font-size: 24px;"><span *ngIf='service.length>0'>Clicca su una data</span><span *ngIf='service.length==0'>Devi prima selezionare un servizio<br><br> <span (click)="showServices()"><span  class="btn btn-primary px-4 py-3">Seleziona un servizio</span></span></span> </h2>
                         <span class="time-available1" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='active_date[ind]'>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</span>
                         <div class="close" (click)='closeBooking()'>Annulla</div>
                     </span>
@@ -27,19 +30,20 @@
                 <p style="font-size: 18px;">{{selected_date}}</p>
         </div>
         <div  (click)="showSpots()">
-             
+                
                 <p style="font-size: 18px;"> {{displ_hour}}</p>
                 <!--  -->
                 <span class="services-cont services-cont3"[style.display]='spots'>
-                      
+                       
                 <span class="bookings-time" >
-                        <span class="time-available" *ngFor='let serv of service, let i = index '  >{{serv.name}} 
+                        <span class="time-available" *ngFor='let serv of service, let i = index '  ><p style="display: inline-block;">{{serv.name}}</p> 
                             <select class='select_no_margin_left' [(ngModel)]="filtr[i]"  (change)='filter_serv()'   >
                                 <option *ngFor='let empl of empl_for_service[i]'  value={{empl.id}} >{{empl.name}}</option>
                         </select></span>
                         <!-- <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2> -->
                     <!-- <span *ngFor="let employee of employees_list, let ind =index "> -->
                         <span class="employee-spot"  >
+                                <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona un orario</h2>
                             <!-- *ngIf='employee.employee==2' -->
                         <!-- <h3>{{employee.name}}</h3> -->
                         <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
@@ -48,7 +52,7 @@
 
                                 <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
                             <span *ngFor='let spot of final_spots_displ'>
-                                <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 12px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
+                                <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 11px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
                             </span>
                         </span>
                         <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->

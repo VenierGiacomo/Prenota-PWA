@@ -1,0 +1,22 @@
+<!-- <app-header></app-header> -->
+<div class="cont">
+    <h2>Ciao {{first_name}}! <br>  </h2>
+    <br>
+        <h4>{{store}} ti da il benvenuto! {{emoji}} </h4>
+
+        
+  <div style="display: block; position: relative; margin-top:40px">
+
+ <div class='adv' [style.left]='left_1' [style.visibility]='vis_1'><p>Da oggi puoi prenotarci online. <br>In meno di 30 secondi</p></div>
+ <div class='adv' [style.left]='left_2' [style.visibility]='vis_2'><p> Vedrai tutte le date e gli orari disponibili. {{emoji_love}}</p></div>
+ <div class='adv' [style.left]='left_3' [style.visibility]='vis_3'><p> Riceverai un promemoria per ricordarti dell'appuntamento.</p></div>
+ <div class='adv' [style.left]='left_4' [style.visibility]='vis_4'><p> Potrai prenotare a qualsiasi ora del giorno, o della notte {{emoji_devil}}</p></div>
+  </div>
+ <div style=" margin-top:200px; position: relative;">
+    <h4>Prenota online </h4>
+ <button class='button_blue' (click)='getApp()'>Scarica l'app</button>
+ <p style="width: 80vw; margin: 10px auto;">Ti abbiamo già creato un account, dopo aver scaricato l'app torna su questa pagina e clicca il tasto qui sotto</p>
+ <button class='button_white' (click)='autoLogin()'>Accedi automaticamente</button>
+</div>
+</div>
+<!-- <app-footer></app-footer> -->

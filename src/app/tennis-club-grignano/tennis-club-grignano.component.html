@@ -1,16 +1,16 @@
 <div class="top-bar">
     <!-- <div class="toast-s" [style.display]='toastx'>{{toast_text}}</div> -->
     <app-header></app-header>
-    <div class="service" >
-        <!-- <h2>Prenota ora</h2> -->
-        <!--   (mouseout)="ser='none'" -->
+    <!-- <div class="service" >
+       
+        
         <div (click)="showServices()">
             <span class="services-cont"[style.display]='serv_displ'>
                 <span class="services"  >
-                        <!-- (mouseover)="ser='block'" -->
+                        
                         <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona uno o più servizi</h2>
-                        <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span><!--<span class="lefty" [style.color]='active_services[i][3]'>da 50€</span>--></span>
-                        <!-- <span  (click)='closeBooking()' class="time-available" style="color: #263b56">Chiudi</span> -->
+                        <span class="time-available" *ngFor='let service of services, let i = index ' [style.background]='active_services[i][0]' [style.color]='active_services[i][1]'(click)="selectService(service,i)">{{service.name}}<span [style.color]='active_services[i][3]'>{{time_duration[service.duration-1]}}</span>
+                       
                         <span  *ngIf='service.length>0' (click)='showSpots()' class="time-available" style="color: #fff; background: #00479d;">Prosegui</span>
                 </span>
                 <div class="close" (click)='closeBooking()'>Annulla</div>
@@ -31,7 +31,7 @@
         <div  (click)="showSpots()">
                 
                 <p style="font-size: 18px;"> {{displ_hour}}</p>
-                <!--  -->
+            
                 <span class="services-cont services-cont3"[style.display]='spots'>
                        
                 <span class="bookings-time" >
@@ -39,27 +39,23 @@
                             <select class='select_no_margin_left' [(ngModel)]="filtr[i]"  (change)='filter_serv()'   >
                                 <option *ngFor='let empl of empl_for_service[i]'  value={{empl.id}} >{{empl.name}}</option>
                         </select></span>
-                        <!-- <h2 style="text-align: center; padding: 30px; font-size: 21px;">{{total_service.name}} in data {{selected_date}}</h2> -->
-                    <!-- <span *ngFor="let employee of employees_list, let ind =index "> -->
+                     
                         <span class="employee-spot"  >
                                 <h2 style="text-align: center; padding: 30px; font-size: 24px;">Seleziona un orario</h2>
-                            <!-- *ngIf='employee.employee==2' -->
-                        <!-- <h3>{{employee.name}}</h3> -->
-                        <!-- <p class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length!=0'> Scorri verso il basso per verdere altri orari</p> -->
+                        
                         <p class='nada' style="padding: 10px 0px; font-size: 16px;" *ngIf='selected_date=="Seleziona data" || selected_service=="Seleziona servizio"'>Seleziona prima una data e un servizio</p>
                         <span class="cont-timeslots">
 
-                                <!-- <p class='nada' *ngIf='results_empl_serv[ind][0].length!=0 && results_empl_serv[ind].length==service.length'> Scorri verso il basso per verdere altri orari</p> -->
+                          
                             <span *ngFor='let spot of final_spots_displ'>
                                 <span class="time-available2"  (click)="selectTime(spot)"> {{times[spot[0].start]}} <span *ngIf='spot.length>1' ><span *ngFor='let spot_p of spot'> <span class="mini"> {{spot_p.service_name}} <span style="font-size: 11px; color:#2f2f3f ; text-align: right;">{{spot_p.emplo_name}}</span></span></span></span></span> 
                             </span>
                         </span>
-                        <!-- <span class='nada' style="padding: 10px 0px;" *ngIf='results_empl_serv[ind][0].length==0 || results_empl_serv[ind].length!=service.length'>{{employee.name}} non effetua questop tipo di servizi</span> -->
+                        
                         <p class='nada' *ngIf='final_spots_displ.length==0'>Siamo spiacenti, nessuna disponibilità in questa data<br>Prova a cambiare data o selezionare un altro collaboratore </p>
-                        <!-- <span class='nada' *ngIf='selected_date!="Seleziona data"  && service!=undefined && availableSpots.length==0'>Nessuna disponibilità in questa data</span> -->
-                    <!-- -->
+                
                         </span>
-                    <!-- </span> -->
+                   
                    
                 </span>
                 <div class="close" (click)='closeBooking()'>Annulla</div>
@@ -68,7 +64,7 @@
         <div class="prenota-blue" (click)='book()'>
                 <button style="color:#0061d5" [disabled]='disabled_btn'>prenota</button>
          </div>
-    </div>
+    </div> -->
 </div>
 
 <div class="cont-template">
@@ -82,8 +78,9 @@
                         <div class="col-md-6 ftco-animate" >
                           <h1 class="mb-5" >TENNIS CLUB GRIGNANO</h1>
                           <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
-                          <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
-                          <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota da sito</div></div>
+                          
+                          <!-- <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                          <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota da sito</div></div> -->
                         </div>
                       </div>
                     </div>
@@ -334,7 +331,7 @@
                                             <!-- <h3>Prendi appuntamento online</h3> -->
                                             <h2 class="mb-4" style="color: white !important;">Prendi appuntamento online</h2>
                                             <p class="mb-4" style="color: white;">Senza doverti disturbare a prendere il telefono e chiamare, puoi prendere appuntamento direttamente da qui</p>
-                                            <div (click)="showServices()" class="btn btn-primary px-4 py-3">{{button_text}}</div>
+                                            <!-- <div (click)="showServices()" class="btn btn-primary px-4 py-3">{{button_text}}</div> -->
                                         </div>
                                     </div>
                                 </div>

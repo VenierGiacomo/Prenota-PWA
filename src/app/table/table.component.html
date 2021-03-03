@@ -31,25 +31,30 @@
                                     <div class="card-body--">
                                         <div class="table-stats order-table ov-h">
                                             <table class="table ">
+                                                    <thead>
+                                                            <tr>
+                                                                <th class="serial" style="    border-top-left-radius: 10px;
+                                                                border-top-right-radius: 10px;">Cerca <input style="border-radius: 2px; padding: 5px 10px" /> </th>
+
+                                                            </tr>
+                                                        </thead>
                                                 <thead>
                                                     <tr>
                                                         <th class="serial">Nome e Cognome</th>
-                                                        <th class="avatar">Colore</th>
-                                                        <th>Lunghezza</th>
                                                         <th>Cellulare</th>
-                                                        <th>Spesa</th>
-                                                        <th>Ultimo Servizio</th>
-                                                        <th>Salva</th>
+                                                        <th>Credito</th>
+                                                        <th>Note</th>
+                                                        <th style="padding-left:40px ;">Salva</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                         <tr *ngFor='let client of clients'>
                                                                 <td class="serial"><input [(ngModel)]='client.client_name'></td>
-                                                                <td class="avatar"><input [(ngModel)]='client.hair_color'></td>
-                                                                <td> <input [(ngModel)]='client.hair_lenght'></td>
+                                                                
+                                                               
                                                                 <td> <input [(ngModel)]='client.phone'></td>
-                                                                <td> <input [(ngModel)]='client.avarage_expense'></td>
-                                                                <td><input [(ngModel)]='client.last_service'></td>
+                                                                <td> <input [(ngModel)]='client.credit'></td>
+                                                                <td> <input [(ngModel)]='client.note'></td>
                                                                 <td>
                                                                     <span class="badge badge-complete" (click)='update(client)'>Aggiorna</span>
                                                                 </td>

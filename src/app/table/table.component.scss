@@ -1,6 +1,12 @@
 
 @import "./../../assets/ElaAdmin-master/assets/css/style.css";
 
+.serial{
+  text-align: left !important;
+  input{
+    text-transform: capitalize;
+  }
+}
 .spinner {
     top:8vh;
     width: 100%;
@@ -9,6 +15,7 @@
     position: absolute;
     text-align: center;
     z-index: 10000000;
+
   }
   
   .double-bounce1, .double-bounce2 {

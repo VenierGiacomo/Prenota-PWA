@@ -52,8 +52,10 @@ import { PaymentSuccessComponent } from './payment-success/payment-success.compo
 import { Page404Component } from './page404/page404.component';
 import { DlfComponent } from './dlf/dlf.component';
 import { CategoryListingComponent } from './category-listing/category-listing.component';
-import { CovidCounterComponent } from './covid-counter/covid-counter.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { WelcomeDownloadComponent } from './welcome-download/welcome-download.component';
+import { AnticaBarbariaNapoletanaComponent } from './antica-barbaria-napoletana/antica-barbaria-napoletana.component';
+import { GetappComponent } from './getapp/getapp.component';
 
 @NgModule({
   declarations: [
@@ -97,7 +99,9 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     Page404Component,
     DlfComponent,
     CategoryListingComponent,
-    CovidCounterComponent,
+    WelcomeDownloadComponent,
+    AnticaBarbariaNapoletanaComponent,
+    GetappComponent,
     
   ],
   imports: [

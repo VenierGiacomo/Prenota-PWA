@@ -242,7 +242,7 @@ input:focus, textarea:focus, select:focus{
     width: max-content;
     overflow: auto;
     background: rgba(255,255,255, 0.8);
-    backdrop-filter: blur(16px);
+    // backdrop-filter: blur(16px);
  
     input{
         text-align: left !important;

@@ -30,9 +30,9 @@
                         <table *ngIf='display==="week"' class="fixed-table">
                                 <thead>
                                     <tr> 
-                                        <td class="fst-col"><p class="ph">07:00</p></td>
-                                        <th (click)='setRecuringBooking()'>Lun<br><span>{{week[0]}}</span></th>
-                                        <th  (click)='deleteRecuringBooking()'>Mar<br><span>{{week[1]}}</span></th>
+                                        <td class="fst-col"><p class="ph"></p></td>
+                                        <th >Lun<br><span>{{week[0]}}</span></th>
+                                        <th >Mar<br><span>{{week[1]}}</span></th>
                                         <th>Mer<br><span>{{week[2]}}</span></th>
                                         <th>Gio<br><span>{{week[3]}}</span></th>
                                         <th>Ven<br><span>{{week[4]}}</span></th>
@@ -43,14 +43,14 @@
                             </table>
           
                        
-                <div  (click)="showCoords($event)"  *ngIf='display==="week"'>
-                    <table class="autoscroll" >
+                
+                    <table class="autoscroll" (click)="showCoords($event)"  *ngIf='display==="week"'>
                         <tbody>
                         <tr *ngFor="let row of rows,let row_idx = index" class="rows">
-                            <td class="fst-col"><p>{{row}}</p></td>
+                            <td class="fst-col"><p>{{rows[row_idx-1]}}</p></td>
                             <td *ngFor="let cell of columns,  let col_idx = index" >
                                 <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
-                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx)" id="{{row_idx}}-{{col_idx}}" ></div>
+                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx, $event)" id="{{row_idx}}-{{col_idx}}" ></div>
                                 </div>
                                  
                                 </td>
@@ -58,7 +58,7 @@
                         
                     </tbody>
                     </table>
-                </div>
+                
             </div>
             </div> 
         </div>
@@ -77,27 +77,27 @@
                         <table *ngIf='display==="week"' class="fixed-table1">
                                 <thead>
                                     <tr> 
-                                        <td class="fst-col"><p class="ph">07:00</p></td>
+                                        <td class="fst-col"><p class="ph"></p></td>
                                         <th *ngFor='let employee of employees' >{{employee.name}}</th>
                                     </tr>
                                 </thead>  
                             </table>
           
                        
-                <div  (click)="showCoords($event)"  *ngIf='display==="week"'>
-                    <table class="autoscroll" >
+                
+                    <table class="autoscroll oneView" (click)="showCoords($event)"  *ngIf='display==="week"' >
                         <tbody>
                         <tr *ngFor="let row of rows,let row_idx = index" class="rows">
-                            <td class="fst-col"><p>{{row}}</p></td>
+                            <td class="fst-col" ><p *ngIf='row_idx%2==0'>{{rows[row_idx-1]}}</p></td>
                             <td *ngFor="let employee of employees,  let col_idx = index" >
                                 <!-- <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'> -->
-                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, employee.id)" id="{{row_idx}}-{{employee.id}}" ></div>
+                                    <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, employee.id,  $event)" id="{{row_idx}}-{{employee.id}}" ></div>
                                 <!-- </div> -->
                                 </td>
                         </tr>
                     </tbody>
                     </table>
-                </div>
+                
             </div>
             </div> 
         </div>
@@ -109,10 +109,10 @@
 <div class='appointment-modal' [style.display]="point.disp" [style.left]="point.left" [style.top]="point.top">
         <p>Nome:</p>
         <div class="close-appointment-modal" (click)="closeModal()">
-                <img src="../assets/icons/close.svg"/>
+                <img src="../assets/icons/closewhite.svg"/>
         </div>
-            <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome">
-        <p>Cellulare:</p>
+            <input type="text" placeholder="Mario Rossi" [(ngModel)]="nome" id='appo_nameInput' (keyup)='type()' (focus)='open_contact()'>
+        <p *ngIf='!show_recurring' >Cellulare:</p>
         <!-- <div class="dropdown">
             <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Tutorials
             <span class="caret"></span></button>
@@ -135,22 +135,24 @@
               </li>
             </ul>
           </div> -->
-        <input type="text" placeholder="3312233645" [(ngModel)]="phone">
+        <input type="text" placeholder="3312233645" [(ngModel)]="phone" *ngIf='!show_recurring'>
         <p>Servizio:</p>
         <select class='select_no_margin_left' [(ngModel)]="info" >
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
                 <option value=-3 >chiudi un'ora</option>
-                <option value=-2 >chiudi tutto il giorno</option>
+                <option value=-2 *ngIf='!edit'>chiudi tutto il giorno</option>
                 <option value=-1 >altro</option>
         </select>
-        <p *ngIf='edit'>Nota:</p>
-        <textarea class="lable-appointment-modal" *ngIf='edit' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
-        <p *ngIf='info == -1' >Descrizione:</p>
-            <textarea class="lable-appointment-modal" *ngIf='info == -1' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
-        <p *ngIf='info == -1'>Durata</p>
+        <p *ngIf='show_recurring'>N° di prenotazioni future:</p>
+        <input type="number" placeholder="10" [(ngModel)]="recurring_quantity" *ngIf='show_recurring'>
+        <p *ngIf='edit && !show_recurring'>Nota:</p>
+        <textarea class="lable-appointment-modal" *ngIf='edit && !show_recurring' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
+        <p *ngIf='info == -1 && !show_recurring' >Descrizione:</p>
+            <textarea class="lable-appointment-modal" *ngIf='info == -1 && !show_recurring' placeholder="Inserisci altri dettagli" [(ngModel)]="extra_desc" ></textarea>
+        <p *ngIf='info == -1 && !show_recurring'>Durata</p>
     <div class="time" >
-        <div *ngIf='info == -1'>
+        <div *ngIf='info == -1 && !show_recurring'>
         <select [(ngModel)]="time">
                 <!-- <option value=1>5 min</option>
                 <option value=2>10 min</option> -->
@@ -176,16 +178,32 @@
                 <!-- <option value=22> 1 ora 50 min</option>
                 <option value=23> 1 ora 55 min</option> -->
                 <option value=24> 2 ore</option>
+                <option value=27> 2 ora 15 min</option>
+                <!-- <option value=16> 1 ora 20 min</option>
+                <option value=17> 1 ora 25 min</option> -->
+                <option value=30> 2 ora 30 min</option>
+                <!-- <option value=19> 1 ora 35 min</option>
+                <option value=20> 1 ora 40 ora</option> -->
+                <option value=33> 2 ora 45 min</option>
+                <!-- <option value=22> 1 ora 50 min</option>
+                <option value=23> 1 ora 55 min</option> -->
+                <option value=36> 3 ore</option>
 
         </select>
         </div>
-        <button  *ngIf='!edit'class="single-button " (click)='addAppointment()'>Salva</button>
+        <div *ngIf='!edit'>
+        <button class="single-button " (click)='addAppointment()'>Salva</button>
+        <button  *ngIf='storeUseCredits'class="single-button modify-app " (click)='scaleCredit()' style="margin-top: 10px;">Salva e Scala Credito</button>
+    </div>
         <div *ngIf='edit'>
-            <button  class="single-button " (click)='updateAppointment()'>Salva modifiche</button>
-            <button  class="single-button delete-app" (click)='deleteAppointment()' *ngIf='recurring>0' >Cancella</button>
-            <button  class="single-button delete-app" (click)='deleteRecuringBooking()' *ngIf='recurring>0' >Cancella ricorrenti</button>
-                <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0)' ><span *ngIf='!_loading'>Cancella</span></button>
-                <button  class="two-buttons-1 modify-app"  *ngIf='!(recurring>0)'> <span *ngIf='!_loading' (click)='setRecuringBooking()'>Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
+                <button  class="single-button" (click)='setRecuringBooking(false)' *ngIf='show_recurring' ><span *ngIf='!_loading' >Salva</span> <div class="loader-6 center" *ngIf="_loading"><span></span></div></button>                
+                <button  class="single-button modify-app" style="margin-top: 10px;" (click)='setRecuringBooking(true)' *ngIf='show_recurring && storeUseCredits'><span *ngIf='!_loading' >Salva e scala credito</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
+                
+            <button  class="single-button " (click)='updateAppointment()' *ngIf='!show_recurring'>Salva modifiche</button>
+            <button  class="single-button delete-app" (click)='deleteAppointment()' *ngIf='recurring>0 && !show_recurring' >Cancella</button>
+            <button  class="single-button delete-app" (click)='deleteRecuringBooking()' *ngIf='recurring>0 && !show_recurring' >Cancella ricorrenti</button>
+                <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0) && !show_recurring' ><span *ngIf='!_loading'>Cancella</span></button>
+                <button  (click)='show_recurring=true' class="two-buttons-1 modify-app"  *ngIf='!(recurring>0) && !show_recurring'> <span *ngIf='!_loading' >Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
                 
         </div>
     </div>
@@ -193,7 +211,7 @@
 
 
 <!-- big modal  -->
-<div [style.display]="bgModalDisp" class="big-modal">
+<!-- <div [style.display]="bgModalDisp" class="big-modal">
         <div class='appointment-modal appointment-modal-date'>
                 <p>Nome:</p>
                 <div class="close-appointment-modal" (click)="bgModalDisp='none'">
@@ -250,9 +268,9 @@
                         <button class="single-button " (click)='pickerApoointment()'>Salva</button>
                     </div>
             </div>   
-</div>
+</div> -->
 
-<div class="free_spots" [style.display]="spot_show" >
+<!-- <div class="free_spots" [style.display]="spot_show" >
         <div class="close-spot-modal" (click)="spot_show='none'">
                 <img src="../assets/icons/closewhite.svg"/>
         </div>
@@ -271,11 +289,27 @@
         </div>
     </div>
 </div>
+</div> -->
+
+<div class="contact_list" [style.left]='left_contact'>
+<h5>Clicca su un cliente per selezionarlo</h5>
+        <div *ngFor="let client of show_client" class="contact_person" (click)='select_client(client)'>
+             <span style="text-transform: capitalize;"> <b>{{client.client_name}}</b></span> <br>
+             TEL: {{client.phone}}
+             <br>
+             <span *ngIf='storeUseCredits'>Credito: <span [class.low_credit]="1900>client.credit">{{displ_credit(client.credit)}}</span> </span>
+        </div>
 </div>
+<div class="new_costomer" [style.top]='new_customer_modal_top'>
+        <p><b>{{new_customer_name}}</b> vorrebbe diventare un tuo cliente</p>
+        <button class="confirm_customer" (click)='saveClient_socket()'>Accetta</button><button (click)='new_customer_modal_top="-200px"'>Non ora</button>
+        </div>
 </body>
 
 <style>
-
+.low_credit{
+color: #8d0000;
+}
 /* loader */
 .loader-5 {
     height: 32px;
@@ -395,5 +429,294 @@
   @keyframes loader-5-5 {
     0%   { transform: translate3d(0, 0, 0) scale(1); }
     50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }  
+}
+
+
+.loader-6 {
+    height: 32px;
+    width: 32px;
+    margin: 0px auto;
+    -webkit-animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-1 {
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes loader-5-1 {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .loader-6::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: auto;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #00479d;
+    border-radius: 50%;
+    -webkit-animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-2 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-2 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(24px, 0, 0) scale(.5); }
     100% { transform: translate3d(0, 0, 0) scale(1); }
-}</style>
+  }
+  .loader-6::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: auto;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #00479d;
+    border-radius: 50%;
+    -webkit-animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-3 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-3 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-6 span {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    height: 32px;
+    width: 32px;
+  }
+  .loader-6 span::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: auto; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #00479d;
+    border-radius: 50%;
+    -webkit-animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-4 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-4 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-6 span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: auto; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #00479d;
+    border-radius: 50%;
+    -webkit-animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-5 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-5 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }  
+}
+
+
+.contact_list{
+ position: absolute;
+ display: block;
+ background: #ffffffbb;
+ backdrop-filter: blur(8px);
+ height : 100vh;
+ width: 20vw;
+ top:0px;
+ transition: 400ms;
+ z-index: 10;
+ 
+ text-align: center;
+ overflow: scroll;}
+ .contact_list h5{
+     padding: 30px 20px;
+ }
+ .contact_list .contact_person{
+     text-align: left;
+     font-size: 13px;
+     width: 18vw;
+    text-overflow: ellipsis ;
+    background: #ffffffbb;
+   
+    border-radius: 5px;
+    color:#313131;
+     padding: 10px 15px;
+     margin: 20px 1vw;
+     -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+     -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,50.17);
+     box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+ }
+ 
+.contact_person:hover{
+   background: #00479d !important;
+   color: #fff !important;
+
+   
+}
+.oneView .fst-col{
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
+    height: 20px  !important;
+    font-size: 9px !important;
+    padding:  0px!important;
+    line-height: 0px  !important;
+    margin:0px !important;
+}
+.oneView  .fst-col p{
+    bottom: -7px;
+    font-size: 11px !important;;
+}
+.oneView  th {
+    height: 20px  !important;
+    line-height: 20px !important; 
+}
+.oneView tr{
+    height: 20px  !important;
+    line-height: 20px !important; 
+}
+.oneView td  {
+    height: 20px  !important;
+    line-height: 20px !important; 
+}
+.oneView  .cell {
+    height: 20px  !important;
+    line-height: 20px !important; 
+}
+.oneView  .cell{
+    position: relative;
+    pointer-events: inherit;
+    height: 20px  !important;;
+    width: 100%;
+    overflow: visible;
+}
+
+.fst-col{
+    width: 4vw !important;
+    background: white;
+    font-size: 15px;
+    text-align: right;
+    border: none !important;
+    vertical-align: bottom;
+    border-bottom-right-radius:0px;
+    border-bottom-left-radius:0px;
+    height: var(--cell-height)  !important;
+    font-size: calc((var(--cell-height) / 2 - 1px)) !important;
+    padding:  0px!important;
+    line-height: 0px  !important;
+    margin:0px !important; 
+    position: relative;
+    border: 0px solid white !important;
+    
+   
+}
+.fst-col  p{
+        background: white;
+    line-height: 15px;
+    position: absolute;
+    font-size: var(--cell-font-size);
+    top: 2px;
+    right: 2px;
+    }
+    .fst-col   .ph{
+        position: relative;
+        color: white;
+        border-radius: 10px;
+        bottom: 1vh;
+    }
+.fixed-table{
+    z-index: 3;
+    position: fixed;
+    width: 72.1vw;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background: white;
+    margin-top:30px;
+}
+.fixed-table1{
+    z-index: 3;
+    
+    position: fixed;
+    width: 72.1vw;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    background: white;
+    margin-top:0px;
+}
+
+/* new customer */
+.new_costomer{
+  position: fixed;
+  right: 50px; 
+  width: 400px;
+  padding:20px;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  transition: 600ms;
+  background: #fff;
+  z-index: 1000000;
+}
+.new_costomer p{
+font-size: 12px;
+}
+.new_costomer button{
+  width: 150px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  margin: 0px 15px ;
+  padding: 0px 10px;
+  height: 40px;
+  border-radius: 7px;;
+  line-height: 40px;
+  font-size: 12px;
+  
+  font-weight: 700;
+  position: relative;
+  
+  }
+  .new_costomer .confirm_customer{
+    background: #0061d5;
+    color: white;
+  }
+</style>

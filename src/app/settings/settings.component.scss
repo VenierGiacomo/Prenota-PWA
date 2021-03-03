@@ -1,35 +1,29 @@
 @import "./../../assets/ElaAdmin-master/assets/css/style.css";
-
 .home{
     display:grid;
     height: 100vh;
     width: 100vw;
     grid-template-columns: 2fr 8fr;
     font-size: 1.5vw;
-    overflow: hidden;
+    overflow:hidden !important;
+    
 
 }
-.toast-s{
-    text-align: center;
-    position: absolute;
-    padding: 20px;
-    border-radius: 5px;
-    width: 300px;
-    background: #181717;
-    color: white;
-    top: 20px;
-    margin-left: calc(50% - 150px);
-    z-index: 1000;
+html{
+    overflow: hidden !important;
 }
+body{
+    overflow:hidden !important;
 
+}
 .card{
     cursor: pointer;
     .card-body{
-        padding: 25px !important;
+        padding: 25px  !important;
     }
     .stat-text{
-        position: absolute;
-        left:120px;
+        // position: absolute;
+        // left:120px;
         height: 60px;
         line-height: 60px;
         span{
@@ -81,21 +75,6 @@
         display: block;    
         cursor: pointer;
     }
-    .menu-data{
-  
-        width: max-content;
-
-        margin-right: 30px;
-        padding-left: 5px;
-        padding-right: 20px;
-        border-radius: 5px;
-        font-weight: 500;
-        position: relative;
-        margin-top: 5vh;
-        margin-left: 2vw;
-        display: block;    
-        cursor: pointer;
-    }
     .menu-logout{
         position: absolute;
         color: white;
@@ -121,25 +100,7 @@
     background: #fafafa;
     
 
-    .opening-hours{
-        margin-top: -1vh;
-        padding: 0px 40px;
-        background: #fff;
-        display: grid;
-        grid-template-rows: 1fr 15fr;
-        width: 100%;
-        border-radius: 10px;
-        height: -moz-min-content;
-        height: 72vh;
-        margin-bottom: 40px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
-            h4{
-                align-self:center;
-                font-size: 21px;
-                margin: 0px ;
-                display: inline;
-            }
-        }
+    
     }
     .stat-content{
         margin-left: 70px !important;
@@ -177,12 +138,14 @@
     width: max-content;
     overflow: auto;
     background: rgba(255,255,255, 0.8);
-    backdrop-filter: blur(16px);
+    // -webkit-backdrop-filter: blur(16px);
+    // backdrop-filter: blur(16px);
+
  
     input{
-        // -webkit-appearance: none;
+        -webkit-appearance: none;
         text-align: center;
-        background: transparent;
+        background: transparent !important;
     }
 }
 
@@ -366,20 +329,7 @@ form{
   
     }
   }
-  vaadin-time-picker{
-    width: 120px;
-    margin: -5px 20px 0 20px;
-    height: 20px !important;
-  }
-  vaadin-checkbox{
-    font-size: 16px;
-  }
-  vaadin-checkbox-group{
-    height: 20px !important;
-      text-align: center;
-    margin: 8px 0px;
-    align-self: flex-end;
-  }
+ 
 
 
   ///////////////// topbar 
@@ -394,12 +344,12 @@ form{
     z-index: 10;
     // padding: 10px;
     div{
-        background: #0061d5;
+        
         line-height: 6vh;
         margin-top:10px;
         text-align: center;
         color: #B3D1F1;
-        z-index: 100001;
+        z-index: 11;
     }
     .not{
         background: #00479D  !important;
@@ -439,9 +389,7 @@ form{
             margin: 50px auto;
         }
        }
-       span{
-        width: 100%;
-        text-align: center;
+    
         button{
             margin-top:80px;
             padding: 10px 25px;
@@ -451,43 +399,43 @@ form{
             background: #0061d5;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
         }
-       }
+       
        
    }
 
-   .list-payments{
-       h2{
-        margin-top:30px;
+   .list-payments  h2{
+        margin:10px 0px 20px 0px;
         font-size: 24px;
         line-height: 24px;
         font-weight: 700;
          color: #1a1a1a;
        }
-   }
+
    .payment-container{
     background: white;
     border-radius: 5px;
-    height: 80px;
-    // padding: 16px;
+    height: 100px;
+    
     display: inline-block;
     width: 100%;
     border: 1px solid rgb(204, 204, 204);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    
     h5{
         line-height: 16px;
         font-size: 16px;
         color: #1a1a1a;
     }
     p{
-        line-height: 13px;
+        margin: 5px 0px;
+        line-height: 16px;
         font-size: 13px;
         color: #666666;
     }
     .left_data{
 
         position: relative;
-        width: 50%; 
-        height: 80px;
+        width: 70%; 
+        height: 90px;
         display: inline-block;
         h5{
             position : absolute;
@@ -502,17 +450,17 @@ form{
     }
     .right_data{
         position: relative;
-        width: 50%; 
-        height: 80px;
+        width: 30%; 
+        height: 90px;
         display: inline-block;
         svg{
             position : absolute;
-            top:28px;
+            top:33px;
             right: 12px;
         }
         h5{
             position : absolute;
-            top:32px;
+            top:37px;
             right: 42px;
         }
     
@@ -525,6 +473,9 @@ form{
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+input{
+    -webkit-appearance: none;
 }
 input[type=number] {
     -moz-appearance: textfield;
@@ -539,15 +490,148 @@ input[type=number] {
       height: calc( 94vh - 10px );
       display: block;
       background: white;
-      overflow: scroll;
+      overflow: hidden;
+      h4{
+        text-align: center;
+        font-weight: 700;
+        padding-top: 10px;
+      }
+      img{
+        height: 20px;
+      }
       div{
         margin: 4vh 0vw 4vh 4vw;
         width: 32vw ;
         padding: 20px ;
         text-align: center;
         display: inline-block;
+        background: white;
         height:34vh;
         font-family:  -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif !important;
     }
 
   }
+
+
+  /////// table
+.serial{
+  text-align: left !important;
+  input{
+    text-transform: capitalize;
+  }
+}
+.spinner {
+    top:8vh;
+    width: 100%;
+    height:100%;
+    background: white;
+    position: absolute;
+    text-align: center;
+    z-index: 10000000;
+
+  }
+  
+  .double-bounce1, .double-bounce2 {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: #0061d5;
+    opacity: 0.6;
+    position: absolute;
+    left:calc(40vw - 20px);
+    top:calc(46vh - 20px);
+    
+    -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+    animation: sk-bounce 2.0s infinite ease-in-out;
+  }
+  
+  .double-bounce2 {
+    -webkit-animation-delay: -1.0s;
+    animation-delay: -1.0s;
+  }
+  
+  @-webkit-keyframes sk-bounce {
+    0%, 100% { -webkit-transform: scale(0.0) }
+    50% { -webkit-transform: scale(1.0) }
+  }
+  
+  @keyframes sk-bounce {
+    0%, 100% { 
+      transform: scale(0.0);
+      -webkit-transform: scale(0.0);
+    } 50% { 
+      transform: scale(1.0);
+      -webkit-transform: scale(1.0);
+    }
+  }
+.home{
+    display:grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 2fr 8fr;
+    font-size: 1.5vw;
+    overflow: hidden;
+
+}
+
+.cont-left{
+    display: block;
+    position: absolute;
+    width: 80vw;
+    top: 0vh;
+    height: 100vh;
+    background: #fafafa;
+    overflow: hidden !important;
+    transition: 600ms;
+}
+#right-panel{
+    overflow: hidden;
+    
+    margin-top:12vh
+}
+.topbar{
+    position: fixed;
+    left:20vw;
+    width: 80vw;
+    height: 6vh;
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    background: #0061d5;
+    z-index: 10;
+    div{
+        background: #0061d5;
+        line-height: 6vh;
+        margin-top:10px;
+        text-align: center;
+        color: #B3D1F1;
+        z-index: 11;
+    }
+    .not{
+        background: #00479D  !important;
+        color: #fff !important;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+    }
+  }
+  .card{
+    max-height: 80vh;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+}
+.card1{
+  overflow: hidden;
+  background: #fff;
+}
+.table{
+  margin-top: 20px
+}
+.badge{
+
+    margin: 0px 2px;
+    display: inline-block !important;
+  cursor: pointer!important;
+}
+
+
+
+

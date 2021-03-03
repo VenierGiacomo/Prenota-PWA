@@ -51,8 +51,10 @@ export class LoginComponent implements OnInit {
       this.api.hasStore().subscribe(
         async data=>{
           var res:any = await data
-          if(res.has_store){
-            this.router.navigateByUrl('loading')    
+          if(res.has_store==undefined){
+            await localStorage.setItem("shop_data",JSON.stringify(res))
+            this.router.navigateByUrl('loading')  
+  
           }else{
             this.router.navigateByUrl('home/ricerca')
           }
