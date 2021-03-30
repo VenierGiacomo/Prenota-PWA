@@ -15,7 +15,6 @@ export class HomelistingComponent implements OnInit {
           if(this.mobileCheck()){
             window.location.href = 'https://mobile.prenota.cc'
           }
-      this.titleService.setTitle( "Prenota: Scopri parrucchieri e medici a Trieste e prendi appuntamento");
    }
 
   ngOnInit(): void {

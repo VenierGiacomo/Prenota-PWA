@@ -1,9 +1,11 @@
 export class Appointment {
   
  constructor(
-     public id: number,
+    public id: number,
     public start: number,
     public end: number,
+    public start_t: number,
+    public end_t: number,
     public day: number,
     public week:number,
     public month:number,

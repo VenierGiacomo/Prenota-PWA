@@ -12,9 +12,12 @@ export class HeaderComponent implements OnInit {
 href
 move_l=true
 is_business=false
+show_btn=true
 show_business: boolean = true
   ngOnInit(): void {
     this.href = this.router.url
+    
+   
     if(this.mobileCheck()){
       this.is_business=false
       this.button_text="Scarica l'app"
@@ -27,11 +30,19 @@ show_business: boolean = true
         this.move_l=true
         this.button_text="Richiedi info"
       }
-      if(this.href== '/home/ricerca'){
+      if(this.href.includes('appuntamento')||this.href.includes('ricerca')){
         this.show_business=false
         this.move_l=true
         this.button_text="I tuoi appuntamenti"
       }
+    }
+    if(this.href=='/appuntamento/studio_gasbarro'){
+     
+      this.show_btn=false
+      
+    }else{
+      this.show_btn=true
+      
     }
     
    
@@ -52,7 +63,7 @@ navBusiness(){
   }else{
     if(this.href== '/business'){
       this.router.navigateByUrl('register')
-    }else if(this.href== '/home/ricerca'){
+    }else if(this.href.includes('appuntamento')||this.href.includes('ricerca')){
       this.router.navigateByUrl('i_miei_appuntamenti')
     }else {
       this.router.navigateByUrl('business')

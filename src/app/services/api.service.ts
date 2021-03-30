@@ -200,7 +200,7 @@ bookAppointment(start, end, day, month, year,name, phone, details, employee, ser
   if(year==2021 && week==0 && day<4){
     week=53
   }
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id}
+  var data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
@@ -216,6 +216,9 @@ updateClientStore(id, client_name,  phone,  credit, note, isMember):Observable<a
   
     return this.http.put(BASE_URL+'store/clients/'+id+'/', data,{headers: this.newheader()})
 }
+deleteClientStore(id){
+  return this.http.delete(BASE_URL+'store/clients/'+id+'/',  {headers: this.newheader()})
+}
 setClientStore( client_name,  phone,  credit, note):Observable<any>{
   var data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note}
     return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
@@ -224,6 +227,10 @@ setClientStorebyId( client_id):Observable<any>{
   var data = {'client_name':'temporary_name','client_id': client_id }
     return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
 }
+isStoreClient(shop):Observable<any>{
+  return this.http.get(BASE_URL+'store/clients/is/?shop='+shop,{headers: this.newheader()})
+}
+
  async getStoreClients(force?){
     var last_download 
     if(JSON.parse(await localStorage.getItem('last_clients_update'))!= null && JSON.parse(localStorage.getItem('last_clients_update'))!= undefined){
@@ -252,7 +259,7 @@ setClientStorebyId( client_id):Observable<any>{
 }
 bookAppointmentNoOwner(start, end, day, month, year,name, phone, details, employee, service, shop):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone': phone, 'details': details, 'service_n': service, 'shop':shop}
+  var data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone': phone, 'details': details, 'service_n': service, 'shop':shop}
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 getAppointments(week):Observable<any>{
@@ -293,7 +300,7 @@ getMonthAppointments(month):Observable<any>{
 
 updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service, note):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
+  var data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
 payBookingFromShop(id){
@@ -406,6 +413,9 @@ getStoreservicebyStore(id){
 getStores(){
   return this.http.get(BASE_URL+'store/list',{headers: this.httpheader})
 }
+getStore(id){
+  return this.http.get(BASE_URL+'store/id/'+id+'/',{headers: this.httpheader})
+}
 getStoresCategory(id){
   return this.http.get(BASE_URL+'store/list/category/'+id+'/',{headers: this.httpheader})
 }
@@ -470,9 +480,16 @@ registerClientWithEmail(first_name, last_name, phone ,email?  ):Observable<any>{
     }
   }
  
-  return this.http.post(BASE_URL+'store/clients/email/', data,{headers: this.newheader() })
+  return this.http.post(BASE_URL+'store/clients/new/', data,{headers: this.newheader() })
 }
+inviteCLient(client):Observable<any>{
+  var data={
+    'id': client.id,
+    "client_name": client.client_name,
 
+  }
+  return this.http.post(BASE_URL+'store/clients/invite/email/', data,{headers: this.newheader() })
+}
 
 parseJwt = (token) => {
 try {

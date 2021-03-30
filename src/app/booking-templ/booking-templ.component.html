@@ -1,49 +1,50 @@
-<app-header></app-header>
+<app-header ></app-header>
   
 
 
             
             <div class="cont-template" id='cont-scroll'>
-                            <div class="hero-wrap " style="background-image: url({{businesses[slug].img_bg}});" >
+                            <div class="hero-wrap " style="background-image: url({{businesses[slug].img_bg}}) ; background-position: top center;" >
                             <div class="bg-black-custom" [style.background]='businesses[slug].bg_opacity'>
                                 <div class="container">
                                   <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start">
                                       <!-- <a href="https://vimeo.com/45830194" class="icon popup-vimeo d-flex justify-content-center align-items-center">
                                           <span class="icon-play"></a>
                                       </a> -->
-                                    <div class="col-md-8 ftco-animate" >
-                                      <h1 class="mb-5" style="text-transform: capitalize;">{{businesses[slug].name}}</h1>
+                                    <div class="col-md-8 " >
+                                      <h1 class="mb-5" style=" color: white;">{{businesses[slug].name}}</h1>
                                       <h3 class="mb-4" style="color: white; text-transform: uppercase;">{{businesses[slug].category}}</h3>
                                       <!-- <div (click)="ser='block'"data-scrollax="properties: { translateY: '30%', opacity: 1.6 }"><div  class="btn btn-primary px-4 py-3">Prenota appuntmamento</div></div> -->
-                                      <div (click)="showServices()"><div style="z-index: 100;" class="btn btn-primary px-4 py-3">{{button_text}}</div></div>
+                                      <div (click)="getapp()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Scarica l'app</div></div>
+                                      <div (click)="showServices()" ><div style="z-index: 100;margin-top:20px" class="btn btn-primary px-4 py-3" >{{button_text}}</div></div>
                                       <!-- <div (click)="scrollInfo()" *ngIf='!book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Informazioni</div></div> -->
-                                      <div (click)="goBookSite()" *ngIf='book_site'><div style="z-index: 100;" class="btn btn-secondary px-4 py-3">Prenota subito</div></div>
+                                      
                                     
                                     </div>
                                   </div>
                                 </div>
                             </div>
                               </div>
-                              <section class="ftco-intro" style="padding-bottom:0px !important;">
+                              <section class="ftco-intro" style="padding-bottom:0px !important; margin: 50px 0px 0px 0px;">
                                     <div class="container-wrap">
                                         <div class="wrap d-lg-flex align-items-end">
                                             <div class="info">
                                                 <div class="row no-gutters" style="text-align: center;">
-                                                    <div class="col-lg-4 d-flex ftco-animate" style="padding: 10px ;">
+                                                    <div class="col-lg-4 d-flex " style="padding: 10px ;">
                                                        
                                                         <div class="text">
                                                             <h3>  <div class="icon"><span class="icon-phone"></span></div>Telefono</h3>
                                                             <p>{{businesses[slug].phone}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 d-flex ftco-animate " style="padding: 10px ;">
+                                                    <div class="col-lg-4 d-flex  " style="padding: 10px ;">
                                                         
                                                         <div class="text">
                                                             <h3><div class="icon"><span class="icon-my_location"></span></div>Indirizzo</h3>
                                                             <p>{{businesses[slug].address}}</p>
                                                         </div>
                                                     </div>
-                                                    <div class="col-lg-4 d-flex ftco-animate" style="padding: 10px ;">
+                                                    <div class="col-lg-4 d-flex " style="padding: 10px ;">
                                                      
                                                         <div class="text">
                                                             <h3>   <div class="icon"><span class="icon-clock-o"></span></div>Orario di apertura</h3>
@@ -60,16 +61,16 @@
                                         </div>
                                     </div>
                                 </section>
-                                <section class="ftco-section light-blue">
+                                <section class="ftco-section " style="background: #cde0f7;">
                                         <div class="container">
                                             <div class="row justify-content-center mb-4">
-                                          <div class="col-md-7 heading-section ftco-animate text-center">
+                                          <div class="col-md-7 heading-section  text-center">
                                             <h2 class="mb-4">Informazioni<br><span>{{businesses[slug].name}}</span></h2>
                                             <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
                                           </div>
                                         </div>
                                             <div class="row justify-content-center">
-                                                <div class="col-md-8 text-center ftco-animate" innerHTML='{{businesses[slug].description}}'>
+                                                <div class="col-md-8 text-center " innerHTML='{{businesses[slug].description}}'>
                                                     <p>
                     </p>                                    
                                                 </div>
@@ -79,18 +80,18 @@
                                 <section class="ftco-section ">
                                         <div class="container">
                                                 <div class="row justify-content-center mb-5 pb-3 mt-5 pt-5">
-                                              <div class="col-md-7 heading-section text-center ftco-animate">
+                                              <div class="col-md-7 heading-section text-center ">
                                                 <h2 class="mb-4">Listino servizi &amp; prezzi</h2>
                                                 <p class="flip"><span class="deg1"></span><span class="deg2"></span><span class="deg3"></span></p>
-                                                <p class="mt-5">I nostri servizi ed listino prezzi</p>
+                                               
                                               </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-md-8 offset-md-2">                                                    
-                                                    <div class="pricing-entry ftco-animate" *ngFor='let service of services'>
+                                                    <div class="pricing-entry " *ngFor='let service of services'>
                                                             <div class="d-flex text align-items-center">
                                                                 <h3><span>{{service.name}}</span></h3>
-                                                                <span class="price">{{ (service.price==0)? "Gratuito" : (service.price/100).toFixed(2) +"€"}}</span>
+                                                                <span class="price">{{ (service.price==0)? "Gratuito" : (service.price==-1)? "Preventivo in studio" : (service.price/100).toFixed(2) +"€"}}</span>
                                                             </div>
                                                             <div class="d-block">
                                                                 <p>	Durata:<b> {{time_duration[service.duration]}}</b><br>                                                        
@@ -103,7 +104,7 @@
                                             </div>
                                         </section>
                                    
-                                        <app-footer></app-footer>
+                                        <app-footer *ngIf="slug!='studio_gasbarro'"></app-footer>
             </div>
             
             
@@ -176,7 +177,7 @@
                             </div>
                         </div>
                     </div>
-                        <div class="button-reg">  <button (click)='SendBooking("register")'> <span *ngIf="!loading" style='font-family: "Comfortaa Bold" , sans-serif !important;'> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
+                        <div class="button-reg">  <button (click)='SendBooking("register")'> <span *ngIf="!loading" > prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
                 </div> 
             </div>
             <div class="login-form" *ngIf="formType=='Login'"> 
@@ -195,7 +196,7 @@
                     <input class="input--style-4"  type="email" [(ngModel)]="email1" name="email" placeholder="mario.rossi@email.com">
                     <label class="label">Password</label>
                     <input class="input--style-4"  type="password" name="password" [(ngModel)]="password1"  placeholder="********">
-                            <div class="button-reg">  <button (click)='SendBooking("login")' > <span *ngIf="!loading" style='font-family: "Comfortaa Bold" , sans-serif !important;'> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
+                            <div class="button-reg">  <button (click)='SendBooking("login")' > <span *ngIf="!loading" > prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
                     </div> 
                 </div>
             </div>
@@ -258,3 +259,592 @@
                         <button (click)='book()'> <span *ngIf="!loading"> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button>
                 </span>
         </div>
+
+
+        <style>
+        /*!
+ * Bootstrap v4.1.0 (https://getbootstrap.com/)
+ * Copyright 2011-2018 The Bootstrap Authors
+ * Copyright 2011-2018 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
+ */
+
+ .loader-5 {
+    height: 32px;
+    width: 32px;
+    margin: 9px auto;
+    -webkit-animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-1 {
+    0%   { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+  }
+  @keyframes loader-5-1 {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  .loader-5::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: auto;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-2 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-2 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(24px, 0, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: auto;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-3 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-3 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(-24px, 0, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5 span {
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    height: 32px;
+    width: 32px;
+  }
+  .loader-5 span::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0; left: 0;
+    bottom: auto; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-4 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-4 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, 24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  .loader-5 span::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: auto; left: 0;
+    bottom: 0; right: 0;
+    margin: auto;
+    width: 8px;
+    height: 8px;
+    background: #fff;
+    border-radius: 50%;
+    -webkit-animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+            animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+  }
+  @-webkit-keyframes loader-5-5 {
+    0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+    50%  { -webkit-transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+  }
+  @keyframes loader-5-5 {
+    0%   { transform: translate3d(0, 0, 0) scale(1); }
+    50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+    100% { transform: translate3d(0, 0, 0) scale(1); }
+  }
+  
+
+.bg-black{
+  width:100vw;
+  height: 100%;
+  margin:0px;
+background: rgba(0, 0, 0, 0.5);
+ }
+ .bg-black-custom{
+  width:100vw;
+  height: 100%;
+  margin:0px;
+ }
+
+.text-primary {
+  color: #0061d5 !important; }
+
+.ftco-navbar-light {
+  background: transparent !important;
+  position: absolute;
+  right: 0;
+  left: 0;
+  z-index: 3;
+  top: 10px; }
+  @media (max-width: 991.98px) {
+    .ftco-navbar-light {
+      background: #000 !important;
+      top: 0;
+      position: relative; } }
+  .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+    font-size: 14px;
+    padding-top: .9rem;
+    padding-bottom: .9rem;
+    padding-left: 0;
+    padding-right: 0;
+    color: rgba(255, 255, 255, 0.9);
+    font-weight: 400;
+    opacity: 1 !important; }
+    @media (min-width: 768px) {
+      .ftco-navbar-light .navbar-nav > .nav-item > .nav-link {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        padding-left: 20px;
+        padding-right: 20px;
+        color: rgba(255, 255, 255, 0.7); } }
+    .ftco-navbar-light .navbar-nav > .nav-item > .nav-link:hover {
+      color: #0061d5; }
+  .ftco-navbar-light .navbar-nav > .nav-item .dropdown-menu {
+    border: none;
+    background: #fff;
+    -webkit-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+    -moz-box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41);
+    box-shadow: 0px 10px 34px -20px rgba(0, 0, 0, 0.41); }
+  .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator {
+    position: relative;
+    margin-left: 20px;
+    padding-left: 20px; }
+    @media (max-width: 991.98px) {
+      .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator {
+        padding-left: 0;
+        margin-left: 0; } }
+    .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator:before {
+      position: absolute;
+      content: "";
+      top: 10px;
+      bottom: 10px;
+      left: 0;
+      width: 2px;
+      background: rgba(255, 255, 255, 0.05); }
+      @media (max-width: 991.98px) {
+        .ftco-navbar-light .navbar-nav > .nav-item.ftco-seperator:before {
+          display: none; } }
+  @media (max-width: 767.98px) {
+    .ftco-navbar-light .navbar-nav > .nav-item.cta {
+      margin-bottom: 20px; } }
+  .ftco-navbar-light .navbar-nav > .nav-item.cta > a {
+    color: #fff;
+    border: 1px solid #0061d5;
+    background: #0061d5;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-top: 4px;
+ }
+    .ftco-navbar-light .navbar-nav > .nav-item.cta > a span {
+      display: inline-block;
+      color: #fff; }
+    .ftco-navbar-light .navbar-nav > .nav-item.cta > a:hover {
+      background: #0061d5;
+      border: 1px solid #0061d5; }
+  .ftco-navbar-light .navbar-nav > .nav-item.cta.cta-colored span {
+    border-color: #0061d5; }
+  .ftco-navbar-light .navbar-nav > .nav-item.active > a {
+    color: #0061d5; }
+  .ftco-navbar-light .navbar-toggler {
+    border: none;
+    color: rgba(255, 255, 255, 0.8) !important;
+    cursor: pointer;
+    padding-right: 0;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: .1em; }
+  .ftco-navbar-light.scrolled {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    margin-top: -130px;
+    background: #1b1b1b !important;
+    -webkit-box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); }
+    .ftco-navbar-light.scrolled .nav-item > .nav-link {
+      color: #fff !important; }
+    .ftco-navbar-light.scrolled .nav-item.active > a {
+      color: #0061d5 !important; }
+    .ftco-navbar-light.scrolled .nav-item.cta > a {
+      color: #fff !important;
+      background: #0061d5;
+      border: none !important;
+      padding-top: 0.5rem !important;
+      padding-bottom: .5rem !important;
+      padding-left: 20px;
+      padding-right: 20px;
+      margin-top: 6px !important;
+ }
+      .ftco-navbar-light.scrolled .nav-item.cta > a span {
+        display: inline-block;
+        color: #fff !important; }
+    .ftco-navbar-light.scrolled .nav-item.cta.cta-colored span {
+      border-color: #0061d5; }
+    @media (max-width: 991.98px) {
+      .ftco-navbar-light.scrolled .navbar-nav {
+        background: none;
+        border-radius: 0px;
+        padding-left: 0rem !important;
+        padding-right: 0rem !important; } }
+    @media (max-width: 767.98px) {
+      .ftco-navbar-light.scrolled .navbar-nav {
+        background: none;
+        padding-left: 0 !important;
+        padding-right: 0 !important; } }
+    .ftco-navbar-light.scrolled .navbar-toggler {
+      border: none;
+      color: rgba(255, 255, 255, 0.8) !important;
+      border-color: rgba(0, 0, 0, 0.5) !important;
+      cursor: pointer;
+      padding-right: 0;
+      text-transform: uppercase;
+      font-size: 16px;
+      letter-spacing: .1em; }
+    .ftco-navbar-light.scrolled .nav-link {
+      padding-top: 0.9rem !important;
+      padding-bottom: 0.9rem !important;
+      color: #000 !important; }
+      .ftco-navbar-light.scrolled .nav-link.active {
+        color: #0061d5 !important; }
+    .ftco-navbar-light.scrolled.awake {
+      margin-top: 0px;
+      -webkit-transition: .3s all ease-out;
+      -o-transition: .3s all ease-out;
+      transition: .3s all ease-out; }
+    .ftco-navbar-light.scrolled.sleep {
+      -webkit-transition: .3s all ease-out;
+      -o-transition: .3s all ease-out;
+      transition: .3s all ease-out; }
+    
+
+.hero-wrap {
+  width: 100%;
+  height: calc(100vh - 90px);
+  position: relative;
+  z-index: 0; }
+  @media (max-width: 1199.98px) {
+    .hero-wrap {
+      background-position: center center !important; } }
+  .hero-wrap .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    content: '';
+    opacity: .5;
+    background: #000; }
+
+
+.bg-light {
+  background: #fff !important; }
+
+.bg-primary {
+  background: #0061d5; }
+
+.btn {
+  cursor: pointer;
+  -ms-word-break: break-all !important;
+  word-break: break-all!important;
+  word-break: break-word!important;
+-webkit-hyphens: auto!important;
+ -moz-hyphens: auto!important;
+      hyphens: auto!important;
+
+  /* -webkit-box-shadow: none !important; */
+  /* box-shadow: none !important; */
+  font-size: 13px; }
+  .btn:hover, .btn:active, .btn:focus {
+    outline: none; }
+  .btn.btn-primary {
+    background: #0061d5 !important;
+    border: 1px solid #0061d5 !important;
+    color: #fff; }
+    .btn.btn-primary:hover {
+      border: 1px solid #0061d5;
+      background: transparent !important;
+      color: #0061d5; }
+    .btn.btn-primary.btn-outline-primary {
+      border: 1px solid #0061d5;
+      background: transparent;
+      color: #0061d5; }
+      .btn.btn-primary.btn-outline-primary:hover {
+        border: 1px solid transparent;
+        background: #0061d5;
+        color: #fff; }
+  .btn.btn-white {
+    background: #fff;
+    border: 1px solid #fff;
+    color: #000; }
+    .btn.btn-white:hover {
+      border: 1px solid #000;
+      background: #000;
+      color: #fff; }
+    .btn.btn-white.btn-outline-white {
+      border-color: rgba(255, 255, 255, 0.8);
+      background: none;
+      border-width: 1px;
+      color: #fff; }
+      .btn.btn-white.btn-outline-white:hover, .btn.btn-white.btn-outline-white:focus, .btn.btn-white.btn-outline-white:active {
+        background: #fff;
+        border-color: #fff;
+        color: #0061d5; }
+  .btn.btn-outline-black {
+    border-color: black;
+    background: none;
+    border-width: 1px;
+    color: #000; }
+    .btn.btn-outline-black:hover, .btn.btn-outline-black:focus, .btn.btn-outline-black:active {
+      background: #000;
+      border-color: #000;
+      color: #fff; }
+
+@media (min-width: 768px) {
+  .ftco-intro {
+     } }
+
+.ftco-intro .container-wrap {
+  z-index: 2 !important;
+  position: relative; }
+
+.ftco-intro .wrap {
+  width: 100%; 
+  margin-top: -50px;}
+  .ftco-intro .wrap .info {
+    background: #fff;
+    padding: 30px; }
+    @media (min-width: 992px) {
+      .ftco-intro .wrap .info {
+        width: 100%;
+        padding: 2% 1% 2% 1%; } }
+    .ftco-intro .wrap .info p {
+      margin-bottom: 0; }
+  /* .ftco-intro .wrap .social {
+    width: 35%;
+    background: #0061d5; } */
+    @media (max-width: 991px) {
+      .ftco-intro .wrap .social {
+        width: 100%; } }
+    .ftco-intro .wrap .social .social-icon {
+      margin: 0;
+      padding: 0; }
+      .ftco-intro .wrap .social .social-icon li {
+        list-style: none;
+        display: inline-block;
+        line-height: 0;
+        padding: 0 10px; }
+        .ftco-intro .wrap .social .social-icon li a {
+          display: block;
+          margin: 0;
+          padding: 0; }
+          .ftco-intro .wrap .social .social-icon li a span {
+            color: #fff;
+            font-size: 20px; }
+  .ftco-intro .wrap h3 {
+      display: -webkit-inline-box;
+    font-size: 16px; 
+    margin-left: -15px;}
+  .ftco-intro .wrap .text {
+    width: calc(100%); }
+  .ftco-intro .wrap .icon {
+    width: 40px; }
+    .ftco-intro .wrap .icon span {
+      color: #0061d5;
+      font-size: 20px; }
+      @media(max-width: 570px){
+        .ftco-intro .wrap h3 {
+      
+        margin-left: 0px;}
+        .ftco-intro .wrap .icon{
+          display: none !important;
+        }
+        .ftco-intro .wrap .text{
+          width: 100% !important;
+        }
+      }
+.services h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  color: #fff; }
+
+.services:hover .icon span {
+  color: #fff; }
+
+.services:hover .icon:after {
+  -webkit-transform: rotate(135deg);
+  -ms-transform: rotate(135deg);
+  transform: rotate(135deg);
+  background: #0061d5; }
+
+.services-wrap {
+  width: 100%;
+  display: block; }
+  @media (max-width: 767.98px) {
+    .services-wrap {
+      margin-bottom: 30px; } }
+  .services-wrap .img, .services-wrap .text {
+    width: 50%; }
+  .services-wrap .img {
+    display: block; }
+  .services-wrap .text {
+    background: #000;
+    position: relative; }
+    .services-wrap .text h3 {
+      font-size: 20px; }
+
+.product-entry {
+  border: 1px solid #0061d5; }
+  @media (max-width: 767.98px) {
+    .product-entry {
+      margin-bottom: 30px; } }
+  .product-entry .img {
+    display: block;
+    height: 350px; }
+  .product-entry .text {
+    padding: 30px;
+    border-top: 1px solid #0061d5; }
+    .product-entry .text .rate span {
+      color: #0061d5; }
+    .product-entry .text h3 {
+      font-size: 16px; }
+      .product-entry .text h3 a {
+        color: #fff; }
+    .product-entry .text .price {
+      font-size: 18px;
+      font-weight: 400;
+      color: #0061d5;
+      display: inline-block; }
+
+.ftco-gallery {
+  padding-top: 7em; }
+
+.gallery {
+  display: block;
+  height: 300px;
+  position: relative; }
+  .gallery .icon {
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    z-index: 0;
+    opacity: 0;
+    position: relative;
+    -moz-transition: all 0.6s ease;
+    -o-transition: all 0.6s ease;
+    -webkit-transition: all 0.6s ease;
+    -ms-transition: all 0.6s ease;
+    transition: all 0.6s ease; }
+    .gallery .icon:after {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 50px;
+      height: 50px;
+      content: '';
+      background: #0061d5;
+      z-index: -1;
+      -moz-transition: all 0.6s ease;
+      -o-transition: all 0.6s ease;
+      -webkit-transition: all 0.6s ease;
+      -ms-transition: all 0.6s ease;
+      transition: all 0.6s ease; }
+    .gallery .icon span {
+      color: #fff; }
+  .gallery:hover .icon, .gallery:focus .icon {
+    opacity: 1; }
+    .gallery:hover .icon:after, .gallery:focus .icon:after {
+      -webkit-transform: rotate(135deg);
+      -ms-transform: rotate(135deg);
+      transform: rotate(135deg); }
+
+.pricing-entry {
+  width: 100%;
+  display: block;
+  margin-bottom: 30px; }
+  .pricing-entry .text {
+    width: 100%;
+    display: block;
+    position: relative;
+    z-index: 0; }
+    .pricing-entry .text:after {
+      position: absolute;
+      bottom: 35%;
+      left: 0;
+      right: 0;
+      content: '';
+      width: 100%;
+      height: 1px;
+      border-bottom: 1px dashed #785028;
+      z-index: -1; }
+    .pricing-entry .text h3 {
+      width: calc(100% - 80px);
+      font-size: 18px; }
+      .pricing-entry .text h3 span {
+        background: #fff;
+        color: #0061d5;
+        padding-right: 20px; }
+    .pricing-entry .text .price {
+      width: 100px;
+      color: #0061d5;
+      text-align: right;
+      background: #fff;
+      font-size: 16px; }
+
+
+
+
+.heading-section .subheading {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 10px; }
+
+.hero-wrap,
+.img,
+.blog-img,
+.user-img {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; }
+</style>

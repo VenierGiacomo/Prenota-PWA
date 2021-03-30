@@ -46,8 +46,8 @@
                 
                     <table class="autoscroll" (click)="showCoords($event)"  *ngIf='display==="week"'>
                         <tbody>
-                        <tr *ngFor="let row of rows,let row_idx = index" class="rows">
-                            <td class="fst-col"><p>{{rows[row_idx-1]}}</p></td>
+                        <tr *ngFor="let row of times,let row_idx = index" class="rows" id='{{row_idx}}'>
+                            <td class="fst-col"><p>{{times[row_idx-1]}}</p></td>
                             <td *ngFor="let cell of columns,  let col_idx = index" >
                                 <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
                                     <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, col_idx, $event)" id="{{row_idx}}-{{col_idx}}" ></div>
@@ -87,8 +87,8 @@
                 
                     <table class="autoscroll oneView" (click)="showCoords($event)"  *ngIf='display==="week"' >
                         <tbody>
-                        <tr *ngFor="let row of rows,let row_idx = index" class="rows">
-                            <td class="fst-col" ><p *ngIf='row_idx%2==0'>{{rows[row_idx-1]}}</p></td>
+                        <tr *ngFor="let row of times,let row_idx = index" class="rows" id='{{row_idx}}'> 
+                            <td class="fst-col" ><p *ngIf='row_idx%2==1'>{{times[row_idx-1]}}</p></td>
                             <td *ngFor="let employee of employees,  let col_idx = index" >
                                 <!-- <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'> -->
                                     <div  class="cell" (drop)="drop($event)" (dragover)="allowDrop($event)" (click)="blockPos(row_idx, employee.id,  $event)" id="{{row_idx}}-{{employee.id}}" ></div>

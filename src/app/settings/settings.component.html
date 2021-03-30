@@ -852,7 +852,7 @@ min="06:30" max="22:00"
                             <div class="card-body">
                                 <h4 class="box-title">I tuoi clienti</h4>
                                 
-                                <button class="add_client" style="right: 280px;" (click)='download_latestCLient()'>Controlla nuovi clienti</button>
+                                <button class="add_client" style="right: 280px;" (click)='download_latestCLient()'>Aggiorna dati</button>
                                 <button class="add_client" (click)='register_form="block"'>Aggiungi un nuovo cliente</button>
                             </div>
                             <div class="card-body--">
@@ -867,26 +867,31 @@ min="06:30" max="22:00"
                                                 </thead>
                                         <thead>
                                             <tr>
-                                                <th class="serial">Nome e Cognome</th>
-                                                <th>Cellulare</th>
-                                                <th *ngIf='storeUseCredits'>Credito</th>
+                                                <th class="serial" style="width: 14vw;">Nome e Cognome</th>
+                                                <th style="width: 10vw;">Cellulare</th>
+                                                <th *ngIf='storeUseCredits' style="width: 8vw;">Credito</th>
+                                               
+                                                <th style="width: 3vw;">Socio</th>
                                                 <th>Note</th>
-                                                <th>Socio</th>
                                                 <th style="padding-left:40px ;">Salva</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                                 <tr *ngFor='let client of show_clients'>
-                                                        <td class="serial"><input [(ngModel)]='client.client_name'></td>
+                                                        <td class="serial" style="width: 14vw;"><input [(ngModel)]='client.client_name'></td>
                                                         
                                                        
-                                                        <td> <input [(ngModel)]='client.phone'></td>
-                                                        <td *ngIf='storeUseCredits'> <input [(ngModel)]='client.credit'></td>
+                                                        <td  style="width: 10vw;"> <input [(ngModel)]='client.phone'> </td>
+                                                        <td *ngIf='storeUseCredits' style="width: 8vw;"> <input [(ngModel)]='client.credit'></td>
+                                                        <td style="width: 3vw;"><vaadin-checkbox value="Option" (change)='client.isMember=!client.isMember' [checked]="client.isMember"></vaadin-checkbox></td>
                                                         <td> <input [(ngModel)]='client.note' placeholder="Clicca ed aggiungi una nota"></td>
-                                                        <td><vaadin-checkbox value="Option" (change)='client.isMember=!client.isMember' [checked]="client.isMember"></vaadin-checkbox></td>
+                                                       
                                                         <td>
                                                             <span class="badge badge-complete" (click)='update(client)'>Salva modifiche</span>
                                                             <span class="badge badge-complete" (click)='processQR(client)'>QR</span>
+                                                            <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
+                                                            <span class="badge badge-complete" (click)='promptDelete(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                         
                                                         </td>
                                                     </tr>
                                               
@@ -966,6 +971,12 @@ min="06:30" max="22:00"
             
         </div>
       </div>
+
+      <div class="new_costomer" [style.top]='delete_modal_top'>
+            <p>Sei sicuro di voler rimuovere <b style="text-transform: capitalize;">{{delete_customer.client_name}}</b> dai tuoi clienti?</p>
+            <button class="confirm_customer" (click)='deleteClient()'>Cancella</button><button (click)='closeDeletePrompt()'>Non ora</button>
+            </div>
+
 <style>
 
     /* register */
@@ -1058,5 +1069,43 @@ min="06:30" max="22:00"
     backdrop-filter: blur(16px);
     z-index: 10;
 }
+
+/* new customer */
+.new_costomer{
+  position: fixed;
+  right: 50px; 
+  width: 400px;
+  padding:20px;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  transition: 600ms;
+  background: #fff;
+  z-index: 1000000;
+}
+.new_costomer p{
+font-size: 12px;
+}
+.new_costomer b{
+color: #212121;
+}
+.new_costomer button{
+  width: 150px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  margin: 0px 15px ;
+  padding: 0px 10px;
+  height: 40px;
+  border-radius: 7px;;
+  line-height: 40px;
+  font-size: 12px;
+  
+  font-weight: 700;
+  position: relative;
+  
+  }
+  .new_costomer .confirm_customer{
+    background: #940606;
+    color: white;
+  }
 </style>
 <!-- color picker -->

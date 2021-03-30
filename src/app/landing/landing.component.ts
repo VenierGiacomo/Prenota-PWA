@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Router } from '@angular/router';
 import Notiflix from "notiflix";
-import { Title } from '@angular/platform-browser';
+import { Title, Meta } from '@angular/platform-browser';
 declare var $: any;
 @Component({
   selector: 'app-landing',
@@ -19,8 +19,19 @@ export class LandingComponent implements OnInit {
   price_SMALL = 0
   price_MEDIUM = 0
   call_to_act='Richiedi informazioni'
-  constructor(private api: ApiService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle( "Prenota : Agenda online gratuia per attività di Trieste");
+  constructor(private api: ApiService, private router: Router, private titleService: Title, private metaService: Meta) {
+    this.titleService.setTitle( "Prenota Business: Agenda e prenotazioni online per attività a Trieste");
+    var metaTags=[
+      {property: 'og:url', content: 'https://prenota.cc/business'},
+      {property: 'og:title', content: "Prenota Business: Agenda online gratuia per attività di Trieste"},
+      {property: 'og:description', content: 'Prenotazioni online per attività a Trieste. Agenda online gratuita per piccole attività. Trova nuovi clienti online e fai prenotare i tuoi clienti senza dover chiamare.'},
+      
+      {name: 'keywords', content: 'Prenota, Prenota Trieste, Prenota bussiness, Prenotazioni online trieste'},
+      {name: 'description', content: 'Prenotazioni online per attività a Trieste. Agenda online gratuita per piccole attività. Trova nuovi clienti online e fai prenotare i tuoi clienti senza dover chiamare.'},
+     
+      
+    ];
+    metaTags.forEach(m=> this.metaService.updateTag(m))
    }
   ngOnInit() {
     if(this.mobileCheck()){

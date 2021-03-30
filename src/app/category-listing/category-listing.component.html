@@ -14,10 +14,13 @@
             </div>
             <div class="cards-list">
 
-                <div class="card 1" *ngFor="let shop of shops" (click)='navigate(shop.website)'>
+                <div class="card 1" *ngFor="let shop of shops" (click)='navigate(shop)' [class.blocked]='shop.closed'>
                   <div class="card_image"> <img src="{{shop.img_url}}" /> </div>
                   <div class="card_title">
                     <p>{{shop.store_name}}</p>
+                  </div>
+                  <div class="card_subtitle">
+                    <p>{{shop.business_description}}</p>
                   </div>
                 </div>
                 </div>

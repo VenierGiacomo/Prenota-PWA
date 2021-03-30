@@ -13,7 +13,7 @@
                     <h1>{{appointment.store_name}}</h1>
                     <h3>{{appointment.details}}</h3>
                     <div class="appo_date">
-                        <h4>{{appointment.day}} {{months_names[appointment.month]}} {{appointment.year}} ore {{rows[appointment.start]}} </h4>
+                        <h4>{{appointment.day}} {{months_names[appointment.month]}} {{appointment.year}} ore {{times[appointment.start_t]}} </h4>
                     </div>
                     <div class="note_btn" (click)='AddNote(appointment)'> <span *ngIf="appointment.note=='' || appointment.note==undefined ">Aggiungi nota</span> <span *ngIf='appointment.note!="" && appointment.note!=undefined'>Modifica nota</span><img src='../../assets/icons/notes.svg'   alt="Aggiungi una nota" title="Aggiungi una nota"></div>
                     <div class="delete_btn" (click)='deletestorage(appointment)'>Cancella appuntamento  <img src='../../assets/icons/delete_white.svg'> </div>

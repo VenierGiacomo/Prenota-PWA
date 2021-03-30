@@ -2,7 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import Notiflix from "notiflix";
 import { Router } from '@angular/router';
-import { Title }     from '@angular/platform-browser';
+import { Title, Meta }     from '@angular/platform-browser';
 
 @Component({
   selector: 'app-booking-templ',
@@ -11,7 +11,7 @@ import { Title }     from '@angular/platform-browser';
 })
 export class BookingTemplComponent implements OnInit {
 
-  year
+  year=new Date().getFullYear()
   month
   day
   just_entered= 0
@@ -85,8 +85,9 @@ export class BookingTemplComponent implements OnInit {
   total_service={name:'',duration:0,id:-1}
   selected_services:any=[]
   // rand = [ 6, 12, 21, 32 ,47 ,49 ]
-  times =["06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
+  times =["06:00", "06:05", "06:10", "06:15", "06:20", "06:25", "06:30", "06:35", "06:40","06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
   rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "24:00"]
+  full_hours = [ "07:00",  "08:00", "09:00",  "10:00", "11:00",  "12:00", "13:00",  "14:00", "15:00", "16:00", "17:00","18:00", "19:00", "20:00", "21:00",  "22:00",  "23:00","24:00"]
   days= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
   months=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
   months_short=['Gen','Feb','Mar','Apr','Mag','Giu','Lug','Ago','Set','Ott','Nov','Dic']
@@ -102,7 +103,9 @@ export class BookingTemplComponent implements OnInit {
   last_selected_week
   appointments
   book_site= false
- 
+  account_credits = 0
+  is_member = false
+  is_client= false
   place_holder
   has_spot = true
   date_vis='hidden'
@@ -117,33 +120,106 @@ export class BookingTemplComponent implements OnInit {
   loading=false
   bookable_pc
   campo
+  available_on
+  hourfilter
+  advance_day=2
   businesses={
     'Wellness_Clinic':{
                       name:'Wellness Clinic',
-                      html_title:'Medico Sportivo a Trieste - Prenota una vista medica a Trieste con il dott. Gianfranco Stupar',
+                      html_title:'Wellness Clinic: Medicina dello Sport a Trieste',
                       id:18,
                       campo:false,
+                      keywords:'Wellness Clinic, Wellness Clinic Trieste, Stupar, Stupar Trieste, Stupar medico sportivo, medico sportivo Trieste, visita medica Trieste, visita medica sportiva, visita medica sportiva Trieste, visita agonistica Trieste,  medico dello sport, medico dello sport Trieste ',
+                      og_url:'https://prenota.cc/appuntamento/Wellness_Clinic',
+                      og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+                      og_description:'Prenota una visita medico sportiva con il Dott. Gianfranco Stupar. Idoneità agonistica, visita non agonistica e prova da sforzo a Trieste.',
                       phone: '+39 3516113525',
                       address: 'Via Torrebianca 28/a', 
                       zip_code:'34122',
                       bg_opacity:'#00000088',
                       img_bg:'../assets/ddd.jpg',
                       bookable_pc:true,
+                      rich_cont:`
+                      {
+                        "@context": "https://schema.org",
+                        "@type": "MedicalBusiness",
+                        "image": [
+                          "https://example.com/photos/1x1/photo.jpg",
+                          "https://example.com/photos/4x3/photo.jpg",
+                          "https://example.com/photos/16x9/photo.jpg"
+                         ],
+                        "@id": "https://prenota.cc/appuntamento/Wellness_Clinic",
+                        "name": "Wellness Clinic",
+                        "address": {
+                          "@type": "PostalAddress",
+                          "streetAddress": "Via Giulia 56",
+                          "addressLocality": "Trieste",
+                          "addressRegion": "IT",
+                          "postalCode": "34126",
+                          "addressCountry": "IT"
+                        },
+                        "review": {
+                          "@type": "Review",
+                          "reviewRating": {
+                            "@type": "Rating",
+                            "ratingValue": "5",
+                            "bestRating": "5"
+                          },
+                          "author": {
+                            "@type": "Person",
+                            "name": "Federico Mattesi"
+                          }
+                        },
+                        "geo": {
+                          "@type": "GeoCoordinates",
+                          "latitude": 45.6525543,
+                          "longitude": 13.7731577
+                        },
+                        "url": "https://prenota.cc/appuntamento/Wellness_Clinic",
+                        "telephone": "+39 3391139977",
+                        "openingHoursSpecification": [
+                          {
+                            "@type": "OpeningHoursSpecification",
+                            "dayOfWeek": [
+                              "Monday",
+                              "Tuesday",
+                              "Wednesday",
+                              "Thursday",
+                              "Friday"
+                            ],
+                            "opens": "8:30",
+                            "closes": "20:00"
+                          },
+                          {
+                            "@type": "OpeningHoursSpecification",
+                            "dayOfWeek": "Saturday",
+                            "opens": "9:30",
+                            "closes": "14:00"
+                          }
+                        ],
+                      
+                        "acceptsReservations": "True"
+                      }
+                   `,
                       category:'Medico sportivo a Trieste',
                       hours:`Lun, Mar, Mer, Gio, Ven:
                       8:30 - 12:30 e 14:30 - 20:00<br> Sab:  <span style="text-align: right;">8:30 - 12:30 e 14:30 - 20:00</span></p>`,
-                      description:`WELLNESS CLINIC è un laboratorio della salute dove l’esercizio fisico viene prescritto alla pari di un farmaco e somministrato in uno spazio wellness-medico attrezzato e protetto.
+                      description:`WELLNESS CLINIC è un laboratorio della salute dove l'esercizio fisico viene prescritto alla pari di un farmaco e somministrato in uno spazio wellness-medico attrezzato e protetto.
                       Con la sua equipe di professionisti, la WELLNESS CLINIC opera nell'attuare un protocollo di prevenzione, attraverso uno specifico programma di esercizi, sviluppati al fine di ridurre gli infortuni durante la pratica sportiva specifica.`}
-  ,'Dott_Michelone':{
+  ,'dott_Michelone':{
                       name:'Dott. Luca Michelone',
-                      html_title:'Oculista a Trieste - Prenota una vista oculistica a Trieste con il dott. Luca Michelone',
+                      html_title:'Dott. Luca Michelone: Oculista moderno a Trieste',
                       id:43,
                       campo:false,
+                      keywords:'Luca Michelone, Luca Michelone trieste, oculista Luca Michelone, oculsita Trieste, visita oculistica Trieste, visita agli occhi, visita oculistica Trieste, campo visivo a Trieste, esame oct trieste, studio oculistico',
+                      og_url:'https://prenota.cc/appuntamento/dott_Michelone',
+                      og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+                      og_description:'Prenota una visita oculistica a Trieste con il Dott. Luca Michelone. Visita oculistica, esame OCT e campo visivo computerizzato a Trieste.',
                       phone: '+39 3807385994',
                       address: 'Largo della Barriera Vecchia 13', 
                       zip_code:'34129',
                       bg_opacity:'#000000aa',
-                      img_bg:'../assets/icons/oculista.jpg',
+                      img_bg:'../assets/Eye_Doctor_Tool_Free_Vector.svg',
                       bookable_pc:true,
                       category:'Oculista a Trieste',
                       hours:`Lun: 09:00 - 11:00 e 15:00 - 17:00`,
@@ -153,9 +229,13 @@ export class BookingTemplComponent implements OnInit {
                       Effettua interventi di chirurgia refrattiva c/o il Centro Medico San Biagio di Fossalta di Portogruaro`}
   ,'TK_Business':{
                         name:'TK Business',
-                        html_title:'Marketing Digitale a Trieste - Prenota una consuleza digitale gratuita a Trieste. TK Business SEO Instagram e Facebook',
+                        html_title:'TK Business: Marketing e consulenza Digitale a Trieste',
                         id:28,
                         campo:false,
+                        keywords:'TK Business, TK Business Trieste, marketing a Trieste, consulenza Digitale a Trieste, consulenza marketing gratuita, consulenza digitale gratuita, consulenza marketing gratuita a Trieste, consulenza digitale gratuita a Trieste, ',
+                        og_url:'https://prenota.cc/appuntamento/TK_Business',
+                        og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+                        og_description:'Prenota una consulenza campagna marketing su Facebook a Trieste o una consulenza campagna marketing su Google a Trieste.',
                         phone: '+39 3471864232',
                         address: 'Piazza Tommaseo 4/C', 
                         zip_code:'34121',
@@ -167,7 +247,7 @@ export class BookingTemplComponent implements OnInit {
                         description:`Consulente di Marketing Digitale.<br><br>
                         Assisto le PMI nel sviluppare al massimo le potenzialità dell'attività sui Motori di Ricerca e sui Social.<br><br>
                        
-Ho avuto l’occasione di lavorare in diversi settori ed ognuno di essi mi ha lasciato qualcosa d’importante, delle skills che ancora adesso sto portando a presso.<br><br>
+Ho avuto l'occasione di lavorare in diversi settori ed ognuno di essi mi ha lasciato qualcosa d'importante, delle skills che ancora adesso sto portando a presso.<br><br>
 <br>
 Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria appresa e sono riuscito ad ottenere notevoli risultati.
 `
@@ -175,9 +255,13 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
 }
   ,'Cmassaggi':{
       name:'Cmassaggi',
-      html_title:'Massaggi professionali a Trieste - Prendi appuntamento online e fatti coccolare da un massaggio rigenerante',
+      html_title:'Cmassaggi Claudia Mileto: Massaggi professionali a Trieste',
       id:27,
       campo:false,
+      keywords:'Cmassaggi, Claudia Mileto, Cmassaggi Trieste, Claudia Mileto Trieste, Massaggi professionali a Trieste, Massaggi sportivo a Trieste, centro massaggi a Trieste, messaggio decontratturante a Trieste,messaggio decontratturante,messaggio sportivo Trieste ',
+      og_url:'https://prenota.cc/appuntamento/Cmassaggi',
+      og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+      og_description:'Prenota un massaggio rigenerante, un massaggio decontratturante o un massaggio sportivo a Trieste.',
       phone: '+39 3314665503',
       address: 'Salita Zugnano 1', 
       zip_code:'34148',
@@ -187,15 +271,19 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
       bookable_pc:true,
       hours:`Lun, Mar, Gio, Ven, 9:00 - 19:00 <br> Mer 11:00 - 19:00`,
       description:`Vieni a trovarmi e decidiamo assieme il percorso più adatto alle tue esigenze. Da un massaggio Sportivo ad uno Svedese    <br><br>
-      Nello studio troverai i confort di cui hai bisogno: ciabattine e slip monouso, teli monouso per doccia, lettino riscaldato in inverno, musica adeguata al trattamento o alla sessione che sceglierai, vari olii e prodotti naturali ed edibili per i trattamenti......
+      Nello studio troverai i confort di cui hai bisogno: ciabattine e slip monouso, teli monouso per doccia, lettino riscaldato in inverno, musica adeguata al trattamento o alla sessione che sceglierai, vari olii e prodotti naturali ed edibili per i trattamenti.
   
       
   `}
   ,'Aparrucchieri':{
     name:'Aparrucchieri',
-    html_title:'Salone di parrucchieri professionale ed accogliente a Trieste - Prenota un tagio di capelli e fatti coccolare.',
+    html_title:'Aparrucchieri: Salone parrucchieri moderno a Trieste.',
     id:23,
     campo:false,
+    keywords:'Aparrucchieri, Aparrucchieri Trieste, Parrucchiere a Trieste, Barbiere a Trieste, Taglio di capelli a Trieste, Taglio di capelli in centro città a Trieste,',
+    og_url:'https://prenota.cc/appuntamento/Aparrucchieri',
+    og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+    og_description:'Aparrucchieri, prenota un taglio capelli vicino allo stadio: salone moderno di parrucchieri e barbieri a Trieste. Piega, taglio e taglio capelli uomo nel quartiere di Chiarbola a Trieste.',
     phone: '+39 0402652079',
     address: 'Via Pirano 12/A', 
     zip_code:'34145',
@@ -206,11 +294,34 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
     hours:`Mar - Sab 9:00 - 19:00`,
     description:`Aparrucchieri è un esclusivo salone nella zona sud di Trieste, in via Pirano 12, dall'arredamento elegante e minimal chic che gioca sul contrasto creato dal classico black and white.<br><br>  Alan, il titolare, ha scoperto giovanissimo la passione per il mestiere. Prendendo come punto di riferimento sua mamma, che lo ha poi supportato in tutto il suo percorso formativo tecnico/artistico.<br> <br>  La qualità dei prodotti Davines e Philip Martin's contribuiscono a dare ulteriore prestigio al salone, che mira sempre alla soddisfazione del cliente su cui viene pensato un percorso di bellezza e consulenza minuziosa e personalizzata. 
 `}
+,'salone_rocco':{
+  name:'Salone Rocco',
+  html_title:'Salone Rocco: Parrucchire storico in centro Trieste.',
+  id:29,
+  campo:false,
+  keywords:'Salone Rocco, Salone Rocco Trieste, Parrucchiere a Trieste, Parrucchiere a Trieste centro, Taglio di capelli a Trieste, Taglio di capelli in centro città a Trieste',
+  og_url:'https://prenota.cc/appuntamento/salone_rocco',
+  og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+  og_description:"Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Piega, taglio e taglio capelli uomo vicino all'universita.",
+  phone: '+39 0402652079',
+  address: 'Via San Francesco 18/A', 
+  zip_code:'34133',
+  bg_opacity:'#00000088',
+  img_bg:'../assets/Salone_rocco_bottom.jpg',
+  bookable_pc:true,
+  category:'Studio di parrucchieri a Trieste',
+  hours:`<p>Mar e Gio 8:30 - 12:30 &amp; 15:30 - 19:00<br>Mer e Sab 8:30 - 16:30<br>Ven 8:30 - 17:30 </p>`,
+  description:`Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Dopo venticinque anni di lavoro da dipendente, Rocco decide di iniziare la sua attività come lavoratore autonomo. Nasce così il Salone Rocco il 1 febbraio 1966. <br><br>Dopo quarat'anni d'attività fiorente, Rocco insegna il suo mestiere ad una quarantina di giovani finchè lascia nelle mani della figlia Maura, attuale titolare, l'attività rinnovata da un anno. <br><br>Il Salone Rocco, a detta della clientela, è sempre accogliente come un buon salotto cittadino. L'atmosfera del negozio risulta essere sempre familiare e, al tempo stesso, accogliente e professionale 
+`}
 ,'Tennis_Grignano':{
   name:'Circolo Tennis Grignano',
-  html_title:'Campi da tennis a Trieste - Prenota un campo in 30 secondi e vieni a giocare su terra rossa o erba sintetica',
+  html_title:'Circolo Tennis Grignano: Campi da tennis in terra ed erba a Trieste ',
   id:36,
   campo:true,
+  keywords:'tennis grignano, Circolo Tennis Grignano, Circolo Tennis Grignano Trieste, tennis trieste, tennis campo in terra trieste, circolo tennis trieste',
+    og_url:'https://prenota.cc/appuntamento/Tennis_Grignano',
+    og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+    og_description:'Prenota un taglio capelli a Trieste: i migliori parrucchieri e barbieri a Trieste. Piega, taglio e taglio capelli uomo nel quartiere di Chiarbola a Trieste.',
   phone: '+39 040224361',
   address: 'Via Junker 8', 
   zip_code:'34151',
@@ -221,10 +332,96 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
   hours:`Lun - Dom 8:30 - 23:00`,
   description:`Il circolo dispone di 2 campi in terra rossa e un campo in erba sintetica. Tutti tre i campi sono coperti e riscaldati nel periodo invernale mentre in estate offrono una location baciata dal sole e accarezzata dalla brezza marina. Nella struttura sono inoltre presenti ampi spogliatoi maschili e femminili, una club house dotata di tv e snack bar, una piccola palestra ad esclusivo uso dei soci, una terrazza panoramica per eventi, ping pong, macchina incordatrice, ampio parcheggio privato adiacente alla struttura e una segreteria efficiente e attenta a rispondere alle richieste dei suoi soci e dei ragazzi della Scuola Tennis. 
 `}
+,'dott_manfra':{
+  name:'Dottor Manfra',
+  html_title:'Dottor Manfra: Studio Dentistico moderno a Trieste ',
+  id:42,
+  campo:false,
+  keywords:'Dottor Manfra, Dottor Manfra Trieste, dentista trieste, Manfra dentista, manfra trieste, studio dentistico trieste, dentisti a trieste',
+  og_url:'https://prenota.cc/appuntamento/dott_manfra',
+  og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+  og_description:'Antonio Manfra dentista professionale, giovane ed accessibile economicamente. Vienici a trovare',
+  phone: '+39 3534110525',
+  address: 'Via delle sette fontane 67',
+  zip_code:'34139',
+  bg_opacity:'#00000099',
+  img_bg:'../assets/Dentista_Template_Free_Vector.svg',
+  bookable_pc:true,
+  category:'Studio Dentistico',
+  hours:`Lun - Gio 9:00 - 19:00, Ven 9:00 - 15:00, Sab 9:00 - 13:00`,
+  description:`Mi chiamo Antonio Manfra e sono un dentista specializzato nella cura dei bambini e dei ragazzi.  
+<br>
+  Ho conseguito la specializzazione in odontoiatria pediatrica presso l’Università degli studi di Trieste, con il massimo dei voti, lavorando attivamente presso l’Ospedale infantile Burlo Garofalo.<br><br> La mia passione per la cura dei bambini e dei ragazzi nasce dal desiderio di vederli sempre felici e in salute, quindi voglio dedicare particolare attenzione alla PREVENZIONE e alla CURA della bocca dei più piccini.
+  è importante far vivere il dentista con serenità, un’esperienza positiva, così da poter seguire i piccoli pazienti nella loro crescita, senza ansie e traumi.. <br> <br> 
 
+  Opero nello studio dentistico dr. Altin e dr. Harei, presente da più di 20 anni a Trieste.<br><br> 
+
+                            Lo studio multidisciplinare esegue servizi di ogni tipo.
+`}
+,'farmacia_cermelj':{
+  name:'Farmacia Cermelj Sas',
+  html_title:'Farmacia Cermelj Sas: Tamponi rapidi a Opicina, Trieste',
+  id:44,
+  campo:false,
+  keywords:'Farmacia Cermelj Sas, Farmacia Cermelj Sas Opicina, Farmacia Opicina, Farmacia Trieste, tampone rapido trieste, tampone rapido opicina,tampone rapido online trieste, tampone rapido online opicina, tampone rapido',
+  og_url:'https://prenota.cc/appuntamento/farmacia_cermelj',
+  og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+  og_description:'Prenota un tampone rapido online nella farmacia Cermelj. Ci metti qualche secondo',
+  phone: '+39 3516060650',
+  address: 'Via di Prosecco 3,',
+  zip_code:'34151',
+  bg_opacity:'#00000099',
+  img_bg:'../assets/farmacia_cermelj.png',
+  bookable_pc:true,
+  category:'Farmacia',
+  hours:`Da Lun a Sab 08:00 - 19:30`,
+  description:`Prenota un tampone rapido online nella farmacia Cermelj. Ci metti qualche secondo.<br>La nostra farmacia offre anche numerosi altri servizi:
+  Prenotazioni Cup : da lunedì a venerdì 8.30-12.30,
+  Autoanalisi del sangue,
+  Misurazione pressione arteriosa,
+  Forazione lobi,
+  Preparazioni galeniche e magistrali,
+  Tisane,
+  Fiori di Bach,
+  Fitoterapia,
+  Farmacista Nutrizionista,
+  Omeopatia,
+  Cosmesi,
+  Neonati e bambini,
+  Veterinar,
+  Per evitare le code ordina quello
+
+che ti serve telefonicamente e passa a ritirarlo
+
+in Farmacia quando vuoi.
+`}
+,'studio_gasbarro':{
+      name:'Studio Gasbarro',
+      html_title:'Studio Gasbarro: Dottore Commercialista Centro CAF Patronato a Castel di Sangro (AQ)',
+      id: 45,
+      campo:false,
+      keywords:"Studio Gasbarro, Silvia Gasbarro, Centro CAF Patronato, Dottore Commercialista Gasbarro, Dottore Commercialista a Castel di Sangro, Centro CAF Patronato L'Aquila, Commercialista Castel di Sangro, Commercialista L'Aquila, Gasbarro Castel di Sangro, Studio Tributario e Fiscale Gasbarro, Studio Tributario e Fiscale Castel di Sangro, 730 Castel di Sangro, domanda disoccupazione Castel di Sangro, ISEE Castel di Sangro, Visure Camerali Castel di Sangro, Redditi di Cittadinanza Castel di Sangro",
+      og_url:'https://prenota.cc/appuntamento/studio_gasbarro',
+      og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+      og_description:'Studio Gasbarro, prenota un servizio tributario e fiscale a Castel di Sangro: la Dott.ssa Gasbarro aiuta i clienti con Domanda Disoccupazione, Contabilità Forfettarie, 730, Domanda Maternità e molto altro.',
+      phone: '+39 0864847002',
+      address: 'Via XX Settembre 131, Castel di Sangro (AQ)', 
+      zip_code:'67031',
+      bg_opacity:'#000000aa',
+      img_bg:'../assets/Gasbarro.jpg',
+      bookable_pc:true,
+      category:'Centro CAF Commercialista',
+      hours:`Lun - Ven dalle 9:30 alle 13 senza appuntamento - Lun - Ven dalle 16 alle 19 con appuntamento preso online`,
+      description:`Dott. ssa Silvia Gasbarro <br><br>
+  Dottore Commercialista e Revisore Contabile<br><br>
+  Iscritta all'Albo dei Dottori Commercialisti ed Esperti Contabili della Provincia di L'Aquila sez. “A” al n. 322, Revisore Contabile, mediatore commerciale e creditizio.<br><br>
+  Svolge la propria attività di commercialista, centro CAF e Patronato.<br><br>
+  Si occupa principalmente di consulenza fiscale, societaria, contabile, tributaria, contrattuale, pratiche patronato fornita sia ai clienti dello studio sia ad aziende esterne. <br><br>
+  Esperta in fondi perduti per aziende. 
+  `}
 }
   slug
-  constructor(private api: ApiService, private router: Router, private titleService: Title) {
+  constructor(private api: ApiService, private router: Router, private titleService: Title, private metaService: Meta) {
     var url
     if(this.router.url.includes('?')){
       url = this.router.url.split('?')[0].split('/')
@@ -233,13 +430,37 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
     }
    
     this.slug = url[url.length-1]
+    if(this.businesses[this.slug] == undefined ){
+      this.router.navigateByUrl('/home/ricerca')
+    }
     this.id = this.businesses[this.slug].id
     this.name = this.businesses[this.slug].name
     this.bookable_pc = this.businesses[this.slug].bookable_pc
     this.campo =  this.businesses[this.slug].campo
     var html_title = this.businesses[this.slug].html_title
+    var html_description = this.businesses[this.slug].og_description
+    var html_image = this.businesses[this.slug].og_image
+    var html_url = this.businesses[this.slug].og_url
+    var html_keywords = this.businesses[this.slug].keywords
     this.titleService.setTitle(html_title)
-   }
+    var metaTags=[
+      {property: 'og:url', content: html_url},
+      {property: 'og:title', content: html_title},
+      {property: 'og:description', content: html_description},
+      {property: 'og:image', content: html_image},
+      {name: 'keywords', content: html_keywords},
+      {name: 'description', content: html_description},
+     
+      
+    ];
+    metaTags.forEach(m=> this.metaService.updateTag(m))
+    // var head =document.head
+  
+    // var script = document.createElement('script');
+    // script.setAttribute('type', 'application/ld+json');
+    // script.innerHTML=this.businesses[this.slug].rich_cont
+    // document.head.append(script)
+  }
    async ngOnInit() {
    
     // Notiflix.Block.Standard('.service', 'Caricamento serivzi...');
@@ -253,6 +474,15 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
     var now = new  Date()
     var month = now.getMonth()
     var day_number = now.getDate()
+    if(this.available_on=='f'){
+      this.hourfilter=this.full_hours
+    }else{
+      if(this.available_on=='a'){
+        this.hourfilter=this.times
+      }else{
+        this.hourfilter=this.rows
+      }
+    }
     for(let i=0; i< this.limit; i++){
 
       this.services_list.push({name:'service ' +i, duration:'1 ora'})
@@ -285,26 +515,57 @@ for (let i=0;i<31;i++){
     }
   }
 }
-    await this.getservices()
+this.api.getStore(this.id).subscribe((res:any)=>{
+  this.available_on=res.available_on
+  if(this.available_on=='f'){
+    this.hourfilter=this.full_hours
+  }else{
+    if(this.available_on=='a'){
+      this.hourfilter=this.times
+    }else{
+      this.hourfilter=this.rows
+    }
+  }
+  this.advance_day =res.book_advance
+  
+})
+
+await this.getEmployees()
     // this.getAppointments(this.day)
     await this.tokenValidation()
-    await this.calculateWorkdates()
-    await this.getEmployees()
+    if(this.api.isvalidToken()){
+      this.api.isStoreClient(this.id).subscribe(res=>{
+        if(res[0]!=undefined){
+          this.is_client = true
+          this.is_member = res[0].isMember
+          this.account_credits = res[0].credit
+        }else{
+          this.is_client = false
+        }
+        this.getDatesAndServices()
+      })
+    }else{
+      this.is_client = false  
+      this.getDatesAndServices()
+    }
+    // await this.calculateWorkdates()
+  
     this.active_date[0]=true
  
-    this.api.getEmploservicebyStore(this.id).subscribe(async data=>{
-      this.employees_serivces = await data
-        },err=>{
-          console.log(err)
-        })
+   
         if(this.mobileCheck()){
-          this.button_text="Scarica l'app"
-          this.book_site= true
+          this.button_text="Prenota ora"
+          if(this.router.url!='/appuntamento/studio_gasbarro'){
+            this.book_site= true
+          }else{
+            this.book_site= false
+          }
+        
         }else{
           if(this.campo){
             this.button_text="Prenota un campo"
           }else{
-            this.button_text="Prenota appuntamento"
+            this.button_text="Prenota un appuntamento"
           }
           
           this.book_site= false
@@ -330,6 +591,18 @@ for (let i=0;i<31;i++){
               backOverlayColor:'rgba(#00479d,0.2)',}
             },
           )
+  }
+  getDatesAndServices(){
+    this.calculateWorkdates().then(()=>{
+      
+     
+      this.api.getEmploservicebyStore(this.id).subscribe(async data=>{
+        this.employees_serivces = await data
+        await this.getservices()
+          },err=>{
+            console.log(err)
+          })
+    })
   }
   mobileCheck() {
     let check = false;
@@ -373,6 +646,10 @@ for (let i=0;i<31;i++){
       this.api.getStoreservicebyStore(this.id).subscribe(
         async data=>{
           this.services = await data
+          if(!this.is_client){
+            this.services = this.services.filter(val =>{
+              return !val.hasToBeCLient  })
+          }
           for(let i=0;i< this.services.length;i++){
             this.active_services.push(["#ffffff", '#263b56',false])
           }          
@@ -393,13 +670,10 @@ for (let i=0;i<31;i++){
   }
   showServices(){
     if(this.mobileCheck()){
-      var userAgent = navigator.userAgent || navigator.vendor ;
-      if (/android/i.test(userAgent)) {
-        window.location.href="http://play.google.com/store/apps/details?id=io.prenota.client"
-      }
-      // iOS detection from: http://stackoverflow.com/a/9039885/177710
-      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-        window.location.href="https://apps.apple.com/app/id1523525291"
+      if(this.bookable_pc){
+      window.location.href = 'https://mobile.prenota.cc/business/'+this.id
+      }else{
+        Notiflix.Report.Info("Scarica l'app", "Al momento siamo prenotabili solo da app! Clicca sul tasto in alto per scaricarla.", 'OK');
       }
     }else{
       if(this.bookable_pc){
@@ -608,7 +882,7 @@ for (let i=0;i<31;i++){
       for(let work of empl){
         for(let day of this.week){
           if(day.week_day == work.wkday){
-            if(day.number<=this.day && day.month==this.month){
+            if((day.number<this.day+this.advance_day && day.month==this.month)||(day.number<this.day+this.advance_day-this.months_days[this.month] && day.month==this.month+1)){
             }else{
               x.push(day)
             }
@@ -742,9 +1016,8 @@ items.forEach(function (a) {
           async data=>{
            this.all_app_week1 =  await data
            for(let appointment of  this.all_app_week1){
-            var start = this.times.indexOf(this.rows[appointment.start])
-            var end = start+appointment.end -  appointment.start
-            this.list_work =  this.list_work.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee || appointment.employee!=value.employee || appointment.day!=value.day )})
+           
+            this.list_work =  this.list_work.filter(function(value, index, arr){ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee || appointment.employee!=value.employee || appointment.day!=value.day )})
           } 
           var app
           var tot_dur=0
@@ -810,9 +1083,7 @@ items.forEach(function (a) {
       this.just_entered=1
     }else{
           for(let appointment of  this.all_app_week1){
-           var start = this.times.indexOf(this.rows[appointment.start])
-           var end = start+appointment.end -  appointment.start
-           this.list_work =  this.list_work.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee || appointment.employee!=value.employee || appointment.day!=value.day )})
+           this.list_work =  this.list_work.filter(function(value, index, arr){ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee || appointment.employee!=value.employee || appointment.day!=value.day )})
          } 
          var app
          var tot_dur=0
@@ -869,14 +1140,18 @@ items.forEach(function (a) {
       }
   }
   async calculateAvailability(date, bool){
+    
     this.total_service.duration=0
     this.total_service.name=''
+    
         for(let service of this.service){
           if(this.service.indexOf(service) == this.service.length-1){
             this.total_service.name = this.total_service.name+service.name
+            
           }else{
             this.total_service.name = this.total_service.name+service.name+' + '
             this.total_service.id = -1
+            
           }
         }
         if(this.service.length==1){
@@ -884,6 +1159,7 @@ items.forEach(function (a) {
         }else{
           this.total_service.id = -1
         }
+    
     var serv_ind = this.service.length-1
     if(serv_ind == 0){
       var day_of_week = date.getDay()-1
@@ -903,15 +1179,16 @@ items.forEach(function (a) {
               for (var i = start; i <= end; i++) {
                 list.push({time: i  , employee: day.employee });
               }
+            
             }
 
           }
           this.openhours = await list
+         
           for(let appointment of this.list_appointments){
-            var start = this.times.indexOf(this.rows[appointment.start])
-            var end = start+appointment.end -  appointment.start
-            this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+            this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee})
           } 
+          
           for (let empl of this.employees_serivces){
             if( empl.service_id == this.service[0].id){                
               var y = empl.employee
@@ -920,19 +1197,22 @@ items.forEach(function (a) {
               var max_ind = this.openhours.length-1
               // let _mid =0
               for(let idx in this.openhours){
-                // console.log(idx ,this.openhours[idx].employee)
+               
                 if(this.openhours[idx].employee==y){
                   let id:any = idx
-                  // console.log(id , this.openhours[id] , this.openhours[id-1] , this.openhours[id], this.openhours[id-1],  app , this.service[serv_ind])
                   if(id ==0 || id == max_ind || this.openhours[id].time-this.openhours[id-1].time> 1  || this.openhours[id].employee-this.openhours[id-1].employee!= 0 || app == undefined || app.duration == this.service[serv_ind].duration_book){
                     if (app != undefined){
-                      if(app.duration >=   this.service[serv_ind].duration_book){
-                        this.availableSpots.push(app)
-                        // console.log(app)
+                      if(app.duration ==   this.service[serv_ind].duration_book){
+                          this.availableSpots.push(app)  
+                      }
+                      if(id>0 && this.openhours[id].time-this.openhours[id-1].time> 1){
+                        app=undefined
                       }
                     }
-                    if(this.rows.indexOf(this.times[this.openhours[id].time])!=-1){
+
+                    if(this.hourfilter.indexOf(this.times[this.openhours[id].time])!=-1){
                       app = {start: this.openhours[id].time, duration: 1, employee:y, emplo_name:empl_name, service: this.service[0].id , service_name: service_name}
+                    
                     }
                 
                   }else{
@@ -955,11 +1235,12 @@ items.forEach(function (a) {
               await this.final_spots.sort(function(a, b) {
                 return a[0].start - b[0].start;
              });
+        
              this.filtr =  []
              this.place_holder = []   
             //  if(this.final_spots.length<1 || this.final_spots==undefined ||this.final_spots == null ) {
             //   if(this.uniques.length>0){
-            //     if(date.getDate()==this.uniques[0].number){
+            //     if(date.getDate()==this.souniques[0].number){
             //       // this.just_entered =0
             //       this.uniques.shift()
             //       await this.DatePicker(this.uniques[0],0) 
@@ -979,7 +1260,7 @@ items.forEach(function (a) {
                 var f = this.final_spots[0][0].emplo_name
                 this.filtr.push(g)
                 this.place_holder.push(f)
-                // console.log( this.final_spots)
+                
                 await this.filter_serv()
                 if(bool && this.available_days.length>0){
                   this.date_vis='visible'
@@ -999,10 +1280,9 @@ items.forEach(function (a) {
       if (day_of_week == -1){
         day_of_week= 6
       }
-      // Notiflix.Block.Standard('.bookings-time', 'Verificando la disponibilità...');
-      // console.log(this.final_spots, serv_ind)
+      
       this.availableSpots = this.final_spots
-      // console.log(this.availableSpots, this.final_spots)
+     
       var list = [];
       var app
       for (let day of this.empl_hours){
@@ -1017,9 +1297,8 @@ items.forEach(function (a) {
       this.openhours = list
       
       for(let appointment of this.list_appointments){
-        var start = this.times.indexOf(this.rows[appointment.start])
-        var end = start+appointment.end -  appointment.start
-        this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time <= start && appointment.employee==value.employee )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+        
+        this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time <= appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee})
       } 
       var o:any = await this.groupBy( this.openhours, 'employee')
     // setTimeout(async () => {
@@ -1036,7 +1315,7 @@ items.forEach(function (a) {
             for(let spot of this.availableSpots){
               let time_spot = JSON.parse(JSON.stringify(spot));
               let obj = await this.openhours.find(obj => obj.time == (Math.ceil(dur_client/3)*3)+spot[last_spot_ind].start && obj.employee == empl.employee && spot.length == last_spot_ind+1 );
-              // console.log(obj)
+              
               if(obj!=undefined){
                 var ind = this.openhours.indexOf(obj)
                 if(ind+duration<this.openhours.length){
@@ -1047,6 +1326,7 @@ items.forEach(function (a) {
                 }
               }
             }
+            await this.filter_serv()
         }
 
       
@@ -1079,7 +1359,7 @@ items.forEach(function (a) {
   //   }
   // }else{
 
-
+   
     if(this.final_spots[0]){
       await  this.final_spots.sort(function(a, b) {
         return a[0].start - b[0].start;
@@ -1091,7 +1371,7 @@ items.forEach(function (a) {
       this.place_holder.push(el.emplo_name)
 
     }
-
+  
     await this.filter_serv()
     this.has_spot=true
     if(bool && this.available_days.length>0){
@@ -1150,6 +1430,7 @@ async filter_serv(){
      this.final_spots_displ= final_spots_displ
    }
    this.final_spots_displ= [...new Set( this.final_spots_displ)]
+   
 }
   getWeekNumber(d) {
     // Copy date so don't modify original
@@ -1189,7 +1470,7 @@ async book(){
       for (let  ind in this.app_to_book){
         Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
         var client_name = this.user.first_name+' '+ this.user.last_name
-        var start = this.rows.indexOf(this.times[this.app_to_book[ind].start])
+        var start = this.app_to_book[ind].start
         var end = start + this.app_to_book[ind].duration
         // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
         this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
@@ -1253,7 +1534,7 @@ async book(){
           this.api.storeToken(data.token)
           for (let  ind in this.app_to_book){
             var client_name = this.first_name+' '+this.last_name
-            var start = + this.rows.indexOf(this.times[this.app_to_book[ind].start])
+            var start = this.app_to_book[ind].start
             var end = start + this.app_to_book[ind].duration
             this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.phone, this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
             this.register_form='none'
@@ -1304,7 +1585,7 @@ async book(){
           // await this.storage.setAppointment(appointment)
           Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
           var client_name = this.user.first_name+' '+this.user.last_name
-          var start = + this.rows.indexOf(this.times[this.app_to_book[ind].start])
+          var start = this.app_to_book[ind].start
           var end = start + this.app_to_book[ind].duration
           // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
           this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
@@ -1364,7 +1645,7 @@ async book(){
       // await this.storage.setAppointment(appointment)
       Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
       var client_name =first_name+' '+ last_name
-      var start = + this.rows.indexOf(this.times[this.app_to_book[ind].start])
+      var start = this.app_to_book[ind].start
       var end = start + this.app_to_book[ind].duration
       // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
       this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
@@ -1424,9 +1705,16 @@ this.text_c='#fff'
     this.text_c='#0061d5'
   }
 }
-goBookSite(){
+getapp(){
   // if(this.mobileCheck()){
-    window.location.href = 'https://mobile.prenota.cc/business/'+this.id
+    var userAgent = navigator.userAgent || navigator.vendor ;
+      if (/android/i.test(userAgent)) {
+        window.location.href="http://play.google.com/store/apps/details?id=io.prenota.client"
+      }
+      // iOS detection from: http://stackoverflow.com/a/9039885/177710
+      if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+        window.location.href="https://apps.apple.com/app/id1523525291"
+      }
   // }
 }
 closeBookingPage(){

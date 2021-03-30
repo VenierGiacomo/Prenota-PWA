@@ -46,12 +46,19 @@ span{
         }
     
 }
+img{
+    height: 40vh;
+}
 @media (max-width: 576px) {
     .header-act {
         display: none;
     }
     .banner{
         height: calc( 120vh - 90px) !important;
+    }
+    img{
+        height:auto !important;
+        width: calc(100vw - 60px)!important;
     }
   }
 
@@ -68,3 +75,5 @@ a{
     text-decoration: underline !important;
     color:#6e6e6e !important
 }
+
+

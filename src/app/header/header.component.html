@@ -4,9 +4,10 @@
     <nav class="navbar navbar-expand-lg pl-3 pl-sm-0" id="navbar">
       <div class="container">
         <div class="navbar-brand-wrapper d-flex w-100">
-       <div class="logo-menu" (click)='navListing()'>prenota</div>
-      <div class="header-act "  [class.move-left]="move_l"></div> <span (click)="navLogin()"  class="btn" style="right: 200px; background: #00479d;color:#fff!important; box-shadow: 0 0 10px 5px rgba(#000, 0.8);" *ngIf='is_business'>Login</span><span (click)="navBusiness()"  class="btn" >{{button_text}}</span>
-      <div class="header-act "  [class.move-left]="move_l"><p *ngIf='show_business' >Hai un Business?</p> </div> <span (click)="navBusiness()"  class="btn" >{{button_text}}</span>
+       <div class="logo-menu" (click)='navListing()' *ngIf='show_btn'>prenota</div>
+       <div class="logo-menu-c" *ngIf='!show_btn'>prenota</div>
+      <div class="header-act "  [class.move-left]="move_l" *ngIf='show_btn' ></div> <span (click)="navLogin()"  class="btn" style="right: 200px; background: #00479d;color:#fff!important; box-shadow: 0 0 10px 5px rgba(#000, 0.8);" *ngIf='is_business'>Login</span><span (click)="navBusiness()"  class="btn" *ngIf='show_btn'>{{button_text}}</span>
+      <div class="header-act "  [class.move-left]="move_l" *ngIf='show_btn'><p *ngIf='show_business' >Hai un Business?</p> </div> <span  (click)="navBusiness()"  class="btn"  *ngIf='show_btn' >{{button_text}}</span>
       <!-- <span  class="btn" *ngIf='show_business'>Istruzioni</span>  -->
         </div>
       </div>

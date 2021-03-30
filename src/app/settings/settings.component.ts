@@ -7,6 +7,7 @@ import QRCode from 'qrcode';
 import '@vaadin/vaadin-time-picker';
 import '@vaadin/vaadin-checkbox';
 import Notiflix from "notiflix";
+import { convertToObject } from 'typescript';
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.component.html',
@@ -122,6 +123,8 @@ export class SettingsComponent implements OnInit {
   chart_data:any=[]
   payable
   // services
+  delete_modal_top ='-200px'
+  delete_customer:any ={client_name:''}
   week_days = ['Dom','Lun','Mar','Mer','Gio','Ven','Sab']
   months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
   constructor(private api: ApiService, private storage: StorageService, private router: Router, private titleService: Title) {
@@ -160,11 +163,12 @@ export class SettingsComponent implements OnInit {
         this.closed_days[day] = false
       }
     }
-    let store_info = JSON.parse( localStorage.getItem('shop_data'))
+    let store_info = JSON.parse( await localStorage.getItem('shop_data'))
     this.storeUseCredits =store_info.credits
     this.store_type =store_info.business_type
     this.store_name=store_info.store_name
     this.payable = store_info.payable
+    console.log(store_info,this.store_name)
     // this.services = this.storage.getCatalog()
     if( this.store_type==7){
       this.xAxisLabel_services_per_emplo = 'Campi';
@@ -327,7 +331,9 @@ export class SettingsComponent implements OnInit {
       this.online_performance = new_arr2  
       
       var new_arr3=[]
-      var quantity2 = stats.map((val) =>{ if (Number(val.service_n)>0 ){return val.day}})
+      var quantity2 = stats.map((val) =>{if(Number(val.service_n)>0 ){
+         return val.day}
+        })
     var result = this.count_occurencies(quantity2);
     var datas
     for (let ind in result[0]){
@@ -364,8 +370,8 @@ this.day_by_day = new_arr3
   } 
 nameToDate(val){
       var day = val.split('/')
-      var week_day=new Date(this.year,this.month, day[0] ).getDay()
-      return this.week_days[week_day] + " "+ day[0]+ ' '+ this.months_names[this.month]
+      var week_day=new Date(this.year,this.stat_month, day[0] ).getDay()
+      return this.week_days[week_day] + " "+ day[0]+ ' '+ this.months_names[this.stat_month]
   }
 
 count_occurencies(arr) {
@@ -633,6 +639,36 @@ close_clients(ev){
       console.log(err)
     })
   }
+
+  async deleteClient(){
+    this.closeDeletePrompt()
+    // if(this.delete_customer.client!=1){
+      this.api.deleteClientStore(this.delete_customer.id).subscribe(async data=>{
+        await this.storage.deleteClient(this.delete_customer)
+
+        setTimeout(async () => {
+          var client_list = await JSON.parse( localStorage.getItem('client_list'))
+          this.clients = client_list.list 
+          this.show_clients =  this.clients.slice(0, 9) 
+          for(let el of this.show_clients ){
+            el.client_name = el.client_name.toLowerCase()
+          }
+          Notiflix.Notify.Success('Cliente cancellato');
+        }, 100);
+      
+      },err=>{
+        console.log(err)
+      })
+    // }else{
+    //   await this.storage.deleteClient(this.delete_customer)
+    //   setTimeout(() => {
+    //     Notiflix.Notify.Success('Cliente cancellato');
+    //   }, 800);
+    // }
+    
+    
+  }
+  
   async listBusinessTransactions(){
     this.api.listBusinessTransactions().subscribe((res:any)=>{
       this.payments_recieved = res.data.filter((val)=>{return val.description != null })
@@ -663,16 +699,17 @@ close_clients(ev){
     if(this.invite_first_name != '' && this.invite_last_name != '' && this.invite_phone != ''){
       if(this.invite_email!=''){
         this.api.registerClientWithEmail(this.invite_first_name,this.invite_last_name,this.invite_phone,this.invite_email).subscribe(async res=>{
-          
+          this.register_form='none'
       
           await this.storage.addClient(res)
 
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
-          this.show_clients = client_list.list
+          this.clients = client_list.list 
+          this.show_clients =  this.clients.slice(0, 9) 
           for(let el of this.show_clients ){
             el.client_name = el.client_name.toLowerCase()
           }
-          Notiflix.Notify.Success('Modifiche salvate con sucesso');
+          Notiflix.Notify.Success('Cliente registrato');
           this.invite_email=''
           this.invite_first_name =''
           this.invite_last_name =''
@@ -688,11 +725,12 @@ close_clients(ev){
           
           await this.storage.addClient(res)
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
-          this.show_clients = client_list.list
+          this.clients = client_list.list 
+          this.show_clients =  this.clients.slice(0, 9) 
           for(let el of this.show_clients ){
             el.client_name = el.client_name.toLowerCase()
           }
-          Notiflix.Notify.Success('Modifiche salvate con sucesso');
+          Notiflix.Notify.Success('Cliente registrato');
           this.invite_email =''
           this.invite_first_name =''
           this.invite_last_name =''
@@ -741,5 +779,22 @@ closeQR(){
     setTimeout(() => {
     this.backdrop_active =false
   }, 500);
+}
+
+promptDelete(client){
+  this.delete_customer =client
+  this.delete_modal_top='50px'
+}
+
+closeDeletePrompt(){
+  this.delete_modal_top='-200px'
+}
+inviteEmail(client){
+  this.api.inviteCLient(client).subscribe(res=>{
+    Notiflix.Notify.Success('Invito sepdito');
+  },err=>{
+    Notiflix.Notify.Failure("C'è stato un problema nell'invio, riporva più tardi");
+  })
+
 }
 }

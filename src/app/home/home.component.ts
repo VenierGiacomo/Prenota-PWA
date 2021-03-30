@@ -1,3 +1,4 @@
+
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { StorageService } from '../services/storage.service';
@@ -71,8 +72,9 @@ export class HomeComponent implements OnInit {
   recurring
   availableSpots:any=[]
   spot_show = 'none'
+  timetables
   openlist = [[],[],[],[],[],[],[],]
-  times =["06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
+  times =["06:00", "06:05", "06:10", "06:15", "06:20", "06:25", "06:30", "06:35", "06:40","06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
   rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "24:00"]
   columns= ["Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato","Domenica"] 
   // grid=[]
@@ -98,37 +100,68 @@ export class HomeComponent implements OnInit {
   to_be_payed=false
   table_line_heigth =60
   quarter_displ =true
+  
+  five_displ =false
   table_font_size = 12
   recurring_quantity=10
   show_recurring=false
 async ngOnInit() {
-  let store_info = JSON.parse( localStorage.getItem('shop_data'))
+  var store_info = await JSON.parse( await localStorage.getItem('shop_data'))
   if(store_info.custom_size){
     this.table_line_heigth =store_info.table_line_heigth
     this.quarter_displ = store_info.quarter_displ
+    this.five_displ = store_info.five_displ
     this.table_font_size = store_info.table_font_size
   }
-  let root = document.documentElement;
+  var root = document.documentElement;
   root.style.setProperty('--cell-height', this.table_line_heigth +'px' );
   root.style.setProperty('--cell-font-size',  this.table_font_size+'px');
   if(this.quarter_displ){
-    root.style.setProperty('--quarter-displ',  "table-row");
+    if(!this.five_displ){
+      for(let ind in this.times){
+        var el
+        if((+ind)%3!=1){
+          el = document.getElementById(ind)
+          if(el!=null){
+            el.style.display='none'
+          }
+         
+        }
+      }
+    }
   }else{
-    root.style.setProperty('--quarter-displ',  "none");
+    for(let ind in this.times){
+      if(+ind%6!=1){
+        document.getElementById(ind).style.display='none'
+      }
+    }
   }
-  var pusher = new Pusher('45f982633227395f42a9', {
-    cluster: 'eu'
-  });
-
-  var socekt_name = store_info.store_name.replaceAll(' ','-')
-  var channel = pusher.subscribe(socekt_name);
-  channel.bind('become-costumer', (data)=> {
-    this.new_customer_modal_top='24px'
-    this.new_customer_name=data.message
-    this.new_customer_id = data.id
-
-  });
- 
+  setTimeout(()=>{
+    var pusher = new Pusher('45f982633227395f42a9', {
+      cluster: 'eu'
+    });
+  
+    var socekt_name = store_info.store_name.replaceAll(' ','-')
+    var channel = pusher.subscribe(socekt_name);
+    channel.bind('become-costumer', (data)=> {
+      this.new_customer_modal_top='24px'
+      this.new_customer_name=data.message
+      this.new_customer_id = data.id
+    });
+    channel.bind('update-costumer', async (data)=> {
+      var client_list = await JSON.parse( localStorage.getItem('client_list'))
+      var client = client_list.list.filter(value=>{return value.id == +data.client_id})
+      client[0].client=data.id
+      await this.storage.updateClient(client[0])
+      var client_list = await JSON.parse( localStorage.getItem('client_list'))
+      this.store_clients = client_list.list
+      for(let el of this.store_clients ){
+        el.client_name = el.client_name.toLowerCase()
+      }
+      Notiflix.Notify.Success("L'account di "+ client[0].client_name+" è stato collegato");
+    });
+  },1000)
+  
 
   
 // dispaly the appopriate days number and months
@@ -172,8 +205,8 @@ else{
 }
 
 // dispaly the closed hours
-var openinghours = await this.storage.getEmployeehours()
-if(openinghours==0 || openinghours[0].timetable.length == 0){
+this.timetables = await this.storage.getEmployeehours()
+if(this.timetables==0 || this.timetables[0].timetable.length == 0){
   
   this.api.getEmployees().subscribe(async data=>{
     this.employees_list = data
@@ -215,10 +248,10 @@ if(x.length==0){
   })
 }
 // this.storage.setHomeReference(this)
-  if (openinghours.length>0){
-    for (let hour of openinghours[0].timetable){
-      this.openlist[hour.wkday].push(hour.start)
-      this.openlist[hour.wkday].push(hour.end)      
+  if (this.timetables.length>0){
+    for (let hour of this.timetables[0].timetable){
+      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.start]))
+      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.end]))      
     }
   }
 
@@ -269,8 +302,8 @@ if(x.length==0){
         }
         for(let appo of just_downloaded_appo){
           this.appointmentlist.push(appo)
-         
-          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note,appo.payed )
+        //  add one view
+          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note,appo.payed )
         
         }
       
@@ -287,7 +320,7 @@ if(x.length==0){
     })
    
     
-  },60000)
+  },120000)
     let use_credits = JSON.parse( localStorage.getItem('shop_data'))
     this.storeUseCredits =use_credits.credits
 
@@ -476,7 +509,7 @@ addAppointment(payed?) {
    drop(ev) {
     var data = ev.dataTransfer.getData("text");
     var el = document.getElementById(data)
-    el.style.zIndex = "10"
+    el.style.zIndex = "1"
 
     // el.style.opacity = "1"
     if(ev.target.id.includes('-')){
@@ -490,7 +523,7 @@ addAppointment(payed?) {
       var id = ev.target.id
       var h1 = id.split('-')[0]-1
      
-      var dur = appo[0].end - appo[0].start 
+      var dur = appo[0].end_t - appo[0].start_t 
      
      
      
@@ -499,8 +532,8 @@ addAppointment(payed?) {
      
      
       if( this.times[h1] != undefined && this.times[h2] != undefined && ev.target.id != data  ){
-        var hour1=this.rows[h1]
-        var hour2 = this.times[this.times.indexOf(hour1)+dur]
+        var hour1=this.times[h1]
+        var hour2 = this.times[h2]
         if(!this.OneView){
           document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
    
@@ -522,7 +555,8 @@ addAppointment(payed?) {
             }
             this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data})
             //  this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note )
-            this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note).subscribe(res =>{
+            console.log(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note)
+            this.api.updateAppointment(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note).subscribe(res =>{
               // this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
               this.appointmentlist.push(res)
               Notiflix.Notify.Success('Modifiche salvate con successo');
@@ -530,16 +564,27 @@ addAppointment(payed?) {
               console.log(err)
              })
           }else{
-            if(this.week[6]<this.week[0]&& this.week[col]>7){
-              appointment.month=appointment.month-1
-              if(appointment.month==-1){
-                appointment.month=11
-                appointment.year-=1
-              }
+            if(this.week[6]<this.week[0]){
+              if(appointment.day<7&& this.week[col]>7){
+                appointment.month=appointment.month-1
+                if(appointment.month==-1){
+                  appointment.month=11
+                  appointment.year-=1
+                }
+              }else{
+                if(appointment.day>7&& this.week[col]<7){
+                  appointment.month=appointment.month+1
+                  if(appointment.month==12){
+                    appointment.month=1
+                    appointment.year+=1
+                  }
+                }
+              } 
             }
             this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data})
             //  this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note)
-            this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note).subscribe(res =>{
+           
+            this.api.updateAppointment(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note).subscribe(res =>{
              
               this.appointmentlist.push(res)
               Notiflix.Notify.Success('Modifiche salvate con successo');
@@ -559,12 +604,12 @@ addAppointment(payed?) {
       var parentId=  document.getElementById(ev.target.id).parentElement.id
       var id :any = parentId 
       var h1 = id.split('-')[0]-1
-      var dur = appo[0].end - appo[0].start 
+      var dur = appo[0].end_t - appo[0].start_t 
       var h2 = h1 + dur
       var col = id.split('-')[1]
       if( this.times[h1] != undefined && this.times[h2] != undefined && parentId != data  ){
-        var hour1=this.rows[h1]
-        var hour2 = this.times[this.times.indexOf(hour1)+dur]
+        var hour1=this.times[h1]
+        var hour2 = this.times[h2]
  
         if(!this.OneView){
          document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
@@ -580,7 +625,7 @@ addAppointment(payed?) {
          if (this.OneView){
          this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data})
            // this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.note)
-           this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.appointment_notes).subscribe(res =>{
+           this.api.updateAppointment(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, col, appointment.service_n, appointment.appointment_notes).subscribe(res =>{
              // this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
                this.appointmentlist.push(res)
              Notiflix.Notify.Success('Modifiche salvate con successo');
@@ -592,7 +637,7 @@ addAppointment(payed?) {
        }else{
          this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data})
            // this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note)
-           this.api.updateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.appointment_notes).subscribe(res =>{
+           this.api.updateAppointment(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.today, appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.appointment_notes).subscribe(res =>{
              // this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
                this.appointmentlist.push(res)
              Notiflix.Notify.Success('Modifiche salvate con successo');
@@ -640,19 +685,19 @@ async getAppoitments(){
   // if ((now - this.time_passed )>60000){
     this.api.getAppointments(week).subscribe(
       data=>{
-        // console.log(data)
+       
         this.appointmentlist= data
         this.time_passed = + new Date()
         if (this.appointmentlist.length != 0){
           if(this.OneView){
             for (let appo of this.appointmentlist){
-              this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed  )
+              this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed  )
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               // this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
           }else{
             for (let appo of this.appointmentlist){
-              this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
+              this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               // this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
@@ -661,10 +706,11 @@ async getAppoitments(){
         else{console.log('empty_data')}
       },
       err => {
+        Notiflix.Notify.Failure('Connessione assente');
         this.appointmentlist=[]
         this.appointmentlist = this.storage.getAllAppointmets()
         for (let appo of this.appointmentlist){
-          this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed  )
+          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed  )
           // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
         }
        
@@ -676,7 +722,6 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
   if(client_name==""){
     client_name='~'
   }
-  
   // if(this.week==53 && day<7)
   var week = this.getWeekNumber(new Date(year, month, day))
     this.point.disp="none"
@@ -687,28 +732,28 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
         if(this.OneView){
           if(this.to_be_payed){
           this.drawEmploAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month, year, true)
-          this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, '',true ))
+          this.appointmentlist.push(new Appointment(data.id,data.start, data.end, start, end, day, week, month, year, client_name, phone,  details, employee, service, '',true ))
           }else{
             this.drawEmploAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month, year, data.payed)
-            this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, '',data.payed ))
+            this.appointmentlist.push(new Appointment(data.id,data.start, data.end,start, end, day, week, month, year, client_name, phone,  details, employee, service, '',data.payed ))
           }
         // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
         
-        if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso'){
+        if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1)){
           this.store_client(client_name,phone,0,'')
         }
       }
         else{
           if(this.to_be_payed){
           this.drawAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month-1, year,'', true)
-          this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, '', true))
+          this.appointmentlist.push(new Appointment(data.id, data.start, data.end, start, end,  day, week, month, year, client_name, phone,  details, employee, service, '', true))
           }else{
             this.drawAppointment(data.id, start, end, details, client_name, employee, service, day ,week, month-1, year,'', data.payed)
-            this.appointmentlist.push(new Appointment(data.id,start, end, day, week, month, year, client_name, phone,  details, employee, service, '', data.payed))
+            this.appointmentlist.push(new Appointment(data.id, data.start, data.end, start, end,  day, week, month, year, client_name, phone,  details, employee, service, '', data.payed))
           }
           // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
          
-          if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso'){
+          if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1)){
             this.store_client(client_name,phone,0,'')
           }
         }
@@ -743,7 +788,7 @@ if(this.info >0){
     }
     
   }
-  app.end =app.start + Number(new_service.duration_book)
+  app.end_t =app.start_t + Number(new_service.duration_book)
   if(this.quarter_displ){
     var div_height = (new_service.duration_book*this.table_line_heigth/3)+'px'
   }else{
@@ -755,7 +800,7 @@ if(this.info >0){
     this.extra_desc = new_service.name
  }else{
    if(this.info ==-1){
-    app.end =app.start + Number(this.time)
+    app.end_t =app.start_t + Number(this.time)
     if(this.quarter_displ){
       var div_height = (this.time*this.table_line_heigth/3)+'px'
     }else{
@@ -764,7 +809,7 @@ if(this.info >0){
     new_service= {color: 6 } 
    }else{
     if(this.info ==-3){
-      app.end =app.start + 12
+      app.end_t =app.start_t + 12
       if(this.quarter_displ){
         var div_height = (12*this.table_line_heigth/3)+'px'
       }else{
@@ -792,10 +837,10 @@ if(this.info >0){
    
   
  }
-  this.api.updateAppointment(this.updateAppointmentId, app.start, app.end ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info, this.appointment_notes ).subscribe(data =>{
+  this.api.updateAppointment(this.updateAppointmentId, app.start_t, app.end_t ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info, this.appointment_notes ).subscribe(data =>{
     var element = document.getElementById(this.updateAppointmentId)
-    var hour1= this.rows[app.start]
-    var hour2 = this.times[this.times.indexOf(hour1)+Number(app.end -app.start)]
+    var hour1= this.times[app.start_t]
+    var hour2 = this.times[app.end_t]
     element.getElementsByClassName('task-details')[0].innerHTML = `${data.details}`
     element.getElementsByClassName('task-name')[0].innerHTML = `${this.nome}`
     element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
@@ -1071,33 +1116,36 @@ goNotifications(){
 
 // notifications
 async activetab(employee){
-  this.show_others=false
   var paras = document.getElementsByClassName('task');
+  
+
   while(paras[0]) {
+    
     paras[0].parentNode.removeChild(paras[0]);
   } ​
   this.selected = employee.id
-  var timetables = this.storage.getEmployeehours()
+  
   var work_hours:any
-  for (let timetable of timetables){
+  for (let timetable of this.timetables){
     if(timetable.id == employee.id){
       work_hours = timetable.timetable
     }
   }
   this.openlist = [[],[],[],[],[],[],[],]
   for (let hour of work_hours){
-   this.openlist[hour.wkday].push(hour.start)
-   this.openlist[hour.wkday].push(hour.end)      
+    this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.start]))
+      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.end]))      
   }
   // console.log(this.appointmentlist)
   if (this.appointmentlist.length != 0){
+
     if(this.OneView){
       for (let appo of this.appointmentlist){
-        this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed  )
+        this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed  )
       }
     }else{
       for (let appo of this.appointmentlist){        
-        this.drawAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
+        this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
       }
     }
   }
@@ -1117,13 +1165,35 @@ goToday(new_week){
  this.OneView = true
   if(new_week){
     setTimeout(() => {
+    
       this.getAppoitments()
     }, 50);
   }else{
     setTimeout(async () => {
+      if(this.quarter_displ){
+        if(!this.five_displ){
+          for(let ind in this.times){
+            var el
+            if((+ind)%3!=1){
+              el = document.getElementById(ind)
+              if(el!=null){
+                el.style.display='none'
+              }
+             
+            }
+          }
+        }
+      }else{
+        for(let ind in this.times){
+          
+          if(+ind%6!=1){
+            document.getElementById(ind).style.display='none'
+          }
+        }
+      }
       // this.appointmentlist = await this.storage.getAppointmets(true)
     for (let appo of this.appointmentlist){
-      this.drawEmploAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed )
+      this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed )
     }
   }, 100);
   }
@@ -1151,8 +1221,14 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
   var height = end - start
   if(this.quarter_displ){
     var div_height = (height*this.table_line_heigth/3)+'px'
+    if(this.five_displ){
+      var div_height = (height*this.table_line_heigth)+'px'
+    }
   }else{
-    var div_height = (height*this.table_line_heigth/6)+'px'
+  
+      var div_height = (height*this.table_line_heigth/6)+'px'
+    
+    
   }
   
   var div = document.createElement('div');
@@ -1171,7 +1247,7 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
    
     self.nome = appo.client_name
-    self.time = appo.end-start
+    self.time = appo.end_t-appo.start_t
     self.info = Number(appo.service_n)
     self.extra_desc = appo.details
     self.edit = true
@@ -1181,7 +1257,6 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     self.appointment_notes = note
     self.client = self.store_clients.filter((val, ind, arr)=>{ return val.client == appo.client})[0]
    
-    console.log(self.client)
     }, 1);
 };
 var services = this.storage.getCatalog()
@@ -1200,15 +1275,16 @@ if(service==-1){
   div.style.height =div_height
   div.ondragover=this.allowDrop
   div.ondrop=this.drop
-  var hour1=this.rows[start]
-  var hour2 = this.times[this.times.indexOf(hour1)+height]
+  var hour1=this.times[start]
+  var hour2 = this.times[end]
   var div_resize = document.createElement('div');
   div_resize.classList.add('bot-drag')
   var m_pos;
-  let mod_div 
+  var mod_div 
   let initial_h
   var res =false
   async function resize(e){
+    
       // var mod_div = await document.getElementById(id)
       var dy = e.y - m_pos;
       // m_pos = e.y;
@@ -1217,43 +1293,51 @@ if(service==-1){
       // if (dy%20>10){
         mod_div.style.height = initial_h +dy +'px'
       // }
+      
       // mod_div.style.height = initial_h +(Math.floor(dy/20)) *20 +'px'
       // mod_div.draggable =true
       // mod_div.style.zIndex = "1"
       // console.log( initial_h + dy)
   }
 
-  div_resize.addEventListener("mousedown", async function(e){
-    res =true
+  div_resize.onmousedown = async function (e) {
+    console.log('down')
+    // res =true
       m_pos = e.y;
-      mod_div = await document.getElementById(id)
+      mod_div =  document.getElementById(id)
       if(mod_div!=undefined){
         mod_div.draggable =false
       }
-     
       initial_h =  parseInt(mod_div.style.height.slice(0, -2))
       document.addEventListener("mousemove", resize, false);
-  }, false);
-  document.addEventListener("mouseup", async function(){
-    
+  };
+  div_resize.onmouseup =async function (e){
+    console.log('up')
+    var target:any =e.target
+    mod_div= target.parentElement
     if(mod_div!=undefined){
       mod_div.draggable =true
     }
-    
-    if(res){
+
+
     var hei = parseInt(mod_div.style.height.slice(0, -2))
     var appo: any = await self.appointmentlist
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
     var min_5_height
     if(self.quarter_displ){
-       min_5_height =(self.table_line_heigth/3)
+      if(self.five_displ){
+        min_5_height =self.table_line_heigth
+      }else{
+        min_5_height =(self.table_line_heigth/3)
+      }
+     
     }else{
       min_5_height =(self.table_line_heigth/6)
     }
-  
-    if(hei%min_5_height>10){
+    // if(hei%min_5_height>10){
       mod_div.style.height  = Math.ceil(hei/min_5_height)*min_5_height +'px'
       hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/min_5_height)]
+      console.log(hour2)
       if(has_note){
         if(payed){
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
@@ -1278,9 +1362,9 @@ if(service==-1){
         
       }
       div.appendChild(div_resize)
-      start = self.rows.indexOf(hour1)
-      end = self.rows.indexOf(hour1) + self.times.indexOf(hour2)- self.times.indexOf(hour1)
-      console.log(appo, 'nonon')
+      div
+      start = self.times.indexOf(hour1)
+      end = self.times.indexOf(hour2) 
       self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
         self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
         self.appointmentlist.push(res)
@@ -1289,52 +1373,53 @@ if(service==-1){
       },err =>{
         console.log(err)
        })
-    }else{
-      mod_div.style.height  = Math.floor(hei/min_5_height)*min_5_height+'px'
-      hour2 = self.times[self.times.indexOf(hour1)+Math.floor(hei/min_5_height)]
-      if(has_note){
-        if(payed){
-          mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
-      <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-      <div class="task-name" id=${id} >${client_name}   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
-        }else{
-          mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id=${id} >${client_name}  </div>`
-        }
+    // }else{
+    //   mod_div.style.height  = Math.floor(hei/min_5_height)*min_5_height+'px'
+    //   hour2 = self.times[end]
+    //   console.log(hour2)
+    //   if(has_note){
+    //     if(payed){
+    //       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
+    //   <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+    //   <div class="task-name" id=${id} >${client_name}   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+    //     }else{
+    //       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
+    //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+    //       <div class="task-name" id=${id} >${client_name}  </div>`
+    //     }
      
-      }else{
-        if(payed){
-          mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
-        }else{
-          mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id=${id} >${client_name} </div>`
-        }
+    //   }else{
+    //     if(payed){
+    //       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+    //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+    //       <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+    //     }else{
+    //       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
+    //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+    //       <div class="task-name" id=${id} >${client_name} </div>`
+    //     }
         
-      }
-      div.appendChild(div_resize)
-      start = self.rows.indexOf(hour1)
-      end = self.rows.indexOf(hour1) + self.times.indexOf(hour2) - self.times.indexOf(hour1)
-      console.log(appo, 'heere')
-      self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
-        self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
-        self.appointmentlist.push(res)
-        Notiflix.Notify.Success('Modifiche salvate con successo');
-        // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
-      },err =>{
-        console.log(err)
-       })
-    }
+    //   }
+    //   div.appendChild(div_resize)
+    //   start = self.times.indexOf(hour1)
+    //   end = self.times.indexOf(hour2) 
+    //   self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
+    //     self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
+    //     self.appointmentlist.push(res)
+    //     Notiflix.Notify.Success('Modifiche salvate con successo');
+    //     // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
+    //   },err =>{
+    //     console.log(err)
+    //    })
+    //    document.removeEventListener("mousemove", resize, false);
+    // }
     // setTimeout(() => {
     //   self.point.disp = 'none'
     // }, 1); 
-      document.removeEventListener("mousemove", resize, false);
-      res=false
-    }
-  }, false);
+      
+    document.removeEventListener("mousemove", resize, false);
+    div.style.zIndex='1'
+  }
   // <div><img src='../assets/icons/info.svg'></div>
   if(has_note){
     if(payed){
@@ -1385,63 +1470,21 @@ if(service==-1){
   }
   
   }  
-  drawfadedAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year ){
-    var height = end - start
-    var div_height = (height*20)+'px'
-    var div = document.createElement('div');
-    div.style.opacity = '0.5'
-    var self = this
-    
-  var services = this.storage.getCatalog()
-  var color = 10000
-  for (let service_el of services){
-    if (service_el.id == service){
-      color = service_el.color
-    }
-  }
-  if(service==-1){
-    var color = 6
-  }
-    div.classList.add('task','task--primary', `c${color}`) 
-    div.id= id
-    div.style.height =div_height
-    div.style.zIndex = '-1 !important'
-    div.ondragover=this.allowDrop
-    div.style.pointerEvents ='none'
-    div.ondrop=this.drop
-    // div.style.top = "15px"
-    var hour1=this.rows[start]
-    var hour2 = this.times[this.times.indexOf(hour1)+height]
-    // <div><img src='../assets/icons/info.svg'></div>
-    div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
-                    <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-                    <div class="task-name" id=${id} >${client_name}</div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
-    if(this.week[6]<this.week[0]){1
-      if(day<7){
-        if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected !=employee){
-         if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount ==0){
-          document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
-         } 
-          }
-      }else{
-        if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month-1, day)) == week && this.selected !=employee){
-          if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount == 0){
-            document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
-          }
-         
-          }
-      }}
-    if (this.week.indexOf(day)>=0 && this.getWeekNumber(new Date(this.year, this.month, day)) == week && this.selected !=employee){
-      if(document.getElementById((start+1)+"-"+this.week.indexOf(day)).childElementCount == 0){
-        document.getElementById((start+1)+"-"+this.week.indexOf(day)).append(div)
-      }
-    }
-    
-    } 
+
   drawEmploAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,payed ){
-    var height = end - start
+    var height
+    if(this.quarter_displ){
+       height = (end - start)
+       if(this.five_displ){
+        height = (end - start)*3
+       }
+    }else{
+       height = (end - start)/2
+    }
+    
     var div_height = ((height*7)-1)+'px'
     var div = document.createElement('div');
+    div.style.zIndex='1'
     div.ondragstart = this.drag
     var self = this
     div.onclick = function() {
@@ -1478,100 +1521,100 @@ if(service==-1){
     // div.style.top = "15px"
     var hour1=this.rows[start]
     var hour2 = this.times[this.times.indexOf(hour1)+height]
-    var div_resize = document.createElement('div');
-  div_resize.classList.add('bot-drag')
+    // var div_resize = document.createElement('div');
+  // div_resize.classList.add('bot-drag')
   var m_pos;
   let mod_div 
   let initial_h
   var res =false
-  async function resize(e){
-      // var mod_div = await document.getElementById(id)
-      var dy = e.y - m_pos;
-      // m_pos = e.y;
-      // console.log(dy%20,(Math.floor(dy/20)))
-      // mod_div.style.height = initial_h
-      // if (dy%20>10){
-        mod_div.style.height = initial_h +dy +'px'
-      // }
-      // mod_div.style.height = initial_h +(Math.floor(dy/20)) *20 +'px'
-      // mod_div.draggable =true
-      // mod_div.style.zIndex = "1"
-      // console.log( initial_h + dy)
-  }
+  // async function resize(e){
+  //     // var mod_div = await document.getElementById(id)
+  //     var dy = e.y - m_pos;
+  //     // m_pos = e.y;
+  //     // console.log(dy%20,(Math.floor(dy/20)))
+  //     // mod_div.style.height = initial_h
+  //     // if (dy%20>10){
+  //       mod_div.style.height = initial_h +dy +'px'
+  //     // }
+  //     // mod_div.style.height = initial_h +(Math.floor(dy/20)) *20 +'px'
+  //     // mod_div.draggable =true
+  //     // mod_div.style.zIndex = "1"
+  //     // console.log( initial_h + dy)
+  // }
 
-  div_resize.addEventListener("mousedown", async function(e){
-    res =true
-      m_pos = e.y;
-      mod_div = await document.getElementById(id)
-      mod_div.draggable =false
-      initial_h =  parseInt(mod_div.style.height.slice(0, -2))
-      document.addEventListener("mousemove", resize, false);
-  }, false);
-  document.addEventListener("mouseup", async function(){
-    if(res){
-    mod_div.draggable =true
-    var hei = parseInt(mod_div.style.height.slice(0, -2))
-    var appo: any = await self.appointmentlist
-    if(hei%20>10){
-      mod_div.style.height  = Math.ceil(hei/20)*20 +'px'
-      hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/20)]
-      if(payed){
-        mod_div.innerHTML =`
-        <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
-        <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-        <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
-      }else{
-        mod_div.innerHTML =`
-        <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
-        <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-        <div class="task-name" id=${id} >${client_name}  </div>`
-      }
+  // div_resize.onmousedown= async function(e){
+  //   res =true
+  //     m_pos = e.y;
+  //     mod_div = await document.getElementById(id)
+  //     mod_div.draggable =false
+  //     initial_h =  parseInt(mod_div.style.height.slice(0, -2))
+  //     document.addEventListener("mousemove", resize, false);
+  // }
+  // div_resize.onmouseup= async function(){
+  //   if(res){
+  //   mod_div.draggable =true
+  //   var hei = parseInt(mod_div.style.height.slice(0, -2))
+  //   var appo: any = await self.appointmentlist
+  //   if(hei%20>10){
+  //     mod_div.style.height  = Math.ceil(hei/20)*20 +'px'
+  //     hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/20)]
+  //     if(payed){
+  //       mod_div.innerHTML =`
+  //       <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
+  //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+  //       <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+  //     }else{
+  //       mod_div.innerHTML =`
+  //       <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
+  //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+  //       <div class="task-name" id=${id} >${client_name}  </div>`
+  //     }
      
-      div.appendChild(div_resize)
-      start = self.rows.indexOf(hour1)
-      end = self.rows.indexOf(hour1) + self.times.indexOf(hour2)- self.times.indexOf(hour1)
-      self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
-        self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
-        self.appointmentlist.push(res)
-        Notiflix.Notify.Success('Modifiche salvate con successo');
-        // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
-      },err =>{
-        console.log(err)
-       })
-    }else{
-      mod_div.style.height  = Math.floor(hei/20)*20+'px'
-      hour2 = self.times[self.times.indexOf(hour1)+Math.floor(hei/20)]
-      if(payed){
-        mod_div.innerHTML =`
-        <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
-      <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-      <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
-      }else{
-        mod_div.innerHTML =`
-        <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
-        <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-        <div class="task-name" id=${id} >${client_name}  </div>`
-      }
+  //     div.appendChild(div_resize)
+  //     start = self.rows.indexOf(hour1)
+  //     end = self.rows.indexOf(hour1) + self.times.indexOf(hour2)- self.times.indexOf(hour1)
+  //     self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
+  //       self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
+  //       self.appointmentlist.push(res)
+  //       Notiflix.Notify.Success('Modifiche salvate con successo');
+  //       // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
+  //     },err =>{
+  //       console.log(err)
+  //      })
+  //   }else{
+  //     mod_div.style.height  = Math.floor(hei/20)*20+'px'
+  //     hour2 = self.times[self.times.indexOf(hour1)+Math.floor(hei/20)]
+  //     if(payed){
+  //       mod_div.innerHTML =`
+  //       <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
+  //     <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+  //     <div class="task-name" id=${id} >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+  //     }else{
+  //       mod_div.innerHTML =`
+  //       <!-- <div class="task-duration" id=${id}>${hour1}-${hour2}</div> -->
+  //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
+  //       <div class="task-name" id=${id} >${client_name}  </div>`
+  //     }
       
-      div.appendChild(div_resize)
-      start = self.rows.indexOf(hour1)
-      end = self.rows.indexOf(hour1) + self.times.indexOf(hour2) - self.times.indexOf(hour1)
-      self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
-        self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
-        self.appointmentlist.push(res)
-        Notiflix.Notify.Success('Modifiche salvate con successo');
-        // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
-      },err =>{
-        console.log(err)
-       })
-    }
-    // setTimeout(() => {
-    //   self.point.disp = 'none'
-    // }, 1); 
-      document.removeEventListener("mousemove", resize, false);
-      res=false
-    }
-  }, false);
+  //     div.appendChild(div_resize)
+  //     start = self.rows.indexOf(hour1)
+  //     end = self.rows.indexOf(hour1) + self.times.indexOf(hour2) - self.times.indexOf(hour1)
+  //     self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
+  //       self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
+  //       self.appointmentlist.push(res)
+  //       Notiflix.Notify.Success('Modifiche salvate con successo');
+  //       // await self.storage.dragUpdateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note)
+  //     },err =>{
+  //       console.log(err)
+  //      })
+  //   }
+  //   // setTimeout(() => {
+  //   //   self.point.disp = 'none'
+  //   // }, 1); 
+  //     document.removeEventListener("mousemove", resize, false);
+  //     res=false
+  //   }
+  // }
     // <div><img src='../assets/icons/info.svg'></div>
     if(payed){
       div.innerHTML = `
@@ -1585,7 +1628,7 @@ if(service==-1){
       <div class="task-name" id=${id} >${client_name}  </div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
     }
   
-    div.appendChild(div_resize)
+    // div.appendChild(div_resize)
     if(this.week[6]<this.week[0]){1
       if(day<7){
         if (this.today==day && this.month==month &&  this.year==year){
@@ -1683,95 +1726,96 @@ setStoreserviceDefault(){
     console.log(err)
   })
 }
-pickerApoointment(){
-  var now =new Date(this.date_picker)
-  var hour:any = now.getHours()
-  var min:any = now.getMinutes()
-  var day = now.getDate()
-  var month = now.getMonth()
-  var year = now.getFullYear()
-  if (min<10){
-    min="0"+min.toString()
-  }
-  if (hour<10){
-    hour="0"+hour.toString()
-  }
-  var start = this.rows.indexOf(`${hour}:${min}`)
-  if (this.info == -1){
-    this.setAppoitment(start, start+(this.time-1), day, month, year, this.nome ,this.phone, this.extra_desc,this.selected, this.info)
-  }
-  else{
-    var services = this.storage.getCatalog()
-    var serv
-    for(let service of services){
-      if (service.id ==  this.info){
-        serv= service
-      }
-    }
-    this.setAppoitment(start, start+Number(serv.duration_book) , day, month, year, this.nome , this.phone,serv.name,this.selected, this.info)
-  }
-  this.bgModalDisp = 'none'
-}
-async freeSpots(){
-  this.spot_show = 'block'
-  this.availableSpots=[]
-  this.selected 
-  var timetables = this.storage.getEmployeehours()
-  var work_hours:any
-  for (let timetable of timetables){
-    // if(timetable.id == this.selected ){
-      work_hours = timetable.timetable
-      var list:any =[]
-      for (let day of work_hours){
-        // if(day_of_week == day.wkday){
-          var start = this.times.indexOf(this.rows[day.start])
-          var end =  this.times.indexOf(this.rows[day.end])
-          for (var i = start; i <= end; i++) {
-            list.push({time: i  , employee: day.employee, day: day.wkday, name:timetable.name });
-          }
-        // }
-      }
-      this.free_hours =list
-      var self = this
-      for(let appointment of this.appointmentlist){
-        var start = this.times.indexOf(this.rows[appointment.start])
-        var end = start+appointment.end -  appointment.start        
-        this.free_hours = this.free_hours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee  )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee || self.week.indexOf(appointment.day)!=value.day; })
-      } 
-      var app
-      for(let idx in this.free_hours){
+// pickerApoointment(){
+//   var now =new Date(this.date_picker)
+//   var hour:any = now.getHours()
+//   var min:any = now.getMinutes()
+//   var day = now.getDate()
+  
+//   var month = now.getMonth()
+//   var year = now.getFullYear()
+//   if (min<10){
+//     min="0"+min.toString()
+//   }
+//   if (hour<10){
+//     hour="0"+hour.toString()
+//   }
+//   var start = this.rows.indexOf(`${hour}:${min}`)
+//   if (this.info == -1){
+//     this.setAppoitment(start, start+(this.time-1), day, month, year, this.nome ,this.phone, this.extra_desc,this.selected, this.info)
+//   }
+//   else{
+//     var services = this.storage.getCatalog()
+//     var serv
+//     for(let service of services){
+//       if (service.id ==  this.info){
+//         serv= service
+//       }
+//     }
+//     this.setAppoitment(start, start+Number(serv.duration_book) , day, month, year, this.nome , this.phone,serv.name,this.selected, this.info)
+//   }
+//   this.bgModalDisp = 'none'
+// }
+// async freeSpots(){
+//   this.spot_show = 'block'
+//   this.availableSpots=[]
+//   this.selected 
+//   var timetables = this.storage.getEmployeehours()
+//   var work_hours:any
+//   for (let timetable of timetables){
+//     // if(timetable.id == this.selected ){
+//       work_hours = timetable.timetable
+//       var list:any =[]
+//       for (let day of work_hours){
+//         // if(day_of_week == day.wkday){
+//           var start = this.times.indexOf(this.rows[day.start])
+//           var end =  this.times.indexOf(this.rows[day.end])
+//           for (var i = start; i <= end; i++) {
+//             list.push({time: i  , employee: day.employee, day: day.wkday, name:timetable.name });
+//           }
+//         // }
+//       }
+//       this.free_hours =list
+//       var self = this
+//       for(let appointment of this.appointmentlist){
+//         var start = this.times.indexOf(this.rows[appointment.start])
+//         var end = start+appointment.end -  appointment.start        
+//         this.free_hours = this.free_hours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee  )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee || self.week.indexOf(appointment.day)!=value.day; })
+//       } 
+//       var app
+//       for(let idx in this.free_hours){
       
-          let id:any = idx
-          var length =this.free_hours.length-1
-          if(id ==0  ||this.free_hours[id-1].time-this.free_hours[id].time<- 1 || id == length||this.free_hours[id].time<this.free_hours[id-1].time ){
-            if (app != undefined){
-              if(app.duration>=3){
-                if (this.free_hours[id].time<this.free_hours[id-1].time){
-                  app.duration -=1 
-                  this.availableSpots.push(app)
-                }else{
-                  this.availableSpots.push(app)
-                }
+//           let id:any = idx
+//           var length =this.free_hours.length-1
+//           if(id ==0  ||this.free_hours[id-1].time-this.free_hours[id].time<- 1 || id == length||this.free_hours[id].time<this.free_hours[id-1].time ){
+//             if (app != undefined){
+//               if(app.duration>=3){
+//                 if (this.free_hours[id].time<this.free_hours[id-1].time){
+//                   app.duration -=1 
+//                   this.availableSpots.push(app)
+//                 }else{
+//                   this.availableSpots.push(app)
+//                 }
                
-              }
+//               }
                
-            }
-            if(this.rows.indexOf(this.times[this.free_hours[id].time])!=-1){
-              app = {start: this.free_hours[id].time, duration: 1, employee:this.free_hours[id].employee, day: this.free_hours[id].day, name:this.free_hours[id].name} 
-            }
-          }else{
-              app.duration +=1
-          }
+//             }
+//             if(this.rows.indexOf(this.times[this.free_hours[id].time])!=-1){
+//               app = {start: this.free_hours[id].time, duration: 1, employee:this.free_hours[id].employee, day: this.free_hours[id].day, name:this.free_hours[id].name} 
+//             }
+//           }else{
+//               app.duration +=1
+//           }
        
-        }
-        this.availableSpots.sort(function(a, b) {
-          return a.employee - b.employee;
-        });
-}
+//         }
+//         this.availableSpots.sort(function(a, b) {
+//           return a.employee - b.employee;
+//         });
+// }
 
-  // console.log(this.availableSpots)
-  // }
-}
+//   // console.log(this.availableSpots)
+//   // }
+// }
 groupBy(arr, property) {
   return arr.reduce(function(memo, x) {
     if (!memo[x[property]]) { memo[x[property]] = []; }
@@ -1779,215 +1823,215 @@ groupBy(arr, property) {
     return memo;
   }, {});
 }
-nextWeSpots(){
-    //remove last week appoitments
-    if(this.OneView){
-      if(this.today<this.months_days[this.month]){
-        this.today+=1
-      }else{
-        if(this.month!=11){
-          this.today = 1
-          this.month+=1
-        }else{
-          this.today = 1
-          this.month=1
-          this.year=+1
-        }
+// nextWeSpots(){
+//     //remove last week appoitments
+//     if(this.OneView){
+//       if(this.today<this.months_days[this.month]){
+//         this.today+=1
+//       }else{
+//         if(this.month!=11){
+//           this.today = 1
+//           this.month+=1
+//         }else{
+//           this.today = 1
+//           this.month=1
+//           this.year=+1
+//         }
        
-      }
-      var last_week = this.week
-      this.week=[]
-      // console.log(this.year,this.month, this.today, this.week)
-      var now = new  Date(this.year,this.month, this.today)
-      var today = now.getDay() -1
-      var month = now.getMonth()
-      var day_number = now.getDate()
-      // console.log(this.year,this.month, this.today, this.week, today, month,day_number)
-      if (today == -1){
-        today= 6
-      }
-      for (let i=0;i<7;i++){
-        if( day_number - today  + i<= this.months_days[month]){
-          var day = day_number - today  + i
-          if(day<1){
-          day= day +this.months_days[month-1]
-          }
-        }else{
-          var day = day_number - today  + i - this.months_days[month]
-        }
-        this.week.push(day)
-      }
-    //   if(this.week[6]<this.week[0] && day_number>20){
-    //   this.month = month+1
-    //   this.month_name=this.months_names[month+1]
-    // }
-    // else{
-      this.month = month
-      this.month_name=this.months_names[month]
-    // }
-    // console.log(this.week[6]+1,this.week[6], this.today)
-      this.goToday(this.week[0]!=last_week[0])
+//       }
+//       var last_week = this.week
+//       this.week=[]
+//       // console.log(this.year,this.month, this.today, this.week)
+//       var now = new  Date(this.year,this.month, this.today)
+//       var today = now.getDay() -1
+//       var month = now.getMonth()
+//       var day_number = now.getDate()
+//       // console.log(this.year,this.month, this.today, this.week, today, month,day_number)
+//       if (today == -1){
+//         today= 6
+//       }
+//       for (let i=0;i<7;i++){
+//         if( day_number - today  + i<= this.months_days[month]){
+//           var day = day_number - today  + i
+//           if(day<1){
+//           day= day +this.months_days[month-1]
+//           }
+//         }else{
+//           var day = day_number - today  + i - this.months_days[month]
+//         }
+//         this.week.push(day)
+//       }
+//     //   if(this.week[6]<this.week[0] && day_number>20){
+//     //   this.month = month+1
+//     //   this.month_name=this.months_names[month+1]
+//     // }
+//     // else{
+//       this.month = month
+//       this.month_name=this.months_names[month]
+//     // }
+//     // console.log(this.week[6]+1,this.week[6], this.today)
+//       this.goToday(this.week[0]!=last_week[0])
      
-    } else{
-    var paras = document.getElementsByClassName('task');
-    while(paras[0]) {
-      paras[0].parentNode.removeChild(paras[0]);
-    } ​
-    setTimeout(async () => {
-    //change dates
-    var next_m = 0
-    for (let day in this.week){
-      if (this.week[day] +7 <= this.months_days[this.month]){
-        this.week[day] +=7
-      }
-      else{
-        if (this.week[day] +7 > this.months_days[this.month] && this.week[6] +7 <= this.months_days[this.month]){
-          if (this.month == 0){
-            this.week[day] =this.week[day] +7  -this.months_days[11]
+//     } else{
+//     var paras = document.getElementsByClassName('task');
+//     while(paras[0]) {
+//       paras[0].parentNode.removeChild(paras[0]);
+//     } ​
+//     setTimeout(async () => {
+//     //change dates
+//     var next_m = 0
+//     for (let day in this.week){
+//       if (this.week[day] +7 <= this.months_days[this.month]){
+//         this.week[day] +=7
+//       }
+//       else{
+//         if (this.week[day] +7 > this.months_days[this.month] && this.week[6] +7 <= this.months_days[this.month]){
+//           if (this.month == 0){
+//             this.week[day] =this.week[day] +7  -this.months_days[11]
             
-          }else{
-            this.week[day] =this.week[day] +7  -this.months_days[this.month-1]
-          }
-        }
-        else{
-          this.week[day] =this.week[day] +7  -this.months_days[this.month]
-          next_m = 1
+//           }else{
+//             this.week[day] =this.week[day] +7  -this.months_days[this.month-1]
+//           }
+//         }
+//         else{
+//           this.week[day] =this.week[day] +7  -this.months_days[this.month]
+//           next_m = 1
        
          
-        }
-      }
-    }
-    if(next_m == 1){
-      if (this.month == 11){
-        this.month =0
-        this.year += 1
-      }
-      else{
-        this.month +=1
-      }
+//         }
+//       }
+//     }
+//     if(next_m == 1){
+//       if (this.month == 11){
+//         this.month =0
+//         this.year += 1
+//       }
+//       else{
+//         this.month +=1
+//       }
       
-      next_m = 0
-      this.month_name = this.months_names[this.month]
-    }
-    // this.week= this.week.map((value, index, array)=>{
-    //   value+=7
-    //   return value})
-    //get appointments
-    await this.getAppoitments()
-    setTimeout(() => {
-      this.freeSpots()
-    }, 800);
-  }, 100);
+//       next_m = 0
+//       this.month_name = this.months_names[this.month]
+//     }
+//     // this.week= this.week.map((value, index, array)=>{
+//     //   value+=7
+//     //   return value})
+//     //get appointments
+//     await this.getAppoitments()
+//     setTimeout(() => {
+//       this.freeSpots()
+//     }, 800);
+//   }, 100);
   
-  }
+//   }
 
-}
-pastWeSpots(){
-  //remove last week appoitments
-  if(this.OneView){
-    if(this.today>1){
-      this.today-=1
-    }else{
-      if(this.month!=0){
-        this.month= this.month-1
-        this.today = this.months_days[this.month]
-      }else{
-        this.today = 31
-        this.month=11
-        this.year=-1
-      }
+// }
+// pastWeSpots(){
+//   //remove last week appoitments
+//   if(this.OneView){
+//     if(this.today>1){
+//       this.today-=1
+//     }else{
+//       if(this.month!=0){
+//         this.month= this.month-1
+//         this.today = this.months_days[this.month]
+//       }else{
+//         this.today = 31
+//         this.month=11
+//         this.year=-1
+//       }
      
-    }
-    var last_week = this.week
-    this.week=[]
-    var now = new   Date(this.year,this.month, this.today)
-    var today = now.getDay() -1
-    var month = now.getMonth()
-    var day_number = now.getDate()
-    if (today == -1){
-      today= 6
-    }
-    for (let i=0;i<7;i++){
-      if( day_number - today  + i<= this.months_days[month]){
-        var day = day_number - today  + i
-        if(day<1){
-        day= day +this.months_days[month-1]
-        }
-      }else{
-        var day = day_number - today  + i - this.months_days[month]
-      }
-      this.week.push(day)
-    }
-    this.goToday(this.week[0]!=last_week[0]) //pass true or false
+//     }
+//     var last_week = this.week
+//     this.week=[]
+//     var now = new   Date(this.year,this.month, this.today)
+//     var today = now.getDay() -1
+//     var month = now.getMonth()
+//     var day_number = now.getDate()
+//     if (today == -1){
+//       today= 6
+//     }
+//     for (let i=0;i<7;i++){
+//       if( day_number - today  + i<= this.months_days[month]){
+//         var day = day_number - today  + i
+//         if(day<1){
+//         day= day +this.months_days[month-1]
+//         }
+//       }else{
+//         var day = day_number - today  + i - this.months_days[month]
+//       }
+//       this.week.push(day)
+//     }
+//     this.goToday(this.week[0]!=last_week[0]) //pass true or false
   
 
    
-  } else{
-  var paras = document.getElementsByClassName('task');
-  while(paras[0]) {
-    paras[0].parentNode.removeChild(paras[0]);
-  } ​
-  //change dates
-  setTimeout(async () => {
-    var next_m = 0
-  for (let day in this.week){
-    if (this.week[day] > 7){
-      this.week[day] -=7
-    }
-    else{
-      if (this.week[day] < 7  && this.week[6] > 7){
-      if (this.month == 0){
-        this.week[day] = this.week[day] -7 +this.months_days[11]
-      }
-      else{
-        this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
-      }
-      }
-      else{
-        if (this.week[day] < 7  && this.week[0] > 7){
+//   } else{
+//   var paras = document.getElementsByClassName('task');
+//   while(paras[0]) {
+//     paras[0].parentNode.removeChild(paras[0]);
+//   } ​
+//   //change dates
+//   setTimeout(async () => {
+//     var next_m = 0
+//   for (let day in this.week){
+//     if (this.week[day] > 7){
+//       this.week[day] -=7
+//     }
+//     else{
+//       if (this.week[day] < 7  && this.week[6] > 7){
+//       if (this.month == 0){
+//         this.week[day] = this.week[day] -7 +this.months_days[11]
+//       }
+//       else{
+//         this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
+//       }
+//       }
+//       else{
+//         if (this.week[day] < 7  && this.week[0] > 7){
 
-          if (this.month == 0){
-            this.week[day] = this.week[day] -7 +this.months_days[11]
-            next_m = 1
-          }
-          else{
-            this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
-            next_m = 1
-          }
+//           if (this.month == 0){
+//             this.week[day] = this.week[day] -7 +this.months_days[11]
+//             next_m = 1
+//           }
+//           else{
+//             this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
+//             next_m = 1
+//           }
          
-        }
-        else{
-          this.week[day]= this.week[day] -7 +this.months_days[this.month-1]
-          // next_m = 1
-        }
+//         }
+//         else{
+//           this.week[day]= this.week[day] -7 +this.months_days[this.month-1]
+//           // next_m = 1
+//         }
        
        
-      }
-    }
-  }
-  if(next_m == 1){
-    if (this.month == 0){
-      this.month = 11
-      this.year -= 1
-    }
-    else{
-      this.month -=1
-    }
+//       }
+//     }
+//   }
+//   if(next_m == 1){
+//     if (this.month == 0){
+//       this.month = 11
+//       this.year -= 1
+//     }
+//     else{
+//       this.month -=1
+//     }
    
-    next_m = 0
-    this.month_name = this.months_names[this.month]
-  }
-  //get appointments
-  await this.getAppoitments()
-    setTimeout(() => {
-      this.freeSpots()
-    }, 800);
-  }, 100);
+//     next_m = 0
+//     this.month_name = this.months_names[this.month]
+//   }
+//   //get appointments
+//   await this.getAppoitments()
+//     setTimeout(() => {
+//       this.freeSpots()
+//     }, 800);
+//   }, 100);
   
-}
-}    
+// }
+// }    
  setRecuringBooking(scale_credit){
-  this._loading=true
+ 
   if(this.recurring_quantity<0){
     Notiflix.Notify.Warning("Il numero di prenotazioni future deve essere positivo")
   }else{
@@ -2002,6 +2046,7 @@ pastWeSpots(){
           this._loading=false
           return
          }else{
+          this.closeModal()
           let service = this.catalog_list.filter(val=>{
             return val.id ==this.info
           })
@@ -2018,8 +2063,9 @@ pastWeSpots(){
               }
               this.show_client = this.show_client.slice(0, 15) 
               this.client=undefined
+              
             },err=>{
-              this._loading=false
+             
               Notiflix.Notify.Warning('Errore duranta lo scalo dei crediti');
             })
             
@@ -2028,15 +2074,15 @@ pastWeSpots(){
        }
     }
     }
- 
+    this.closeModal()
   this.api.setRecuringBooking(this.updateAppointmentId,this.recurring_quantity).subscribe(data=>  {
      Notiflix.Notify.Success('Appuntamento ricorrente creato'),this.closeModal()
      var new_appo =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id == this.updateAppointmentId})
      new_appo[0].recurring_id=this.updateAppointmentId
-     this._loading=false     
+     
     //  this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != this.updateAppointmentId})
     },err=> {
-      this._loading=false
+  
       Notiflix.Notify.Warning("C'è stato un problem durante la cancellazione"),this.closeModal()})
 }
 

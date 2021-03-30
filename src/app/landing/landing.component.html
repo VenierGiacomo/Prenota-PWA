@@ -1,36 +1,16 @@
-<!DOCTYPE html>
-<html lang="it">
+
+
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
   <!-- Favicons -->
   <link href="../assets/butterfly/assets/img/favicon.png" rel="icon">
   <link href="../assets/butterfly/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
+ 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Dosis:300,400,500,,600,700,700i|Lato:300,300i,400,400i,700,700i" rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <!-- <link href="../assets/butterfly/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="../assets/butterfly/assets/vendor/icofont/icofont.min.css" rel="stylesheet">
-  <link href="../assets/butterfly/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="../assets/butterfly/assets/vendor/venobox/venobox.css" rel="stylesheet"> -->
-  <!-- <link href="../assets/butterfly/assets/vendor/line-awesome/css/line-awesome.min.css" rel="stylesheet"> -->
-  <!-- <link href="../assets/butterfly/assets/vendor/owl.carousel/assets/owl.carousel.min.css" rel="stylesheet"> -->
-
-  <!-- Template Main CSS File -->
-  <!-- <link href="../assets/butterfly/assets/css/style.css" rel="stylesheet"> -->
-
-  <!-- =======================================================
-  * Template Name: Butterfly - v2.0.0
-  * Template URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
 </head>
-
 <body>
 
   <!-- ======= Header ======= -->
@@ -808,20 +788,505 @@
 
 
   <!-- Vendor JS Files -->
-  <script src="../assets/butterfly/assets/vendor/jquery/jquery.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/jquery.easing/jquery.easing.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/php-email-form/validate.js"></script>
-  <script src="../assets/butterfly/assets/vendor/venobox/venobox.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/waypoints/jquery.waypoints.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/counterup/counterup.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="../assets/butterfly/assets/vendor/owl.carousel/owl.carousel.min.js"></script>
+  <style>
+  /**
+* Template Name: Butterfly - v2.0.0
+* Template URL: https://bootstrapmade.com/butterfly-free-bootstrap-theme/
+* Author: BootstrapMade.com
+* License: https://bootstrapmade.com/license/
+*/
 
-  <!-- Template Main JS File -->
-  <script src="../assets/butterfly/assets/js/main.js"></script>
+/*--------------------------------------------------------------
+# General
+--------------------------------------------------------------*/
+body {
+  font-family: "Open Sans", sans-serif !important;
+  color: #444444;
+}
+
+a {
+  color: #49b5e7;
+}
+
+a:hover {
+  color: #76c7ed;
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Open Sans", sans-serif !important;
+}
+
+/*
+
+
+/*--------------------------------------------------------------
+# Hero Section
+--------------------------------------------------------------*/
+#hero {
+  width: 100%;
+  height: 80vh;
+  background: #fff;
+}
+
+#hero .container {
+  padding-top: 84px;
+}
+
+#hero h1 {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 56px;
+  color: #0f394c;
+  text-transform: uppercase;
+}
+
+#hero h2 {
+  color: #555;
+  margin: 10px 0 0 0;
+  font-size: 20px;
+}
+
+.btn-get-started {
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 15px 20px;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin-top: 25px;
+  color: #fff !important;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: "Open Sans", sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #0061d5;
+  border: none;
+}
+
+.btn-get-started:hover {
+  background: #0084ff;
+}
+.more-info{
+  font-family: "Open Sans", sans-serif !important;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 14px 20px;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin-top: 25px;
+  margin-right: 20px;
+  border: solid 1px  #0f394c;
+  color: #0f394c;
+  background: #fff;
+  text-transform: uppercase;
+}
+@media (max-width: 991px) {
+  #hero {
+    height: 100vh;
+    text-align: center;
+  }
+  #hero .hero-img img {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  #hero h1 {
+    font-size: 28px;
+    line-height: 36px;
+  }
+  #hero h2 {
+    font-size: 18px;
+    line-height: 24px;
+  }
+  #hero .hero-img img {
+    width: 80%;
+  }
+}
+.head-45{
+  padding: 45px 0 !important;
+}
+@media (max-width: 575px) {
+.more-info{
+  padding: 10px 15px!important;
+  margin: 10px 0px 0px 0px!important;
+}
+.btn-get-started {
+  padding: 10px 15px!important;
+  margin: 10px 20px 0px 20px!important;
+}
+}
+/*--------------------------------------------------------------
+# Sections General
+--------------------------------------------------------------*/
+section {
+  padding: 60px 0;
+}
+
+.section-bg {
+  background-color: #f4fbfe;
+}
+
+.section-title {
+  text-align: center;
+  padding-bottom: 30px;
+}
+
+.section-title h2 {
+  font-size: 36px;
+  padding: 10px 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  padding-bottom: 0;
+  color: #0f394c;
+}
+
+.section-title p {
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# About
+--------------------------------------------------------------*/
+.about .icon-boxes h3 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #0f394c;
+  margin-bottom: 15px;
+}
+
+.about .icon-box {
+  margin-top: 40px;
+}
+
+.about .icon-box .icon {
+  float: left;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border: 2px solid #d0ecf9;
+  border-radius: 50px;
+  transition: 0.5s;
+}
+
+.about .icon-box .icon i {
+  color: #49b5e7;
+  font-size: 32px;
+}
+
+.about .icon-box:hover .icon {
+  background: #49b5e7;
+  border-color: #49b5e7;
+}
+
+.about .icon-box:hover .icon i {
+  color: #fff;
+}
+
+.about .icon-box .title {
+  margin-left: 85px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.about .icon-box .title a {
+  color: #343a40;
+  transition: 0.3s;
+}
+
+.about .icon-box .title a:hover {
+  color: #49b5e7;
+}
+
+.about .icon-box .description {
+  margin-left: 85px;
+  line-height: 24px;
+  font-size: 14px;
+}
+/* 
+.about .video-box {
+  
+} */
+
+
+/*--------------------------------------------------------------
+# Counts
+--------------------------------------------------------------*/
+.counts {
+  /* background: url("../assets/butterfly/assets/img/counts-bg.jpg") center center no-repeat; */
+  background-size: cover;
+  padding: 80px 0 0px 0;
+  /* background: #ebf7fc; */
+  position: relative;
+}
+
+.counts::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+}
+
+.counts .title {
+  position: relative;
+  color: #0f394c;
+  margin-bottom: 40px;
+}
+
+.counts .title h3 {
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.counts .counters span {
+  font-size: 44px;
+  font-weight: 700;
+  display: block;
+  color: #49b5e7;
+  font-family: "Open Sans", sans-serif !important;
+}
+
+.counts .counters p {
+  padding: 0;
+  margin: 0 0 20px 0;
+  font-size: 15px;
+  color: #444444;
+}
+
+@media (min-width: 1200px) {
+  .counts {
+    background-attachment: fixed;
+  }
+}
+
+/*--------------------------------------------------------------
+# Services
+--------------------------------------------------------------*/
+.services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 10px;
+  margin: 0 10px 40px 10px;
+  background: #fff;
+  box-shadow: 0 0 15px 1px #ddd !important;
+  transition: all 0.3s ease-in-out;
+}
+
+.services .icon-box:hover {
+  transform: translateY(-5px);
+}
+
+.services .icon {
+  position: absolute;
+  left: 0px;
+  top: calc(50% - 30px);
+}
+
+.services .icon i {
+  opacity: 0.8;
+  font-size: 50px;
+  line-height: 1;
+  transition: 0.5s;
+}
+
+.services .title {
+  margin-left: 40px;
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+
+.services .title a {
+  color: #111;
+}
+
+.services .icon-box:hover .title a {
+  color: #49b5e7;
+}
+
+.services .description {
+  font-size: 14px;
+  margin-left: 40px;
+  line-height: 24px;
+  margin-bottom: 0;
+}
+
+/*--------------------------------------------------------------
+# Contact
+--------------------------------------------------------------*/
+.contact .info {
+  width: 100%;
+  
+}
+
+.contact .info i {
+  font-size: 20px;
+  color: #49b5e7;
+  float: left;
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  transition: all 0.3s ease-in-out;
+}
+
+.contact .info h4 {
+  padding: 0 0 0 60px;
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #0f394c;
+}
+
+.contact .info p {
+  padding: 0 0 0 60px;
+  margin-bottom: 0;
+  font-size: 14px;
+  color: #2079a1;
+}
+
+.contact .info .email, .contact .info .phone {
+  margin-top: 40px;
+  background:#fff
+}
+
+.contact .info .email:hover i, .contact .info .address:hover i, .contact .info .phone:hover i {
+  background: #0061d5;
+  color: #fff;
+}
+
+.contact .php-email-form {
+  width: 100%;
+  /* background-color: #f4fbfe; */
+}
+
+.contact .php-email-form .form-group {
+  padding-bottom: 8px;
+}
+
+.contact .php-email-form .validate {
+  display: none;
+  color: red;
+  margin: 0 0 15px 0;
+  font-weight: 400;
+  font-size: 13px;
+}
+
+.contact .php-email-form .error-message {
+  display: none;
+  color: #fff;
+  background: #ed3c0d;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .php-email-form .sent-message {
+  display: none;
+  color: #fff;
+  background: #18d26e;
+  text-align: center;
+  padding: 15px;
+  font-weight: 600;
+}
+
+.contact .php-email-form .loading {
+  display: none;
+  background: #fff;
+  text-align: center;
+  padding: 15px;
+}
+
+.contact .php-email-form .loading:before {
+  content: "";
+  display: inline-block;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0 10px -6px 0;
+  border: 3px solid #18d26e;
+  border-top-color: #eee;
+  -webkit-animation: animate-loading 1s linear infinite;
+  animation: animate-loading 1s linear infinite;
+}
+
+.contact .php-email-form input, .contact .php-email-form textarea {
+  border-radius: 0;
+  box-shadow: none;
+  background: #f4fbfe !important;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.contact .php-email-form input {
+  height: 44px;
+}
+
+.contact .php-email-form textarea {
+  padding: 10px 12px;
+}
+
+.contact .php-email-form button[type="submit"] {
+  letter-spacing: 1px;
+  display: inline-block;
+  padding: 15px 28px;
+  border-radius: 3px;
+  transition: 0.5s;
+  margin-top: 25px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 15px;
+  line-height: 20px;
+  font-family: "Open Sans", sans-serif !important;
+  text-transform: uppercase;
+  font-weight: 500;
+  background: #0061d5;
+  border: none;
+}
+
+.contact .php-email-form button[type="submit"]:hover {
+  background: #1da2e0;
+}
+
+@-webkit-keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animate-loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
   
   <!-- Load Facebook SDK for JavaScript -->
 </body>
 
-</html>
