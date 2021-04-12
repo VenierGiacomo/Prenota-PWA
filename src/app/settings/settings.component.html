@@ -849,13 +849,11 @@ min="06:30" max="22:00"
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="card">
-                            <div class="card-body">
-                                <h4 class="box-title">I tuoi clienti</h4>
+                            <div class="card-body" style="padding: 25px 0px 0px 0px  !important;">
+                                <h4 class="box-title" style="padding-left:25px;">I tuoi clienti</h4>
                                 
                                 <button class="add_client" style="right: 280px;" (click)='download_latestCLient()'>Aggiorna dati</button>
                                 <button class="add_client" (click)='register_form="block"'>Aggiungi un nuovo cliente</button>
-                            </div>
-                            <div class="card-body--">
                                 <div class="table-stats order-table ov-h">
                                     <table class="table ">
                                             <thead>
@@ -876,6 +874,13 @@ min="06:30" max="22:00"
                                                 <th style="padding-left:40px ;">Salva</th>
                                             </tr>
                                         </thead>
+                                        </table>
+                                        </div>
+                            </div>
+                            <div class="card-body--" style="overflow: scroll;">
+                                <div class="table-stats order-table ov-h">
+                                    <table class="table " style="margin-top:0px  !important">
+                                           
                                         <tbody>
                                                 <tr *ngFor='let client of show_clients'>
                                                         <td class="serial" style="width: 14vw;"><input [(ngModel)]='client.client_name'></td>
@@ -887,10 +892,10 @@ min="06:30" max="22:00"
                                                         <td> <input [(ngModel)]='client.note' placeholder="Clicca ed aggiungi una nota"></td>
                                                        
                                                         <td>
-                                                            <span class="badge badge-complete" (click)='update(client)'>Salva modifiche</span>
-                                                            <span class="badge badge-complete" (click)='processQR(client)'>QR</span>
-                                                            <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
-                                                            <span class="badge badge-complete" (click)='promptDelete(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                            <span class="badge badge-complete" (click)='update(client)'><img style='height: 15px;' src='../assets/icons/floppy-disk.svg'></span>
+                                                            <span class="badge badge-complete" (click)='processQR(client)'  style='line-height: 15px;'>QR</span>
+                                                            <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding:  10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
+                                                            <span class="badge badge-complete" (click)='promptDelete(client)' style="padding:  10px !important; background: #bd0026;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
                                                          
                                                         </td>
                                                     </tr>
@@ -900,6 +905,29 @@ min="06:30" max="22:00"
                                                    
                                            
                                         </tbody>
+                                        <!-- <cdk-virtual-scroll-viewport style="display: table-caption; height: 50vh;" itemSize="30" >   
+                                           
+                                            <tr *cdkVirtualFor="let client of clients">
+                                                    <td class="serial" style="width: 14vw;"><input [(ngModel)]='client.client_name'></td>
+                                                    
+                                                   
+                                                    <td  style="width: 10vw;"> <input [(ngModel)]='client.phone'> </td>
+                                                    <td *ngIf='storeUseCredits' style="width: 8vw;"> <input [(ngModel)]='client.credit'></td>
+                                                    <td style="width: 3vw;"><vaadin-checkbox value="Option" (change)='client.isMember=!client.isMember' [checked]="client.isMember"></vaadin-checkbox></td>
+                                                    <td> <input [(ngModel)]='client.note' placeholder="Clicca ed aggiungi una nota"></td>
+                                                   
+                                                    <td style="text-align: right;">
+                                                        <span class="badge badge-complete" (click)='update(client)'>Salva modifiche</span>
+                                                        <span class="badge badge-complete" (click)='processQR(client)'>QR</span>
+                                                        <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
+                                                        <span class="badge badge-complete" (click)='promptDelete(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                     
+                                                    </td>
+                                                </tr>
+                                          
+                                                       
+                               
+                                            </cdk-virtual-scroll-viewport>    -->
                                     </table>
                                     <div *ngIf=' show_clients.length==0 'class="activate-payments" style="padding: 30px;"> <span><h2>Nessun Cliente trovato</h2></span><div> <img src='../assets/undraw_Tree_swing_646s.svg'></div>
                                    
@@ -1106,6 +1134,17 @@ color: #212121;
   .new_costomer .confirm_customer{
     background: #940606;
     color: white;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+    -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
   }
 </style>
 <!-- color picker -->

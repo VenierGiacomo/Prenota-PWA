@@ -64,3 +64,8 @@
       -webkit-transform: scale(1.0);
     }
   }
+
+  html body{
+    height: 100vh !important;
+    overflow: hidden!important;
+  }

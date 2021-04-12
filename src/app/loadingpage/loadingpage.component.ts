@@ -15,7 +15,7 @@ export class LoadingpageComponent implements OnInit {
   constructor(private api: ApiService, private storage: StorageService,private router: Router) { }
 
   async ngOnInit() {
-
+    var self = this
   var textWrapper = document.querySelector('.ml2');
 textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
@@ -46,11 +46,11 @@ anime.timeline({loop: false})
         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
          function(){ 
-           this.api.deleteAllData()
+          self.api.deleteAllData()
           window.location.reload(true);
           }, 
-        function(){ this.api.deleteAllData()
-          // this.router.navigateByUrl('login')
+        function(){ self.api.deleteAllData()
+          this.router.navigateByUrl('login')
       } ); 
         console.log(err)
       })
@@ -123,30 +123,62 @@ anime.timeline({loop: false})
     Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
      Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
      function(){ 
-       this.api.deleteAllData()
+      self.api.deleteAllData()
       window.location.reload(true);
       }, 
-    function(){ this.api.deleteAllData()
-      this.router.navigateByUrl('login')
+    function(){ self.api.deleteAllData()
+      self.router.navigateByUrl('login')
   } ); 
     console.log(err)
   })
 
  await this.api.getopenHours().subscribe(data=>{
     this.storage.setOpenignhours(data)
-    setTimeout(() => {
-      this.router.navigateByUrl('home')
-    }, 6000);
-    
+      this.api.getServiceAdons().subscribe(data=>{
+   
+        this.storage.setServiceAdons(data)
+        this.api.getAdons().subscribe(data=>{
+          this.storage.setAdons(data)
+   
+          setTimeout(() => {
+            this.router.navigateByUrl('home')
+          }, 3000);
+        }
+          ,err=>{
+        
+            Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+            Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+            function(){ 
+              self.api.deleteAllData()
+             window.location.reload(true);
+             }, 
+           function(){ self.api.deleteAllData()
+            self.router.navigateByUrl('login')
+         } ); 
+           console.log(err)
+          })       
+      }    
+        ,err=>{
+          Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
+          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
+          function(){ 
+            self.api.deleteAllData()
+           window.location.reload(true);
+           }, 
+         function(){ self.api.deleteAllData()
+          self.router.navigateByUrl('login')
+       } ); 
+         console.log(err)
+        })    
       },err=>{
         Notiflix.Confirm.Init({ titleColor:"#eebf31",okButtonBackground:"#0061d5",cancelButtonBackground:"#676767",backgroundColor:"#ffffff", }); 
          Notiflix.Confirm.Show( 'Attenzione, si è presentato un problema durante il login','Vuoi riprovare a fare il login', 'Si', 'No', 
          function(){ 
-           this.api.deleteAllData()
+          self.api.deleteAllData()
           window.location.reload(true);
           }, 
-        function(){ this.api.deleteAllData()
-          this.router.navigateByUrl('login')
+        function(){ self.api.deleteAllData()
+          self.router.navigateByUrl('login')
       } ); 
         console.log(err)
       })

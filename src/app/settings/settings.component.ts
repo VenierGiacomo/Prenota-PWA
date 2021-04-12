@@ -22,7 +22,7 @@ export class SettingsComponent implements OnInit {
   color_show='none';
   bussiness_type_stripe='none'
   business= this.storage.getbusinneType()
-  colors_list=["#f2b3b3","#fccbbc","#fcecbe","#c2e9d7","#b3e1f7","#c5cbe9","#d7dbef","#ddbde6"]
+  colors_list=["#f2b3b3","#fccbbc","#fcecbe","#c2e9d7","#b3e1f7","#c5cbe9","#d7dbef","#ddbde6","#d19a7a","#E80627"]
   bgcolor='#f2b3b3'
   double_turn=[false,false,false,false,false,false,false]
   closed_days=[true,true,true,true,true,true,true]
@@ -168,7 +168,6 @@ export class SettingsComponent implements OnInit {
     this.store_type =store_info.business_type
     this.store_name=store_info.store_name
     this.payable = store_info.payable
-    console.log(store_info,this.store_name)
     // this.services = this.storage.getCatalog()
     if( this.store_type==7){
       this.xAxisLabel_services_per_emplo = 'Campi';
@@ -488,6 +487,7 @@ count_occurencies(arr) {
         var res:any = data
         await this.storage.setCatalog(res.id, res.name, res.duration, res.duration, res.price, res.max_n, res.color)
         this.catalog_list = await this.storage.getCatalog()
+        
         for (let el of this.catalog_list){
           
           el.price_display = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(el.price/100)
@@ -581,11 +581,14 @@ count_occurencies(arr) {
    
     this.api.getStoreClients().then(data=>{
     this.clients=data
-    this.show_clients =  this.clients.slice(0, 9) 
+    this.show_clients =  this.clients.slice(0,9) 
     for(let client of this.clients){
       client.client_name =client.client_name.toLowerCase()
       client.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(client.credit/100)
     }
+    setTimeout(() => {
+      this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100)) 
+    }, 2000);
     this.spin="none"
     }).catch(err=>{
       this.spin="none"
@@ -596,7 +599,7 @@ count_occurencies(arr) {
   download_latestCLient(){
     this.api.getStoreClients(true).then(data=>{
       this.clients=data
-      this.show_clients =  this.clients.slice(0, 9) 
+      this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100)) 
       for(let client of this.clients){
         client.client_name =client.client_name.toLowerCase()
         client.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(client.credit/100)
@@ -615,7 +618,7 @@ count_occurencies(arr) {
         return val
       }    
     })
-    this.show_clients = this.show_clients.slice(0, 9) 
+    this.show_clients = this.show_clients.slice(0, Math.min(this.clients.length, 100)) 
   }
   reverseFormatNumber(val,locale){
     var group = new Intl.NumberFormat(locale).format(1111).replace(/1/g, '');
@@ -635,6 +638,18 @@ close_clients(ev){
     this.api.updateClientStore(client.id, client.client_name, client.phone, credit, client.note, client.isMember).subscribe(async data=>{
       await this.storage.updateClient(data)
       Notiflix.Notify.Success('I dati sono stati aggiornati con successo');
+       await this.api.getStoreClients().then((res)=>{
+        this.clients =res
+        this.show_clients =  this.clients.slice(0,9) 
+        for(let client of this.clients){
+          client.client_name =client.client_name.toLowerCase()
+          client.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(client.credit/100)
+        }
+        setTimeout(() => {
+          this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100)) 
+        }, 2000);
+      })
+      
     },err=>{
       console.log(err)
     })
@@ -647,13 +662,17 @@ close_clients(ev){
         await this.storage.deleteClient(this.delete_customer)
 
         setTimeout(async () => {
-          var client_list = await JSON.parse( localStorage.getItem('client_list'))
-          this.clients = client_list.list 
-          this.show_clients =  this.clients.slice(0, 9) 
-          for(let el of this.show_clients ){
-            el.client_name = el.client_name.toLowerCase()
-          }
-          Notiflix.Notify.Success('Cliente cancellato');
+          await this.api.getStoreClients().then((res)=>{
+            this.clients =res
+            this.show_clients =  this.clients.slice(0,9) 
+            for(let client of this.clients){
+              client.client_name =client.client_name.toLowerCase()
+              client.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(client.credit/100)
+            }
+            setTimeout(() => {
+              this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100)) 
+            }, 2000);
+          })
         }, 100);
       
       },err=>{
@@ -705,7 +724,8 @@ close_clients(ev){
 
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
           this.clients = client_list.list 
-          this.show_clients =  this.clients.slice(0, 9) 
+          this.show_clients =  this.clients.slice(0,9)
+         
           for(let el of this.show_clients ){
             el.client_name = el.client_name.toLowerCase()
           }
@@ -714,6 +734,9 @@ close_clients(ev){
           this.invite_first_name =''
           this.invite_last_name =''
           this.invite_phone=''
+          setTimeout(() => {
+            this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100)) 
+          }, 1000);
         },err=>{
           Notiflix.Notify.Failure("C'è stato un errore durante il salvataggio! \nRiprova più tardi");
           
@@ -726,7 +749,7 @@ close_clients(ev){
           await this.storage.addClient(res)
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
           this.clients = client_list.list 
-          this.show_clients =  this.clients.slice(0, 9) 
+          this.show_clients =  this.clients.slice(0, Math.min(this.clients.length, 100) )
           for(let el of this.show_clients ){
             el.client_name = el.client_name.toLowerCase()
           }
@@ -791,7 +814,7 @@ closeDeletePrompt(){
 }
 inviteEmail(client){
   this.api.inviteCLient(client).subscribe(res=>{
-    Notiflix.Notify.Success('Invito sepdito');
+    Notiflix.Notify.Success('Invito spedito');
   },err=>{
     Notiflix.Notify.Failure("C'è stato un problema nell'invio, riporva più tardi");
   })

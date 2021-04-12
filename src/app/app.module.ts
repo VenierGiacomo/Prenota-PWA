@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDatepickerModule, MatNativeDateModule,  } from '@angular/material'
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { NgxMatNativeDateModule, NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -109,6 +110,7 @@ import { GetappComponent } from './getapp/getapp.component';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
+    ScrollingModule,
     MatDatepickerModule,
     NgxChartsModule,
     NgxMatNativeDateModule, 

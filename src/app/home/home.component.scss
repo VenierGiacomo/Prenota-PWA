@@ -59,47 +59,21 @@
         padding: 8px 12px;
         border: none;
         
+        
+        transition: 600ms;
+    }
+    .std-app{
         background: #00468e;
     
         color: white;
-        transition: 600ms;
     }
-    .single-button:hover{
-        color: #00468e;
-        background: #fff;
+    // .single-button:hover{
+    //     color: #00468e;
+    //     background: #fff;
  
-        
-    }
-    .two-buttons{
-        width: 45%;
-        margin: 5px 0% auto 0%;
-        border-radius: 5px;
-        font-size: 14px;
-        line-height: 35px;
-        padding: 0px !important;
-        font-weight: 500;
-        height: 35px;
-        padding: 0px;
-        border: none;
-        
-       
-    }
-    .two-buttons-1{
-        width: 45%;
-        margin-right: 0%;
-        margin-left: 10%;
-        margin-top: 5px;
-        border-radius: 5px;
-        font-size: 14px;
-        line-height: 35px;
-        padding: 0px !important;
-        font-weight: 500;
-        height: 35px;
-        padding: 0px;
-        border: none;
-        
-       
-    }
+  
+    // }
+    
     button{
         transition: 600ms;
     }
@@ -108,21 +82,14 @@
         color: #00468e;
         transition: 600ms;
     }
-    .modify-app:hover{
-        background: #00468e;
-        color: #fff;
-    }
+  
     .delete-app{
-        margin: 5px 0px 10px 0px !important;
+        margin: 5px auto 10px  !important;
         background: #bd0026;
         color: white;
   
     }
-    .delete-app:hover{
-        background: #fff;
-        color: #bd0026;
-
-    }
+    
     select::-ms-expand {
         display: none;
     }
@@ -180,7 +147,18 @@ button:focus {
     }
 } 
     
-
+html , :root, body{
+    --lumo-contrast-20pct: #ffffff55 !important;
+ }
+ :host ::ng-deep body{
+    --lumo-contrast-20pct: #ffffff55 !important;
+ }
+ :host ::ng-deep :root{
+    --lumo-contrast-20pct: #ffffff55 !important;
+ }
+ :host ::ng-deep html{
+    --lumo-contrast-20pct: #ffffff55 !important;
+ }
 
 
 .modal-cont{
@@ -362,7 +340,7 @@ body{
         align-self:end;
         position: relative;
         margin-left: 5vw;
-        color: #0061d5;
+        color: #343a40;
         font-size: 1.2vw;
         display:grid;
         grid-template-columns: 5fr 8fr 6fr;
@@ -370,7 +348,13 @@ body{
         align-self:end;
         line-height: 2.5vw;
         font-size: 2.5vw;
-        color: #000;
+     
+        span{
+            align-self:end;
+            line-height: .5vw;
+            font-size: 1.2vw;
+
+        }
         }
         div{
             align-self:end;
@@ -385,6 +369,7 @@ body{
         position: absolute;
         background: white;
         top:3vh;
+        color: #343a40;
         right: 30vw;
         font-size: 1vw;
         border-radius: 5px;
@@ -405,6 +390,7 @@ body{
         font-size: 1vw;
         align-self:end;
         display:grid;
+        color: #343a40;
         grid-template-columns: 3fr 3fr ;
         div{
             font-size: 1vw;
@@ -513,7 +499,7 @@ table-layout: fixed;
 }
 td {
     padding: 0;
-    color: #0061d5;
+    color: #343a40;
     height:var(--cell-height);
     overflow: visible;
     border-left: 1px solid rgba($color: #000000, $alpha: 0.1);
@@ -523,7 +509,7 @@ td {
 }
 th{
     font-size: var(--cell-font-size);
-    color:#0061d5;
+    color:#343a40;
     text-align: center;
     font-weight: 300;
     line-height: 2vw;
@@ -670,6 +656,14 @@ table::-webkit-scrollbar {
       &7{
         color: rgb(95, 17, 131);
         background: #ddbde6;
+      }
+      &8{
+        color:#291004;
+        background: #d19a7a;
+      }
+      &9{
+          color:#f3f3f3;
+        background: #E80627
       }
       &10000{
         // height: 60px;

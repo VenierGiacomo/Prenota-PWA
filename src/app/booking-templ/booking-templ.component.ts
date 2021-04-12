@@ -347,12 +347,12 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
   bg_opacity:'#00000099',
   img_bg:'../assets/Dentista_Template_Free_Vector.svg',
   bookable_pc:true,
-  category:'Studio Dentistico',
+  category:'Studio Dentistico a Trieste',
   hours:`Lun - Gio 9:00 - 19:00, Ven 9:00 - 15:00, Sab 9:00 - 13:00`,
   description:`Mi chiamo Antonio Manfra e sono un dentista specializzato nella cura dei bambini e dei ragazzi.  
 <br>
-  Ho conseguito la specializzazione in odontoiatria pediatrica presso l’Università degli studi di Trieste, con il massimo dei voti, lavorando attivamente presso l’Ospedale infantile Burlo Garofalo.<br><br> La mia passione per la cura dei bambini e dei ragazzi nasce dal desiderio di vederli sempre felici e in salute, quindi voglio dedicare particolare attenzione alla PREVENZIONE e alla CURA della bocca dei più piccini.
-  è importante far vivere il dentista con serenità, un’esperienza positiva, così da poter seguire i piccoli pazienti nella loro crescita, senza ansie e traumi.. <br> <br> 
+  Ho conseguito la specializzazione in odontoiatria pediatrica presso l'Università degli studi di Trieste, con il massimo dei voti, lavorando attivamente presso l'Ospedale infantile Burlo Garofalo.<br><br> La mia passione per la cura dei bambini e dei ragazzi nasce dal desiderio di vederli sempre felici e in salute, quindi voglio dedicare particolare attenzione alla PREVENZIONE e alla CURA della bocca dei più piccini.
+  è importante far vivere il dentista con serenità, un'esperienza positiva, così da poter seguire i piccoli pazienti nella loro crescita, senza ansie e traumi.. <br> <br> 
 
   Opero nello studio dentistico dr. Altin e dr. Harei, presente da più di 20 anni a Trieste.<br><br> 
 
@@ -373,7 +373,7 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
   bg_opacity:'#00000099',
   img_bg:'../assets/farmacia_cermelj.png',
   bookable_pc:true,
-  category:'Farmacia',
+  category:'Farmacia a Trieste',
   hours:`Da Lun a Sab 08:00 - 19:30`,
   description:`Prenota un tampone rapido online nella farmacia Cermelj. Ci metti qualche secondo.<br>La nostra farmacia offre anche numerosi altri servizi:
   Prenotazioni Cup : da lunedì a venerdì 8.30-12.30,
@@ -419,6 +419,28 @@ in Farmacia quando vuoi.
   Si occupa principalmente di consulenza fiscale, societaria, contabile, tributaria, contrattuale, pratiche patronato fornita sia ai clienti dello studio sia ad aziende esterne. <br><br>
   Esperta in fondi perduti per aziende. 
   `}
+  ,'MaiFidarsiDelBarbiere':{
+        name:'Mai Fidarsi Del Barbiere',
+        html_title:'Mai Fidarsi Del Barbiere | Il miglior barbiere a Trieste',
+        id:49,
+        campo:false,
+        keywords:'barbiere, mai fidarsi del barbiere, taglio capelli, capelli uomo, androna, barbiere trieste, mai fidarsi del barbiere trieste, taglio capelli trieste, capelli uomo trieste, androna trieste, tommaso, hussein, daniele, barbiere trieste, barba a trieste, barba, barba trieste, barbiere a trieste, mai fidarsi del barbiere a trieste, taglio capelli a trieste, capelli uomo a trieste',
+        og_url:'https://prenota.cc/appuntamento/MaiFidarsiDelBarbiere',
+        og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+        og_description:'Mai Fidarsi del Barbiere. Unusual Barber a Trieste',
+        phone: '+39 3924204122',
+        address: 'Androna del Torchio 3, Trieste (TS)', 
+        zip_code:'34120',
+        bg_opacity:'#00000088',
+        img_bg:'../assets/Screenshotmfdl.png',
+        bookable_pc:true,
+        category:'Barbiere a Trieste',
+        hours:`Mar - Ven dalle 9:00 alle 19:30<br> Sab dalle 11:00 alle 17:00`,
+        description:`
+    Mai Fidarsi del Barbiere è molto più di un posto dove farsi un taglio per aumentare il proprio livello di fascino; o trasformarsi in un hipster dalla barba perfetta e gli occhiali in plastica nera (non inclusi). Passa a scoprirci anche solo per berti un caffè.
+    Abbiamo un Master di secondo livello in cazzeggio.
+    
+    `}
 }
   slug
   constructor(private api: ApiService, private router: Router, private titleService: Title, private metaService: Meta) {
@@ -474,15 +496,7 @@ in Farmacia quando vuoi.
     var now = new  Date()
     var month = now.getMonth()
     var day_number = now.getDate()
-    if(this.available_on=='f'){
-      this.hourfilter=this.full_hours
-    }else{
-      if(this.available_on=='a'){
-        this.hourfilter=this.times
-      }else{
-        this.hourfilter=this.rows
-      }
-    }
+    
     for(let i=0; i< this.limit; i++){
 
       this.services_list.push({name:'service ' +i, duration:'1 ora'})
@@ -864,6 +878,7 @@ await this.getEmployees()
    
     // console.log( this.app_to_book)
   }
+
   showSpots(){
     setTimeout(() => {
       this.serv_displ='none'
@@ -1186,7 +1201,7 @@ items.forEach(function (a) {
           this.openhours = await list
          
           for(let appointment of this.list_appointments){
-            this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+            this.openhours = await this.openhours.filter((value, index, arr)=>{ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee || appointment.month!=this.month})
           } 
           
           for (let empl of this.employees_serivces){
@@ -1298,7 +1313,7 @@ items.forEach(function (a) {
       
       for(let appointment of this.list_appointments){
         
-        this.openhours = await this.openhours.filter(function(value, index, arr){ return (value.time <= appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee})
+        this.openhours = await this.openhours.filter((value, index, arr)=>{ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee || appointment.month!=this.month})
       } 
       var o:any = await this.groupBy( this.openhours, 'employee')
     // setTimeout(async () => {
@@ -1468,7 +1483,7 @@ async book(){
     if(this.api.isvalidToken()){
 
       for (let  ind in this.app_to_book){
-        Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
+        // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
         var client_name = this.user.first_name+' '+ this.user.last_name
         var start = this.app_to_book[ind].start
         var end = start + this.app_to_book[ind].duration
@@ -1479,7 +1494,7 @@ async book(){
             // console.log(this.user.email,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.total_service.name,this.name)
             this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
           }
-      Notiflix.Block.Remove('.cont');
+      // Notiflix.Block.Remove('.cont');
       this.loading = false
        Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
        var ok_btn = document.getElementById('NXReportButton')
@@ -1531,12 +1546,12 @@ async book(){
       
       this.api.register(this.first_name, this.last_name,  this.email, this.sex, this.phone, this.password).subscribe(
         async data=>{
-          this.api.storeToken(data.token)
+          await this.api.storeToken(data.token)
           for (let  ind in this.app_to_book){
             var client_name = this.first_name+' '+this.last_name
-            var start = this.app_to_book[ind].start
-            var end = start + this.app_to_book[ind].duration
-            this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.phone, this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
+            // var start = await this.app_to_book[ind].start
+            // var end = await start + this.app_to_book[ind].duration
+            this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, this.app_to_book[ind].start+this.app_to_book[ind].duration, this.day, this.month, this.year, client_name, this.phone, this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
             this.register_form='none'
             this.user.first_name=this.first_name
             this.user.last_name=this.last_name
@@ -1583,18 +1598,18 @@ async book(){
         this.user = await data
         for (let  ind in this.app_to_book){
           // await this.storage.setAppointment(appointment)
-          Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
+          // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
           var client_name = this.user.first_name+' '+this.user.last_name
-          var start = this.app_to_book[ind].start
-          var end = start + this.app_to_book[ind].duration
+          // var start = await this.app_to_book[ind].start
+          // var end = await start + this.app_to_book[ind].duration
           // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
-          this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
+          this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, (this.app_to_book[ind].start+this.app_to_book[ind].duration), this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
             // console.log(data)
             if( ind == '0'){
                 this.sendEmailConfirmation(this.email1,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
               }
               // await this.storage.setAppointment(appointment)
-          Notiflix.Block.Remove('.cont');
+          // Notiflix.Block.Remove('.cont');
            Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
            var ok_btn = document.getElementById('NXReportButton')
               ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
@@ -1643,18 +1658,18 @@ async book(){
     if(this.api.isvalidToken()){
     for (let  ind in this.app_to_book){
       // await this.storage.setAppointment(appointment)
-      Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
+      // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
       var client_name =first_name+' '+ last_name
-      var start = this.app_to_book[ind].start
-      var end = start + this.app_to_book[ind].duration
+      // var start = this.app_to_book[ind].start
+      // var end = start + this.app_to_book[ind].duration
       // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
-      this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
+      this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, (this.app_to_book[ind].start+this.app_to_book[ind].duration), this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
         // console.log(data)
         if( ind == '0'){
             this.sendEmailConfirmation(email,first_name,last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
           }
           // await this.storage.setAppointment(appointment)
-      Notiflix.Block.Remove('.cont');
+      // Notiflix.Block.Remove('.cont');
        Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
        var ok_btn = document.getElementById('NXReportButton')
           ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 

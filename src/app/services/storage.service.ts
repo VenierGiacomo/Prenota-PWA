@@ -16,6 +16,20 @@ export class StorageService {
     return business == null ? 0 : business;
 
   }
+  setServiceAdons(adons){
+    localStorage.setItem('serviceadons',JSON.stringify({ 'adons': adons}))
+  }
+  setAdons(adons){
+    localStorage.setItem('storeadons',JSON.stringify({ 'adons': adons}))
+  }
+  getAdons(){
+    var adons = JSON.parse(localStorage.getItem('storeadons'));
+    return adons == null ? 0 : adons.adons;
+  }
+  getServiceAdons(){
+    var adons = JSON.parse(localStorage.getItem('serviceadons'));
+    return adons == null ? 0 : adons.adons;
+  }
   setOpenignhours(timetable){
     localStorage.setItem('openhours',JSON.stringify({ 'timetable': timetable}))
   }

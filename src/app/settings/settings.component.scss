@@ -34,7 +34,8 @@ body{
 // 
 
 .side-menu{
-    min-width: 225px;
+    // min-width: 225px;
+    width: 20vw;
     background: #0061d5;
     color: #B3D1F1;
     font-size: 28px;
@@ -94,7 +95,7 @@ body{
 }   
 .settings{
     overflow: hidden;
-    min-width: 900px;
+    // min-width: 900px;
     position: relative;
     color: #00468e;
     background: #fafafa;
@@ -268,40 +269,47 @@ body{
         width: 20px;
         margin:5px;
         border-radius: 5px;
-        &1{
-            color: #85040a;
-            background: #f2b3b3;
+        &0{
+            color: #85040a !important;
+            background: #f2b3b3 !important;
           }
-          &2{
+          &1{
             color: #b63a00;
             background: #fccbbc;
           }
-          &3{
+          &2{
             color: #9c6b00;
             background: #fcecbe;
           }
-          &4{
+          &3{
             color: #047a10;
             background: #c2e9d7;
-           
           }
-          &5{
+          &4{
             color: #0954cc;
             background: #b3e1f7;
-           
           }
-          &6{
+          &5{
             color: #4c21a3;
             background: #c5cbe9;
           }
-          &7{
+          &6{
             color: rgb(68, 78, 126);
-            background: #d7dbef;
+            background: #d7dbef;  
           }
-          &8{
+          &7{
             color: rgb(95, 17, 131);
             background: #ddbde6;
           }
+          &8{
+            color:#291004;
+            background: #d19a7a;
+          }
+          &9{
+              color:#f3f3f3;
+            background: #E80627
+          }
+          
     }
   }
   input::-webkit-calendar-picker-indicator {
@@ -469,17 +477,7 @@ form{
 
 
 
-   input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-input{
-    -webkit-appearance: none;
-}
-input[type=number] {
-    -moz-appearance: textfield;
-  }
+
 
   .charts{
       position: absolute;
@@ -623,7 +621,7 @@ input[type=number] {
   background: #fff;
 }
 .table{
-  margin-top: 20px
+  margin-top: 50px
 }
 .badge{
 

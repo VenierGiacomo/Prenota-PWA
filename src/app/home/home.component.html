@@ -64,7 +64,7 @@
         </div>
         <div class="calendar" *ngIf='OneView'>
             <div class="date"> 
-                <div class="current-date"> <span>  {{today}}</span>  <div *ngIf='week[0]>week[6] '>{{months_names[month]}}  {{year}}</div> <div *ngIf='week[6]>week[0] '>{{months_names[month]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                <div class="current-date"> <span><span>{{giorni[oneviewDay]}}</span> {{today}}  </span>  <div *ngIf='week[0]>week[6] '>{{months_names[month]}}  {{year}}</div> <div *ngIf='week[6]>week[0] '>{{months_names[month]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
                 <div class="today-date activetoday" (click)='goToday(false)'>Oggi</div>
                 <div class="selector-date">
                     <div  (click)='displayWeek(false)'>Settimana</div>
@@ -137,13 +137,19 @@
           </div> -->
         <input type="text" placeholder="3312233645" [(ngModel)]="phone" *ngIf='!show_recurring'>
         <p>Servizio:</p>
-        <select class='select_no_margin_left' [(ngModel)]="info" >
+        <select class='select_no_margin_left' (change)='select_serv()' [(ngModel)]="info" >
                 <option value=101010 selected >Seleziona servizio</option>
                 <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
                 <option value=-3 >chiudi un'ora</option>
                 <option value=-2 *ngIf='!edit'>chiudi tutto il giorno</option>
                 <option value=-1 >altro</option>
         </select>
+        <div *ngIf='adons_to_show.length>0'>
+          <span *ngFor='let adon of adons_to_show'>
+            <vaadin-checkbox (change)='adon.selected=!adon.selected' [checked]='adon.selected' ></vaadin-checkbox> <p style="margin:auto 15px auto 2px;">{{adon.name}}</p>
+          </span>
+      
+      </div>
         <p *ngIf='show_recurring'>N° di prenotazioni future:</p>
         <input type="number" placeholder="10" [(ngModel)]="recurring_quantity" *ngIf='show_recurring'>
         <p *ngIf='edit && !show_recurring'>Nota:</p>
@@ -192,19 +198,23 @@
         </select>
         </div>
         <div *ngIf='!edit'>
-        <button class="single-button " (click)='addAppointment()'>Salva</button>
+        <button class="single-button std-app" (click)='addAppointment()'>Salva</button>
         <button  *ngIf='storeUseCredits'class="single-button modify-app " (click)='scaleCredit()' style="margin-top: 10px;">Salva e Scala Credito</button>
     </div>
         <div *ngIf='edit'>
-                <button  class="single-button" (click)='setRecuringBooking(false)' *ngIf='show_recurring' ><span *ngIf='!_loading' >Salva</span> <div class="loader-6 center" *ngIf="_loading"><span></span></div></button>                
+                <button  class="single-button std-app" (click)='setRecuringBooking(false)' *ngIf='show_recurring' ><span *ngIf='!_loading' >Salva</span> <div class="loader-6 center" *ngIf="_loading"><span></span></div></button>                
                 <button  class="single-button modify-app" style="margin-top: 10px;" (click)='setRecuringBooking(true)' *ngIf='show_recurring && storeUseCredits'><span *ngIf='!_loading' >Salva e scala credito</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
                 
-            <button  class="single-button " (click)='updateAppointment()' *ngIf='!show_recurring'>Salva modifiche</button>
-            <button  class="single-button delete-app" (click)='deleteAppointment()' *ngIf='recurring>0 && !show_recurring' >Cancella</button>
+            <button  class="single-button modify-app" (click)='updateAppointment(false)' *ngIf='!show_recurring'>Salva modifiche</button>
+            <button class="two-buttons std-app" title="Segna come pagato" *ngIf='recurring>0 && !show_recurring' (click)='updateAppointment(true)' style="margin:5px 10% 5px 0px"><img src="../assets/icons/euro.svg" ></button>
+               
+            <button class="two-buttons delete-app" title="Elimina Appuntamento" *ngIf='recurring>0 && !show_recurring' (click)='deleteAppointment()'><img src="../assets/icons/trash.svg" ></button>
             <button  class="single-button delete-app" (click)='deleteRecuringBooking()' *ngIf='recurring>0 && !show_recurring' >Cancella ricorrenti</button>
-                <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0) && !show_recurring' ><span *ngIf='!_loading'>Cancella</span></button>
-                <button  (click)='show_recurring=true' class="two-buttons-1 modify-app"  *ngIf='!(recurring>0) && !show_recurring'> <span *ngIf='!_loading' >Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
-                
+                <!-- <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0) && !show_recurring' ><span *ngIf='!_loading'>Cancella</span></button>
+                <button  (click)='show_recurring=true' class="two-buttons-1 modify-app"  *ngIf='!(recurring>0) && !show_recurring'> <span *ngIf='!_loading' >Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                 -->
+                <button class="h-btn-3 std-app" title="Segna come pagato" *ngIf='!(recurring>0) && !show_recurring' (click)='updateAppointment(true)'><img src="../assets/icons/euro.svg" ></button>
+                <button class="h-btn-3 modify-app" style="margin:5px 5%" *ngIf='!(recurring>0) && !show_recurring' title="Salva come appuntamento ricorrente"  (click)='show_recurring=true'><img src="../assets/icons/reload.svg" ></button>
+                <button class="h-btn-3 delete-app" title="Elimina Appuntamento" *ngIf='!(recurring>0) && !show_recurring' (click)='deleteAppointment()'><img src="../assets/icons/trash.svg" ></button>
         </div>
     </div>
     </div>
@@ -719,4 +729,53 @@ font-size: 12px;
     background: #0061d5;
     color: white;
   }
+
+  .h-btn-3{
+        width: 30%;
+        margin: 5px 0px;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 35px;
+        padding: 0px !important;
+        font-weight: 500;
+        height: 35px;
+        padding: 0px;
+        border: none; 
+      
+    }
+    .h-btn-3   img{
+            height: 21px;
+            margin: 7px auto;
+        }
+    .two-buttons{
+        width: 45%;
+        margin: 5px 0% auto 0%;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 35px;
+        padding: 0px !important;
+        font-weight: 500;
+        height: 35px;
+        padding: 0px;
+        border: none; 
+        
+    }
+    .two-buttons  img{
+            height: 21px;
+            margin: 7px auto;
+        }
+    .two-buttons-1{
+        width: 45%;
+        margin-right: 0%;
+        margin-left: 10%;
+        margin-top: 5px;
+        border-radius: 5px;
+        font-size: 14px;
+        line-height: 35px;
+        padding: 0px !important;
+        font-weight: 500;
+        height: 35px;
+        padding: 0px;
+        border: none;       
+    }
 </style>

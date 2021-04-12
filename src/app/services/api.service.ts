@@ -194,13 +194,19 @@ deleteEmployeeservice(employee, service_id){
   return this.http.delete(BASE_URL+'employee/services/'+employee+'/'+service_id+'/', {headers: this.newheader()})
 }
 
-bookAppointment(start, end, day, month, year,name, phone, details, employee, service, client_id?):Observable<any>{
+bookAppointment(start, end, day, month, year,name, phone, details, employee, service, client_id, adons, store_client):Observable<any>{
   
   var week = this.getWeekNumber(new Date(year, month, day))
   if(year==2021 && week==0 && day<4){
     week=53
   }
-  var data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id}
+ var data
+  if(store_client){
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id,'adons':adons,'store_client':store_client}
+   }else{
+      
+      data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'phone':phone, 'details': details, 'service_n': service, 'note': '','client':client_id, 'adons':adons}
+   }
     return this.http.post(BASE_URL+'bookings/', data,{headers: this.newheader()})
 }
 
@@ -298,9 +304,26 @@ getMonthAppointments(month):Observable<any>{
   return this.http.get(BASE_URL+'bookings/month/'+month,{headers: this.newheader()})
 }
 
-updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service, note):Observable<any>{
+updateAppointment(id, start, end, day, month, year,name, phone, details, employee, service, note, payed?):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
-  var data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
+  var data
+  if(payed){
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'payed':payed}
+  }else{
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note}
+  }
+  
+  return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
+}
+updateAppointmentClient(id, start, end, day, month, year,name, phone, details, employee, service, note,  client_id,payed?,):Observable<any>{
+  var week = this.getWeekNumber(new Date(year, month, day))
+  var data
+  if(payed){
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id, 'payed':payed,}
+  }else{
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id,}
+  }
+  
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
 payBookingFromShop(id){
@@ -449,12 +472,12 @@ listBusinessTransactions(){
   // } 
   
 }
-setRecuringBooking(id, weeks){
+setRecuringBooking(id, weeks,payed){
   var data
   if(weeks){
-    data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021, weeks:weeks}
+    data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021, weeks:weeks,payed:payed}
   }else{
-  data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021}
+  data={id:id,client_name:'~',start:1,end:2,day:1,week:0,month:0,year:2021,payed:payed}
   }
   return this.http.post(BASE_URL+'bookings/recurring/',data,{headers: this.newheader()})
 }
@@ -481,6 +504,12 @@ registerClientWithEmail(first_name, last_name, phone ,email?  ):Observable<any>{
   }
  
   return this.http.post(BASE_URL+'store/clients/new/', data,{headers: this.newheader() })
+}
+getServiceAdons():Observable<any>{
+  return this.http.get(BASE_URL+'serviceaddons/store/all',{headers: this.newheader()})
+}
+getAdons():Observable<any>{
+  return this.http.get(BASE_URL+'addons',{headers: this.httpheader})
 }
 inviteCLient(client):Observable<any>{
   var data={
