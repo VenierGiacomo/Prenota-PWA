@@ -9,6 +9,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class FirstpageComponent implements OnInit {
   show_sublinks=true
+  mobile=false
   constructor(private router:Router, private titleService: Title) {
     // this.titleService.setTitle( " Prenota : Prendi appuntamento a Trieste con medici sportivi, parrucchieri, oculisti, campi da tennis, campi da calcio ");
    }
@@ -23,16 +24,7 @@ export class FirstpageComponent implements OnInit {
     }
   }
   
-navBusiness(){
-  this.router.navigateByUrl('business')
-    }
-    async navListing(){
-      if(await this.mobileCheck()){
-        window.location.href = 'https://mobile.prenota.cc'
-      }else{
-        this.router.navigateByUrl('home/ricerca')
-      }
-}
+
 
   mobileCheck() {
     let check = false;
@@ -40,7 +32,5 @@ navBusiness(){
     return check;
   };
   
-  goPage(page){
-    this.router.navigateByUrl(page)
-  }
+ 
 }

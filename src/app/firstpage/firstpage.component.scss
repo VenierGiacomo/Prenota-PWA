@@ -47,14 +47,16 @@ span{
     
 }
 img{
-    height: 40vh;
+  
+    height: var(--20-full-heigth);
 }
 @media (max-width: 576px) {
     .header-act {
         display: none;
     }
     .banner{
-        height: calc( 120vh - 90px) !important;
+        height: var(--120-full-heigth);
+      
     }
     img{
         height:auto !important;
@@ -63,7 +65,7 @@ img{
   }
 
   .banner{
-      height: calc( 100vh - 90px) ;
+    height: var(--full-heigth-90);
   }
 
 //   background-color: #d9fff9;

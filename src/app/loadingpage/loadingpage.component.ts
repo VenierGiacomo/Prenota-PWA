@@ -134,8 +134,7 @@ anime.timeline({loop: false})
 
  await this.api.getopenHours().subscribe(data=>{
     this.storage.setOpenignhours(data)
-      this.api.getServiceAdons().subscribe(data=>{
-   
+      this.api.getAllServicesAdons().subscribe(data=>{
         this.storage.setServiceAdons(data)
         this.api.getAdons().subscribe(data=>{
           this.storage.setAdons(data)

@@ -520,11 +520,11 @@ th{
     }
 }
 .rows:nth-child(even){
-    border-top: 1px solid rgba($color: #000000, $alpha: 0.1);
+    border-top: 1px solid rgba($color: #000000, $alpha: 0.4);
 }
 .rows:nth-child(odd){
    
-    border-top: 1px solid rgba($color: #019aff, $alpha: 0.5);
+    border-top: 1px solid rgba($color: #019aff, $alpha: 0.3);
 }
 
 
@@ -677,7 +677,7 @@ table::-webkit-scrollbar {
       }
 }
 :host ::ng-deep .bot-drag{
-    height: 10px;
+    height: 20px;
     left:0px;
     z-index: 100;
     width: 100%;

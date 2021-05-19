@@ -1,0 +1,48 @@
+<app-header ></app-header>
+<div class="cont">
+<div>
+    <h1>Oculista a Trieste</h1>
+    <h2>Lista completa di tutti gli oculisti nel comune di Trieste<br><br></h2>
+    <div class="no_mob">
+    <h2>Tipologie di servizi</h2>
+    <h3> Visita oculistica</h3>
+    <h3> Visita di controllo oculistico</h3>
+    <h3> Visita rinnovo patente</h3>
+    <h3> Fluorangiografia</h3>
+    <h3> Tomografia ottica OCT</h3>
+    <h3> Yag laser caspulotomia e iridotomia</h3>
+    <h3> Biomicroscopia corneale</h3>
+    <h3> Ecografia oculare</h3>
+    <h3> Esame del fundus oculi</h3>
+    <h3> Argon laser retina</h3>
+    <h3> Topografia corneale, aberrometria, pachimetria</h3>
+    <h3>Chirurgia Laser</h3>
+</div>
+</div>
+<div class="img-cont col-sm-12">
+    <img src='../assets/Eye_Doctor_Tool_Free_Vector.svg' title="Oculista a Trieste" alt='Oculista a Trieste'>
+</div>
+</div>
+<div class="list_activities">
+    <div class="activity col-md-5 offset-md-1 col-sm-12" *ngFor='let doc of eye_doctors; let ind = index'>
+        <div class="img_cont">
+            <img *ngIf='doc.img' src='{{doc.img}}' title="{{doc.name}}" alt='{{doc.name}}'>
+            <img *ngIf='!doc.img' src='../assets/user_empy.svg' title="{{doc.name}}" alt='{{doc.name}}'>
+        </div>
+        <div class="text_activity" >
+            <h2>{{doc.name}}</h2> <img class="img_verified" *ngIf='doc.verified' src='../assets/icons/check.svg'>
+            <h4>Oculista - {{doc.address}}</h4>
+            <a [routerLink]="doc.url"><button class="book" *ngIf='doc.verified'>Vedi disponibilità</button ></a><a [routerLink]="doc.url"><button class="info">Magg. informazioni</button></a>
+        </div>
+    </div>
+
+</div>
+<div class="desc">
+   <h1> Di cosa si occupa un’ oculista:</h1>
+   <p>
+L’ oculista è un medico specialista in Oftalmologia o Oculistica, la branca della medicina che si occupa dello studio della vista e del funzionamento di tutto l’apparato visivo.
+<br><br>Il medico oculista, dunque, è impegnato nella diagnosi, nel trattamento e nella prevenzione dei disturbi e delle malattie che colpiscono l’occhio. Attraverso una visita oculistica, lo specialista può valutare la condizione di salute degli occhi e individuare eventuali difetti visivi o patologie più complesse. Nel caso in cui lo ritenga necessario, l’oculista può richiedere ulteriori prove diagnostiche quali, ad esempio, la tonometria (o misurazione della pressione oculare interna), l’esame del campo visivo o la pachimetria (la misurazione dello spessore corneale).
+Normalmente, ogni medico è specializzato un tipo specifico di trattamento.<br><br> Ad esempio: Mentre un oculista generico si occupa di visite di controllo e diagnosi di patologie, un oculista con specialistica in trattamentto laser, va ad effetuare trattamenti specidici sulla cornea ed il cristallino.
+</p>
+</div>
+<app-footer></app-footer>

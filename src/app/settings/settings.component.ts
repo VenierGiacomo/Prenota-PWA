@@ -101,12 +101,15 @@ export class SettingsComponent implements OnInit {
   colorScheme = {
     domain: ['#0061d5', '#00BBF9','#00479d' , '#00072D']
   };
+  colorScheme_services={
+    domain:[]
+  }
 
   services_per_emplo
   services_general
   online_performance
   lookUp
-  show_clients
+  show_clients=[]
   displ_client=false
   storeUseCredits=false
   store_type= 0
@@ -267,11 +270,12 @@ export class SettingsComponent implements OnInit {
  
     var stats:Array<any> = await this.storage.getStats()
     var services: Array<any> = await this.storage.getCatalog()
+    services.map((val)=>{this.colorScheme_services.domain.push(this.colors_list[val.color])})
     var new_arr =[]
     for(let el of services){
       var quantity = stats.filter((val) =>{return el.id== Number(val.service_n)})
       var hours = quantity.reduce((accumulator, val)=>{
-        return accumulator + val.end - val.start;
+        return accumulator + val.end_t - val.start_t;
       },0)
       hours= hours * 5
       hours = Math.floor(hours/60) + ((hours % 60)/100)
@@ -290,7 +294,7 @@ export class SettingsComponent implements OnInit {
     for(let emplo of employess){
       var quantity = stats.filter((val) =>{return (emplo[0]== Number(val.employee)&& Number(val.service_n)>0)})
       var value:any = quantity.reduce((accumulator, val)=>{
-        return accumulator + val.end - val.start;
+        return accumulator + val.end_t - val.start_t;
       },0)
       value= value * 5
       value = Math.floor(value/60) + ((value % 60)/100)
@@ -303,17 +307,13 @@ export class SettingsComponent implements OnInit {
     }
         this.services_per_emplo = new_arr1  
       var new_arr2=[]
-      var quantity = stats.filter((val) =>{return (val.client!= 1 && Number(val.service_n)>0)})
+      var quantity = stats.filter((val) =>{return val.booked_on_plt})
       var data_call = {
         name: "Chiamate rispamiate",
         value: quantity.length
       }
-      var  serv_dict = {}
-      for(let ser of services ){
-        serv_dict[ser.id] = ser.price
-      }
       var value:any = quantity.reduce((accumulator, val)=>{
-        return accumulator + serv_dict[val.service_n]
+        return accumulator + val.price
       },0)
       var data_money = {
         name: "Incasso da prenotazioni online",
@@ -541,6 +541,10 @@ count_occurencies(arr) {
     this.api.deleteAllData()
     this.router.navigateByUrl('login')
   }
+
+  goClient(client){
+    this.router.navigateByUrl('/clientpage/'+client.id+'/'+client.phone+'/'+client.client_name.replaceAll('%20',' ')+'/'+client.email)
+  }
   async portalStripe(){
     this.api.stripePortalSession().subscribe(async data=>{
       var session:any = await data
@@ -721,14 +725,16 @@ close_clients(ev){
           this.register_form='none'
       
           await this.storage.addClient(res)
-
+          
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
           this.clients = client_list.list 
           this.show_clients =  this.clients.slice(0,9)
          
-          for(let el of this.show_clients ){
+          for(let el of this.clients ){
             el.client_name = el.client_name.toLowerCase()
+            el.credit = new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(el.credit/100)
           }
+          
           Notiflix.Notify.Success('Cliente registrato');
           this.invite_email=''
           this.invite_first_name =''
@@ -745,7 +751,7 @@ close_clients(ev){
       }else{
         this.api.registerClientWithEmail(this.invite_first_name,this.invite_last_name,this.invite_phone).subscribe(async res=>{
           
-          
+         
           await this.storage.addClient(res)
           var client_list = await JSON.parse( localStorage.getItem('client_list'))
           this.clients = client_list.list 
@@ -753,6 +759,7 @@ close_clients(ev){
           for(let el of this.show_clients ){
             el.client_name = el.client_name.toLowerCase()
           }
+
           Notiflix.Notify.Success('Cliente registrato');
           this.invite_email =''
           this.invite_first_name =''
@@ -772,6 +779,10 @@ close_clients(ev){
     const qrcode = QRCode;
     var store_name_url = this.store_name.replaceAll(' ', '%20')
     var name = client.client_name.split(' ')
+    var email=''
+    if(client.email!=undefined){
+       email = client.email
+    }
 
     function capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
@@ -779,7 +790,7 @@ close_clients(ev){
     name[0]= capitalizeFirstLetter(name[0])
     name[1]= capitalizeFirstLetter(name[1])
     this.invite_email='test.cc@email.com'
-    this.code = `https://prenota.cc/register/${name[0]}/${name[1]}//${client.phone}/${store_name_url}/${client.id}`
+    this.code = `https://prenota.cc/register/${name[0]}/${name[1]}/${email}/${client.phone}/${store_name_url}/${client.id}`
     qrcode.toString(this.code, { errorCorrectionLevel: 'H' },  (err, url)=> {
       this.generated = url;
     })

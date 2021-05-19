@@ -563,7 +563,7 @@ canvas {
 /* Main Styles */
 aside.left-panel {
   background: #fff;
-  height: 100vh;
+  height: var(--full-heigth);
   padding: 0;
   vertical-align: top;
   width: 280px;
@@ -2427,7 +2427,7 @@ footer.site-footer {
             flex: none; } }
 @media (max-width: 768px) {
   .navbar {
-    height: 100vh; }
+    height: var(--full-heigth); }
     .navbar .navbar-nav li.menu-item-has-children > a:before {
       display: block !important; }
     .navbar .main-menu {

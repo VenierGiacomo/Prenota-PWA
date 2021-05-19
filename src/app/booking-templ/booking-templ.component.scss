@@ -25,7 +25,8 @@
         position: fixed;
         top: 0vw;
         width: 100vw;
-        height: 100vh;
+        height: var(--full-heigth-90);
+    max-height: -webkit-fill-available !important;;
         display: block;
         z-index: 1000;
         overflow: hidden;
@@ -239,7 +240,8 @@
     
     }
     .full_bg{
-        height: calc(100vh - 90px);
+      height: var(--full-heigth-90);
+      max-height: -webkit-fill-available !important;;
     }
 @media (max-width: 576px) {
     .service{
@@ -263,12 +265,14 @@ html{
     top:90px;
     width: 100vw;
     z-index: 10;
-    height: calc(100vh - 90px);
+   
+    height: var(--full-heigth-90);
+    max-height: -webkit-fill-available !important;;
     background-image: url(./../../assets/Waves-multiple_blue.svg) !important;
     background-repeat: no-repeat;
     background-size: cover;
     display: grid;
-    grid-template-columns: 4fr 6fr ;
+    grid-template-columns: 3fr 7fr ;
     padding: 20px 40px;
     overflow: hidden;
     h4{
@@ -301,22 +305,28 @@ html{
     .left{
       position: relative;
       p{
-        position: absolute;
-        top:18vh;
+        position: relative;
+        top:3vh;
         line-height: 5vh;
         color: white;
       }
       h2{
-        top:5vh
+        position: relative;
+        top:1vh;
+        margin-bottom:0px; 
+        padding-bottom:0px; 
       }
       h4{
-        top: 13vh;
+        position: relative;
+        margin-bottom:0px; 
+        padding-bottom:0px;
+        top:3vh;
       }
       .list_cont{
-        position: absolute;
+        position: relative;
         display: block;
-        top:24vh;
-        height: calc(78vh - 180px);
+        top:2vh;
+        height: calc(78vh - 150px);
         width: 100%;
         overflow: scroll;
        
@@ -395,7 +405,7 @@ html{
         transition: 300ms;
         display: block;
         height: 70px;
-        width: calc(60vw - 180px);
+        width: calc(70vw - 180px);
         -webkit-overflow-scrolling: touch;
         overflow-x: scroll;  white-space: nowrap;
         overflow-y: hidden;
@@ -421,12 +431,16 @@ html{
         height: 50px;
         padding: 0px 20px;
         font-size: 13px;
-        width: calc(30vw - 110px);
-        margin: 20px 10px 0px 10px;
+        width: calc(35vw - 100px);
+        margin: 20px 20px 0px 0px;
         color: white;
         background: rgba(255,255,255,0.1);
         backdrop-filter: blur(16px);
         -webkit-backdrop-filter: blur(16px);
+        span{
+          height: 50px;
+          overflow: hidden;
+        }
         div{
           display: grid;
           grid-template-columns: 8fr 3fr ;
@@ -455,7 +469,8 @@ html{
 
   .confirm{
     z-index: 10;
-    height: calc(100vh - 90px);
+    height: var(--full-heigth-90);
+    max-height: -webkit-fill-available !important;;
     width: 100vw;
     top:90px;
     left:0px;
@@ -466,12 +481,16 @@ html{
     -webkit-backdrop-filter: blur(16px);
     .modal{
       width: 400px;
+      transition: 600ms;
       height: min-content;
+      height: -moz-min-content;
+      height: -webkit-min-content;
+      height: -o-min-content;
       padding:30px;
       border-radius: 10px;
       background: white;
       display: block;
-      margin-top: calc(50vh - 200px);
+      margin-top: 100px;
       margin-left: calc(50vw - 200px);
       button {
         width: 340px;
@@ -503,3 +522,27 @@ html{
   }
 
   
+  @media(max-width:1080px){
+    h2{
+      font-size: 21px;
+      line-height: 21px;
+    }
+    h4{
+      font-size: 18px;
+      line-height: 18px;
+    }
+    p{
+      font-size: 13px;
+      line-height: 13px;
+    }
+  }
+  .toggle{
+
+display: grid;
+grid-template-columns: 8fr 2fr;
+span{
+  display: grid;
+  grid-template-columns: 7fr 3fr;
+}
+
+  }

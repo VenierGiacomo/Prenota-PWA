@@ -51,6 +51,9 @@ export class MonthviewComponent implements OnInit {
     }
     this.month_displayed = this.months_names[this.month]
     this.first_day = new Date(this.year, this.month, 1).getDay()
+    if(this.first_day==0){
+      this.first_day=7
+    }
     this.last_month_days = Array(this.first_day-1).fill('*')
     this.current_month_days = Array(this.months_days[this.month]).fill(0).map((x,i)=>i+1);
     this.next_month_days = ((this.last_month_days.length+this.current_month_days.length)%7==0) ? [] : Array(7-((this.last_month_days.length+this.current_month_days.length)%7))

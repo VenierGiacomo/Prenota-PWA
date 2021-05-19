@@ -4,7 +4,7 @@
 
             
             <div class="cont-template" id='cont-scroll'>
-                            <div class="hero-wrap " style="background-image: url({{businesses[slug].img_bg}}) ; background-position: top center;" >
+                            <div class="hero-wrap " title='{{businesses[slug].name}}' style="background-image: url({{businesses[slug].img_bg}}) ; background-position: top center;" >
                             <div class="bg-black-custom" [style.background]='businesses[slug].bg_opacity'>
                                 <div class="container">
                                   <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-start">
@@ -205,7 +205,9 @@
                     <div class="left">
                            <span (click)='closeBookingPage()' style="cursor: pointer;"><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"> <span style="color: white !important; padding: 12px 8px 0px 8px;">Indietro</span></span> 
                         <h2 class="name" (click)='closeBook()'>{{name}}</h2>
-                        <h4>Seleziona uno o più servizi</h4>
+                        <h4 *ngIf='!adons' >Seleziona un servizio o più</h4>
+<h4 *ngIf='adons' >Seleziona un servizio</h4>
+                <!-- <h4 >Seleziona un servizio o più</h4> -->
                         <p *ngIf='show_scroll'>Scorri per vedere altri servizi</p>
                         <div class="list_cont" >
                             <div class="list_el_pos" *ngFor='let service of services, let i = index ' (click)="selectService(service,i)" [class.active]='checkServActive(service.id)'>
@@ -222,53 +224,111 @@
                             <h4>Seleziona una data</h4>
                             <p >Scorri lateralmente per vedere altri servizi</p>
                             <div class="list_cont" id='date'>
-                                <div  [style.position]="position_book" style='right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "date")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
-                                <div  [style.position]="position_book" style='left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "date")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
+                                <div  [style.position]="position_book" style='right: 35px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "date")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
+                                <div  [style.position]="position_book" style='left: calc(30vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "date")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
                             <div class="date_el" *ngFor='let date_avi of uniques, let ind = index' (click)="DatePicker(date_avi, ind, true)" [class.active]='date_avi.number == day && date_avi.month == month' >
                                     <div>{{week_name[date_avi.week_day]}} {{date_avi.number}} {{months_short[date_avi.month]}}</div>
                             </div>
                             </div>
                         </div>
+                    <div *ngIf='employees_list.length>1 && has_spot'>
+                      <div class=" item" *ngFor='let serv of service, let i = index '> <div><span>{{serv.name}}</span><select  [(ngModel)]="filtr[i]"   (change)='filter_serv()'><option *ngFor='let empl of empl_for_service[i]' value={{empl.id}}>{{empl.name}}</option></select></div> </div>
                       
-                    <!-- <div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-                    <div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-                    <div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-                    <div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div> -->
-                        
-                        <div class="time">
+                    </div>  
+                        <div class="time" *ngIf='has_spot'>
                             <h4>Seleziona un orario disponibile</h4>
                             <p >Scorri lateralmente per vedere altri orari</p>
                             <div class="list_cont" id='time'>
-                                    <div  [style.position]="position_book" style=' right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "time")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
-                                    <div   [style.position]="position_book"style='  left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "time")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
+                                    <div  [style.position]="position_book" style=' right: 35px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "time")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
+                                    <div   [style.position]="position_book"style='  left: calc(30vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "time")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
                             <div class="date_el" *ngFor='let spot of final_spots_displ' (click)="selectTime(spot)">
                                     <div>{{times[spot[0].start]}} </div>
                                     
                             </div>
                             </div>
                         </div>
+                        <div class="time" *ngIf='!has_spot'>
+                          <h4>Nessun orario disponibile</h4>
+                          </div>
                     </div>
             </div>
 
             <div class="confirm" [style.display]='confirm' (click)='closeConfirm($event)' id='confirm'>
-                <span class="modal">
+                <span class="modal" id='modal'>
                         <h4 >Riassunto prenotazione</h4>
                         <p><b>Servizio:</b> {{total_service.name}}</p>
                         <p><b>Data:</b> {{today}}</p>
                         <p><b>Orario:</b> {{timeslot}}</p>
+                        <div style="border-top: solid 1px #424242; padding-bottom: 10px;">
+                        <div class="toggle" *ngFor='let adon of adons_list'>
+                          <span>
+                            <p style="line-height: 40px;"><b>{{adon.name}}</b></p>
+                              
+                            <div class="adon_price">+ {{adon.price/100}}€</div>
+                          </span>
+                          <div class="switch-conts">
+                            <label class="switch">
+                                  <input type="checkbox" [checked]="adon.selected" >
+                                  <span class="slider round"></span>
+                                </label>
+                              </div>
+                        </div>
+                      </div>
                         <button (click)='book()'> <span *ngIf="!loading"> prenota</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button>
+                </span>
+                <span class="modal-1" [style.margin-top]='booked_same_top'>
+                  <h4 style="text-align: center;" >Opss 😔 </h4>
+                  <img src='../assets/undraw_donut_love_kau1.svg'>
+                  <p>Qualcuno ha prenotato nel tuo stesso momento. Prova a scegliere un altro orario!</p>
+                    <button (click)='backtoBooking()'> Scegli un altra ora</button>
                 </span>
         </div>
 
 
         <style>
-        /*!
- * Bootstrap v4.1.0 (https://getbootstrap.com/)
- * Copyright 2011-2018 The Bootstrap Authors
- * Copyright 2011-2018 Twitter, Inc.
- * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
- */
-
+   
+.modal-1{
+      width: 400px;
+      height: 480px;
+      transition: 600ms;
+      padding:30px;
+      border-radius: 10px;
+      background: white;
+      text-align: center;
+      display: block;
+      margin-top: calc(50vh - 300px);
+      margin-left: calc(50vw - 200px);
+ 
+}
+.adon_price{
+  line-height: 40px;
+  font-size: 13px;
+  color: #424242;
+  text-align-last: end;
+}
+.modal-1 button {
+        width: 340px;
+        box-shadow: 0px 0px 10px 2px #00000022;
+        margin: 10px auto 0px;
+        padding: 0px 10px;
+        height: 50px;
+        border-radius: 7px;;
+        
+        line-height: 50px;
+        font-size: 18px;
+        background: #0061d5;
+        position: relative;
+        color: white;
+    }
+    .modal-1  p{
+      margin-top: 20px;
+    color: #666;
+    }
+.modal-1 img {
+    object-fit: cover;
+    width: 80%;
+    margin-top: 50px;
+  }
  .loader-5 {
     height: 32px;
     width: 32px;
@@ -559,7 +619,10 @@ background: rgba(0, 0, 0, 0.5);
 
 .hero-wrap {
   width: 100%;
-  height: calc(100vh - 90px);
+  /* height: calc(100vh - 90px); */
+  height: var(--full-heigth-90);
+ 
+    max-height: -webkit-fill-available !important;;
   position: relative;
   z-index: 0; }
   @media (max-width: 1199.98px) {
@@ -847,4 +910,127 @@ background: rgba(0, 0, 0, 0.5);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center; }
+
+  .switch-conts{
+  display: inline-block;
+  padding: 5px 10px;
+
+}
+.switch {
+    top:0px;
+    left: 0px !important;;
+    position: relative;
+    display: inline-block;
+    width: 46px;
+    height: 28px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 24px;
+    width: 24px;
+    left: 2px;
+    bottom: 2px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  input:checked + .slider {
+    background-color: #0061d5;
+  }
+  
+  input:focus + .slider {
+    box-shadow: 0 0 1px #0061d5;
+  }
+  
+  input:checked + .slider:before {
+    -webkit-transform: translateX(18px);
+    -ms-transform: translateX(18px);
+    transform: translateX(18px);
+  }
+  
+  /* Rounded sliders */
+  .slider.round {
+    border-radius: 24px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
 </style>
+
+<div class="cont-reg" [style.display]='extra_data'>
+<div class="register-form" >
+      <h1>Ulteriori Informazioni</h1>
+  <p>I seguenti dati sono richiesti dalla <b>Farmacia Cermelj</b> per l'invio del risultato del tampone all' <b>Azienda Sanitaria Italiana</b>.<br>
+  <b>I dati non saranno salvati da Prenota</b> e non verranno collegati al tuo account!</p>
+  <div class='inputs'>
+      <div class="row row-space">
+          <div class="col-2-r">
+              <div class="input-group">
+                  <label class="label">Comune di nascita</label>
+                  <input class="input--style-4" [(ngModel)]="born_city" type="text"  placeholder="Trieste">
+                  <p *ngIf='born_city_err!=""'>{{born_city_err}}</p>
+              </div>
+          </div>
+          <div class="col-2-r">
+              <div class="input-group">
+                  <label class="label">Comune di residenza</label>
+                  <input class="input--style-4" [(ngModel)]="live_city" type="text"  placeholder="Trieste">
+                  <p *ngIf='live_city_err!=""'>{{live_city_err}}</p>
+              </div>
+          </div>
+      </div>
+      <div class="row row-space">
+        <div class="col-2-r">
+            <div class="input-group">
+                <label class="label">Indirizzo di residenza</label>
+                <input class="input--style-4" style="padding:0px 10px" [(ngModel)]="live_street" type="text"   placeholder="Via Carducci 21">
+                <p *ngIf='live_street_err!=""'>{{live_street_err}}</p>
+            </div>
+        </div>
+        <div class="col-2-r">
+          <div class="input-group">
+              <label class="label">Data di nascita</label>
+              <input class="input--style-4" style="padding:0px 10px" [(ngModel)]="date_of_birth" type="date"   placeholder="10/11/1995">
+              <p *ngIf='date_of_birth_err!=""'>{{date_of_birth_err}}</p>
+          </div>
+      </div>
+    </div>
+      <div class="row row-space">
+     
+          <div class="col-2-r">
+                  <div class="input-group">
+                      <label class="label">Codice fiscale</label>
+                      <input class="input--style-4"[(ngModel)]="fiscal_code" type="text"  placeholder="CRDMTT80A01L424V">
+                      <p *ngIf='fiscal_code_err!=""'>{{fiscal_code_err}}</p>
+                  </div>
+              </div>
+      </div>
+          <div class="button-reg">  <button (click)='update_extra_data()'> <span  >Invia</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
+  </div> 
+</div>
+
+</div>

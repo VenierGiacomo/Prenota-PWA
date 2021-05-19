@@ -505,8 +505,34 @@ registerClientWithEmail(first_name, last_name, phone ,email?  ):Observable<any>{
  
   return this.http.post(BASE_URL+'store/clients/new/', data,{headers: this.newheader() })
 }
-getServiceAdons():Observable<any>{
+getAllServicesAdons():Observable<any>{
   return this.http.get(BASE_URL+'serviceaddons/store/all',{headers: this.newheader()})
+}
+
+getServiceAdons(service_id):Observable<any>{
+  return this.http.get(BASE_URL+'serviceaddons/'+service_id,{headers: this.httpheader})
+}
+getCustomServices(client_id):Observable<any>{
+  return this.http.get(BASE_URL+'customservices/?client_id='+client_id,{headers: this.newheader()})
+}
+addCustomService(service,store_client,duration,price):Observable<any>{
+  var data={
+    "service": service,
+    "store_client": store_client,
+    "duration": duration,
+    'price': price
+  }
+  return this.http.post(BASE_URL+'customservices/', data,{headers: this.newheader() })
+}
+deleteCustomService(id):Observable<any>{
+  return this.http.delete(BASE_URL+'customservices/'+id+'/', {headers: this.newheader()})
+}
+updateCustomService(id,price,duration){
+  var data={
+    "duration": duration,
+    'price': price
+  }
+  return this.http.put(BASE_URL+'customservices/'+id+'/', data,{headers: this.newheader()})
 }
 getAdons():Observable<any>{
   return this.http.get(BASE_URL+'addons',{headers: this.httpheader})
@@ -518,6 +544,12 @@ inviteCLient(client):Observable<any>{
 
   }
   return this.http.post(BASE_URL+'store/clients/invite/email/', data,{headers: this.newheader() })
+}
+paymentMethods(){
+  return this.http.post(BASE_URL+'webhooks/payment_methods/', {},{headers: this.newheader()})
+}
+getStoresDetails(id){
+  return this.http.get(BASE_URL+'store/id/'+id,{headers: this.httpheader})
 }
 
 parseJwt = (token) => {

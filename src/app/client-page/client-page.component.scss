@@ -1,0 +1,164 @@
+@import "./../../assets/ElaAdmin-master/assets/css/style.css";
+.home{
+    display:grid;
+    height: 100vh;
+    width: 100vw;
+    grid-template-columns: 2fr 8fr;
+    font-size: 1.5vw;
+    overflow:hidden !important;
+    
+
+}
+html{
+    overflow: hidden !important;
+}
+body{
+    overflow:hidden !important;
+
+}
+.side-menu{
+    // min-width: 225px;
+    width: 20vw;
+    background: #0061d5;
+    color: #B3D1F1;
+    font-size: 28px;
+    .menu-home{
+        position: relative;
+        padding-left: 5px;
+        padding-right: 20px;
+        margin-top: 10vh;
+        margin-left: 2vw;
+        display: block;
+        cursor: pointer;
+    }
+    .menu-settings{
+        color: white;
+        width: max-content;
+        background: #00479D;
+        margin-right: 30px;
+        padding-left: 5px;
+        padding-right: 20px;
+        border-radius: 5px;
+        font-weight: 500;
+        position: relative;
+        margin-top: 5vh;
+        margin-left: 2vw;
+        display: block;    
+        cursor: pointer;
+    }
+    .menu-logout{
+        position: absolute;
+        color: white;
+        top: 90vh;
+        margin-left: 2vw;
+        display: block;
+        cursor: pointer;
+        img{
+            margin-top: -3.5%;
+            margin-left: -3.5%;
+            height: 2.8vh;
+        }
+    }
+}
+.content{
+    padding: 5px 1.875em;
+}   
+.settings{
+    overflow: hidden;
+    // min-width: 900px;
+    position: relative;
+    padding:30px;
+    color: #343a40;
+    background: #fafafa;
+
+
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    h1, h3, h2, h4 {
+        color: #343a40;
+    }
+    h1{
+        font-size: 28px;
+    }
+    h3{
+        display: inline-block;
+        padding-right: 20px;
+        font-size: 13px;
+    }
+
+    
+    }
+    .info{
+        display: grid;
+        grid-template-rows: 1fr ;
+        h2{
+           font-size:  24px;
+           line-height: 35px;
+           height: 35px;
+           margin: 0px;
+           display: inline-block;
+        }
+        button{
+            padding: 10px 20px;
+
+            line-height: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px 1px #ccc;
+            background: #fff;
+            font-size: 13px;
+        }
+        .custom_service{
+            position: relative;
+            button{
+                margin-left: 30px;
+            }
+        }
+    }
+    .badge{
+
+        margin: 0px 2px;
+        display: inline-block !important;
+      cursor: pointer!important;
+    }
+    select::-ms-expand {
+        display: none;
+    }
+    select{
+        display: inline-block;
+
+        border-radius: 5px;
+     
+        border: none;
+        width: min-content;
+        -webkit-appearance: none;
+        -moz-appearance: none;      
+        appearance: none;
+        cursor: pointer;
+    }
+    
+    input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+td,th{
+
+    padding: 9px 15px  !important
+    ;
+}
+.scroll_table {
+
+    max-height: 40vh;
+    overflow:scroll
+}
+
+.card{
+    width: calc(80vw - 60px);
+   
+    // margin:30px;
+}
+td{
+    background: #fff;
+}

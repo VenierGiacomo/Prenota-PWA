@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent implements OnInit {
-  button_text='Maggiori Informazioni'
+  button_text='Utilizza prenota, è gratis'
   constructor(private router: Router) { }
 href
 move_l=true
@@ -79,11 +79,11 @@ isDeviceiPad(){
     this.router.navigateByUrl('')
   }
   navLogin(){
-    if(this.isDeviceiPad()){
-      window.location.href="https://ipad.prenota.cc"
-    }else{
+    // if(this.isDeviceiPad()){
+    //   window.location.href="https://ipad.prenota.cc"
+    // }else{
       this.router.navigateByUrl('login')
-    }
+    // }
   
   }
 }

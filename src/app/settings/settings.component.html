@@ -29,7 +29,7 @@
                                                     </div>
                                                    
                                                             <div class="stat-text" ><span class="count">Servizi</span></div>
-                                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                             
                                                        
                                                 </div>
                                             </div>
@@ -45,7 +45,7 @@
                                                         </div>
                                                      
                                                                 <div class="stat-text"><span class="count">Statistiche</span></div>
-                                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                
                                                       
                                                     </div>
                                                 </div>
@@ -60,7 +60,7 @@
                                                         </div>
                                                       
                                                                 <div class="stat-text"><span class="count">Clienti</span></div>
-                                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                
                                                         
                                                     </div>
                                                 </div>
@@ -474,7 +474,7 @@ min="06:30" max="22:00"
 
 
 <div class="catalog" [style.display]='catalog'>
-        <div class="close-catalog" (click)='catalog="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+        <div class="close-catalog" (click)='catalog="none"; color_show="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
             <div class="cont-table">
                 <table class="table-catalog">
                     <thead>
@@ -543,17 +543,20 @@ min="06:30" max="22:00"
        
     </div>
 <div class="color-picker" [style.display]='color_show' [style.top]='color_top'>
-        <div class="c c1" (click)='changeColor(0)'></div>
-        <div class="c c2" (click)='changeColor(1)'></div>
-        <div class="c c3" (click)='changeColor(2)'></div>
-        <div class="c c4" (click)='changeColor(3)'></div>
-        <div class="c c5" (click)='changeColor(4)'></div>
-        <div class="c c6" (click)='changeColor(5)'></div>
-        <div class="c c7" (click)='changeColor(6)'></div>
-        <div class="c c8" (click)='changeColor(7)'></div>  
+        <div class="c c0" (click)='changeColor(0)'></div>
+        <div class="c c1" (click)='changeColor(1)'></div>
+        <div class="c c2" (click)='changeColor(2)'></div>
+        <div class="c c3" (click)='changeColor(3)'></div>
+        <div class="c c4" (click)='changeColor(4)'></div>
+        <div class="c c5" (click)='changeColor(5)'></div>
+        <div class="c c6" (click)='changeColor(6)'></div>
+        <div class="c c7" (click)='changeColor(7)'></div> 
+        <div class="c c8" (click)='changeColor(8)'></div>
+        <div class="c c9" (click)='changeColor(9)'></div>
+        
     </div>
 
-<div class="catalog" [style.display]='bussiness_selection'>
+<!-- <div class="catalog" [style.display]='bussiness_selection'>
         <div class="close-catalog" (click)='bussiness_selection="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
         <h1 style="width: 100vw; color: #fff; text-align: center;margin-top: 30px;">Seleziona la tipologia di attività:</h1>
     <div class="content" style="position: absolute; margin-top: 24vh;">
@@ -568,7 +571,7 @@ min="06:30" max="22:00"
                                 
                                     
                                         <div class="stat-text"><span class="count">Salute</span></div>
-                                        <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                     
                                     
                             </div>
                         </div>
@@ -584,7 +587,7 @@ min="06:30" max="22:00"
                                     
                                         
                                             <div class="stat-text"><span class="count">Cura capelli e viso</span></div>
-                                            <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                            
                                         
                                 </div>
                             </div>
@@ -600,7 +603,7 @@ min="06:30" max="22:00"
                                         
                                             
                                                 <div class="stat-text"><span class="count">Centro Massaggi</span></div>
-                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                
                                            
                                     </div>
                                 </div>
@@ -616,7 +619,7 @@ min="06:30" max="22:00"
                                         
                                             
                                                 <div class="stat-text"><span class="count">Estetisti</span></div>
-                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                
                                        
                                     </div>
                                 </div>
@@ -633,7 +636,7 @@ min="06:30" max="22:00"
                                             </div>
                                             
                                                     <div class="stat-text"><span class="count">Fisioterapia</span></div>
-                                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                    
                                               
                                         </div>
                                     </div>
@@ -650,7 +653,7 @@ min="06:30" max="22:00"
                                     
                                         
                                             <div class="stat-text"><span class="count">Dentisti</span></div>
-                                            <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                            
                                         
                                 </div>
                             </div>
@@ -666,7 +669,7 @@ min="06:30" max="22:00"
                                         
                                             
                                                 <div class="stat-text"><span class="count">Centro sportivo</span></div>
-                                                <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                
                                            
                                     </div>
                                 </div>
@@ -681,7 +684,7 @@ min="06:30" max="22:00"
                                             </div>
                                             
                                                     <div class="stat-text"><span class="count">Avvocati</span></div>
-                                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                    
                                                 
                                         </div>
                                     </div>
@@ -690,7 +693,7 @@ min="06:30" max="22:00"
                          
                 </div>
     </div>
-</div>
+</div> -->
 
 <div class="catalog" [style.display]='bussiness_type_stripe'>
     <div class="close-catalog" (click)='bussiness_type_stripe="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
@@ -707,7 +710,7 @@ min="06:30" max="22:00"
                             
                                 
                                     <div class="stat-text"><span class="count">Partita IVA o Azienda individuale</span></div>
-                                    <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                    
                                 
                         </div>
                     </div>
@@ -723,7 +726,7 @@ min="06:30" max="22:00"
                                 
                                     
                                         <div class="stat-text"><span class="count">Azienda di persone</span></div>
-                                        <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                        
                                     
                             </div>
                         </div>
@@ -749,7 +752,7 @@ min="06:30" max="22:00"
     <div [style.visibility]='chart_visibility'>
         <ngx-charts-bar-vertical
           [view]="view"
-          [scheme]="colorScheme"
+          [scheme]="colorScheme_services"
           [results]="services_general"
           [gradient]="gradient"
           [xAxis]="showXAxis"
@@ -866,6 +869,7 @@ min="06:30" max="22:00"
                                         <thead>
                                             <tr>
                                                 <th class="serial" style="width: 14vw;">Nome e Cognome</th>
+                                      
                                                 <th style="width: 10vw;">Cellulare</th>
                                                 <th *ngIf='storeUseCredits' style="width: 8vw;">Credito</th>
                                                
@@ -882,9 +886,14 @@ min="06:30" max="22:00"
                                     <table class="table " style="margin-top:0px  !important">
                                            
                                         <tbody>
-                                                <tr *ngFor='let client of show_clients'>
-                                                        <td class="serial" style="width: 14vw;"><input [(ngModel)]='client.client_name'></td>
-                                                        
+                                                <!-- <tr *ngFor='let client of show_clients'  (click)='goClient(client)'> -->
+
+                                                <tr *ngFor='let client of show_clients' >
+                                                   
+                                                        <td class="serial" style="width: 16vw;" ><svg  *ngIf='client.client>1' style="width: 1vw; height: 1vw; display: inline-block;"  viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><input    style="    width: 12vw;
+                                                            padding-left: 5px;
+                                                            display: inline-block;"  [(ngModel)]='client.client_name'></td>
+                                                     
                                                        
                                                         <td  style="width: 10vw;"> <input [(ngModel)]='client.phone'> </td>
                                                         <td *ngIf='storeUseCredits' style="width: 8vw;"> <input [(ngModel)]='client.credit'></td>

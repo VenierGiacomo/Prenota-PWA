@@ -1,59 +1,27 @@
+<div class="cont">
 
-<!-- 
-<div class="left">
-    <h2 class="name">Business Name</h2>
-    <h4>Seleziona uno o più servizi</h4>
-    <p *ngIf='show_scroll'>Scorri per vedere altri servizi</p>
-    <div class="list_cont" >
-        <div class="list_el_pos" *ngFor='let el of services_list'>
-        <div class="list_el" >
-           <div> {{el.name}}</div>
-           <div class="duration"> {{el.duration}}</div>
-        </div>
-    </div>
-    </div>
-
-</div>
-<div class="right">
-    <div class="date">
-        <h4>Seleziona una data</h4>
-        <p >Scorri lateramelmente per vedere altri servizi</p>
-        <div class="list_cont" id='date'>
-            <div  style='position: fixed;  right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "date")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
-            <div  style='position: fixed;  left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "date")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
-        <div class="date_el" *ngFor='let el of services_list, let ind =index'>
-                <div>Gio {{ind+1}} Feb</div>
-        </div>
-        </div>
-    </div>
-  
-<div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-<div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-<div class=" item"> <div><span>Taglio</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-<div class=" item"> <div><span>Colore</span><select><option *ngFor='let el of services_list'>{{el.name}}</option></select></div> </div>
-    
-    <div class="time">
-        <h4>Seleziona un orario disponibile</h4>
-        <p >Scorri lateramelmente per vedere altri orari</p>
-        <div class="list_cont" id='time'>
-                <div  style='position: fixed;  right: 45px;  margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(true, "time")'><img src='../assets/icons/chevron-forward-outline.svg'  style="height: 20px;"></div>
-                <div  style='position: fixed;  left: calc(40vw + 75px);   margin-top: 15px; height: 20px; line-height: 20px; cursor: pointer;' (click)='scroll(false, "time")'><img src='../assets/icons/chevron-back-outline.svg'  style="height: 20px;"></div>
-        <div class="date_el" *ngFor='let el of services_list, let ind =index'>
-                <div>{{ind+1}}:00</div>
+<div class="payment_cont">
+    <div class="info"><img src='../assets/icons/info.svg'></div>
+   
+        <h3>Importo dovuto:</h3>
+            <h2>€26.00</h2>
+        <div class="center_v">
+            <div id="payment-request-button">
+                <!-- A Stripe Element will be inserted here. -->
+              </div>
+              <!-- <button class="apple_pay"> <img src='../assets/icons/logo-apple.svg'> Pay</button> -->
+           <p *ngIf='fast_pay_method'>oppure</p>
+           <!-- <p >oppure</p> -->
+          
+            <button *ngFor='let el of paymentmethods' class="existing_card" (click)='showNewCard()'><div><span style="text-align: left;"> <img src='../assets/icons/{{el.card.brand}}.svg'>  **** **** **** {{el.card.last4}} </span><span style="text-align: right;">{{el.card.exp_month}}/{{el.card.exp_year - 2000}}</span></div></button>
+            <p [style.display]='new_card_display' style="margin:10px auto 30px">Aggiungi una carta</p>
+            <div id="card-element"  [style.display]='new_card_display'>
                 
+            </div>
+            <button class="credit_card" (click)='showNewCard()'>{{card_btn_txt}}</button>
         </div>
-        </div>
+    <div class="pay_on_spot">
+        <p>Paga sul posto</p>
     </div>
 </div>
-</div> -->
-<!-- <div class="confirm">
-
-        <div class="modal">
-                <h4 >Riassunto prenotazione</h4>
-                <p><b>Servizio:</b> Taglio di capelli</p>
-                <p><b>Data:</b> 10 Luglio 2021</p>
-                <p><b>Orario:</b> 8:30</p>
-                <button>prenota</button>
-            </div>
-</div> -->
-
+</div>

@@ -111,6 +111,8 @@ export class HomeComponent implements OnInit {
   adons 
   serviceadons
   adons_to_show=[]
+  payed =false
+  rec_end_date =new Date()
 async ngOnInit() {
   var store_info = await JSON.parse( await localStorage.getItem('shop_data'))
   if(store_info.custom_size){
@@ -254,12 +256,14 @@ if(x.length==0){
   })
 }
 // this.storage.setHomeReference(this)
+
   if (this.timetables.length>0){
     for (let hour of this.timetables[0].timetable){
-      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.start]))
-      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.end]))      
+      this.openlist[hour.wkday].push(hour.start_t)
+      this.openlist[hour.wkday].push(hour.end_t)      
     }
   }
+  
 
  
   setTimeout(()=>{
@@ -364,6 +368,8 @@ getWeekNumber(d) {
 
 //Used to select the proper cell to create the event
 blockPos(row, col ,ev){
+  this.client = {id:false}
+  this.client_id=1
   this.show_recurring=false
   this.adons_to_show=[]
   if(ev.target.id.includes('-')){
@@ -380,7 +386,10 @@ blockPos(row, col ,ev){
  
 }
 closeModal(){
+  if(document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col)!=undefined){
     document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
+  }
+    
     this.point.disp = "none"
     this.close_contact()
 }
@@ -403,16 +412,15 @@ showCoords($event) {
   var width = Math.max( body.scrollWidth, body.offsetWidth, 
         html.clientWidth, html.scrollWidth, html.offsetWidth );
   if( height-y < 432){
-      y =  height-670
+      y =  Math.max(height-670,20)
   }else{
-    y = Math.max(y -260,0)
+    y = Math.max(y -260,20)
   }
   if(width/x>=2){
    x =(x+130)
   }else{
     x = (x-390)
   }
-  
     this.point={
       disp:"block",
       left: x+"px",
@@ -430,6 +438,7 @@ showCoords($event) {
     }
     this.close_contact()
   }
+  
 }
 
 //Add a new appointment
@@ -780,6 +789,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
   if(client_name==""){
     client_name='~'
   }
+  
   var adons =[]
   adons =  this.adons_to_show.filter((val)=>{ return val.selected})
   adons = adons.map((val)=>{ return val.id_c})
@@ -787,7 +797,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
 
   var week = this.getWeekNumber(new Date(year, month, day))
     this.point.disp="none"
-    if(this.client==null || this.client==undefined || this.client.id==null || this.client.id==undefined){
+    if(this.client==null || this.client==undefined || this.client.id==null || this.client.id==undefined ){
         this.client = {id:false}
     }
     this.api.bookAppointment( start, end, day, month, year, client_name, this.phone, details, employee, service, this.client_id, adons, this.client.id).subscribe(
@@ -796,34 +806,34 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
        
         if(this.OneView){
           if(this.to_be_payed){
-          this.drawEmploAppointment(data.id, start, end, data.details, client_name, employee, service, day ,week, month, year, true)
+          this.drawEmploAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month, year, true)
           this.appointmentlist.push(data)
           this.client_id=1
         }else{
-            this.drawEmploAppointment(data.id, start, end, data.details, client_name, employee, service, day ,week, month, year, data.payed)
+            this.drawEmploAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month, year, data.payed)
             this.appointmentlist.push(data)
             this.client_id=1
           }
         // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
         
-        if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1)){
+        if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1 || this.client.id==false)){
           this.store_client(client_name,phone,0,'')
           this.client_id=1
         }
       }
         else{
           if(this.to_be_payed){
-          this.drawAppointment(data.id, start, end, data.details, client_name, employee, service, day ,week, month-1, year,'', true)
+          this.drawAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month-1, year,'', true)
           this.appointmentlist.push(data)
           this.client_id=1
         }else{
-            this.drawAppointment(data.id, start, end, data.details, client_name, employee, service, day ,week, month-1, year,'', data.payed)
+            this.drawAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month-1, year,'', data.payed)
             this.appointmentlist.push(data)
             this.client_id=1
           }
           // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
-         
-          if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1)){
+        
+          if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1 || this.client.id==false)){
             this.store_client(client_name,phone,0,'')
             this.client_id=1
           }
@@ -841,7 +851,8 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
     )
     this.client_id=1
 }
-updateAppointment(payed){
+async updateAppointment(payed){
+  console.log(this.updateAppointmentId)
 var appointments = this.appointmentlist
 var app
   for (let appointment of appointments){
@@ -852,28 +863,41 @@ var app
   }
   var new_service
 if(this.info >0){
-  var services = this.storage.getCatalog()
+  var services = await this.storage.getCatalog()
   for(let service of services){
     if(service.id == this.info){
       new_service = service
     }
     
-  }
-  app.end_t =app.start_t + Number(new_service.duration_book)
-  if(this.quarter_displ){
-    var div_height = (new_service.duration_book*this.table_line_heigth/3)+'px'
-  }else{
-    var div_height = (new_service.duration_book*this.table_line_heigth/6)+'px'
-  }
-  
-
-
+  } 
+  if(new_service.id == +app.service_n){
     this.extra_desc = app.details
+  }else{
+    this.extra_desc = new_service.name
+    app.end_t =app.start_t + Number(new_service.duration_book)
+    
+  }
+  var new_heigth = app.end_t- app.start_t
+  if(this.quarter_displ){
+    if(this.five_displ){
+      var div_height = (new_heigth*this.table_line_heigth)+'px'
+    }else{
+      var div_height = (new_heigth*this.table_line_heigth/3)+'px'
+    }
+  }else{
+    var div_height = (new_heigth*this.table_line_heigth/6)+'px'
+  }
  }else{
    if(this.info ==-1){
     app.end_t =app.start_t + Number(this.time)
     if(this.quarter_displ){
-      var div_height = (this.time*this.table_line_heigth/3)+'px'
+      
+      if(this.five_displ){
+        var div_height = (this.time*this.table_line_heigth)+'px'
+      }else{
+        var div_height = (this.time*this.table_line_heigth/3)+'px'
+      }
+     
     }else{
       var div_height = (this.time*this.table_line_heigth/6)+'px'
     }
@@ -882,7 +906,12 @@ if(this.info >0){
     if(this.info ==-3){
       app.end_t =app.start_t + 12
       if(this.quarter_displ){
-        var div_height = (12*this.table_line_heigth/3)+'px'
+        
+        if(this.five_displ){
+          var div_height = (12*this.table_line_heigth)+'px'
+        }else{
+          var div_height = (12*this.table_line_heigth/3)+'px'
+        }
       }else{
         var div_height = (12*this.table_line_heigth/6)+'px'
       }
@@ -891,11 +920,16 @@ if(this.info >0){
       new_service= {color: 10000 } 
     }else{
       if(this.info ==-2){
-        app.star= 0
-        app.end =204
+        app.start_t= 0
+        app.end_t =204
         
         if(this.quarter_displ){
-          var div_height = (204*this.table_line_heigth/3)+'px'
+         
+          if(this.five_displ){
+            var div_height = (204*this.table_line_heigth)+'px'
+          }else{
+            var div_height = (204*this.table_line_heigth/3)+'px'
+          }
         }else{
           var div_height = (204*this.table_line_heigth/6)+'px'
         }
@@ -911,7 +945,9 @@ if(this.info >0){
  if(!payed){
    payed = app.payed
  }
-  this.api.updateAppointmentClient(this.updateAppointmentId, app.start_t, app.end_t ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info,  this.appointment_notes, this.client_id,payed ).subscribe(async data =>{
+ 
+  this.api.updateAppointmentClient(this.updateAppointmentId, app.start_t, app.end_t ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info,  this.appointment_notes, this.client_id,payed )
+  .subscribe(async data =>{
     var element = document.getElementById(this.updateAppointmentId)
     var hour1= this.times[app.start_t]
     var hour2 = this.times[app.end_t]
@@ -919,17 +955,39 @@ if(this.info >0){
       element.getElementsByClassName('task-name')[0].innerHTML = `${this.nome} <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>`
     }else{
       element.getElementsByClassName('task-name')[0].innerHTML = `${this.nome} `
-
     }
+    if(!this.OneView){
+      if(data.note!=""){
+        element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>`
+      }else{
+        element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
+      }
+    }
+  
+
     element.getElementsByClassName('task-details')[0].innerHTML = `${data.details}`
-    element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
+
+    if(this.OneView){
+      var height
+    if(this.quarter_displ){
+       height = (app.end_t - app.start_t)
+       if(this.five_displ){
+        height = (app.end_t - app.start_t)*3
+       }
+    }else{
+       height = (app.end_t - app.start_t)/2
+    }
+    
+    var div_height = ((height*7)-1)+'px'
+    }
     element.style.height = div_height
     // element.classList.remove(`c${app.service}`)
     const colors = new RegExp(/c[0-9]*/, 'g');
     element.className = element.className.replace(colors, '') 
     element.classList.add(`c${new_service.color}`)
-    Notiflix.Notify.Success('Modifiche salvate con successo');
+    
     this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data.id})
+
     this.appointmentlist.push(data)
     if(payed){
       
@@ -947,8 +1005,7 @@ if(this.info >0){
             }
             
             
-            let new_credits = client.credit - data.price
-
+            let new_credits = client.credit - data.price            
             setTimeout(() => {
             this.api.updateClientStore(client.id, client.client_name, client.phone,  new_credits, client.note, client.isMember).subscribe(async (res)=>{
               await this.storage.updateClient(res)
@@ -959,10 +1016,14 @@ if(this.info >0){
               }
               this.show_client = this.show_client.slice(0, 15) 
               this.client=undefined
+              Notiflix.Notify.Success('Modifiche salvate e credito scalato');
             })
             this.client_id=1
             }, 500);
-    }}
+    }
+  }else{
+    Notiflix.Notify.Success('Modifiche salvate con successo');
+  }
 
          },err =>{
           this.client_id=1
@@ -972,6 +1033,15 @@ if(this.info >0){
   
   this.closeModal()
 
+}
+endDate(){
+  var today = new Date()
+  this.rec_end_date = today
+   this.rec_end_date = new Date(+today + (this.recurring_quantity*604800000))
+}
+showRecurring(){
+  this.endDate()
+  this.show_recurring=true
 }
 deleteAppointment(){
   this.api.deleteAppointment(this.updateAppointmentId).subscribe(
@@ -1250,8 +1320,8 @@ async activetab(employee){
   }
   this.openlist = [[],[],[],[],[],[],[],]
   for (let hour of work_hours){
-    this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.start]))
-      this.openlist[hour.wkday].push(this.times.indexOf(this.rows[hour.end]))      
+    this.openlist[hour.wkday].push(hour.start_t)
+      this.openlist[hour.wkday].push(hour.end_t)      
   }
   // console.log(this.appointmentlist)
   if (this.appointmentlist.length != 0){
@@ -1390,7 +1460,7 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     setTimeout(async() => {
   
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
-
+    console.log(id)
     self.nome = appo.client_name
     self.time = appo.end_t-appo.start_t
     self.info = Number(appo.service_n)
@@ -1399,8 +1469,9 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     self.recurring = appo.recurring_id
     self.phone=appo.phone
     self.updateAppointmentId = id
-    self.appointment_notes = note
+    self.appointment_notes = appo.note
     self.client_id=appo.client
+    self.payed=appo.payed
     if(appo.client!=1){
       self.client = self.store_clients.filter((val, ind, arr)=>{ return val.client == appo.client})[0]
     }else{
@@ -1410,7 +1481,9 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
         
       }
     }
-       
+    setTimeout(() => {
+      self.type()
+    }, 200);
     }, 1);
 };
 var services = this.storage.getCatalog()
@@ -1475,43 +1548,50 @@ if(service==-1){
 
 
     var hei = parseInt(mod_div.style.height.slice(0, -2))
-    var appo: any = await self.appointmentlist
+    var appo: any =  self.appointmentlist
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
     var min_5_height
     if(self.quarter_displ){
       if(self.five_displ){
         min_5_height =self.table_line_heigth
+        hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/min_5_height)]
       }else{
         min_5_height =(self.table_line_heigth/3)
+        hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/min_5_height)]
       }
      
     }else{
-      min_5_height =(self.table_line_heigth/6)
+      min_5_height =self.table_line_heigth
+      hour2 = self.times[self.times.indexOf(hour1)+(Math.ceil(hei/min_5_height)*6)]
     }
-    // if(hei%min_5_height>10){
-      mod_div.style.height  = Math.ceil(hei/min_5_height)*min_5_height +'px'
-      hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/min_5_height)]
+    hour1 =self.times[appo.start_t]
+    mod_div.style.height  = Math.ceil(hei/min_5_height)*min_5_height +'px'
+
+
+
+    
+     
       
       if(has_note){
         if(payed){
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id='${id}-name' >${client_name}   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
+          <div class="task-name" id='${id}-name' >${appo.client_name}   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
         }else{
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id='${id}-name'>${client_name}   </div>`
+          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
+          <div class="task-name" id='${id}-name'>${appo.client_name}   </div>`
         }
      
       }else{
         if(payed){
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id='${id}-name' >${client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
+          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
+          <div class="task-name" id='${id}-name' >${appo.client_name}  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg></div>`
         }else{
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
-          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
-          <div class="task-name" id='${id}-name'>${client_name}  </div>`
+          <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
+          <div class="task-name" id='${id}-name'>${appo.client_name}  </div>`
         }
         
       }
@@ -1664,13 +1744,33 @@ if(service==-1){
       // document.getElementById( self.currentBlock.row+"-"+ self.currentBlock.col).style.backgroundColor = 'transparent'
       var appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
       self.nome = appo.client_name
+    
       self.time = appo.end-start
       self.info = Number(appo.service_n)
       self.extra_desc = appo.details
       self.edit = true
+      self.recurring = appo.recurring_id
       self.phone=appo.phone
       self.updateAppointmentId = id
+      self.payed=appo.payed
       self.appointment_notes = appo.note
+      self.client_id=appo.client
+      self.payed=appo.payed
+
+      if(appo.client!=1){
+        self.client = self.store_clients.filter((val, ind, arr)=>{ return val.client == appo.client})[0]
+      }else{
+        // c
+        if(appo.store_client!=undefined&& appo.store_client!=null){
+          self.client = self.store_clients.filter((val, ind, arr)=>{ return val.id == appo.store_client})[0]
+          
+        }
+      }
+
+   
+    setTimeout(() => {
+      self.type()
+    }, 200);
       }, 1);
   };
   var services = this.storage.getCatalog()
@@ -1963,7 +2063,7 @@ setStoreserviceDefault(){
 //       var list:any =[]
 //       for (let day of work_hours){
 //         // if(day_of_week == day.wkday){
-//           var start = this.times.indexOf(this.rows[day.start])
+//           var start = this.times[day.start])
 //           var end =  this.times.indexOf(this.rows[day.end])
 //           for (var i = start; i <= end; i++) {
 //             list.push({time: i  , employee: day.employee, day: day.wkday, name:timetable.name });

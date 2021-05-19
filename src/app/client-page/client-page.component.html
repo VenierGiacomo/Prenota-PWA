@@ -1,0 +1,128 @@
+<div class="home">   
+        <div class="side-menu">
+            <div class="menu-home" (click)='goHome()'>Calendario</div>
+            <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
+            <!-- <div class="menu-data" (click)='goData()'>Area clienti</div> -->
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
+            <!-- <button>Logout</button> -->
+        </div> 
+        <div class="settings">
+            <div>
+                <h1 style="text-transform: capitalize;"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>{{client_name}}</h1>
+                <div>
+                    <h3>{{email}}</h3>
+                    <h3>{{phone}}</h3>
+                </div>
+            </div>
+            <div  class="info">
+                <div class="custom_service">
+                    <h2>Servizi personalizzati</h2>
+
+                    <!-- <button>Aggiungi un servizio personalizzato</button> -->
+                    <div style="margin-top:20px;">
+                  
+                            <div class="card" style="    border-radius: 5px;
+                            overflow: hidden;">
+                                <div class="card-body" style="padding: 0px  !important; overflow: hidden;">
+                                   
+                                    <div class="table-stats order-table " >
+                                        <table class="table" style=" box-shadow: 0 0 15px 1px #eee; margin:0px  !important ;position: fixed; width: calc(80vw - 60px);">
+                                         
+                                            <thead>
+                                                <tr>
+                                                    <th  style="width: 40%;" >Sevizio</th>
+                                          
+                                                    <th  style="width:20%;">Durata</th>
+                                                    <th  style="width: 20%; ">Prezzo</th>
+                                                    <th  style="width: 20%;">Gestisci</th>
+                                                   
+                                                   
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr >
+
+
+                                                   
+                                                        <td style="width: 40%;" > <select class='select_no_margin_left' [(ngModel)]='selected_service'  >
+                                                            <option value=101010 selected >Seleziona un servizio</option>
+                                                            <option value={{service.id}} *ngFor='let service of catalog_list'>{{service.name}}</option>
+                                                    </select></td>
+                                                     
+                                                       
+                                                        <td  style="width: 20%;" >
+                                                            <select class='select_no_margin_left' [(ngModel)]='duration'>
+                                                                <option value=101010 selected >Seleziona la durata</option>
+                                                                <option value={{ind}} *ngFor='let dur of time_duration; let ind = index'>{{dur}}</option>
+                                                        </select>
+                                                            
+                                                            </td>
+                                                        <td  style="width: 20%;" > <input  [(ngModel)]=price></td>
+                                                        <td  style="width: 20%; text-align: center;" >
+                                                            <span class="badge badge-complete" (click)='addCustomService()' >Aggiungi</span>
+                                                            
+                                                        </td>
+                                                   
+                                                    </tr>
+                                              
+                                                           
+                                                    
+                                                   
+                                           
+                                        </tbody>
+                                            </table>
+                                            </div>
+                                </div></div>
+                                <div class="card" style="    border-radius: 5px;
+                            overflow: hidden; top:100px">
+                                <div class="card-body--" style="overflow: scroll;">
+                                    <div class="table-stats order-table scroll_table">
+                                        <table class="table " style="margin:0px  !important">
+                                               
+                                            <tbody>
+                                                    <tr *ngFor="let custom of custome_services">
+    
+    
+                                                       
+                                                            <td style="width: 40%; font-weight: 400;" >{{services_name[custom.service]}}</td>
+                                                         
+                                                           
+                                                            <td  style="width: 20%;" >
+                                                                <select class='select_no_margin_left'[(ngModel)]='custom.duration' >
+                                                                    <option value={{ind}} *ngFor='let duration of time_duration; let ind = index'>{{duration}}</option>
+                                                            </select>
+                                                                
+                                                                </td>
+                                                            <td  style="width: 20%;" > <input  [(ngModel)]='custom.price_displ'></td>
+                                                            <td  style="width: 20%; text-align: center;" >
+                                                                <span class="badge badge-complete"  (click)='updateCustomService(custom)'><img style='height: 15px;' src='../assets/icons/floppy-disk.svg'></span>
+                                                                <span class="badge badge-complete"(click)='deleteCustomService(custom)'  style="padding:  10px !important; background: #bd0026;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                            </td>
+                                                       
+                                                        </tr>
+                                                  
+                                                               
+                                                        
+                                                       
+                                               
+                                            </tbody>
+                                        </table>
+                                      
+                                        
+                                       
+                                    </div> <!-- /.table-stats -->
+                                </div>
+                            </div> <!-- /.card -->
+                         <!-- /.col-lg-8 -->
+                    </div>
+                   
+                </div>
+                <!-- <div class="bookings">
+                    <h2>Prenotazion passate</h2>
+
+                </div> -->
+                
+            </div>
+
+        </div> 
+        </div>

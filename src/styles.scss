@@ -55,7 +55,7 @@
 body{
     padding: 0;
     margin: 0;
-    height: 100vh;
+    height: var(--full-heigth);
     width: 100vw;
     -ms-overflow-style: none !important;;  /* IE and Edge */
     scrollbar-width: none !important;;  /* Firefox */
@@ -63,6 +63,7 @@ body{
 }
 html{
   overflow-x: hidden;
+  height: var(--full-heigth);
   
 }
 
@@ -79,6 +80,8 @@ div::-webkit-scrollbar {
 table::-webkit-scrollbar {
   display: none !important;;
 }
+
+
 
 // html, body { height: 100%; }
 // body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -78,7 +78,7 @@ export class BookingTemplComponent implements OnInit {
   all_app_week1:any=[]
   show_something= false
   text_c ='#0061d5'
-  time_duration: string[] = ["0 min","5 min","10 min","15 min","20 min","25 min", "30 min","35 min", "40 min", "45 min", "50 min", "55 min", "1 ora","1 ora e 5 min", "1 ora e 10 min", "1 ora e 15 min","1 ora e 20 min", "1 ora e 25 min","1 ora e 30 min","1 ora e 35 min","1 ora e 40 min","1 ora e 45 min","1 ora e 50 min","1 ora e 55 min","2 ore"];
+  time_duration: string[] = ["0 min","5 min","10 min","15 min","20 min","25 min", "30 min","35 min", "40 min", "45 min", "50 min", "55 min", "1 ora","1 ora e 5 min", "1 ora e 10 min", "1 ora e 15 min","1 ora e 20 min", "1 ora e 25 min","1 ora e 30 min","1 ora e 35 min","1 ora e 40 min","1 ora e 45 min","1 ora e 50 min","1 ora e 55 min","2 ore","2 ore e 5 min", "2 ore e 10 min", "2 ore e 15 min","2 ore e 20 min", "2 ore e 25 min","2 ore e 30 min","2 ore e 35 min","2 ore e 40 min","2 ore e 45 min","2 ore e 50 min","2 ore e 55 min","3 ore","3 ore e 5 min", "3 ore e 10 min", "3 ore e 15 min","3 ore e 20 min", "3 ore e 25 min","3 ore e 30 min","3 ore e 35 min","3 ore e 40 min","3 ore e 45 min","3 ore e 50 min","3 ore e 55 min"];
   week_name = ["Lun","Mar","Mer","Gio","Ven","Sab","Dom"]
   months_days=[31, ((this.year%4==0 && this.year%100!=0)|| this.year%400==0)? 29 :28, 31 , 30, 31, 30, 31, 31, 30, 31, 30, 31]
   months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
@@ -123,13 +123,28 @@ export class BookingTemplComponent implements OnInit {
   available_on
   hourfilter
   advance_day=2
+  booked_same_top ='120vh'
+  adons_list
+  adons =false
+  born_city ='Trieste'
+  live_city ='Trieste'
+  live_street
+  date_of_birth
+  fiscal_code
+  extra_data='none'
+  res_book:any
+  fiscal_code_err=''
+  born_city_err=''
+  live_city_err=''
+  live_street_err=''
+  date_of_birth_err=''
   businesses={
     'Wellness_Clinic':{
                       name:'Wellness Clinic',
-                      html_title:'Wellness Clinic: Medicina dello Sport a Trieste',
+                      html_title:'Wellness Clinic: Medico sportivo Gianfranco Stupar a Trieste',
                       id:18,
                       campo:false,
-                      keywords:'Wellness Clinic, Wellness Clinic Trieste, Stupar, Stupar Trieste, Stupar medico sportivo, medico sportivo Trieste, visita medica Trieste, visita medica sportiva, visita medica sportiva Trieste, visita agonistica Trieste,  medico dello sport, medico dello sport Trieste ',
+                      keywords:'Gianfranco Stupar, Stupar, Gianfranco Stupar Trieste, Wellness Clinic, Wellness Clinic Trieste, Stupar, Stupar Trieste, Stupar medico sportivo, medico sportivo Trieste, visita medica Trieste, visita medica sportiva, visita medica sportiva Trieste, visita agonistica Trieste,  medico dello sport, medico dello sport Trieste ',
                       og_url:'https://prenota.cc/appuntamento/Wellness_Clinic',
                       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
                       og_description:'Prenota una visita medico sportiva con il Dott. Gianfranco Stupar. Idoneità agonistica, visita non agonistica e prova da sforzo a Trieste.',
@@ -211,7 +226,7 @@ export class BookingTemplComponent implements OnInit {
                       html_title:'Dott. Luca Michelone: Oculista moderno a Trieste',
                       id:43,
                       campo:false,
-                      keywords:'Luca Michelone, Luca Michelone trieste, oculista Luca Michelone, oculsita Trieste, visita oculistica Trieste, visita agli occhi, visita oculistica Trieste, campo visivo a Trieste, esame oct trieste, studio oculistico',
+                      keywords:'Luca Michelone, Luca Michelone trieste, oculista Luca Michelone, luca michelone dottore, oculsita Trieste, visita oculistica Trieste, visita agli occhi, visita oculistica rinnovo patente, OCT, campo visito computerizzato, campo visivo a Trieste, esame oct trieste, studio oculistico',
                       og_url:'https://prenota.cc/appuntamento/dott_Michelone',
                       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
                       og_description:'Prenota una visita oculistica a Trieste con il Dott. Luca Michelone. Visita oculistica, esame OCT e campo visivo computerizzato a Trieste.',
@@ -277,7 +292,7 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
   `}
   ,'Aparrucchieri':{
     name:'Aparrucchieri',
-    html_title:'Aparrucchieri: Salone parrucchieri moderno a Trieste.',
+    html_title:'Aparrucchieri: Salone parrucchieri moderno a Trieste',
     id:23,
     campo:false,
     keywords:'Aparrucchieri, Aparrucchieri Trieste, Parrucchiere a Trieste, Barbiere a Trieste, Taglio di capelli a Trieste, Taglio di capelli in centro città a Trieste,',
@@ -419,28 +434,231 @@ in Farmacia quando vuoi.
   Si occupa principalmente di consulenza fiscale, societaria, contabile, tributaria, contrattuale, pratiche patronato fornita sia ai clienti dello studio sia ad aziende esterne. <br><br>
   Esperta in fondi perduti per aziende. 
   `}
-  ,'MaiFidarsiDelBarbiere':{
-        name:'Mai Fidarsi Del Barbiere',
-        html_title:'Mai Fidarsi Del Barbiere | Il miglior barbiere a Trieste',
-        id:49,
-        campo:false,
-        keywords:'barbiere, mai fidarsi del barbiere, taglio capelli, capelli uomo, androna, barbiere trieste, mai fidarsi del barbiere trieste, taglio capelli trieste, capelli uomo trieste, androna trieste, tommaso, hussein, daniele, barbiere trieste, barba a trieste, barba, barba trieste, barbiere a trieste, mai fidarsi del barbiere a trieste, taglio capelli a trieste, capelli uomo a trieste',
-        og_url:'https://prenota.cc/appuntamento/MaiFidarsiDelBarbiere',
+  ,'faniolimpia':{
+        name:'Fani Olimpia GSD',
+        html_title:'Fani Olimpia : Campo da calcetto a Trieste. Partite di calcetto a sette (7) in centro a Trieste ',
+        id: 35,
+        campo:true,
+        keywords:"Fani Olimpia, Fani Olimpia Trieste, Fani Olimpia calcetto, Fani Olimpia calcetto a 7, Fani Olimpia calcetto a sette, Fani Olimpia calcetto a sette Trieste, calcetto Trieste, campo calcetto Trieste, campo da calcetto Trieste,  campo da calcio Trieste, campo calcio Trieste, calcio a sette Trieste",
+        og_url:'https://prenota.cc/appuntamento/faniolimpia',
         og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-        og_description:'Mai Fidarsi del Barbiere. Unusual Barber a Trieste',
-        phone: '+39 3924204122',
-        address: 'Androna del Torchio 3, Trieste (TS)', 
-        zip_code:'34120',
+        og_description:'Fani Olimpia Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo in centro a Trieste, via Pascoli.',
+        phone: '+39 040360407',
+        address: 'Via Pascoli 31/a, Trieste', 
+        zip_code:'34129',
         bg_opacity:'#00000088',
-        img_bg:'../assets/Screenshotmfdl.png',
+        img_bg:'../assets/fani.jpeg',
         bookable_pc:true,
-        category:'Barbiere a Trieste',
-        hours:`Mar - Ven dalle 9:00 alle 19:30<br> Sab dalle 11:00 alle 17:00`,
+        category:'Campo da calcetto a sette Trieste',
+        hours:`Lun - Dom dalle 18:00 alle 22:00`,
         description:`
-    Mai Fidarsi del Barbiere è molto più di un posto dove farsi un taglio per aumentare il proprio livello di fascino; o trasformarsi in un hipster dalla barba perfetta e gli occhiali in plastica nera (non inclusi). Passa a scoprirci anche solo per berti un caffè.
-    Abbiamo un Master di secondo livello in cazzeggio.
-    
+    Il campo di calcio a 7 giocatori di via Pascoli è nuovo e pronto ad essere utilizzato. <br><br>
+    Gestito dal GSD Fani Olimpia:  Gruppo sportivo dilettantistico ad indirizzo calcistico situato nel centro di Trieste.<br>
+   È stato rinnovato nel Gennaio 2021 ed è diventato il miglior campo da calcetto a Trieste.
+
+   <br><br>
+   Siamo entusiasti di potervi ospitare nel nostro nuovo campo.
     `}
+    ,'borgoalta':{
+          name:'Borgo Alta',
+          html_title:'Borgo Alta: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
+          id: 51,
+          campo:true,
+          keywords:"Borgo Alta, Borgo Alta campo, Borgo Alta calcetto, Borgo Alta calcetto a 7, Borgo Alta calcetto a sette, Borgo Alta calcetto a sette campo, calcetto Trieste, campo calcetto Borgo Alta, campo da calcetto Borgo Alta,  campo da calcio Trieste Borgo Alta, campo Borgo Alta calcio Trieste, calcio a sette Borgo Alta",
+          og_url:'https://prenota.cc/appuntamento/borgoalta',
+          og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+          og_description:'Borgo Alta campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo Borgo Alta a Trieste, via Tonino amatori.',
+          phone: '+39 040360407',
+          address: 'Via Tonino Amatori, Trieste', 
+          zip_code:'34148',
+          bg_opacity:'#00000088',
+          img_bg:'../assets/IMG_1601.png',
+          bookable_pc:false,
+          category:'Campo da calcetto a sette Trieste',
+          hours:`Lun - Dom dalle 18:00 alle 22:00`,
+          description:`
+      Il campo da calcetto di Borgo Alta, a 7 giocatori di via Tonino Amatori è pronto ad essere utilizzato. <br><br>
+      Campo utilizzato dalla squadra Inter San sergio, Squadra sportiva amatoriale di calcio a 11 fondata da Carlo Milocco.<br>
+     È molto ampio e può essere giocato anche 9 contro 9
+  
+     <br><br>
+     Siamo entusiasti di potervi ospitare nel nostro nuovo campo.
+      `},
+      'montuzza':{
+            name:'Montuzza',
+            html_title:'Montuzza: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
+            id: 52,
+            campo:true,
+            keywords:"Montuzza, Montuzza campo, Montuzza calcetto, Montuzza calcetto a 7, Montuzza calcetto a sette, Montuzza calcetto a sette campo, calcetto Trieste, campo calcetto Montuzza, campo da calcetto Montuzza,  campo da calcio Trieste Montuzza, campo Montuzza calcio Trieste, calcio a sette Montuzza",
+            og_url:'https://prenota.cc/appuntamento/borgoalta',
+            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+            og_description:'Montuzza campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo Montuzza a Trieste, via Tonino amatori.',
+            phone: '+39 040308814',
+            address: 'Via Tommaso Grossi 4', 
+            zip_code:'34131',
+            bg_opacity:'#00000088',
+            img_bg:'../assets/icons/DSC_1021-2048x1536.jpeg',
+            bookable_pc:true,
+            category:'Campo da calcetto a sette Trieste',
+            hours:`Lun - Dom dalle 18:00 alle 22:00`,
+            description:`
+
+       
+        L'Oratorio dispone di un campo da calcetto a sette (Montuzza)  in erba sintetica con spogliatoi e illuminazione, il campo è disponibile per gli amatori nei giorni feriali dalle 19:00 in poi.
+        Campo all' interno di un oratorio, posto tranquillo ed amichevole <br>
+       <br><br>
+       Siamo entusiasti di potervi ospitare nel nostro campo.
+        `}
+      ,
+      'villaara':{
+            name:'Villa Ara',
+            html_title:'Villa Ara: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
+            id: 52,
+            campo:true,
+            keywords:"Villa Ara, Villa Ara campo, Villa Ara calcetto, Villa Ara calcetto a 7, Villa Ara calcetto a sette, Villa Ara calcetto a sette campo, calcetto Trieste, campo calcetto Villa Ara, campo da calcetto Villa Ara,  campo da calcio Trieste Villa Ara, campo Villa Ara calcio Trieste, calcio a sette Villa Ara",
+            og_url:'https://prenota.cc/appuntamento/villaara',
+            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+            og_description:'Villa Ara campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo Villa Ara a Trieste, via Monte Cengio 2.',
+            phone: '+39 040 568474',
+            address: 'Via Monte Cengio 2', 
+            zip_code:'34127',
+            bg_opacity:'#00000088',
+            img_bg:'../assets/icons/calcio-Caritas.jpeg',
+            bookable_pc:true,
+            category:'Campo da calcetto a sette Trieste',
+            hours:`Lun - Dom dalle 18:00 alle 22:00`,
+            description:`
+
+       
+        L'Oratorio dispone di un campo da calcetto a sette (Villa Ara)  in erba sintetica con spogliatoi e illuminazione, il campo è disponibile per gli amatori nei giorni feriali dalle 19:00 in poi.
+        Campo all' interno di un oratorio, posto tranquillo ed amichevole <br>
+       <br><br>
+       Siamo entusiasti di potervi ospitare nel nostro campo.
+        `}
+      ,
+      'tattooatelier13':{
+            name:"L'Atelier 13 tattoo",
+            html_title:"L'Atelier 13 tattoo: Tatuaggi e Pierging a Trieste. Preventivi per tatuaggi",
+            id: 56,
+            campo:false,
+            keywords:"L'Atelier 13 Tatttoo, L'Atelier 13 Tatttoo Trieste, tatuaggio trieste, tatuatori trieste, tatoo trieste, tatuaggi viale d'annunzio, tatuaggi via delle sette fontane, tatuatori trieste,  tatuatore trieste",
+            og_url:'https://prenota.cc/appuntamento/tattooatelier13',
+            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+            og_description:"L'atelier 13, tuaturi professionisti a Trieste. Passa in studio e vediamo insieme il tatuaggio più adatto a te. ",
+            phone: '+39 338 8166284',
+            address: "Viale D'annunzio 18/a", 
+            zip_code:'34138',
+            bg_opacity:'#00000088',
+            img_bg:'../assets/61538846_453343652147516_8645654937897795584_n.jpeg',
+            bookable_pc:true,
+            category:'Tatuaggi e Piercing a Trieste',
+            hours:`Lun - Sab  09:30 -14:00 e 16:00 - 19:00`,
+            description:`
+
+       
+        Studio Tatuaggi, un unico riferimento in viale D'annuzio 18/a Trieste!
+        <br>      <br>
+        L'atelier 13, tuaturi professionisti a Trieste. Siamo giovani e pronti a customizzare un tatuaggio su misura per te.
+       
+        Passa in studio e troviamo insieme il tatuaggio più adatto alle tue esigenze. Ivan e Marko ti assisteranno in tutto, dai disegni all'esecuzione.
+        `}
+      ,'msnails':{
+            name:'MS Nails',
+            html_title:'MS Nails Art: Unghie ed Estetista a Trieste',
+            id:54,
+            campo:false,
+            keywords:'MS nails, nail art,unghie a trieste, permanente unghie trieste, MS, nails, estetista donna, via molino a vento, cura, trucco, make up trieste, estetista trieste, nail art trieste, san giacomo',
+            og_url:'https://prenota.cc/appuntamento/msnails',
+            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+            og_description:'MS Nails: Trattamenti di manicure, ricostruzione unghie, smalti e pedicure. Vieni a farti coccolare',
+            phone: '380 864 5039',
+            address: 'Via Molino a Vento 26/d', 
+            zip_code:'34137',
+            bg_opacity:'#00000088',
+            img_bg:'../assets/ms_bg.jpeg',
+            bookable_pc:true,
+            category:'Unghie ed Estetista a Trieste',
+            hours:`Mar - Sab 9:00 - 18:00`,
+            description:`MS Nails'
+        
+        Salone dedicato alla cura della persona.
+        Ci occupiamo di trattamenti mani e piedi, dalla semplice manicure a ricostruzioni gel e smalti semipermanenti, laminazione ciglia, extension ciglia e trattamenti viso.
+        Ti aspetta professionalità e qualità.”
+        
+        `},
+        'deselyhairstyle':{
+              name:'Desely HairStyle and MakeUp',
+              html_title:'Desely HairStyle and MakeUp: Studio parrucchiere a Trieste ',
+              id:53,
+              campo:false,
+              keywords:'Desely, Desely Trieste, Desely HairStyle and MakeUp, Desely HairStyle and MakeUp Trieste, parrucchiere, desely, hairstyle, capelli donna, via molino a vento, makeup, trucco, taglio donna, parrucchiere trieste, salone trieste, san giacomo',
+              og_url:'https://prenota.cc/appuntamento/deselyhairstyle',
+              og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+              og_description:'Desely HairStyle and Makeup. Salone parrucchieri a Trieste contrato improntato sul benessere ed il naturale',
+              phone: '380 864 5039',
+              address: 'Via Molino a Vento 26/d', 
+              zip_code:'34137',
+              bg_opacity:'#00000088',
+              img_bg:'../assets/hairdressers-accessories-vector-20213721.jpeg',
+              bookable_pc:true,
+              category:'Parrucchiere a Trieste',
+              hours:`Mar, Mer, Ven e Sab dalle 9:00 alle 14:00, Gio dalle 11:30 alle 15:30`,
+              description:`Desely HairStyle and MakeUp'
+          
+          Il Salone è improntato sul benessere ed il naturale, grazie alle sue linee di prodotti Nevitaly e Milkshake. 
+          La filosofia che abbiamo adottato deriva dalla nostra principale linea: “Vivere la natura, capirne i segreti, miscelare i principi attivi trasformandoli in prodotti di bellezza e benessere nel pieno rispetto dell'ambiente.”
+          
+          `},
+       'trifoglio':{
+            name:'ASD Trifoglio',
+            html_title:'ASD Trifoglio: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
+            id: 41,
+            campo:true,
+            keywords:"ASD Trifoglio, ASD Trifoglio campo, ASD Trifoglio calcetto, ASD Trifoglio calcetto a 7, ASD Trifoglio calcetto a sette, ASD Trifoglio calcetto a sette campo, calcetto Trieste, campo calcetto ASD Trifoglio, campo da calcetto ASD Trifoglio,  campo da calcio Trieste ASD Trifoglio, campo ASD Trifoglio calcio Trieste, calcio a sette ASD Trifoglio",
+            og_url:'https://prenota.cc/appuntamento/villaara',
+            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+            og_description:'ASD Trifoglio campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo ASD Trifoglio a Trieste, via Monte Cengio 2.',
+            phone: '+39 040 568474',
+            address: 'Via delle campanelle 266', 
+            zip_code:'34149',
+            bg_opacity:'#00000088',
+            img_bg:'../assets/IMG_1644.png',
+            bookable_pc:true,
+            category:'Campi da calcetto a sette e a cinque Trieste',
+            hours:`Lun - Dom dalle 18:00 alle 22:00`,
+            description:`
+
+       
+        È disponibile il campo da calcetto a sette (ASD Trifoglio)  in erba sintetica con spogliatoi (al momento non agibili causa COVID) e illuminazione, il campo è disponibile per gli amatori nei giorni feriali dalle 18:00 in poi.
+        È disponibile anche il campo da calcetto a cinque, ottimo per gruppi più piccoli <br>
+       <br><br>
+       Siamo entusiasti di potervi ospitare nel nostro campo.
+        `},
+      // 'dopolavoro':{
+
+      // }
+  // ,'MaiFidarsiDelBarbiere':{
+  //       name:'Mai Fidarsi Del Barbiere',
+  //       html_title:'Mai Fidarsi Del Barbiere | Il miglior barbiere a Trieste',
+  //       id:49,
+  //       campo:false,
+  //       keywords:'barbiere, mai fidarsi del barbiere, taglio capelli, capelli uomo, androna, barbiere trieste, mai fidarsi del barbiere trieste, taglio capelli trieste, capelli uomo trieste, androna trieste, tommaso, hussein, daniele, barbiere trieste, barba a trieste, barba, barba trieste, barbiere a trieste, mai fidarsi del barbiere a trieste, taglio capelli a trieste, capelli uomo a trieste',
+  //       og_url:'https://prenota.cc/appuntamento/MaiFidarsiDelBarbiere',
+  //       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+  //       og_description:'Mai Fidarsi del Barbiere. Unusual Barber a Trieste',
+  //       phone: '+39 3924204122',
+  //       address: 'Androna del Torchio 3, Trieste (TS)', 
+  //       zip_code:'34120',
+  //       bg_opacity:'#00000088',
+  //       img_bg:'../assets/Screenshotmfdl.png',
+  //       bookable_pc:true,
+  //       category:'Barbiere a Trieste',
+  //       hours:`Mar - Ven dalle 9:00 alle 19:30<br> Sab dalle 11:00 alle 17:00`,
+  //       description:`
+  //   Mai Fidarsi del Barbiere è molto più di un posto dove farsi un taglio per aumentare il proprio livello di fascino; o trasformarsi in un hipster dalla barba perfetta e gli occhiali in plastica nera (non inclusi). Passa a scoprirci anche solo per berti un caffè.
+  //   Abbiamo un Master di secondo livello in cazzeggio.
+    
+  //   `}
 }
   slug
   constructor(private api: ApiService, private router: Router, private titleService: Title, private metaService: Meta) {
@@ -476,6 +694,11 @@ in Farmacia quando vuoi.
       
     ];
     metaTags.forEach(m=> this.metaService.updateTag(m))
+    this.api.getStoresDetails(this.id).subscribe(async (data:any)=>{
+      this.adons =data.adons
+    },err=>{
+
+    })
     // var head =document.head
   
     // var script = document.createElement('script');
@@ -605,6 +828,11 @@ await this.getEmployees()
               backOverlayColor:'rgba(#00479d,0.2)',}
             },
           )
+          if(this.api.isvalidToken()){
+          this.api.paymentMethods().subscribe(res=>{
+            console.log(res)
+          })
+        }
   }
   getDatesAndServices(){
     this.calculateWorkdates().then(()=>{
@@ -656,10 +884,13 @@ await this.getEmployees()
   }
 
   getservices(){
+  
     this.active_services=[]
       this.api.getStoreservicebyStore(this.id).subscribe(
         async data=>{
           this.services = await data
+          this.services = this.services.filter(val =>{
+            return val.hasToBeMember == this.is_member })
           if(!this.is_client){
             this.services = this.services.filter(val =>{
               return !val.hasToBeCLient  })
@@ -700,6 +931,11 @@ await this.getEmployees()
     
     }
   }
+  async getAdons(service){
+    this.api.getServiceAdons(service.id).subscribe(res=>{
+      this.adons_list = res
+    })
+   }
   async tokenValidation(){
    
       if(this.api.isvalidToken()){
@@ -777,9 +1013,31 @@ await this.getEmployees()
     // Notiflix.Block.Standard('.all_spots', 'Calcolando disponibilità...');
     this.spin_spots = "block"
     this.spin_spots_neg = "hidden"
-   
-    this.cont=0
-    const index = this.service.indexOf(service);
+    let index
+    this.cont=0  
+    if(this.adons){
+      for(let i=0;i< this.services.length;i++){
+        this.active_services.push(["#ffffff", '#263b56',false])
+      }
+      this.service=[]
+      this.service.push(service)
+
+      index = this.service.indexOf(service);
+      var list =[ ]
+        for(let ser of this.employees_serivces){
+          if(service.id == ser.service_id){
+            var name = this.employees_list.filter( function( el ) {
+              return el.employee == ser.employee})
+            list.push({id:ser.employee, name: name[0].name})
+          }
+        }
+        this.empl_for_service.push(list)
+        this.getAdons(service)
+       
+        this.active_services[i]=["#0061d5","#ffffff",true,"#ffffff"]
+
+    }else{
+     index = this.service.indexOf(service);
     if (index > -1) {
       this.service.splice(index, 1);
       this.empl_for_service.splice(index, 1)
@@ -794,7 +1052,7 @@ await this.getEmployees()
         }
       }
       this.empl_for_service.push(list)
-    }
+    }}
     if(this.active_services[i][2]){
       this.active_services[i]=["#ffffff","#263b56",false,"#939999"]
     }else{
@@ -824,6 +1082,7 @@ await this.getEmployees()
     }
     this.firstweek_availability()
     // this.calculateAvailability(date)
+  
   }
 
   async DatePicker(date_avi, ind, bool) {
@@ -865,6 +1124,7 @@ await this.getEmployees()
     return options;
   }
   selectTime(spot){
+    document.getElementById('modal').style.top='0px'
     this.selected_hour  = spot[0]
     this.timeslot = this.times[spot[0].start]
     this.confirm='block'
@@ -904,6 +1164,7 @@ await this.getEmployees()
           }
         }
       }
+    
       this.unique= [...new Set(x)];
       this.unique.sort(function(a, b){
         if (a.year < b.year) return -1;
@@ -918,6 +1179,7 @@ await this.getEmployees()
       this.today= `${this.day} ${this.months[this.month]} ${this.year}`
       this.spin = 'none'
       this.getAppointments(this.day,true)
+      
     },err =>{
       console.log(err) 
   }) 
@@ -1007,23 +1269,23 @@ items.forEach(function (a) {
       }
     week2.push(day)
     }
+   
     var list1 =[ ]
     for (let day of this.empl_hours){
-        var start = this.times.indexOf(this.rows[day.start])
-        var end =  this.times.indexOf(this.rows[day.end])
+        var start = day.start_t
+        var end =  day.end_t
         for (var i = start; i <= end; i++) {
           list1.push({time: i  , employee: day.employee, day: week[day.wkday], week_day: day.wkday});
         }
       }
       for (let day of this.empl_hours){
-        var start = this.times.indexOf(this.rows[day.start])
-        var end =  this.times.indexOf(this.rows[day.end])
+        var start = day.start_t
+        var end =  day.end_t
         for (var i = start; i <= end; i++) {
           list1.push({time: i  , employee: day.employee, day: week2[day.wkday], week_day: day.wkday});
         }
       }
       this.list_work = list1
-      
        if (this.just_entered == 0){
 
     
@@ -1040,7 +1302,28 @@ items.forEach(function (a) {
              tot_dur = tot_dur+ serv_ind.duration_book
             }
             
-        
+           
+
+              // if(id ==0 || id == max_ind || this.openhours[id].time-this.openhours[id-1].time> 1   || this.list_work[id].time-this.list_work[id-1].time< 0  || this.openhours[id].employee-this.openhours[id-1].employee!= 0 || app == undefined || app.duration == this.service[serv_ind].duration_book){
+              //   if (app != undefined){
+              //     if(app.duration ==   this.service[serv_ind].duration_book){
+              //         this.availableSpots.push(app) 
+              //         console.log(app) 
+              //     }
+              //     if(id>0 && this.openhours[id].time-this.openhours[id-1].time> 1){
+              //       app=undefined
+              //     }
+              //   }
+
+              //   if(this.hourfilter.indexOf(this.times[this.openhours[id].time])!=-1){
+              //     app = {start: this.openhours[id].time, duration: 1, employee:y, emplo_name:empl_name, service: this.service[0].id , service_name: service_name}
+                
+              //   }
+            
+              // }else{
+              //     app.duration +=1
+              // }
+            
 
             for(let idx in this.list_work){
        
@@ -1048,15 +1331,17 @@ items.forEach(function (a) {
               var length =this.list_work.length-1
               if(id ==0 || id == length || this.list_work[id].time-this.list_work[id-1].time> 1 || this.list_work[id].time-this.list_work[id-1].time< 0  || this.list_work[id].employee-this.list_work[id-1].employee!= 0 || app == undefined || app.duration == tot_dur){
                 if (app != undefined){
-                  if(app.duration >=   tot_dur){
+                  if(app.duration ==   tot_dur){
                     this.availableSpots1.push(app)
-                    app =undefined
                 }
-              }else{
-                if(this.rows.indexOf(this.times[this.list_work[id].time])!=-1){
+                if(id>0 && this.list_work[id].time-this.list_work[id-1].time> 1){
+                  app=undefined
+                }
+              }
+              if(this.hourfilter.indexOf(this.times[this.list_work[id].time])!=-1){
                   app = { duration: 1, day: this.list_work[id].day} 
                 }
-               }
+               
              }else{
                  app.duration +=1
              }
@@ -1105,28 +1390,30 @@ items.forEach(function (a) {
             for(let serv_ind of this.service){
              tot_dur = tot_dur+ serv_ind.duration_book
             }
-            
+          
          
-           for(let idx in this.list_work){
+            for(let idx in this.list_work){
        
-             let id:any = idx
-             var length =this.list_work.length-1
-             if(id ==0 || id == length || this.list_work[id].time-this.list_work[id-1].time> 1 || this.list_work[id].time-this.list_work[id-1].time< 0  || this.list_work[id].employee-this.list_work[id-1].employee!= 0 || app == undefined || app.duration == tot_dur){
-               if (app != undefined){
-                 if(app.duration >=   tot_dur){
-                  this.availableSpots1.push(app)
-                  app =undefined
-               }
-              }else{
-                if(this.rows.indexOf(this.times[this.list_work[id].time])!=-1){
+              let id:any = idx
+              var length =this.list_work.length-1
+              if(id ==0 || id == length || this.list_work[id].time-this.list_work[id-1].time> 1 || this.list_work[id].time-this.list_work[id-1].time< 0  || this.list_work[id].employee-this.list_work[id-1].employee!= 0 || app == undefined || app.duration == tot_dur){
+                if (app != undefined){
+                  if(app.duration ==   tot_dur){
+                    this.availableSpots1.push(app)
+                }
+                if(id>0 && this.list_work[id].time-this.list_work[id-1].time> 1){
+                  app=undefined
+                }
+              }
+              if(this.hourfilter.indexOf(this.times[this.list_work[id].time])!=-1){
                   app = { duration: 1, day: this.list_work[id].day} 
                 }
-               }
+               
              }else{
                  app.duration +=1
              }
-          
-           }
+           
+            }
            
            let weeks=[]
            for(let spot of this.availableSpots1){
@@ -1187,10 +1474,9 @@ items.forEach(function (a) {
           var list = [];
           var app
           for (let day of this.empl_hours){
-
             if(day_of_week == day.wkday){
-              var start = this.times.indexOf(this.rows[day.start])
-              var end =  this.times.indexOf(this.rows[day.end])
+              var start = day.start_t
+              var end =  day.end_t
               for (var i = start; i <= end; i++) {
                 list.push({time: i  , employee: day.employee });
               }
@@ -1199,11 +1485,11 @@ items.forEach(function (a) {
 
           }
           this.openhours = await list
-         
+          // console.log(this.openhours)
           for(let appointment of this.list_appointments){
             this.openhours = await this.openhours.filter((value, index, arr)=>{ return (value.time < appointment.start_t && appointment.employee==value.employee )|| (value.time  >= appointment.end_t && appointment.employee==value.employee ) || appointment.employee!=value.employee || appointment.month!=this.month})
           } 
-          
+          // console.log(this.openhours)
           for (let empl of this.employees_serivces){
             if( empl.service_id == this.service[0].id){                
               var y = empl.employee
@@ -1218,7 +1504,7 @@ items.forEach(function (a) {
                   if(id ==0 || id == max_ind || this.openhours[id].time-this.openhours[id-1].time> 1  || this.openhours[id].employee-this.openhours[id-1].employee!= 0 || app == undefined || app.duration == this.service[serv_ind].duration_book){
                     if (app != undefined){
                       if(app.duration ==   this.service[serv_ind].duration_book){
-                          this.availableSpots.push(app)  
+                          this.availableSpots.push(app) 
                       }
                       if(id>0 && this.openhours[id].time-this.openhours[id-1].time> 1){
                         app=undefined
@@ -1239,18 +1525,20 @@ items.forEach(function (a) {
              
             }
                 this.final_spots=[] 
-
+                
               this.availableSpots= await [...new Set(this.availableSpots)]
          
               for(let spot of this.availableSpots ){
                   this.final_spots.push([spot])
                 }
+                
               this.final_spots=await [...new Set(this.final_spots)]
                
               await this.final_spots.sort(function(a, b) {
                 return a[0].start - b[0].start;
              });
         
+            
              this.filtr =  []
              this.place_holder = []   
             //  if(this.final_spots.length<1 || this.final_spots==undefined ||this.final_spots == null ) {
@@ -1270,6 +1558,7 @@ items.forEach(function (a) {
               
             //  }else{
               if(this.final_spots[0]){
+                // console.log(this.final_spots[0], 'true')
                 this.has_spot=true
                 var g = this.final_spots[0][0].employee
                 var f = this.final_spots[0][0].emplo_name
@@ -1283,6 +1572,7 @@ items.forEach(function (a) {
                   this.spin_spots='none'
                 }
               }else{
+                this.final_spots_displ=[]
                 this.has_spot=false
                 if(bool && this.available_days.length>0){
                   this.date_vis='visible'
@@ -1302,8 +1592,8 @@ items.forEach(function (a) {
       var app
       for (let day of this.empl_hours){
         if(day_of_week == day.wkday){
-          var start = this.times.indexOf(this.rows[day.start])
-          var end =  this.times.indexOf(this.rows[day.end])
+          var start = day.start_t
+          var end =  day.end_t
           for (var i = start; i <= end; i++) {
             list.push({time: i  , employee: day.employee });
           }
@@ -1463,6 +1753,7 @@ async filter_serv(){
 
 
 async book(){
+  document.getElementById('modal').style.top='120vh'
   this.loading =true
   var appointment = {
     studio: this.name,
@@ -1487,9 +1778,11 @@ async book(){
         var client_name = this.user.first_name+' '+ this.user.last_name
         var start = this.app_to_book[ind].start
         var end = start + this.app_to_book[ind].duration
+        this.email=this.user.email
         // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
         this.api.bookAppointmentNoOwner(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
           // console.log(data)
+          this.res_book =data
           if( ind == '0'){
             // console.log(this.user.email,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.total_service.name,this.name)
             this.sendEmailConfirmation(this.user.email,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
@@ -1498,12 +1791,23 @@ async book(){
       this.loading = false
        Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
        var ok_btn = document.getElementById('NXReportButton')
-       ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti') },false) 
+       ok_btn.addEventListener("click",async ()=>{
+         if(this.id==44){
+            this.extra_data ='block'
+          }else{
+            this.router.navigateByUrl('i_miei_appuntamenti')
+          }
+        },false) 
     },
       err=>{
+        
         this.loading = false
-        Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
-        console.log(err)
+        if(err.error.just_booked){
+          this.booked_same_top='calc(50vh - 300px)'
+        }else{
+          document.getElementById('modal').style.top='0px'
+          Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
+        }
         Notiflix.Block.Remove('.cont');
         })
       }
@@ -1513,6 +1817,7 @@ async book(){
     }
   }
   SendBooking(type){
+    document.getElementById('modal').style.visibility='hidden'
     if(type=='register'){
       this.submit()
     }else{
@@ -1546,6 +1851,7 @@ async book(){
       
       this.api.register(this.first_name, this.last_name,  this.email, this.sex, this.phone, this.password).subscribe(
         async data=>{
+          document.getElementById('modal').style.top='120vh'
           await this.api.storeToken(data.token)
           for (let  ind in this.app_to_book){
             var client_name = this.first_name+' '+this.last_name
@@ -1553,6 +1859,7 @@ async book(){
             // var end = await start + this.app_to_book[ind].duration
             this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, this.app_to_book[ind].start+this.app_to_book[ind].duration, this.day, this.month, this.year, client_name, this.phone, this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
             this.register_form='none'
+            this.res_book =data
             this.user.first_name=this.first_name
             this.user.last_name=this.last_name
             if( ind == '0'){
@@ -1560,7 +1867,13 @@ async book(){
             }
             await Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
             var ok_btn = document.getElementById('NXReportButton')
-            ok_btn.addEventListener("click",()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
+            ok_btn.addEventListener("click",()=>{
+              if(this.id==44){
+                this.extra_data ='block'
+              }else{
+                this.router.navigateByUrl('i_miei_appuntamenti')
+              }
+            },false) 
             this.selected_date='Seleziona data'
             this.displ_hour='Seleziona ora'
             this.selected_service='Seleziona servizio'
@@ -1570,7 +1883,14 @@ async book(){
           this.total_service={name:'',duration:0,id:-1}
           this.service=[]},
             err=>{
-              Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connesione o prova a cambaire orario', 'Annulla');
+              this.register_form = 'none'
+              if(err.error.just_booked){
+                this.booked_same_top='calc(50vh - 300px)'
+              }else{
+                document.getElementById('modal').style.top='0px'
+                Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
+              }
+             
               console.log(err)
           })
         }
@@ -1600,11 +1920,14 @@ async book(){
           // await this.storage.setAppointment(appointment)
           // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
           var client_name = this.user.first_name+' '+this.user.last_name
+          document.getElementById('modal').style.top='120vh'
+          this.email=this.user.email
           // var start = await this.app_to_book[ind].start
           // var end = await start + this.app_to_book[ind].duration
           // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
           this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, (this.app_to_book[ind].start+this.app_to_book[ind].duration), this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
             // console.log(data)
+            this.res_book =data
             if( ind == '0'){
                 this.sendEmailConfirmation(this.email1,this.user.first_name,this.user.last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
               }
@@ -1612,83 +1935,107 @@ async book(){
           // Notiflix.Block.Remove('.cont');
            Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
            var ok_btn = document.getElementById('NXReportButton')
-              ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
+              ok_btn.addEventListener("click",async ()=>{
+                if(this.id==44){
+                  this.extra_data ='block'
+                }else{
+                  this.router.navigateByUrl('i_miei_appuntamenti')
+                }
+              },false) 
        
           //  await this.pay()
        
           },
           err=>{
-            Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
-            console.log(err)
-            Notiflix.Block.Remove('.cont');
+            this.register_form = 'none'
+            if(err.error.just_booked){
+              this.booked_same_top='calc(50vh - 300px)'
+            }else{
+              document.getElementById('modal').style.top='0px'
+              Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
+            }
+          
             })
           
           }
         },err => {
+          document.getElementById('modal').style.top='120vh'
           this.error = 'Error getting user data'
           console.log(err.error,'err')
         })
       },
       err => {
+        document.getElementById('modal').style.top='0px'
         this.error = 'La password o la email che hai inserito non sono valide'
         console.log(err.error,'err')
       }
     )
   }
-  async bookfromLogin(email,first_name,last_name){
-    this.loading=true
-    var appointment = {
-      studio: this.name,
-      date: this.today,
-      service: this.total_service.name,
-      time: this.timeslot,
-    }
+  // async bookfromLogin(email,first_name,last_name){
+  //   this.loading=true
+  //   var appointment = {
+  //     studio: this.name,
+  //     date: this.today,
+  //     service: this.total_service.name,
+  //     time: this.timeslot,
+  //   }
 
-      var token = await this.api.isvalidToken()
-       var month = this.month
-        var day = this.day
-      if (day!=1){
-        day=day-1
-      }else{
-        day = this.months_days[this.month]-1
-        month=month-1
-      }
-   var x = this.timeslot.split(":")
-    // console.log(new Date(this.year, month, this.day, x[0]-2), `Ricordati il tuo appuntamento presso ${this.name}.\n${this.total_service.name} oggi alle ${this.timeslot}`, new Date(this.year, this.month, day, 11),`Ricordati il tuo appuntamento presso ${this.name}.\n${this.total_service.name} il ${this.today} alle ${this.timeslot}`,)
-    if(this.api.isvalidToken()){
-    for (let  ind in this.app_to_book){
-      // await this.storage.setAppointment(appointment)
-      // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
-      var client_name =first_name+' '+ last_name
-      // var start = this.app_to_book[ind].start
-      // var end = start + this.app_to_book[ind].duration
-      // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
-      this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, (this.app_to_book[ind].start+this.app_to_book[ind].duration), this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
-        // console.log(data)
-        if( ind == '0'){
-            this.sendEmailConfirmation(email,first_name,last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
-          }
-          // await this.storage.setAppointment(appointment)
-      // Notiflix.Block.Remove('.cont');
-       Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
-       var ok_btn = document.getElementById('NXReportButton')
-          ok_btn.addEventListener("click",async ()=>{this.router.navigateByUrl('i_miei_appuntamenti')},false) 
-          this.loading=false
-      //  await this.pay()
+  //     var token = await this.api.isvalidToken()
+  //      var month = this.month
+  //       var day = this.day
+  //     if (day!=1){
+  //       day=day-1
+  //     }else{
+  //       day = this.months_days[this.month]-1
+  //       month=month-1
+  //     }
+  //  var x = this.timeslot.split(":")
+  //   // console.log(new Date(this.year, month, this.day, x[0]-2), `Ricordati il tuo appuntamento presso ${this.name}.\n${this.total_service.name} oggi alle ${this.timeslot}`, new Date(this.year, this.month, day, 11),`Ricordati il tuo appuntamento presso ${this.name}.\n${this.total_service.name} il ${this.today} alle ${this.timeslot}`,)
+  //   if(this.api.isvalidToken()){
+  //   for (let  ind in this.app_to_book){
+  //     // await this.storage.setAppointment(appointment)
+  //     // Notiflix.Block.Standard('.cont', 'Prenotazione in corso...');
+  //     var client_name =first_name+' '+ last_name
+  //     document.getElementById('modal').style.top='120vh'
+  //     // var start = this.app_to_book[ind].start
+  //     // var end = start + this.app_to_book[ind].duration
+  //     // console.log(start, end, this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id,this.name)
+  //     this.api.bookAppointmentNoOwner(this.app_to_book[ind].start, (this.app_to_book[ind].start+this.app_to_book[ind].duration), this.day, this.month, this.year, client_name, this.user.phone,  this.service[ind].name, this.app_to_book[ind].employee, this.app_to_book[ind].service,this.id).subscribe(async data=>{
+  //       // console.log(data)
+  //       this.res_book =data
+  //       if( ind == '0'){
+  //           this.sendEmailConfirmation(email,first_name,last_name,this.day,this.months_names[this.month],this.year,this.times[this.app_to_book[ind].start],this.service[ind].name,this.name)
+  //         }
+  //         // await this.storage.setAppointment(appointment)
+  //     // Notiflix.Block.Remove('.cont');
+  //      Notiflix.Report.Success("L'appuntamento è stato prenotato", 'Controlla la tua email per ulteriori informazioni', 'OK');
+  //      var ok_btn = document.getElementById('NXReportButton')
+  //         ok_btn.addEventListener("click",async ()=>{
+  //           if(this.id==44){
+  //             this.extra_data ='block'
+  //           }else{
+  //             this.router.navigateByUrl('i_miei_appuntamenti')
+  //           }
+  //         },false) 
+  //         this.loading=false
+  //     //  await this.pay()
    
-      },
-      err=>{
-        this.loading=false
-        Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
-        console.log(err)
-        Notiflix.Block.Remove('.cont');
-        })
-      }
-      }else{
-        this.presentRegisterModal()
-      }
+  //     },
+  //     err=>{
+  //       this.register_form = 'none'
+  //       if(err.error.just_booked){
+  //         this.booked_same_top='0px'
+  //       }else{
+  //         document.getElementById('modal').style.top='0px'
+  //         Notiflix.Report.Failure("Errore, prenotazione fallita", 'Controlla la tua connessione o prova a cambiare orario', 'Annulla');
+  //       }
+  //       })
+  //     }
+  //     }else{
+  //       this.presentRegisterModal()
+  //     }
     
-    }
+  //   }
   sendEmailConfirmation(email, name, surname, day, month, year, time, servcie, shop){
       this.api.emailConfirmBooking(email,name,surname,day,month,year,time,servcie,shop).subscribe(
         data=>{
@@ -1711,6 +2058,11 @@ closeConfirm(ev){
     this.confirm='none'
   }
  
+}
+backtoBooking(){
+  this.booked_same_top='120vh'
+  document.getElementById('modal').style.top='0px'
+  this.confirm='none'
 }
 
 logScrolling(ev){
@@ -1735,5 +2087,69 @@ getapp(){
 closeBookingPage(){
   this.booking_left='100vw'
   this.position_book='absolute'
+}
+
+update_extra_data(){
+
+  var extra_data =`Nome e cognome:
+  ${this.res_book.client_name} -
+  - Cellulare:
+  ${this.res_book.phone}
+  - Email:
+  ${this.email}
+  - Comune di nascita:
+  ${this.born_city}
+  - Comune di residenza:
+  ${this.live_city}
+  - Indirizzo:
+  ${this.live_street}
+  - Data di nascita:
+  ${this.date_of_birth}
+  - Codice Fiscale:
+  ${this.fiscal_code}`
+
+  if(this.fiscal_code==undefined || this.fiscal_code==null|| this.fiscal_code==''){
+    this.fiscal_code_err='Inserisci il codice fiscale'
+  }else{
+    this.fiscal_code_err=''
+  }
+  if(this.born_city==undefined || this.born_city==null|| this.born_city==''){
+    this.born_city_err='Inserisci il comune di nasicta'
+  }else{
+    this.born_city_err=''
+  }
+  if(this.live_city==undefined || this.live_city==null || this.live_city==''){
+    this.live_city_err='Inserisci il comune di residenza'
+  }else{
+    this.live_city_err=''
+  }
+  if(this.live_street==undefined || this.live_street==null|| this.live_street==''){
+    this.live_street_err="Inserisci l'indirizzo'"
+  }else{
+    this.live_street_err=''
+  }
+  if(this.date_of_birth==undefined || this.date_of_birth==null || this.date_of_birth==''){
+    this.date_of_birth_err='Inserisci la data di nascita'
+  }else{
+    this.date_of_birth_err=''
+  }
+  setTimeout(() => {
+    if(this.date_of_birth_err==''&& this.live_street_err==''&& this.live_city_err==''&& this.born_city_err==''&& this.fiscal_code_err==''){
+      this.api.updateAppointment(this.res_book.id, this.res_book.start_t, this.res_book.end_t, this.res_book.day, this.res_book.month, this.res_book.year, this.res_book.client_name, this.res_book.phone, this.res_book.details, this.res_book.employee, this.res_book.service_n, extra_data).subscribe(async res =>{
+     
+        Notiflix.Report.Success("Grazie!", "I suoi dati sono stati registrati", 'Continua')
+        var ok_btn = document.getElementById('NXReportButton')
+        ok_btn.addEventListener("click",async ()=>{
+             this.router.navigateByUrl('i_miei_appuntamenti')
+         },false) 
+      
+      },err=>{
+        Notiflix.Notify.Failure("C'è stato un problema durante il salvataggio");
+        console.log(err)
+      })
+    }
+  }, 100);
+  
+  
 }
 }

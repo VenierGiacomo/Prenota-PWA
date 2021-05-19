@@ -12,15 +12,16 @@
                     </div>
                 </div>
                 <div class="cards-list" >
-  
-                    <div class="card 1" (click)='goParrucchieri()'>
+                  <a [routerLink]="['/home/ricerca/parrucchieri']">
+                    <div class="card 1" >
                       <div class="card_image"> <img src="../../assets/card-images/undraw_barber_3uel (1).svg" /> </div>
                       <div class="card_title">
                         <p>Parrucchieri</p>
                       </div>
                     </div>
-                    
-                      <div class="card 2" (click)='goDottori()'>
+                  </a>
+                  <a [routerLink]="['/home/ricerca/medici']">
+                      <div class="card 2" >
                       <div class="card_image">
                         <img src="../../assets/card-images/undraw_doctors_hwty (1).svg" />
                         </div>
@@ -28,7 +29,9 @@
                         <p>Salute</p>
                       </div>
                     </div>
-                    <div class="card 3" (click)='goCampi()'>
+                  </a>
+                  <a [routerLink]="['/home/ricerca/campi']">
+                    <div class="card 3" >
                         <div class="card_image">
                           <img src="../../assets/undraw_grand_slam_0q5r.svg" />
                         </div>
@@ -36,15 +39,17 @@
                           <p>Campi</p>
                         </div>
                       </div>
-                     
-                    <div class="card 4" (click)='goMassaggi()'>
+                    </a>
+                  <a [routerLink]="['/home/ricerca/curadite']">
+                    <div class="card 4" >
                       <div class="card_image">
                         <img src="../../assets/card-images/undraw_mindfulness_scgo (1).svg" />
                       </div>
                       <div class="card_title">
-                        <p>Massaggi</p>
+                        <p>Cura di te</p>
                       </div>
                     </div>
+                  </a>
                   </div>
                    
             </div>
@@ -61,7 +66,7 @@
                 </div>
                 <div class="row justify-content-center">
                         <div class="featured-btn-wrap">
-                            <span (click)="goBusiness()"  class="btn btn--blue" >Scopri di più</span>              
+                            <a [routerLink]="['/business']"><span  class="btn btn--blue" >Scopri di più</span> </a>             
                     </div>
                 </div>
             </div>

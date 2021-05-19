@@ -1,0 +1,39 @@
+<app-header ></app-header>
+<div class="cont">
+<div>
+    <h1>Unghie a Trieste</h1>
+    <h2>Lista completa di tutti i centri estetici per nails e manicure  unghie nel comune di Trieste<br><br></h2>
+    <div class="no_mob">
+        <h2>Lista servizi</h2>
+    <h3>Riscotruzione unghie</h3>
+    <h3>Unghie gel</h3>
+    <h3>Nails art</h3>
+    <h3>Applicazione smalto</h3>
+    <h3>Smalto semipermanente</h3>
+    <h3>Manicure</h3>
+    <h3>Pedicure</h3>
+    <h3>Unghie artificali - Unghie finte</h3>
+    <h3>Smalto acrilico</h3>
+    <h3>Onicotecnica unghie</h3>
+    <h3>Smalto permanente</h3>
+</div>
+</div>
+<div class="img-cont col-sm-12">
+    <img src='../assets/4180425.svg' title="Unghie a Trieste" alt='Unghie a Trieste'>
+</div>
+</div>
+<div class="list_activities">
+    <div class="activity col-md-5 offset-md-1 col-sm-12" *ngFor='let doc of eye_doctors; let ind = index'>
+        <div class="img_cont">
+            <img *ngIf='doc.img' src='{{doc.img}}' title="{{doc.name}}" alt='{{doc.name}}'>
+            <img *ngIf='!doc.img' src='../assets/nail-polish.svg' title="{{doc.name}}" alt='{{doc.name}}'>
+        </div>
+        <div class="text_activity" >
+            <h2>{{doc.name}}</h2> <img class="img_verified" *ngIf='doc.verified' src='../assets/icons/check.svg'>
+            <h4>Unghie - {{doc.address}}</h4>
+            <a [routerLink]="doc.url"><button class="book" *ngIf='doc.verified'>Vedi disponibilità</button ></a><a [routerLink]="doc.url"><button class="info">Magg. informazioni</button></a>
+        </div>
+    </div>
+
+</div>
+<app-footer></app-footer>

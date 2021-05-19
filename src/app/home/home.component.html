@@ -151,7 +151,9 @@
       
       </div>
         <p *ngIf='show_recurring'>N° di prenotazioni future:</p>
-        <input type="number" placeholder="10" [(ngModel)]="recurring_quantity" *ngIf='show_recurring'>
+
+        <p *ngIf='show_recurring' style="font-size: 11; color: #ccc;">{{rec_end_date.getDate()}}/{{rec_end_date.getMonth()}}/{{rec_end_date.getFullYear()}} </p>
+        <input type="number" placeholder="10" [(ngModel)]="recurring_quantity" (change)='endDate()' *ngIf='show_recurring'>
         <p *ngIf='edit && !show_recurring'>Nota:</p>
         <textarea class="lable-appointment-modal" *ngIf='edit && !show_recurring' placeholder="Inserisci altri dettagli" [(ngModel)]="appointment_notes" ></textarea>
         <p *ngIf='info == -1 && !show_recurring' >Descrizione:</p>
@@ -206,14 +208,14 @@
                 <button  class="single-button modify-app" style="margin-top: 10px;" (click)='setRecuringBooking(true)' *ngIf='show_recurring && storeUseCredits'><span *ngIf='!_loading' >Salva e scala credito</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                
                 
             <button  class="single-button modify-app" (click)='updateAppointment(false)' *ngIf='!show_recurring'>Salva modifiche</button>
-            <button class="two-buttons std-app" title="Segna come pagato" *ngIf='recurring>0 && !show_recurring' (click)='updateAppointment(true)' style="margin:5px 10% 5px 0px"><img src="../assets/icons/euro.svg" ></button>
+            <button class="two-buttons std-app" title="Segna come pagato" *ngIf='recurring>0 && !show_recurring && !payed' (click)='updateAppointment(true)' style="margin:5px 10% 5px 0px"><img src="../assets/icons/euro.svg" ></button>
                
             <button class="two-buttons delete-app" title="Elimina Appuntamento" *ngIf='recurring>0 && !show_recurring' (click)='deleteAppointment()'><img src="../assets/icons/trash.svg" ></button>
             <button  class="single-button delete-app" (click)='deleteRecuringBooking()' *ngIf='recurring>0 && !show_recurring' >Cancella ricorrenti</button>
                 <!-- <button  class="two-buttons delete-app" (click)='deleteAppointment()' *ngIf='!(recurring>0) && !show_recurring' ><span *ngIf='!_loading'>Cancella</span></button>
                 <button  (click)='show_recurring=true' class="two-buttons-1 modify-app"  *ngIf='!(recurring>0) && !show_recurring'> <span *ngIf='!_loading' >Ricorrente</span> <div class="loader-5 center" *ngIf="_loading"><span></span></div></button>                 -->
-                <button class="h-btn-3 std-app" title="Segna come pagato" *ngIf='!(recurring>0) && !show_recurring' (click)='updateAppointment(true)'><img src="../assets/icons/euro.svg" ></button>
-                <button class="h-btn-3 modify-app" style="margin:5px 5%" *ngIf='!(recurring>0) && !show_recurring' title="Salva come appuntamento ricorrente"  (click)='show_recurring=true'><img src="../assets/icons/reload.svg" ></button>
+                <button class="h-btn-3 std-app" title="Segna come pagato" *ngIf='!(recurring>0) && !show_recurring && !payed' (click)='updateAppointment(true)'><img src="../assets/icons/euro.svg" ></button>
+                <button class="h-btn-3 modify-app" style="margin:5px 5%" *ngIf='!(recurring>0) && !show_recurring' title="Salva come appuntamento ricorrente"  (click)='showRecurring()'><img src="../assets/icons/reload.svg" ></button>
                 <button class="h-btn-3 delete-app" title="Elimina Appuntamento" *ngIf='!(recurring>0) && !show_recurring' (click)='deleteAppointment()'><img src="../assets/icons/trash.svg" ></button>
         </div>
     </div>
@@ -611,10 +613,16 @@ color: #8d0000;
     padding:  0px!important;
     line-height: 0px  !important;
     margin:0px !important;
+   
 }
 .oneView  .fst-col p{
-    bottom: -7px;
-    font-size: 11px !important;;
+  bottom: -7px;
+    margin-top: -11px;
+    padding-left: 18px !important;
+    padding-right: 6px;
+    background: #fff;
+    margin-right: -2px;
+    font-size: 11px !important;
 }
 .oneView  th {
     height: 20px  !important;

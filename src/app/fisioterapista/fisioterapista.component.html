@@ -1,0 +1,56 @@
+
+<app-header></app-header>
+<div class="cont">
+    <div class="main_data">
+    <div class="img-cont">
+        <img src='../assets/physical-therapy.svg' title="{{doc.name}}" alt='{{doc.name}}'>
+    </div>
+    <div class="text_cont">
+        <h1>{{doc.name}}</h1>
+        <h2>Fisioterapista a Trieste</h2>
+        <h3>{{doc.address}}</h3>
+    </div>
+    </div>
+    <div class="body_under">
+    <p>
+       <span>Al momento non è prenotabile online!</span> <br> <br>
+        Sarebbe comodo poter prenotare a qualsiasi ora del giorno senza dover chiamare?<br> Consiglia {{doc.name}} di utilizzare Prenota, <b>è gratuito</b>.
+</p> 
+        <button class="phone-number" (click)='displayPhone()'>{{phone}}</button>
+</div>
+
+    
+<div class="link_all">
+    <a [routerLink]="['/fisioterapista/trieste']" ><button class="all_back_link">Mostra tutti i fisioterapisti a Trieste</button></a>
+</div>
+
+
+
+
+<div class="mapouter" id='map_cont'>
+   
+    
+    
+
+    </div>
+  </div>
+
+<app-footer></app-footer>  <style>.mapouter{text-align:left;height:250px;width:30vw;}
+    
+    .gmap_canvas {overflow:hidden;background:none!important;height:250px;width:30vw;}
+
+
+
+.mapouter{
+    position: absolute; top: 50px;right: 50px;
+}
+
+.mapouter h3{
+    border-radius: 10px;
+    overflow: hidden;
+   font-size: 21px;
+   color: #424242;
+   line-height: 40px;
+   margin: 0px;
+}
+</style>

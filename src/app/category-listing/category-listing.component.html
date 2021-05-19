@@ -3,7 +3,7 @@
     <app-header></app-header>
     <section class="main-block categories">
         <div class="container">
-                <span (click)='back()' style="cursor: pointer;" class="back-search"><img src='../assets/icons/chevron-back-outline_black.svg'  style="height: 20px; color: #212121;"> <span style="padding: 12px 8px 0px 8px;">Indietro</span></span> 
+                <a [routerLink]="['/home/ricerca']"><span  style="cursor: pointer;" class="back-search"><img src='../assets/icons/chevron-back-outline_black.svg'  style="height: 20px; color: #212121;"> <span style="padding: 12px 8px 0px 8px;">Indietro</span></span> </a>
             <div class="row justify-content-center">
                 <div class="col-md-12">
                     <div class="styled-heading">
@@ -15,14 +15,17 @@
             <div class="cards-list">
 
                 <div class="card 1" *ngFor="let shop of shops" (click)='navigate(shop)' [class.blocked]='shop.closed'>
-                  <div class="card_image"> <img src="{{shop.img_url}}" alt="{{shop.store_name}} Trieste {{shop.business_description}}"/> </div>
+                    <a [routerLink]="shop.closed ? null : '/'+shop.website">  
+                  <div class="card_image"> <img src="{{shop.img_url}}" alt="{{shop.store_name}} Trieste {{shop.business_description}}" title="{{shop.store_name}} Trieste {{shop.business_description}}"/> </div>
                   <div class="card_title" title='{{shop.store_name}}'>
                     <h2>{{shop.store_name}}</h2>
                   </div>
                   <div class="card_subtitle" title='{{shop.business_description}}'>
                     <h3>{{shop.business_description}}</h3>
                   </div>
+                   </a>
                 </div>
+           
                 </div>
         </div>
     </section>
@@ -39,7 +42,7 @@
           </div>
           <div class="row justify-content-center">
                   <div class="featured-btn-wrap">
-                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="mailto:business@gmail.com">Email</a></span>              
+                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="mailto:business@prenota.cc">Email</a></span>              
                       <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="tel:+393312233645">Chiama</a></span>              
               </div>
           </div>

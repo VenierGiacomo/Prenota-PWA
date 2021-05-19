@@ -26,7 +26,9 @@
             "assets": [
               "src/favicon.ico",
               "src/bitcoin.pdf",
+              "src/sitemap.xml",
               "src/assets",
+              
               "src/.well-known",
               {
                   "glob": "**/*.js",

@@ -110,7 +110,7 @@ constructor(private router:Router,private api: ApiService ) { }
    
   }
   updateAppo(){
-    this.api.updateAppointment(this.appo.id, this.appo.start, this.appo.end, this.appo.day, this.appo.month, this.appo.year, this.appo.client_name, this.appo.phone, this.appo.details, this.appo.employee, this.appo.service_n, this.note).subscribe(async res =>{
+    this.api.updateAppointment(this.appo.id, this.appo.start_t, this.appo.end_t, this.appo.day, this.appo.month, this.appo.year, this.appo.client_name, this.appo.phone, this.appo.details, this.appo.employee, this.appo.service_n, this.note).subscribe(async res =>{
      this.note =''
      this.appointments_list = this.appointments_list.filter((val)=>{return val.id!= this.appo.id})
      await this.appointments_list.push(res)
