@@ -1,0 +1,71 @@
+
+<app-header></app-header>
+<div class="cont">
+    <div class="main_data">
+    <div class="img-cont">
+        <img src='../assets/user_empy.svg'>
+    </div>
+    <div class="text_cont">
+        <h1>{{doc.name}}</h1>
+        <h2>Oculista a Trieste</h2>
+        <h3>{{doc.address}}</h3>
+    </div>
+    </div>
+    <div class="body_under">
+    <p>
+       <span>Al momento non è prenotabile online!</span> <br> <br>
+        Sarebbe comodo poter prenotare a qualsiasi ora del giorno senza dover chiamare?<br> Consiglia <b>{{doc.name}}</b> di utilizzare Prenota,<b> è gratuito</b>.
+</p> 
+        <button class="phone-number" (click)='displayPhone()'>{{phone}}</button>
+</div>
+
+    <div class="list_activities">
+        <p >Se preferisci prenotare in qualche secondo senza chiamare:</p>
+        <div class="activity col-md-5 offset-md-1 col-sm-12" >
+            <div class="img_cont">
+    
+                <img src='https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/michelone.jpeg?alt=media&token=5796027d-f76b-41f4-a8bf-ae6c2ba68aa6' title="Dottor Michelone Luca Oculista" alt='Dottor Michelone Luca Oculista'>
+            </div>
+            <div class="text_activity" >
+                <h2>Dottor Michelone Luca</h2> <img class="img_verified"  src='../assets/icons/check.svg'>
+                <h4>Oculista - Largo Barriera Vecchia 13</h4>
+                <a [routerLink]="['/appuntamento/dott_Michelone']"><button class="book" >Vedi disponibilità</button ></a><a [routerLink]="['/appuntamento/dott_Michelone']"><button class="info">Magg. informazioni</button></a>
+            </div>
+        </div>
+    
+
+</div>
+<div class="link_all">
+    <a [routerLink]="['/oculista/trieste']" ><button class="all_back_link">Mostra tutti gli oculisti a Trieste</button></a>
+</div>
+
+
+
+
+<div class="mapouter" id='map_cont'>
+   
+    
+    
+
+    </div>
+  </div>
+
+<app-footer></app-footer>  <style>.mapouter{text-align:left;height:250px;width:30vw;}
+    
+    .gmap_canvas {overflow:hidden;background:none!important;height:250px;width:30vw;}
+
+
+
+.mapouter{
+    position: absolute; top: 50px;right: 50px;
+}
+
+.mapouter h3{
+    border-radius: 10px;
+    overflow: hidden;
+   font-size: 21px;
+   color: #424242;
+   line-height: 40px;
+   margin: 0px;
+}
+</style>

@@ -1,0 +1,95 @@
+
+<app-header></app-header>
+<div class="cont">
+    <div class="main_data">
+    <div class="img-cont">
+        <img src='../assets/soccer-ball.svg' title="{{doc.name}}" alt='{{doc.name}}'>
+    </div>
+    <div class="text_cont">
+        <h1>{{doc.name}}</h1>
+        <h2>Campo da calcetto a Trieste</h2>
+        <h3>{{doc.address}}</h3>
+    </div>
+    </div>
+    <div class="body_under">
+    <p>
+       <span>Al momento non è prenotabile online!</span> <br> <br>
+        Sarebbe comodo poter prenotare a qualsiasi ora del giorno senza dover chiamare?<br> Consiglia al <b>{{doc.name}}</b> di utilizzare Prenota, <b>è gratuito</b>.
+</p> 
+        <button class="phone-number" (click)='displayPhone()'>{{phone}}</button>
+</div>
+
+    <div class="list_activities">
+        <p >Se preferisci prenotare in qualche secondo senza chiamare:</p>
+        
+        <div  class="activity col-md-5 offset-md-1"><div  class="img_cont"><img  src="https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/fani.jpg?alt=media&amp;token=238ce5c2-6a44-49a7-bdab-5a629e26ea71" title="Campo Fani Olimpia" alt="Campo Fani Olimpia">
+            
+         
+            
+         </div><div  class="text_activity"><h2 >Campo Fani Olimpia</h2><img  src="../assets/icons/check.svg" class="img_verified">
+            
+         <h4 >Campo da calcio  - Via Pascoli 31 /A, Trieste (TS)</h4><a   [routerLink]="['/appuntamento/faniolimpia']"><button  class="book">Vedi disponibilità</button>
+            
+         </a><a   [routerLink]="['/appuntamento/faniolimpia']"><button  class="info">Magg. informazioni</button></a></div>
+        </div>
+
+        <div  class="activity col-md-5 offset-md-1"><div  class="img_cont"><img  src="https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/green-leaf-clover-logo.jpg?alt=media&amp;token=5fe3a337-ce10-4b44-9a1a-94b698fb1d24" title="Campo Trifoglio" alt="Campo Trifoglio">
+            
+         
+            
+         </div><div  class="text_activity"><h2 >Campo Trifoglio</h2><img  src="../assets/icons/check.svg" class="img_verified">
+            
+         <h4 >Campo da calcio  - Via delle Campanelle 266, Trieste (TS)</h4><a   [routerLink]="['/appuntamento/trifoglio']"><button  class="book">Vedi disponibilità</button>
+            
+         </a><a   [routerLink]="['/appuntamento/trifoglio']"><button  class="info">Magg. informazioni</button></a></div>
+        </div>
+        <div  class="activity col-md-5 offset-md-1">
+            <div  class="img_cont">
+                <img  src="https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/WhatsApp%20Image%202021-01-26%20at%2016.45.56.jpeg?alt=media&amp;token=3a2001e9-6a5e-4d4c-9805-9d5fc36326b3" title="Campo Oratorio Montuzza" alt="Campo Oratorio Montuzza">
+            </div>
+            <div  class="text_activity">
+                <h2 >Campo Oratorio Montuzza</h2>
+                <img  src="../assets/icons/check.svg" class="img_verified">
+            
+            <h4 >Campo da calcio - Via Tommaso Grossi, 4, 34131 Trieste (TS)</h4><a   [routerLink]="['/appuntamento/montuzza']"><button  class="book">Vedi disponibilità</button>
+            
+            </a><a   [routerLink]="['/appuntamento/montuzza']"><button  class="info">Magg. informazioni</button></a>
+        </div>
+        
+        </div>
+        
+</div>
+<div class="link_all">
+    <a [routerLink]="['/campi_da_calcetto/trieste']" ><button class="all_back_link">Mostra tutti i campi da calcio a Trieste</button></a>
+</div>
+
+
+
+
+<div class="mapouter" id='map_cont'>
+   
+    
+    
+
+    </div>
+  </div>
+
+<app-footer></app-footer>  <style>.mapouter{text-align:left;height:250px;width:30vw;}
+    
+    .gmap_canvas {overflow:hidden;background:none!important;height:250px;width:30vw;}
+
+
+
+.mapouter{
+    position: absolute; top: 50px;right: 50px;
+}
+
+.mapouter h3{
+    border-radius: 10px;
+    overflow: hidden;
+   font-size: 21px;
+   color: #424242;
+   line-height: 40px;
+   margin: 0px;
+}
+</style>

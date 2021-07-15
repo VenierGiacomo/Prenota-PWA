@@ -80,7 +80,7 @@ canvas {
     color: #868e96;
     font-size: 12px;
     font-weight: normal;
-    padding: .75em 1.25em;
+    padding: 5px 10px;
     text-transform: uppercase; }
     .table-stats table th .name,
     .table-stats table td .name {
@@ -89,7 +89,7 @@ canvas {
       text-transform: capitalize; }
   .table-stats table td {
     color: #343a40;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 600;
     text-transform: capitalize;
     vertical-align: middle; }

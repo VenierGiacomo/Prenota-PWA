@@ -1,0 +1,30 @@
+.bottom-login{
+    position: relative;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    a{
+        color: #0061d5;
+        cursor: pointer;
+    }
+    a:hover{
+        color: rgb(0, 162, 255);
+    }
+}
+body{
+    background-image: url('./../../../assets/Waves-multiple.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: var(--full-heigth);
+    overflow: hidden;
+}
+
+.logo-title{
+    color: #ffffff;
+    width: 100vw;
+    text-align: center;
+    padding: 5vh;
+    font-size: 42px;
+    font-family: "Comfortaa" , sans-serif !important;
+    cursor: pointer;
+}

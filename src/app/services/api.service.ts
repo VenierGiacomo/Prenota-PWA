@@ -214,11 +214,17 @@ addClientStore(client_name, hair_color, hair_lenght, phone, avarage_expense, las
   var data = {'client_name': client_name , 'hair_color': hair_color, 'hair_lenght': hair_lenght, 'phone':phone, 'avarage_expense':avarage_expense, 'last_service' : last_service}
     return this.http.post(BASE_URL+'store/clients/', data,{headers: this.newheader()})
 }
-updateClientStore(id, client_name,  phone,  credit, note, isMember):Observable<any>{
+updateClientStore(id, client_name,  phone,  credit, note, isMember,email?):Observable<any>{
   if(note==''){
     note =' '
   }
-  var data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note, 'isMember':isMember}
+  var data
+  if(email && email!+'' && email!+' '){
+     data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note, 'isMember':isMember, 'email':email}
+  }else{
+     data = {'client_name': client_name , 'phone':phone, 'credit' : credit, 'note': note, 'isMember':isMember}
+  }
+  
   
     return this.http.put(BASE_URL+'store/clients/'+id+'/', data,{headers: this.newheader()})
 }
@@ -315,13 +321,13 @@ updateAppointment(id, start, end, day, month, year,name, phone, details, employe
   
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
 }
-updateAppointmentClient(id, start, end, day, month, year,name, phone, details, employee, service, note,  client_id,payed?,):Observable<any>{
+updateAppointmentClient(id, start, end, day, month, year,name, phone, details, employee, service, note,  client_id,store_client, payed?,):Observable<any>{
   var week = this.getWeekNumber(new Date(year, month, day))
   var data
   if(payed){
-    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id, 'payed':payed,}
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id, 'store_client':store_client,'payed':payed,}
   }else{
-    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id,}
+    data = {'new':true,'start': start , 'end': end, 'day': day, 'week':week, 'month':month, 'year' : year, 'employee': employee,  'client_name' :name, 'details': details, 'service_n': service,'phone':phone, 'note':note, 'client_id':client_id,'store_client':store_client,}
   }
   
   return this.http.put(BASE_URL+'bookings/'+id+'/', data, {headers: this.newheader()})
@@ -481,8 +487,8 @@ setRecuringBooking(id, weeks,payed){
   }
   return this.http.post(BASE_URL+'bookings/recurring/',data,{headers: this.newheader()})
 }
-deleteRecuringBooking(id){
-  return this.http.delete(BASE_URL+'bookings/recurring/delete/'+id,{headers: this.newheader()})
+deleteRecuringBooking(id,week,year){
+  return this.http.delete(BASE_URL+'bookings/recurring/delete/'+id+'/?week='+week+'&year='+year,{headers: this.newheader()})
 }
 registerClientWithEmail(first_name, last_name, phone ,email?  ):Observable<any>{
   var data 

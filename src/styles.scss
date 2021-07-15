@@ -1,32 +1,17 @@
-// @import '@angular/material/prebuilt-themes/indigo-pink.css';
-// @import "~assets/butterfly/assets/vendor/bootstrap/css/bootstrap.min.css";
-// @import "~assets/butterfly/assets/vendor/icofont/icofont.min.css" ;
-// @import "~assets/butterfly/assets/vendor/boxicons/css/boxicons.min.css" ;
-// @import "~assets/butterfly/assets/vendor/venobox/venobox.css";
-@import "~assets/butterfly/assets/vendor/line-awesome/css/line-awesome.min.css";
-// @import "~assets/butterfly/assets/vendor/owl.carousel/assets/owl.carousel.min.css" ;
-// @import"~assets/template/vendor/mdi-font/css/material-design-iconic-font.min.css"  ;
-// @import"~assets/template/vendor/font-awesome-4.7/css/font-awesome.min.css" ;
-// @import"~assets/template/vendor/select2/select2.min.css";
-// @import"~assets/template/vendor/datepicker/daterangepicker.css"; 
-@import"~assets/template/css/main.css";
-// @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
-/* Googel Fonts End  
 
-*/
+@import "~assets/butterfly/assets/vendor/line-awesome/css/line-awesome.min.css";
+
+@import"~assets/templatecss/css/main.css";
+
+
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700");
 @import url("https://fonts.googleapis.com/css?family=Comfortaa:400,600,700");
 @import"~assets/author/css/animate.css";
-// @import"~assets/author/css/owl.carousel.min.css";
-// @import"~assets/author/css/owl.theme.default.min.css";
-// @import"~assets/author/css/magnific-popup.css";
+
 @import"~assets/author/css/flaticon.css";
 @import"~assets/author/css/style.css";
-// @import"~assets/landing/vendors/owl-carousel/css/owl.carousel.min.css";
-// @import"~assets/landing/vendors/owl-carousel/css/owl.theme.default.css";
-// @import"~assets/landing/vendors/mdi/css/materialdesignicons.min.css";
-// @import"~assets/landing/vendors/aos/css/aos.css";
-@import"~assets/landing/css/style.css" ;
+
+@import"~assets/landingcss/css/style.css" ;
 
 @import "~assets/listing/css/set1.css";
 
@@ -53,16 +38,30 @@
 
 
 body{
-    padding: 0;
-    margin: 0;
+    padding: 0px;
+    margin: 0px;
     height: var(--full-heigth);
     width: 100vw;
+    overflow-x: hidden;
+    position: fixed;
+    top:0px;
+    left:0px;
+    overflow-y: auto  !important;
+    // scroll-behavior: smooth  !important;
+    -webkit-overflow-scrolling: touch  !important;;
     -ms-overflow-style: none !important;;  /* IE and Edge */
     scrollbar-width: none !important;;  /* Firefox */
     font-family:  'Open Sans', sans-serif !important;
 }
 html{
   overflow-x: hidden;
+  width: 100vw;
+  position: fixed;
+  top:0px;
+  left:0px;
+  overflow-y: auto  !important;
+  // scroll-behavior: smooth  !important;
+  -webkit-overflow-scrolling: touch  !important;;
   height: var(--full-heigth);
   
 }

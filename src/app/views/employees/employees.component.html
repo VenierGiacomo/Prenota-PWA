@@ -1,0 +1,617 @@
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+   
+     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet"> 
+
+    
+    
+<body>
+    <div class="toast-s" [style.display]='toast'>Modifiche salvate correttamente</div>
+    <div class="home">
+        <div class="side-menu">
+            <div class="menu-home" (click)='goHome()'>Calendario</div>
+            <div class="menu-settings">Impostazioni</div>
+            <!-- <div class="menu-home" style="margin-top: 5vh;" (click)='goData()'>Area clienti</div> -->
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
+        </div>   
+        <div class="settings">
+                <div class="topbar">
+                        <div (click)="goSettings()">Attività</div>
+                        <div class="not"> <span *ngIf='store_type!=7'>Collaboratori</span> <span *ngIf='store_type==7'>Campi</span></div>
+                </div>
+                <div style='margin-top: 8vh'  class="content" >
+                        <!-- Animated -->
+                        <div class="animated fadeIn">
+                 <div class="row" *ngIf='!bk_empl'>
+                        <div class="col-lg-4 col-md-6 offset-md-2">
+                                <div class="card" (click)='changeColab()'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-2">
+                                                <i class="pe-7s-cart"></i>
+                                                <img src="../assets/icons/group.svg" height="40px">
+                                            </div>
+                                   
+                                                    <div class="stat-text"><span class="count">Cambia <span *ngIf='store_type!=7'>collaboratore</span> <span *ngIf='store_type==7'>campo</span></span></div>
+                                                     <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <div class="col-lg-4 col-md-6">
+                                <div class="card" (click)='displayCatalog()'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-1">
+                                                <img src="../assets/icons/support.svg" height="40px">
+                                            </div>
+                                            
+                                                    <div class="stat-text"><span class="count">Servizi <span *ngIf='store_type!=7'>collaboratore</span> <span *ngIf='store_type==7'>campo</span></span></div>
+                                                    <!-- <div class="stat-heading">Elimina collaboratore</div> -->
+                                               
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           
+              
+                                    <!-- <div class="col-lg-4 col-md-6">
+                                            <div class="card" (click)='storeEverything()'>
+                                                <div class="card-body">
+                                                    <div class="stat-widget-five">
+                                                        <div class="stat-icon dib flat-color-2">
+                                                            <i class="pe-7s-cart"></i>
+                                                            <img src="../assets/icons/save.svg" height="40px">
+                                                        </div>
+                                                  
+                                                                <div class="stat-text"><span class="count">Salva modifiche</span></div>
+                                                                 
+                                                     
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="row" *ngIf='bk_empl'>
+                                            <div class="col-lg-4 col-md-6" *ngFor="let empl of employees">
+                                                    <div class="card" (click)='changeTimetable(empl)'>
+                                                        <div class="card-body">
+                                                            <div class="stat-widget-five">
+                                                                <div class="stat-icon dib flat-color-2">
+                                                                    <i class="pe-7s-cart"></i>
+                                                                    <img src="../assets/user.svg" height="40px">
+                                                                </div>
+                                                                
+                                                                        <div class="stat-text"><span class="count">{{empl.first_name}}</span></div>
+                                                                         <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                              
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-6" >
+                                                        <div class="card" (click)='emplo="block"'>
+                                                            <div class="card-body">
+                                                                <div class="stat-widget-five">
+                                                                    <div class="stat-icon dib flat-color-2">
+                                                                        <i class="pe-7s-cart"></i>
+                                                                        <img src="../assets/icons/icons8-edit.svg" height="40px">
+                                                                    </div>
+                                                                   
+                                                                            <div class="stat-text"><span class="count">Aggiungi o rimovi</span></div>
+                                                                             <!-- <div class="stat-heading">Tipo di studio</div> -->
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                            </div>
+            <!-- <div class='title-sect'>
+                <h1>Collaboratori</h1>
+            </div> -->       
+            <div class="opening-hours" *ngIf='employee!=0  &&!bk_empl'>
+                <!-- <div class="head-form"> -->
+                        <h4>Orario di lavoro di {{emplo_name}}:</h4> 
+                        <!-- <div class="save">Salva </div> -->
+                <!-- </div> -->
+                <form class="form-time"> 
+                        <h1>Lunedì</h1>
+                            <div *ngIf='!closed_days[0]'></div>
+                            <div *ngIf='!closed_days[0]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,0,0)"
+                            [value]="lun[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[0]'
+                            >
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,0,1)"
+                            [value]="lun[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[0]'
+                            >
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[0]'></div>
+                            <div *ngIf='!double_turn[0]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,0,2)"
+                            [value]="lun[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[0]'
+                            >
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,0,3)"
+                            [value]="lun[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[0]'
+                            >
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[0]' (change)='double_turn[0]=!double_turn[0]' [checked]="double_turn[0]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[0]'(change)='closed_days[0]=!closed_days[0]'[checked]="!closed_days[0]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Martedì</h1>
+                            <div *ngIf='!closed_days[1]'></div>
+                            <div *ngIf='!closed_days[1]'></div>
+                           
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,1,0)"
+                            [value]="mar[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[1]'
+                            >
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,1,1)"
+                            [value]="mar[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[1]'>
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[1]'></div>
+                            <div *ngIf='!double_turn[1]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,1,2)"
+                            [value]="mar[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[1]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,1,3)"
+                            [value]="mar[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[1]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[1]' (change)='double_turn[1]=!double_turn[1]' [checked]="double_turn[1]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[1]'(change)='closed_days[1]=!closed_days[1]'[checked]="!closed_days[1]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Mercoledì</h1>
+                            <div *ngIf='!closed_days[2]'></div>
+                            <div *ngIf='!closed_days[2]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,2,0)"
+                            [value]="mer[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[2]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,2,1)"
+                            [value]="mer[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[2]'
+                            >
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[2]'></div>
+                            <div *ngIf='!double_turn[2]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,2,2)"
+                            [value]="mer[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[2]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,2,3)"
+                            [value]="mer[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[2]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[2]' (change)='double_turn[2]=!double_turn[2]' [checked]="double_turn[2]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[2]'(change)='closed_days[2]=!closed_days[2]'[checked]="!closed_days[2]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Giovedì</h1>
+                            <div *ngIf='!closed_days[3]'></div>
+                            <div *ngIf='!closed_days[3]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,3,0)"
+                            [value]="gio[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[3]'
+                            >
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,3,1)"
+                            [value]="gio[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[3]'>
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[3]'></div>
+                            <div *ngIf='!double_turn[3]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,3,2)"
+                            [value]="gio[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[3]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,3,3)"
+                            [value]="gio[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[3]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[3]' (change)='double_turn[3]=!double_turn[3]' [checked]="double_turn[3]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[3]'(change)='closed_days[3]=!closed_days[3]'[checked]="!closed_days[3]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Venerdì</h1>
+                            <div *ngIf='!closed_days[4]'></div>
+                            <div *ngIf='!closed_days[4]'></div>
+                          
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,4,0)"
+                            [value]="ven[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[4]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,4,1)"
+                            [value]="ven[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[4]'>
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[4]'></div>
+                            <div *ngIf='!double_turn[4]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,4,2)"
+                            [value]="ven[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[4]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,4,3)"
+                            [value]="ven[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[4]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[4]' (change)='double_turn[4]=!double_turn[4]' [checked]="double_turn[4]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[4]'(change)='closed_days[4]=!closed_days[4]'[checked]="!closed_days[4]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Sabato</h1>
+                            <div *ngIf='!closed_days[5]'></div>
+                            <div *ngIf='!closed_days[5]'></div>
+                        
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,5,0)"
+                            [value]="sab[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[5]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,5,1)"
+                            [value]="sab[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[5]'>
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[5]'></div>
+                            <div *ngIf='!double_turn[5]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,5,2)"
+                            [value]="sab[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[5]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,5,3)"
+                            [value]="sab[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[5]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[5]' (change)='double_turn[5]=!double_turn[5]' [checked]="double_turn[5]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[5]'(change)='closed_days[5]=!closed_days[5]'[checked]="!closed_days[5]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                            <!--  -->
+                            <h1>Domenica</h1>
+                            <div *ngIf='!closed_days[6]'></div>
+                            <div *ngIf='!closed_days[6]'></div>
+                            
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,6,0)"
+                            [value]="dom[0]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='closed_days[6]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,6,1)"
+                            [value]="dom[1]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='closed_days[6]'>
+                            </vaadin-time-picker>
+                            <div *ngIf='!double_turn[6]'></div>
+                            <div *ngIf='!double_turn[6]'></div>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,6,2)"
+                            [value]="dom[2]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Apertura"
+                            *ngIf='double_turn[6]'>
+                            </vaadin-time-picker>
+                            <vaadin-time-picker 
+                            (change)="dateChanged($event,6,3)"
+                            [value]="dom[3]"
+                            id="time-picker-basic-demos-value-resolution" 
+                min="06:30" max="22:00" 
+                            step="900" 
+                            label="Chiusura"
+                            *ngIf='double_turn[6]'>
+                            </vaadin-time-picker>
+                            <vaadin-checkbox-group theme="vertical">
+                                    <vaadin-checkbox value="Option" *ngIf='closed_days[6]' (change)='double_turn[6]=!double_turn[6]' [checked]="double_turn[6]">2 turni</vaadin-checkbox>
+                                    <vaadin-checkbox value="Option" *ngIf='!double_turn[6]'(change)='closed_days[6]=!closed_days[6]'[checked]="!closed_days[6]">chiuso</vaadin-checkbox>
+                            </vaadin-checkbox-group>
+                    </form>
+            </div>
+            <!-- <div class="services" >
+                <div class="service-cont">
+                        <div *ngIf='employee!=0'class=" service add-service" (click)='displayCatalog()'>Servizi <br> collaboratore</div>
+                        <div *ngIf='employee==0' class=" service add-service" (click)='this.emplo = "block"'>I tuoi <br> collaboratori</div>
+                        <div class=" service add-service" (click)='createEmployee="block"'>Aggiungi <br> collaboratore</div>
+                       
+                    
+                </div>
+            </div> -->
+    </div>
+</div>
+        </div>
+    </div>
+</body>
+
+<!-- <div class="bk-empl-sel" [style.display]='bk_empl'>
+        <div class="close-catalog" (click)='bk_empl="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+        <div class="container" >
+        <div class="row" style="margin-top:300px;">
+        <div class="col-lg-3 col-md-6" *ngFor='let employee of employees'>
+            <div class="card" (click)='changeTimetable(employee)'>
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-1">
+                            <img src="../assets/user.svg" height="40px">
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{employee.name}}</span></div>
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div> -->
+ <div class="catalog" [style.display]='catalog'>
+        <div class="close-catalog" (click)='storeEverything()'>  <img src="../assets/icons/closewhite.svg"/></div>
+            <div class="cont-table">
+                <table class="table-catalog">
+                    <thead>
+                        <tr> 
+                            <th class="corner1">Nome Servizio</th>
+                            <th>Durata</th>
+                            <!-- <th>Sesso</th> -->
+                            <!-- <th>Max</th> -->
+                            <th class="corner2"></th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        <tr *ngFor='let service of catalog_list'> 
+                            <td>{{service.name}}</td>
+                            <td style='text-align: center;'>{{durations[service.duration]}}</td>
+                            <!-- <td>{{sexs[service.sex]}}</td> -->
+                            <!-- <td>{{service.max_n}}</td> -->
+                            <td *ngIf='service.active' (click)='activate(service)' style="padding: 0px; text-align: center;" > <button class="active-service">Attivo</button></td>
+                            <td *ngIf='!service.active' (click)='activate(service)'  style="padding: 0px; text-align: center;" > <button class="deactivated">Non attivo</button></td>
+                        </tr>
+                       
+                    </tbody>
+                </table>     
+        </div>
+    </div>
+<!-- <div class="catalog" [style.display]='createEmployee'>
+        <div class="close-catalog" (click)='createEmployee="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+    <div class="page-wrapper bg-gra-02 p-t-70 p-b-30 font-poppins" >
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4" style="padding: 30px;">
+                <div class="card-body">
+                    <h2 class="title">Crea il profilo di un nuovo collaboratore</h2>
+                    <form >
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <div class="label">Nome</div>
+                                    <input class="input--style-4" [(ngModel)]="first_name" type="text" name="first_name" placeholder="Mario">
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <div class="label">Cognome</div>
+                                    <input class="input--style-4" [(ngModel)]="last_name" type="text" name="last_name" placeholder="Rossi">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <div class="label">Email</div>
+                                    <input class="input--style-4" [(ngModel)]="email" type="email" name="email"  placeholder="mario.rossi@email.com">
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                    <div class="input-group">
+                                        <div class="label">Numero di telefono</div>
+                                        <input class="input--style-4"[(ngModel)]="phone" type="text" name="phone" placeholder="3312233645">
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="row row-space">
+                                    <div class="col-2-r">
+                                        <div class="input-group" >
+                                            <label class="label">Sesso</label>
+                                            <div class="p-t-10">
+                                                <label class="radio-container m-r-45">Uomo
+                                                    <input type="radio" [(ngModel)]="sex" value="m"checked="checked" name="gender">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                                <label class="radio-container">Donna
+                                                    <input type="radio" [(ngModel)]="sex" value="w" name="gender">
+                                                    <span class="checkmark"></span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-2-r">
+                                        <div class="input-group">
+                                            <div class="label">Password</div>
+                                            <input class="input--style-4" [(ngModel)]="password" type="password" name="password"  placeholder="********">
+                                        </div>
+                                    </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue"  (click)='submit()' >Crea</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="catalog"  [style.display]='emplo'>
+        <div class="close-catalog" (click)='emplo="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+            <div class="cont-table">
+                <table class="table-catalog">
+                    <thead>
+                        <tr> 
+                            <th class="corner1">Nome</th>
+                            <!-- <th class="corner2">Cognome</th> -->
+                            <th ></th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        <tr *ngFor='let employee of employees'> 
+                            <td>{{employee.first_name}}</td>
+                            <!-- <td>{{employee.last_name}}</td> -->
+                            <td  (click)='deleteEmployee(employee)' style="padding: 0px !important;"> <button class="delete">Elimina</button></td>
+                        </tr>
+                        <tr> 
+                            <td class="corner1"><input [(ngModel)]='first_name' placeholder="Inserisci il nome "></td>
+                            <!-- <td class="corner2"><input [(ngModel)]='last_name' placeholder="Inserisci il cognome "></td> -->
+                            <td  (click)='submit()' style="padding: 0px !important;"> <button class="active-service">Aggiungi</button></td>
+                        </tr> 
+                    </tbody>
+                </table>     
+        </div>
+    </div> 

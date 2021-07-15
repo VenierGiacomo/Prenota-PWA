@@ -1003,7 +1003,7 @@ textarea.form-control {
 	height: inherit!important;
 }
 .ftco-vh-100 {
-  height: 100vh;
+  height: var(--full-heigth);
   @include media-breakpoint-down(lg) {
   	height: inherit;
   	padding-top: 5em;

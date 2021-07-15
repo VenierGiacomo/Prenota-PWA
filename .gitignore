@@ -44,3 +44,26 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+/booktest
+/campi-da-calcio
+/campi-da-tennis
+/campo-da-calcio
+/campo-da-tennis
+/centri-estetici
+/centri-estetico
+/fisioterapista
+/fisioterapisti
+/google-deep-links
+/oculista
+/studio-di-unghie
+/studi-di-unghie
+/testing
+/applab
+/author
+/butterfly
+/ElaAdmin-master
+/trim
+/listing
+/templatecss
+/landingcss

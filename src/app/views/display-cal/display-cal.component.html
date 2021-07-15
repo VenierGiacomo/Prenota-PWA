@@ -1,0 +1,567 @@
+<body>
+    <div class="home">
+          
+            <div class="calendar" *ngIf='!OneView'>
+                <div class="date" > 
+                    <div class="current-date"> <span>  {{week[0]}} - {{week[6]}} </span> <div *ngIf='week[6]>week[0]'>{{month_name}}  {{year}}</div> <div *ngIf='week[0]>week[6] && month!=0'>{{months_names[month-1]}} {{month_name}} {{year}}</div> <div *ngIf='week[0]>week[6] && month==0'>{{months_names[11]}} {{month_name}} {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                    <div class="today-date" (click)='goToday(false)' >Oggi</div>
+                    <div class="selector-date">
+                        <div  (click)='displayWeek(false)'[class.active]='display=="week" && !OneView'>Settimana</div>
+                        <div (click)='displayMonth()' [class.active]='display=="month" && !OneView'>Mese</div>
+                    </div>
+                </div>
+                <div class="calendar-table" >
+                    <div class="table-cont">
+                        <div class="tabs" *ngIf='display==="week"' >  <div class="tab " *ngFor='let employee of employees' [class.active]='employee.id == selected' (click)="activetab(employee)"> {{employee.name}}</div> </div>
+                            <app-monthview *ngIf='display=="month"' [myMethod]="myMethodFunc"></app-monthview>
+                            <table *ngIf='display==="week"' class="fixed-table">
+                                    <thead>
+                                        <tr> 
+                                            <td class="fst-col"><p class="ph"></p></td>
+                                            <th >Lun<br><span>{{week[0]}}</span></th>
+                                            <th >Mar<br><span>{{week[1]}}</span></th>
+                                            <th>Mer<br><span>{{week[2]}}</span></th>
+                                            <th>Gio<br><span>{{week[3]}}</span></th>
+                                            <th>Ven<br><span>{{week[4]}}</span></th>
+                                            <th>Sab<br><span>{{week[5]}}</span></th>
+                                            <th>Dom<br><span>{{week[6]}}</span></th>
+                                        </tr>
+                                    </thead>  
+                                </table>
+              
+                           
+                    
+                        <table class="autoscroll"   *ngIf='display==="week"'>
+                            <tbody>
+                            <tr *ngFor="let row of times,let row_idx = index" class="rows" id='{{row_idx}}'>
+                                <td class="fst-col"><p>{{times[row_idx-1]}}</p></td>
+                                <td *ngFor="let cell of columns,  let col_idx = index" >
+                                    <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'>
+                                        <div  class="cell" id="{{row_idx}}-{{col_idx}}"  ></div>
+                                    </div>
+                                     
+                                    </td>
+                            </tr>
+                            
+                        </tbody>
+                        </table>
+                    
+                </div>
+                </div> 
+            </div>
+            <div class="calendar" *ngIf='OneView'>
+                <div class="date"> 
+                    <div class="current-date"> <span><span>{{giorni[oneviewDay]}}</span> {{today}}  </span>  <div *ngIf='week[0]>week[6] '>{{months_names[month]}}  {{year}}</div> <div *ngIf='week[6]>week[0] '>{{months_names[month]}}  {{year}}</div> <div><div (click)='pastWeek()'><img src="../assets/icons/last.svg"/></div> <div (click)='nextWeek()'><img src="../assets/icons/next.svg"/></div></div></div>
+                    <div class="today-date activetoday" (click)='goToday(false)'>Oggi</div>
+                    <div class="selector-date">
+                        <div  (click)='displayWeek(false)'>Settimana</div>
+                        <div (click)='displayMonth()' >Mese</div>
+                    </div>
+                </div>
+                <div class="calendar-table">
+                    <div class="table-cont">
+                            <app-monthview *ngIf='display=="month"' [myMethod]="myMethodFunc"></app-monthview>
+                            <table *ngIf='display==="week"' class="fixed-table1">
+                                    <thead>
+                                        <tr> 
+                                            <td class="fst-col"><p class="ph"></p></td>
+                                            <th *ngFor='let employee of employees' >{{employee.name}}</th>
+                                        </tr>
+                                    </thead>  
+                                </table>
+              
+                           
+                    
+                        <table class="autoscroll oneView"  *ngIf='display==="week"' >
+                            <tbody>
+                            <tr *ngFor="let row of times,let row_idx = index" class="rows" id='{{row_idx}}'> 
+                                <td class="fst-col" ><p *ngIf='row_idx%2==1'>{{times[row_idx-1]}}</p></td>
+                                <td *ngFor="let employee of employees,  let col_idx = index" >
+                                    <!-- <div  [class.cell-blocked]='(openlist[col_idx][0]>= row_idx) || (row_idx> openlist[col_idx][1] && openlist[col_idx][2]== undefined)|| (row_idx> openlist[col_idx][1] && openlist[col_idx][2]>= row_idx) || (row_idx> openlist[col_idx][3]) || (openlist[col_idx][0] == undefined)'> -->
+                                        <div  class="cell"  id="{{row_idx}}-{{employee.id}}" ></div>
+                                    <!-- </div> -->
+                                    </td>
+                            </tr>
+                        </tbody>
+                        </table>
+                    
+                </div>
+                </div> 
+            </div>
+        </div>
+       
+    
+ 
+    
+
+    </body>
+    
+    <style>
+    .low_credit{
+    color: #8d0000;
+    }
+    /* loader */
+    .loader-5 {
+        height: 32px;
+        width: 32px;
+        margin: 0px auto;
+        -webkit-animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-1 {
+        0%   { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+      @keyframes loader-5-1 {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .loader-5::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: 0; right: auto;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-2 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(24px, 0, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-2 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(24px, 0, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-5::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: auto;
+        bottom: 0; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-3 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(-24px, 0, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-3 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(-24px, 0, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-5 span {
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: 0; right: 0;
+        margin: auto;
+        height: 32px;
+        width: 32px;
+      }
+      .loader-5 span::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: auto; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-4 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(0, 24px, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-4 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(0, 24px, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-5 span::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: auto; left: 0;
+        bottom: 0; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        -webkit-animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-5 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(0, -24px, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-5 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }  
+    }
+    
+    
+    .loader-6 {
+        height: 32px;
+        width: 32px;
+        margin: 0px auto;
+        -webkit-animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-1 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-1 {
+        0%   { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+      @keyframes loader-5-1 {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      .loader-6::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: 0; right: auto;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #00479d;
+        border-radius: 50%;
+        -webkit-animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-2 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-2 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(24px, 0, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-2 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(24px, 0, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-6::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: auto;
+        bottom: 0; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #00479d;
+        border-radius: 50%;
+        -webkit-animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-3 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-3 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(-24px, 0, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-3 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(-24px, 0, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-6 span {
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: 0; right: 0;
+        margin: auto;
+        height: 32px;
+        width: 32px;
+      }
+      .loader-6 span::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0; left: 0;
+        bottom: auto; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #00479d;
+        border-radius: 50%;
+        -webkit-animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-4 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-4 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(0, 24px, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-4 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(0, 24px, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }
+      }
+      .loader-6 span::after {
+        content: "";
+        display: block;
+        position: absolute;
+        top: auto; left: 0;
+        bottom: 0; right: 0;
+        margin: auto;
+        width: 8px;
+        height: 8px;
+        background: #00479d;
+        border-radius: 50%;
+        -webkit-animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+                animation: loader-5-5 2s cubic-bezier(0.770, 0.000, 0.175, 1.000) infinite;
+      }
+      @-webkit-keyframes loader-5-5 {
+        0%   { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+        50%  { -webkit-transform: translate3d(0, -24px, 0) scale(.5); }
+        100% { -webkit-transform: translate3d(0, 0, 0) scale(1); }
+      }
+      @keyframes loader-5-5 {
+        0%   { transform: translate3d(0, 0, 0) scale(1); }
+        50%  { transform: translate3d(0, -24px, 0) scale(.5); }
+        100% { transform: translate3d(0, 0, 0) scale(1); }  
+    }
+    
+    
+    .contact_list{
+     position: absolute;
+     display: block;
+     background: #ffffffbb;
+     backdrop-filter: blur(8px);
+     height : var(--full-heigth);
+     width: 20vw;
+     top:0px;
+     transition: 400ms;
+     z-index: 10;
+     
+     text-align: center;
+     overflow: scroll;}
+     .contact_list h5{
+         padding: 30px 20px;
+     }
+     .contact_list .contact_person{
+         text-align: left;
+         font-size: 13px;
+         width: 18vw;
+        text-overflow: ellipsis ;
+        background: #ffffffbb;
+       
+        border-radius: 5px;
+        color:#313131;
+         padding: 10px 15px;
+         margin: 20px 1vw;
+         -webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+         -moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,50.17);
+         box-shadow: 0px 0px 15px 0px rgba(0,0,50,0.17);
+     }
+     
+    .contact_person:hover{
+       background: #00479d !important;
+       color: #fff !important;
+    
+       
+    }
+    .oneView .fst-col{
+        border-bottom-right-radius:0px;
+        border-bottom-left-radius:0px;
+        height: 20px  !important;
+        font-size: 9px !important;
+        padding:  0px!important;
+        line-height: 0px  !important;
+        margin:0px !important;
+       
+    }
+    .oneView  .fst-col p{
+      bottom: -7px;
+        margin-top: -11px;
+        padding-left: 18px !important;
+        padding-right: 6px;
+        background: #fff;
+        margin-right: -2px;
+        font-size: 11px !important;
+    }
+    .oneView  th {
+        height: 20px  !important;
+        line-height: 20px !important; 
+    }
+    .oneView tr{
+        height: 20px  !important;
+        line-height: 20px !important; 
+    }
+    .oneView td  {
+        height: 20px  !important;
+        line-height: 20px !important; 
+    }
+    .oneView  .cell {
+        height: 20px  !important;
+        line-height: 20px !important; 
+    }
+    .oneView  .cell{
+        position: relative;
+        pointer-events: inherit;
+        height: 20px  !important;;
+        width: 100%;
+        overflow: visible;
+    }
+    
+    .fst-col{
+        width: 4vw !important;
+        background: white;
+        font-size: 15px;
+        text-align: right;
+        border: none !important;
+        vertical-align: bottom;
+        border-bottom-right-radius:0px;
+        border-bottom-left-radius:0px;
+        height: var(--cell-height)  !important;
+        font-size: calc((var(--cell-height) / 2 - 1px)) !important;
+        padding:  0px!important;
+        line-height: 0px  !important;
+        margin:0px !important; 
+        position: relative;
+        border: 0px solid white !important;
+        
+       
+    }
+    .fst-col  p{
+            background: white;
+        line-height: 15px;
+        position: absolute;
+        font-size: var(--cell-font-size);
+        top: 2px;
+        right: 2px;
+        }
+        .fst-col   .ph{
+            position: relative;
+            color: white;
+            border-radius: 10px;
+            bottom: 1vh;
+        }
+    .fixed-table{
+        z-index: 3;
+        position: fixed;
+        width: 92vw;
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        background: white;
+        margin-top:30px;
+    }
+    .fixed-table1{
+        z-index: 3;
+        
+        position: fixed;
+        width: 92vw;
+        border-radius: 10px;
+        border-bottom-left-radius: 0px;
+        border-bottom-right-radius: 0px;
+        background: white;
+        margin-top:0px;
+    }
+    
+    /* new customer */
+    .new_costomer{
+      position: fixed;
+      right: 50px; 
+      width: 400px;
+      padding:20px;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px 2px #00000022;
+      transition: 600ms;
+      background: #fff;
+      z-index: 1000000;
+    }
+    .new_costomer p{
+    font-size: 12px;
+    }
+    .new_costomer button{
+      width: 150px;
+      box-shadow: 0px 0px 10px 2px #00000022;
+      margin: 0px 15px ;
+      padding: 0px 10px;
+      height: 40px;
+      border-radius: 7px;;
+      line-height: 40px;
+      font-size: 12px;
+      
+      font-weight: 700;
+      position: relative;
+      
+      }
+      .new_costomer .confirm_customer{
+        background: #0061d5;
+        color: white;
+      }
+    
+      .h-btn-3{
+            width: 30%;
+            margin: 5px 0px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 35px;
+            padding: 0px !important;
+            font-weight: 500;
+            height: 35px;
+            padding: 0px;
+            border: none; 
+          
+        }
+        .h-btn-3   img{
+                height: 21px;
+                margin: 7px auto;
+            }
+        .two-buttons{
+            width: 45%;
+            margin: 5px 0% auto 0%;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 35px;
+            padding: 0px !important;
+            font-weight: 500;
+            height: 35px;
+            padding: 0px;
+            border: none; 
+            
+        }
+        .two-buttons  img{
+                height: 21px;
+                margin: 7px auto;
+            }
+        .two-buttons-1{
+            width: 45%;
+            margin-right: 0%;
+            margin-left: 10%;
+            margin-top: 5px;
+            border-radius: 5px;
+            font-size: 14px;
+            line-height: 35px;
+            padding: 0px !important;
+            font-weight: 500;
+            height: 35px;
+            padding: 0px;
+            border: none;       
+        }
+    </style>

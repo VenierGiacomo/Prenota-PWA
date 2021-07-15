@@ -1,0 +1,1161 @@
+
+    <div class="home">
+           
+        <div class="side-menu">
+            <div class="menu-home" (click)='goHome()'>Calendario</div>
+            <div class="menu-settings" (click)='goSettings()'>Impostazioni</div>
+            <!-- <div class="menu-data" (click)='goData()'>Area clienti</div> -->
+            <div class="menu-logout" (click)='logout()'> <img src="../assets/icons/logout.svg"/> Esci</div>
+            <!-- <button>Logout</button> -->
+        </div>  
+        <div class="settings">
+                        <div class="topbar">
+                            <div class="not">Attività</div>
+                            <div (click)='goEmployees()' > <span *ngIf='store_type!=7'>Collaboratori</span> <span *ngIf='store_type==7'>Campi</span></div>
+                        </div>
+                        <div style='margin-top: 8vh'  class="content">
+                                <!-- Animated -->
+                                <div class="animated fadeIn">
+                         <div class="row">
+                                  
+                
+                                    <div class="col-lg-4 col-md-6">
+                                        <div class="card" (click)='displayCatalog()' >
+                                            <div class="card-body" >
+                                                <div class="stat-widget-five" style="text-align: center;">
+                                                    <div class="stat-icon dib flat-color-2">
+                                                        <i class="pe-7s-cart"></i>
+                                                        <img src="../assets/icons/work.svg" height="50px">
+                                                    </div>
+                                                   
+                                                            <div class="stat-text" ><span class="count">Servizi</span></div>
+                                                             
+                                                       
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-4 col-md-6">
+                                            <div class="card" (click)='charts_show()'>
+                                                <div class="card-body">
+                                                    <div class="stat-widget-five" style="text-align: center;">
+                                                        <div class="stat-icon dib flat-color-1">
+                                                            <img src="../assets/icons/profits.svg" height="50px">
+                                                        </div>
+                                                     
+                                                                <div class="stat-text"><span class="count">Statistiche</span></div>
+                                                                
+                                                      
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4 col-md-6">
+                                            <div class="card" (click)='getClient()'>
+                                                <div class="card-body" style="text-align: center;">
+                                                    <div class="stat-widget-five">
+                                                        <div class="stat-icon dib flat-color-1">
+                                                            <img src="../assets/icons/target.svg" height="50px">
+                                                        </div>
+                                                      
+                                                                <div class="stat-text"><span class="count">Clienti</span></div>
+                                                                
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <div class="col-lg-3 col-md-6">
+                                                <div class="card" (click)='portalStripe()'>
+                                                    <div class="card-body">
+                                                        <div class="stat-widget-five">
+                                                            <div class="stat-icon dib flat-color-2">
+                                                                <i class="pe-7s-cart"></i>
+                                                                <img src="../assets/policy.svg" height="50px">
+                                                            </div>
+                                                            
+                                                                
+                                                                    <div class="stat-text"><span class="count">Info Abbonamento</span></div>
+                                                                
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                                </div>
+                                <div *ngIf='!payable' class="activate-payments"><div> <img src='../assets/undraw_pay_online_b1hk.svg'></div>
+                                <span><button (click)='showBusinessStripeType()'>Accetta pagamenti online</button></span>
+                            
+                            </div>
+                            <div class="list-payments" *ngIf='payable'>
+                                <h2>Vendite</h2>
+                                <div class="row" style="overflow-y:scroll; height: 62vh;">
+                                <div class="col-md-6 " style="padding: 10px;" *ngFor='let payment of payments_recieved'>
+                                    <div class="payment-container">
+                                    <div class='left_data'>
+                                        <h5 style="text-transform:capitalize">{{payment.desc}}</h5>
+                                     <p>{{payment.payer_name}} <br>Data: {{payment.payed_in_date}}</p>
+                                    </div>
+                                    <div class='right_data'>
+                                     <h5 >{{displ_credit(payment.amount)}}</h5>
+                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                                
+                        </div>
+                                         
+                                 
+                                 
+                                
+                            </div>
+        
+        
+        
+        
+        
+        
+                            <!-- <div class="opening-hours">
+            
+                        <h4>Orario del negozio:</h4> 
+                        
+           
+
+<form> 
+        <h1>Lunedì</h1>
+            <div *ngIf='!closed_days[0]'></div>
+            <div *ngIf='!closed_days[0]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,0,0)"
+            [value]="lun[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[0]'
+            >
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,0,1)"
+            [value]="lun[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[0]'
+            >
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[0]'></div>
+            <div *ngIf='!double_turn[0]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,0,2)"
+            [value]="lun[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[0]'
+            >
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,0,3)"
+            [value]="lun[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[0]'
+            >
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[0]' (change)='double_turn[0]=!double_turn[0]' [checked]="double_turn[0]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[0]'(change)='closed_days[0]=!closed_days[0]'[checked]="!closed_days[0]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Martedì</h1>
+            <div *ngIf='!closed_days[1]'></div>
+            <div *ngIf='!closed_days[1]'></div>
+           
+            <vaadin-time-picker 
+            (change)="dateChanged($event,1,0)"
+            [value]="mar[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[1]'
+            >
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,1,1)"
+            [value]="mar[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[1]'>
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[1]'></div>
+            <div *ngIf='!double_turn[1]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,1,2)"
+            [value]="mar[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[1]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,1,3)"
+            [value]="mar[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[1]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[1]' (change)='double_turn[1]=!double_turn[1]' [checked]="double_turn[1]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[1]'(change)='closed_days[1]=!closed_days[1]'[checked]="!closed_days[1]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Mercoledì</h1>
+            <div *ngIf='!closed_days[2]'></div>
+            <div *ngIf='!closed_days[2]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,2,0)"
+            [value]="mer[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[2]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,2,1)"
+            [value]="mer[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[2]'
+            >
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[2]'></div>
+            <div *ngIf='!double_turn[2]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,2,2)"
+            [value]="mer[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[2]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,2,3)"
+            [value]="mer[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[2]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[2]' (change)='double_turn[2]=!double_turn[2]' [checked]="double_turn[2]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[2]'(change)='closed_days[2]=!closed_days[2]'[checked]="!closed_days[2]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Giovedì</h1>
+            <div *ngIf='!closed_days[3]'></div>
+            <div *ngIf='!closed_days[3]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,3,0)"
+            [value]="gio[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[3]'
+            >
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,3,1)"
+            [value]="gio[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[3]'>
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[3]'></div>
+            <div *ngIf='!double_turn[3]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,3,2)"
+            [value]="gio[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[3]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,3,3)"
+            [value]="gio[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[3]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[3]' (change)='double_turn[3]=!double_turn[3]' [checked]="double_turn[3]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[3]'(change)='closed_days[3]=!closed_days[3]'[checked]="!closed_days[3]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Venerdì</h1>
+            <div *ngIf='!closed_days[4]'></div>
+            <div *ngIf='!closed_days[4]'></div>
+          
+            <vaadin-time-picker 
+            (change)="dateChanged($event,4,0)"
+            [value]="ven[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[4]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,4,1)"
+            [value]="ven[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[4]'>
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[4]'></div>
+            <div *ngIf='!double_turn[4]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,4,2)"
+            [value]="ven[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[4]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,4,3)"
+            [value]="ven[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[4]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[4]' (change)='double_turn[4]=!double_turn[4]' [checked]="double_turn[4]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[4]'(change)='closed_days[4]=!closed_days[4]'[checked]="!closed_days[4]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Sabato</h1>
+            <div *ngIf='!closed_days[5]'></div>
+            <div *ngIf='!closed_days[5]'></div>
+        
+            <vaadin-time-picker 
+            (change)="dateChanged($event,5,0)"
+            [value]="sab[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[5]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,5,1)"
+            [value]="sab[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[5]'>
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[5]'></div>
+            <div *ngIf='!double_turn[5]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,5,2)"
+            [value]="sab[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[5]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,5,3)"
+            [value]="sab[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[5]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[5]' (change)='double_turn[5]=!double_turn[5]' [checked]="double_turn[5]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[5]'(change)='closed_days[5]=!closed_days[5]'[checked]="!closed_days[5]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+         
+            <h1>Domenica</h1>
+            <div *ngIf='!closed_days[6]'></div>
+            <div *ngIf='!closed_days[6]'></div>
+            
+            <vaadin-time-picker 
+            (change)="dateChanged($event,6,0)"
+            [value]="dom[0]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='closed_days[6]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,6,1)"
+            [value]="dom[1]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='closed_days[6]'>
+            </vaadin-time-picker>
+            <div *ngIf='!double_turn[6]'></div>
+            <div *ngIf='!double_turn[6]'></div>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,6,2)"
+            [value]="dom[2]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Apertura"
+            *ngIf='double_turn[6]'>
+            </vaadin-time-picker>
+            <vaadin-time-picker 
+            (change)="dateChanged($event,6,3)"
+            [value]="dom[3]"
+            id="time-picker-basic-demos-value-resolution" 
+min="06:30" max="22:00" 
+            step="900" 
+            label="Chiusura"
+            *ngIf='double_turn[6]'>
+            </vaadin-time-picker>
+            <vaadin-checkbox-group theme="vertical">
+                    <vaadin-checkbox value="Option" *ngIf='closed_days[6]' (change)='double_turn[6]=!double_turn[6]' [checked]="double_turn[6]">2 turni</vaadin-checkbox>
+                    <vaadin-checkbox value="Option" *ngIf='!double_turn[6]'(change)='closed_days[6]=!closed_days[6]'[checked]="!closed_days[6]">chiuso</vaadin-checkbox>
+            </vaadin-checkbox-group>
+    </form>
+        </div> -->
+    </div>
+</div>
+            <!-- <div class="services">
+                <div class="service-cont">
+                    <div class=" service add-service" (click)='displayCatalog()'>I tuoi <br> servizi</div>
+                    <div class=" service add-service" (click)='goEmployees()'>I tuoi <br> collaboratori</div>
+                   
+                </div>
+            </div> -->
+        </div>
+   </div>
+
+
+
+<div class="catalog" [style.display]='catalog'>
+        <div class="close-catalog" (click)='catalog="none"; color_show="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+            <div class="cont-table">
+                <table class="table-catalog">
+                    <thead>
+                        <tr> 
+                            <th class="corner1">Nome Servizio</th>
+                            <th style="text-align: center;">Durata</th>
+                            <!-- <th>Sesso</th> -->
+                            <th style="text-align: center;">Prezzo</th>
+                            <th>Colore</th>
+                            <th class="corner2"></th>
+                        </tr>
+                    </thead>  
+                    <tbody>
+                        <tr *ngFor='let service of catalog_list'> 
+                            <td>{{service.name}}</td>
+                            <td style="text-align: center;">{{durations[service.duration]}}</td>
+                            <!-- <td>{{sexs[service.sex]}}</td> -->
+                            <td style="text-align: center;">{{service.price_display}}</td>
+                            <td><div class="color-serv" [style.background]='colors_list[service.color]'></div></td>
+                            <td> <button class="delete" (click)='deleteservice(service.id)'>Elimina</button></td>
+                        </tr>
+                        <tr> 
+                            <td style="padding: 0px;"><input class='input-name'type="text" placeholder="Nome servizio" [(ngModel)]="name" style="text-align: left !important"></td>
+                            <td style="padding: 0px;">
+                                <select [(ngModel)]="duration">
+                                    <option value=1>5 min</option>
+                                    <option value=2>10 min</option>
+                                    <option value=3>15 min</option>
+                                    <option value=4>20 min</option>
+                                    <option value=5>25 min</option>
+                                    <option value=6>30 min</option>
+                                    <option value=7>35 min</option>
+                                    <option value=8>40 ora</option>
+                                    <option value=9>45 min</option>
+                                    <option value=10>50 min</option>
+                                    <option value=11>55 min</option>
+                                    <option value=12> 1 ora</option>
+                                    <option value=13> 1 ora 5 min</option>
+                                    <option value=14> 1 ora 10 min</option>
+                                    <option value=15> 1 ora 15 min</option>
+                                    <option value=16> 1 ora 20 min</option>
+                                    <option value=17> 1 ora 25 min</option>
+                                    <option value=18> 1 ora 30 min</option>
+                                    <option value=19> 1 ora 35 min</option>
+                                    <option value=20> 1 ora 40 ora</option>
+                                    <option value=21> 1 ora 45 min</option>
+                                    <option value=22> 1 ora 50 min</option>
+                                    <option value=23> 1 ora 55 min</option>
+                                    <option value=24> 2 ore</option>
+                                </select>
+                            </td>
+                            <!-- <td style="padding: 0px;">
+                                <select [(ngModel)]="sex">
+                                    <option value=1>Donna</option>
+                                    <option value=2>Uomo</option>
+                                    <option value=3>Unisex</option>
+                                </select>
+                            </td> -->
+                            <td style="padding: 0px;"><input id='input-price'  placeholder="Inserizi il prezzo" [(ngModel)]="price" ></td>
+                            <td style="padding: 0px;" id='color'><div class="color-serv" [style.background]='bgcolor' (click)='displayColorPicker()'></div></td>
+                            <td style="padding: 0px auto;"><button  class="active-service" (click)='storeCatalogService()'>Aggiungi</button></td>
+                        </tr>
+                    </tbody>
+                </table>     
+        </div>
+       
+    </div>
+<div class="color-picker" [style.display]='color_show' [style.top]='color_top'>
+        <div class="c c0" (click)='changeColor(0)'></div>
+        <div class="c c1" (click)='changeColor(1)'></div>
+        <div class="c c2" (click)='changeColor(2)'></div>
+        <div class="c c3" (click)='changeColor(3)'></div>
+        <div class="c c4" (click)='changeColor(4)'></div>
+        <div class="c c5" (click)='changeColor(5)'></div>
+        <div class="c c6" (click)='changeColor(6)'></div>
+        <div class="c c7" (click)='changeColor(7)'></div> 
+        <div class="c c8" (click)='changeColor(8)'></div>
+        <div class="c c9" (click)='changeColor(9)'></div>
+        
+    </div>
+
+<!-- <div class="catalog" [style.display]='bussiness_selection'>
+        <div class="close-catalog" (click)='bussiness_selection="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+        <h1 style="width: 100vw; color: #fff; text-align: center;margin-top: 30px;">Seleziona la tipologia di attività:</h1>
+    <div class="content" style="position: absolute; margin-top: 24vh;">
+        <div class="row" >
+                <div class="col-lg-3 col-md-6">
+                    <div class="card" (click)='updateBusinessType(1)'>
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <img src="../assets/icons/doctor.svg" height="50px">
+                                </div>
+                                
+                                    
+                                        <div class="stat-text"><span class="count">Salute</span></div>
+                                     
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                        <div class="card" (click)='updateBusinessType(2)'>
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <img src="../assets/icons/hair.svg" height="50px">
+                                    </div>
+                                    
+                                        
+                                            <div class="stat-text"><span class="count">Cura capelli e viso</span></div>
+                                            
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                            <div class="card" (click)='updateBusinessType(3)'>
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-1">
+                                            <img src="../assets/icons/massage.svg" height="50px">
+                                        </div>
+                                        
+                                            
+                                                <div class="stat-text"><span class="count">Centro Massaggi</span></div>
+                                                
+                                           
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <div class="col-lg-3 col-md-6">
+                            <div class="card" (click)='updateBusinessType(4)'>
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-1">
+                                            <img src="../assets/icons/nails.svg" height="50px">
+                                        </div>
+                                        
+                                            
+                                                <div class="stat-text"><span class="count">Estetisti</span></div>
+                                                
+                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="col-lg-3 col-md-6">
+                                <div class="card" (click)='updateBusinessType(5)'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-1">
+                                                <img src="../assets/icons/physiotherapy.svg" height="50px">
+                                            </div>
+                                            
+                                                    <div class="stat-text"><span class="count">Fisioterapia</span></div>
+                                                    
+                                              
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+         
+                    <div class="col-lg-3 col-md-6">
+                        <div class="card" (click)='updateBusinessType(6)'>
+                            <div class="card-body">
+                                <div class="stat-widget-five">
+                                    <div class="stat-icon dib flat-color-1">
+                                        <img src="../assets/icons/dentist.svg" height="50px">
+                                    </div>
+                                    
+                                        
+                                            <div class="stat-text"><span class="count">Dentisti</span></div>
+                                            
+                                        
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                            <div class="card" (click)='updateBusinessType(7)'>
+                                <div class="card-body">
+                                    <div class="stat-widget-five">
+                                        <div class="stat-icon dib flat-color-1">
+                                            <img src="../assets/icons/gym.svg" height="50px">
+                                        </div>
+                                        
+                                            
+                                                <div class="stat-text"><span class="count">Centro sportivo</span></div>
+                                                
+                                           
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6">
+                                <div class="card" (click)='updateBusinessType(8)'>
+                                    <div class="card-body">
+                                        <div class="stat-widget-five">
+                                            <div class="stat-icon dib flat-color-1">
+                                                <img src="../assets/icons/lawyer.svg" height="50px">
+                                            </div>
+                                            
+                                                    <div class="stat-text"><span class="count">Avvocati</span></div>
+                                                    
+                                                
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                </div>
+    </div>
+</div> -->
+
+<div class="catalog" [style.display]='bussiness_type_stripe'>
+    <div class="close-catalog" (click)='bussiness_type_stripe="none"'>  <img src="../assets/icons/closewhite.svg"/></div>
+    <h1 style="width: 100vw; color: #fff; text-align: center;margin-top: 30px;">Seleziona la tipologia di attività:</h1>
+<div class="content" style="position: absolute; margin-top: 24vh;">
+    <div class="row" >
+            <div class="col-md-5 offset-md-1">
+                <div class="card" (click)='openPaymentAccount("individual")'>
+                    <div class="card-body">
+                        <div class="stat-widget-five">
+                            <div class="stat-icon dib flat-color-1">
+                                <img src="../assets/icons/doctor.svg" height="50px">
+                            </div>
+                            
+                                
+                                    <div class="stat-text"><span class="count">Partita IVA o Azienda individuale</span></div>
+                                    
+                                
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5 ">
+                    <div class="card" (click)='openPaymentAccount("company")'>
+                        <div class="card-body">
+                            <div class="stat-widget-five">
+                                <div class="stat-icon dib flat-color-1">
+                                    <img src="../assets/icons/hair.svg" height="50px">
+                                </div>
+                                
+                                    
+                                        <div class="stat-text"><span class="count">Azienda di persone</span></div>
+                                        
+                                    
+                            </div>
+                        </div>
+                    </div>
+                </div>      
+            </div>
+</div>
+</div>
+
+<div class="charts" id='charts_cont' (click)='charts_hide($event)' >
+
+        
+        <span style="top: 12px;
+        position: absolute;
+       
+        left: 28.5vw;" (click)='pastmonthChart()'><img src="../assets/icons/last.svg"/></span> <span style="top: 12px;
+        position: absolute;
+    
+        left: 50vw;" (click)='nextmonthChart()'><img src="../assets/icons/next.svg"/></span>    <h4>{{months_names[stat_month]}} {{stat_year}}</h4>   
+    <h2 *ngIf='chart_data.length==0' style="text-align: center; margin-top:30vh; font-weight: 700;" >
+        Dati non sufficenti
+    </h2>
+    <div [style.visibility]='chart_visibility'>
+        <ngx-charts-bar-vertical
+          [view]="view"
+          [scheme]="colorScheme_services"
+          [results]="services_general"
+          [gradient]="gradient"
+          [xAxis]="showXAxis"
+          [yAxis]="showYAxis"
+          [legend]="showLegend"
+          [showXAxisLabel]="showXAxisLabel"
+          [showYAxisLabel]="showYAxisLabel"
+          [xAxisLabel]="xAxisLabel_services_general"
+          [yAxisLabel]="yAxisLabel_services_general"
+          [xAxisTickFormatting]='trunk5'
+          
+          >
+          <ng-template #tooltipTemplate let-model="model">
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:10px 20px 0px 20px;">
+                  {{ model.name }}
+                </p>
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:0px 20px;">{{ formatHour(model.value) }}</p>
+              </ng-template>
+        </ngx-charts-bar-vertical>
+        </div>
+        <div [style.visibility]='chart_visibility'>
+            <ngx-charts-bar-vertical
+              [view]="view"
+              [scheme]="colorScheme"
+              [results]="services_per_emplo"
+              [gradient]="gradient"
+              [xAxis]="showXAxis"
+              [yAxis]="showYAxis"
+              [legend]="showLegend"
+              [showXAxisLabel]="showXAxisLabel"
+              [showYAxisLabel]="showYAxisLabel"
+              [xAxisLabel]="xAxisLabel_services_per_emplo"
+              [yAxisLabel]="yAxisLabel_services_per_emplo"
+              [xAxisTickFormatting]='trunk5'
+              >
+              <ng-template #tooltipTemplate let-model="model">
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:10px 20px 0px 20px;">
+                  {{ model.name }}
+                </p>
+                <p style="color: white; font-size: 11px; line-height: 13px; padding:0px 20px;">{{ formatHour(model.value) }}</p>
+              </ng-template>
+              </ngx-charts-bar-vertical>
+            </div>
+            <div [style.visibility]='chart_visibility'>
+                <ngx-charts-number-card
+                  [view]="view"
+                  [scheme]="colorScheme"
+                  [results]="online_performance"
+                  [gradient]="gradient"
+                  [xAxis]="showXAxis"
+                  [yAxis]="showYAxis"
+                  [legend]="showLegend"
+                  [showXAxisLabel]="showXAxisLabel"
+                  [showYAxisLabel]="showYAxisLabel"
+                  [xAxisLabel]="xAxisLabel_online_performance"
+                  [yAxisLabel]="yAxisLabel_online_performance"                  
+                  [valueFormatting]='format_cardMoney'
+                  >
+                </ngx-charts-number-card>
+                </div>
+                <div [style.visibility]='chart_visibility'>
+                    <ngx-charts-bar-vertical
+                      [view]="view"
+                      [scheme]="colorScheme"
+                      [results]="day_by_day"
+                      [gradient]="gradient"
+                      [xAxis]="showXAxis"
+                      [yAxis]="showYAxis"
+                      [legend]="showLegend"
+                      [showXAxisLabel]="showXAxisLabel"
+                      [showYAxisLabel]="showYAxisLabel"
+                      [xAxisLabel]="xAxisLabel_day_by_day"
+                      [yAxisLabel]="yAxisLabel_day_by_day"
+                      >
+                      <ng-template #tooltipTemplate let-model="model">
+                        <p style="color: white; font-size: 11px; line-height: 13px; padding:10px 20px 0px 20px;">
+                          {{ nameToDate(model.name) }}
+                        </p>
+                        <p style="color: white; font-size: 11px; line-height: 13px; padding:0px 20px;">{{model.value}} appuntamenti</p>
+                      </ng-template>
+                    </ngx-charts-bar-vertical>
+                    </div>
+</div>
+
+<div class="cont-left" *ngIf='displ_client' id='clients_id' [style.left]='left_clients' (click)="close_clients($event)" >
+        <div class="spinner" [style.display]="spin">
+                <div class="double-bounce1"></div>
+                <div class="double-bounce2"></div>
+              </div>
+        <div id="right-panel" >
+                <!-- /#header -->
+                <!-- Content -->
+                <div class="content">
+                        <!-- Animated -->
+                        <div class="animated fadeIn">
+        <div class="orders">
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-body" style="padding: 25px 0px 0px 0px  !important;">
+                                <h4 class="box-title" style="padding-left:25px;">I tuoi clienti</h4>
+                                
+                                <button class="add_client" style="right: 280px;" (click)='download_latestCLient()'>Aggiorna dati</button>
+                                <button class="add_client" (click)='register_form="block"'>Aggiungi un nuovo cliente</button>
+                                <div class="table-stats order-table ov-h">
+                                    <table class="table ">
+                                            <thead>
+                                                    <tr>
+                                                        <th class="serial" style="    border-top-left-radius: 10px;
+                                                        border-top-right-radius: 10px;">Cerca <input style="border-radius: 2px; padding: 5px 10px" [(ngModel)]='lookUp' (keyup)='type()' /> </th>
+
+                                                    </tr>
+                                                </thead>
+                                        <thead>
+                                            <tr>
+                                                <th class="serial" style="width: 12vw;">Nome e Cognome</th>
+                                      
+                                                <th style="width: 8vw;">Cellulare</th>
+                                                <th style="width: 14vw;">Email</th>
+                                                <th *ngIf='storeUseCredits' style="width: 8vw;">Credito</th>
+                                               
+                                                <th style="width: 3vw;">Socio</th>
+                                                <th>Note</th>
+                                                <th style="padding-left:40px ;">Salva</th>
+                                            </tr>
+                                        </thead>
+                                        </table>
+                                        </div>
+                            </div>
+                            <div class="card-body--" style="overflow: scroll;">
+                                <div class="table-stats order-table ov-h">
+                                    <table class="table " style="margin-top:0px  !important">
+                                           
+                                        <tbody>
+                                                <!-- <tr *ngFor='let client of show_clients'  (click)='goClient(client)'> -->
+
+                                                <tr *ngFor='let client of show_clients' >
+                                                   
+                                                        <td class="serial" style="width: 12vw;" ><svg  *ngIf='client.client>1' style="width: 1vw; height: 1vw; display: inline-block;"  viewBox="0 0 24 24" fill="none" data-selector="TRANSACTION.STATUS_ICON" class="e1mbu2mn9 css-17kcjw3-StyledIconSuccess-StyledStatusIcon-StyledStatusIcon ewhta3v0"><path d="M8.183 12.684l2.572 2.571 5.142-6.428" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path><path d="M12 21a9 9 0 100-18 9 9 0 000 18z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg><input    style="    width: 10vw;
+                                                            padding-left: 5px;
+                                                            display: inline-block;"  [(ngModel)]='client.client_name'></td>
+                                                     
+                                                       
+                                                        <td  style="width: 8vw;"> <input [(ngModel)]='client.phone'> </td>
+                                                        <td  style="width: 14vw;"> <input [(ngModel)]='client.email'> </td>
+                                                        <td *ngIf='storeUseCredits' style="width: 8vw;"> <input [(ngModel)]='client.credit'></td>
+                                                        <td style="width: 3vw;"><vaadin-checkbox value="Option" (change)='client.isMember=!client.isMember' [checked]="client.isMember"></vaadin-checkbox></td>
+                                                        <td> <input [(ngModel)]='client.note' placeholder="Clicca ed aggiungi una nota"></td>
+                                                       
+                                                        <td>
+                                                            <span class="badge badge-complete" (click)='update(client)'><img style='height: 15px;' src='../assets/icons/floppy-disk.svg'></span>
+                                                            <span class="badge badge-complete" (click)='processQR(client)'  style='line-height: 15px;'>QR</span>
+                                                            <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding:  10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
+                                                            <span class="badge badge-complete" (click)='promptDelete(client)' style="padding:  10px !important; background: #bd0026;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                         
+                                                        </td>
+                                                    </tr>
+                                              
+                                                           
+                                                    
+                                                   
+                                           
+                                        </tbody>
+                                        <!-- <cdk-virtual-scroll-viewport style="display: table-caption; height: 50vh;" itemSize="30" >   
+                                           
+                                            <tr *cdkVirtualFor="let client of clients">
+                                                    <td class="serial" style="width: 14vw;"><input [(ngModel)]='client.client_name'></td>
+                                                    
+                                                   
+                                                    <td  style="width: 10vw;"> <input [(ngModel)]='client.phone'> </td>
+                                                    <td *ngIf='storeUseCredits' style="width: 8vw;"> <input [(ngModel)]='client.credit'></td>
+                                                    <td style="width: 3vw;"><vaadin-checkbox value="Option" (change)='client.isMember=!client.isMember' [checked]="client.isMember"></vaadin-checkbox></td>
+                                                    <td> <input [(ngModel)]='client.note' placeholder="Clicca ed aggiungi una nota"></td>
+                                                   
+                                                    <td style="text-align: right;">
+                                                        <span class="badge badge-complete" (click)='update(client)'>Salva modifiche</span>
+                                                        <span class="badge badge-complete" (click)='processQR(client)'>QR</span>
+                                                        <span class="badge badge-complete" (click)='inviteEmail(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/mail-outline.svg'></span>
+                                                        <span class="badge badge-complete" (click)='promptDelete(client)' style="padding: 8px 10px !important;"><img style='height: 15px;' src='../assets/icons/delete_white.svg'></span>
+                                                     
+                                                    </td>
+                                                </tr>
+                                          
+                                                       
+                               
+                                            </cdk-virtual-scroll-viewport>    -->
+                                    </table>
+                                    <div *ngIf=' show_clients.length==0 'class="activate-payments" style="padding: 30px;"> <span><h2>Nessun Cliente trovato</h2></span><div> <img src='../assets/undraw_Tree_swing_646s.svg'></div>
+                                   
+                                
+                                </div>
+                                    
+                                   
+                                </div> <!-- /.table-stats -->
+                            </div>
+                        </div> <!-- /.card -->
+                    </div>  <!-- /.col-lg-8 -->
+                </div>
+                   
+               
+                   
+       
+            </div>
+        </div>
+        </div>
+
+        <div class="cont-reg" [style.display]="register_form" id='back_add_client' (click)='closeAddClient($event)'>
+                <div class="register-form" >
+                        <h1>prenota</h1>
+                    <div class='inputs'>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Nome</label>
+                                    <input class="input--style-4" [(ngModel)]="invite_first_name" type="text" name="first_name" placeholder="Mario">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Cognome</label>
+                                    <input class="input--style-4" [(ngModel)]="invite_last_name" type="text" name="last_name" placeholder="Rossi">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2-r">
+                                <div class="input-group">
+                                    <label class="label">Email</label>
+                                    <input class="input--style-4" [(ngModel)]="invite_email" type="email" name="email"  placeholder="mario.rossi@email.com">
+                                    
+                                </div>
+                            </div>
+                            <div class="col-2-r">
+                                    <div class="input-group">
+                                        <label class="label">Numero di telefono</label>
+                                        <input class="input--style-4"[(ngModel)]="invite_phone" type="text" name="phone" placeholder="3312233645">
+                                        
+                                    </div>
+                                </div>
+                        </div>
+                     
+                        <div class="activate-payments" (click)='saveClientwithEmail()'>  <button style="height: 50px; line-height: 50px; font-size: 15px; padding: 0px 25px;"><span *ngIf="!loading">Aggiungi Cliente</span><div class="loader-light center" *ngIf="loading"><span></span></div></button></div>
+                    </div> 
+                </div>
+            
+                </div>
+    </div>
+
+   
+</div>
+<div class="back_qr" *ngIf='backdrop_active' (click)="closeQR()">
+        <div  id='qr-card'>
+            
+        </div>
+      </div>
+
+      <div class="new_costomer" [style.top]='delete_modal_top'>
+            <p>Sei sicuro di voler rimuovere <b style="text-transform: capitalize;">{{delete_customer.client_name}}</b> dai tuoi clienti?</p>
+            <button class="confirm_customer" (click)='deleteClient()'>Cancella</button><button (click)='closeDeletePrompt()'>Non ora</button>
+            </div>
+
+<style>
+
+    /* register */
+.add_client{
+    padding: 10px 20px;
+    box-shadow: 0 0 15px -2px rgba(33, 33, 33, 0.2) !important;
+    border-radius: 5px;
+    display: block;
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    
+}
+.input-group p{
+    
+    padding: 0 !important;
+    margin: 0 !important;
+
+}
+.register-form{
+    padding: 2vw;
+    border-radius: 10px;
+    position: absolute;
+    top: 14vh;
+    width: 60%;
+    left: 20%;
+    display: block;
+    background: white;
+    z-index: 3;}
+    .register-form  h1{
+        font-family: "Comfortaa" , sans-serif!important;
+    }
+    .register-form label{
+        color: #00479D;
+        margin-top: 10px;
+    }
+   
+    .register-form button{
+      margin-top: 30px !important;
+  }
+  .register-form   .inputs{
+        padding: 2vh 5vw 0px 5vw ;
+    }
+   
+    .cont-reg{
+    position: absolute;
+    top: calc(6vh + 10px);
+    width: 100%;
+    height: calc(94vh - 10px);
+    display: block;
+    z-index: 1000;
+    overflow: hidden;
+    margin: 0;
+    background:  #011c53cc}
+    .cont-reg  h1{
+        width: 100%;
+        display: block;
+        text-align: center;
+        font-family: "Comfortaa" , sans-serif !important;
+        color: #0061d5;
+        padding:0px 0px 20px 0px;
+    }
+    .cont-reg input:focus{
+        outline: none;
+    }
+    #qr-card{
+    top:110vh;
+    position: absolute;
+    background: white;
+    width: 40vh;
+    margin-left:calc(50vw - 20vh);
+    height: 40vh;
+    transition: 400ms;
+    border-radius:10px;
+    overflow: hidden;
+    
+}
+#qr-card svg{
+        width: 34vh;
+        height: 34vh;
+        margin: 3vh;
+    }
+    .back_qr{
+    position: absolute;
+    top:0px;
+    left: 0px;
+    width: 100vw;
+    height: var(--full-heigth);
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(16px);
+    z-index: 10;
+}
+
+/* new customer */
+.new_costomer{
+  position: fixed;
+  right: 50px; 
+  width: 400px;
+  padding:20px;
+  display: block;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  transition: 600ms;
+  background: #fff;
+  z-index: 1000000;
+}
+.new_costomer p{
+font-size: 12px;
+}
+.new_costomer b{
+color: #212121;
+}
+.new_costomer button{
+  width: 150px;
+  box-shadow: 0px 0px 10px 2px #00000022;
+  margin: 0px 15px ;
+  padding: 0px 10px;
+  height: 40px;
+  border-radius: 7px;;
+  line-height: 40px;
+  font-size: 12px;
+  
+  font-weight: 700;
+  position: relative;
+  
+  }
+  .new_costomer .confirm_customer{
+    background: #940606;
+    color: white;
+  }
+  input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+    -webkit-appearance: none;
+}
+input[type=number] {
+    -moz-appearance: textfield;
+  }
+</style>
+<!-- color picker -->
