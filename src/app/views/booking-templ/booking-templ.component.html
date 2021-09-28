@@ -988,22 +988,6 @@ background: rgba(0, 0, 0, 0.5);
   <b>I dati non saranno salvati da Prenota</b> e non verranno collegati al tuo account!</p>
   <div class='inputs'>
       <div class="row row-space">
-          <div class="col-2-r">
-              <div class="input-group">
-                  <label class="label">Comune di residenza</label>
-                  <input class="input--style-4" [(ngModel)]="live_city" type="text"  placeholder="Trieste">
-                  <p *ngIf='live_city_err!=""'>{{live_city_err}}</p>
-              </div>
-          </div>
-          <div class="col-2-r">
-            <div class="input-group">
-                <label class="label">Indirizzo di residenza</label>
-                <input class="input--style-4" style="padding:0px 10px" [(ngModel)]="live_street" type="text"   placeholder="Via Carducci 21">
-                <p *ngIf='live_street_err!=""'>{{live_street_err}}</p>
-            </div>
-        </div>
-      </div>
-      <div class="row row-space">
         <div class="col-2-r">
           <div class="input-group">
               <label class="label">Codice fiscale</label>
@@ -1011,47 +995,9 @@ background: rgba(0, 0, 0, 0.5);
               <p *ngIf='fiscal_code_err!=""'>{{fiscal_code_err}}</p>
           </div>
       </div>
-        <div class="col-2-r">
-          <div class="input-group">
-              <label class="label">Cap (codice postale)</label>
-              <input class="input--style-4" style="padding:0px 10px" [(ngModel)]="cap" type="date"   placeholder="34120">
-              <p *ngIf='cap_err!=""'>{{cap_err}}</p>
-          </div>
-      </div>
+
     </div>
-      <div class="row row-space">
-        <div class="col-2-r">
-          <div class="input-group" >
-              <label class="label">Ricevi risposta via email?</label>
-              <div class="p-t-10">
-                  <label class="radio-container m-r-45">Si
-                      <input type="radio" [(ngModel)]="by_emial" value="Si"checked="checked" name="by_emial">
-                      <span class="checkmark"></span>
-                  </label>
-                  <label class="radio-container">No
-                      <input type="radio" [(ngModel)]="by_emial" value="No" name="by_emial">
-                      <span class="checkmark"></span>
-                  </label>
-              </div>
-          </div>
-      </div>
-      <div class="col-2-r">
-        <div class="input-group" >
-            <label class="label">Dovrai recarti in croazia?</label>
-            <div class="p-t-10">
-                <label class="radio-container m-r-45">Si
-                    <input type="radio" [(ngModel)]="croatia" value="Si"checked="checked" name="croatia">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="radio-container">No
-                    <input type="radio" [(ngModel)]="croatia" value="No" name="croatia">
-                    <span class="checkmark"></span>
-                </label>
-            </div>
-        </div>
-    </div>
-          
-      </div>
+
           <div class="button-reg">  <button (click)='update_extra_data()'> <span  >Invia</span><div class="loader-5 center" *ngIf="loading"><span></span></div></button></div>
   </div> 
 </div>

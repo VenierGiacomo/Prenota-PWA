@@ -461,31 +461,7 @@ in Farmacia quando vuoi.
    <br><br>
    Siamo entusiasti di potervi ospitare nel nostro nuovo campo.
     `}
-    ,'borgoalta':{
-          name:'Borgo Alta',
-          html_title:'Borgo Alta: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
-          id: 51,
-          campo:true,
-          keywords:"Borgo Alta, Borgo Alta campo, Borgo Alta calcetto, Borgo Alta calcetto a 7, Borgo Alta calcetto a sette, Borgo Alta calcetto a sette campo, calcetto Trieste, campo calcetto Borgo Alta, campo da calcetto Borgo Alta,  campo da calcio Trieste Borgo Alta, campo Borgo Alta calcio Trieste, calcio a sette Borgo Alta",
-          og_url:'https://prenota.cc/appuntamento/borgoalta',
-          og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-          og_description:'Borgo Alta campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo Borgo Alta a Trieste, via Tonino amatori.',
-          phone: '+39 040360407',
-          address: 'Via Tonino Amatori, Trieste', 
-          zip_code:'34148',
-          bg_opacity:'#00000088',
-          img_bg:'../assets/IMG_1601.png',
-          bookable_pc:true,
-          category:'Campo da calcetto a sette Trieste',
-          hours:`Lun - Dom dalle 18:00 alle 22:00`,
-          description:`
-      Il campo da calcetto di Borgo Alta, a 7 giocatori di via Tonino Amatori è pronto ad essere utilizzato. <br><br>
-      Campo utilizzato dalla squadra Inter San sergio, Squadra sportiva amatoriale di calcio a 11 fondata da Carlo Milocco.<br>
-     È molto ampio e può essere giocato anche 9 contro 9
-  
-     <br><br>
-     Siamo entusiasti di potervi ospitare nel nostro nuovo campo.
-      `},
+    ,
       'montuzza':{
             name:'Montuzza',
             html_title:'Montuzza: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
@@ -620,7 +596,7 @@ in Farmacia quando vuoi.
             og_url:'https://prenota.cc/appuntamento/villaara',
             og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
             og_description:'ASD Trifoglio campo da calcetto Trieste, vedi le disponibilità e prenota il campo a sette online in qualche secondo. Campo ASD Trifoglio a Trieste, via Monte Cengio 2.',
-            phone: '+39 040 568474',
+            phone: '+39 338 6992009',
             address: 'Via delle campanelle 266', 
             zip_code:'34149',
             bg_opacity:'#00000088',
@@ -1348,7 +1324,7 @@ items.forEach(function (a) {
               //     app.duration +=1
               // }
             
-
+              // console.log(this.all_app_week1.filter((app)=>{app.day==11}) ,this.all_app_week1)
             for(let idx in this.list_work){
        
               let id:any = idx
@@ -1371,7 +1347,7 @@ items.forEach(function (a) {
              }
            
             }
-            
+            // console.log(this.availableSpots,this.availableSpots1)
             let weeks=[]
             for(let spot of this.availableSpots1){
                 weeks.push(spot.day)
@@ -1759,7 +1735,7 @@ async filter_serv(){
      this.final_spots_displ= final_spots_displ
    }
    this.final_spots_displ= [...new Set( this.final_spots_displ)]
-   
+   console.log(final_spots_displ)
 }
   getWeekNumber(d) {
     // Copy date so don't modify original
@@ -2122,18 +2098,8 @@ update_extra_data(){
   ${this.res_book.phone}
   - Email:
   ${this.email}
-  - Comune di residenza:
-  ${this.live_city}
-  - Indirizzo:
-  ${this.live_street}
-  - CAP:
-  ${this.cap}
   - Codice Fiscale:
-  ${this.fiscal_code}
-  - Risposta via email:
-  ${this.by_emial}
-  - Croazia:
-  ${this.croatia}`
+  ${this.fiscal_code}`
 
   if(this.fiscal_code==undefined || this.fiscal_code==null|| this.fiscal_code==''){
     this.fiscal_code_err='Inserisci il codice fiscale'
@@ -2145,23 +2111,9 @@ update_extra_data(){
   // }else{
   //   this.born_city_err=''
   // }
-  if(this.live_city==undefined || this.live_city==null || this.live_city==''){
-    this.live_city_err='Inserisci il comune di residenza'
-  }else{
-    this.live_city_err=''
-  }
-  if(this.live_street==undefined || this.live_street==null|| this.live_street==''){
-    this.live_street_err="Inserisci l'indirizzo'"
-  }else{
-    this.live_street_err=''
-  }
-  if(this.cap==undefined || this.cap==null || this.cap==''){
-    this.cap='Inserisci il CAP'
-  }else{
-    this.cap_err=''
-  }
+  
   setTimeout(() => {
-    if(this.cap_err==''&& this.live_street_err==''&& this.live_city_err==''&& this.fiscal_code_err==''){
+    if( this.fiscal_code_err==''){
       this.api.updateAppointment(this.res_book.id, this.res_book.start_t, this.res_book.end_t, this.res_book.day, this.res_book.month, this.res_book.year, this.res_book.client_name, this.res_book.phone, this.res_book.details, this.res_book.employee, this.res_book.service_n, extra_data).subscribe(async res =>{
      
         Notiflix.Report.Success("Grazie!", "I suoi dati sono stati registrati", 'Continua')

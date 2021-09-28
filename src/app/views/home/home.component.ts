@@ -317,7 +317,7 @@ if(x.length==0){
         for(let appo of just_downloaded_appo){
           this.appointmentlist.push(appo)
         //  add one view
-          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note,appo.payed )
+          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note,appo.payed,!appo.visible )
         
         }
       
@@ -763,7 +763,7 @@ async getAppoitments(){
           if(this.OneView){
             for (let appo of this.appointmentlist){
               if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){
-                this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed  )
+                this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed,!appo.visible   )
               } 
              
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
@@ -772,7 +772,7 @@ async getAppoitments(){
           }else{
             for (let appo of this.appointmentlist){
               if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){
-                this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
+                this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed,!appo.visible  )
               }
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               // this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
@@ -787,7 +787,7 @@ async getAppoitments(){
         this.appointmentlist = this.storage.getAllAppointmets()
         for (let appo of this.appointmentlist){
           if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){
-          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed  )
+          this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed,!appo.visible   )
           // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
         }
       }
@@ -868,7 +868,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
                 this.client=undefined
               })
               }, 500);
-          this.drawAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month-1, year,'', true)
+          this.drawAppointment(data.id, data.start_t, data.end_t, data.details, client_name, employee, service, day ,week, month-1, year,'', true,)
           this.appointmentlist.push(data)
           this.client_id=1
         }else{
@@ -890,8 +890,13 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
         } 
       },
       err => {
-        console.log(err)
-        Notiflix.Notify.Failure('Problema di connessione ');
+        console.log()
+        if(err.error.just_booked){
+          Notiflix.Notify.Failure("Questo orario ha già delle prenotazioni");
+        }else{
+          Notiflix.Notify.Failure('Problema di connessione ');
+        }
+       
       }
     )
     this.client_id=1
@@ -1502,7 +1507,7 @@ goToday(new_week){
 //         }
 //       }
 // }
-drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,note,payed ){
+drawAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,note,payed,notvisible? ){
   var height = end - start
   if(this.quarter_displ){
     var div_height = (height*this.table_line_heigth/3)+'px'
@@ -1516,6 +1521,7 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     
   }
   
+  
   var div = document.createElement('div');
   div.ondragstart = this.drag
   var has_note = false
@@ -1524,7 +1530,9 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
   }
   var self = this
   var appo 
-  
+  if(notvisible){
+    div.style.opacity='0.3'
+  }
   // console.log(client_name, day ,week, month, year )
   div.onclick = function(){
     setTimeout(async() => {
@@ -1794,7 +1802,7 @@ if(service==-1){
   
   }  
 
-  drawEmploAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,payed ){
+  drawEmploAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,payed,notvisible? ){
     var height
   
     if(this.quarter_displ){
