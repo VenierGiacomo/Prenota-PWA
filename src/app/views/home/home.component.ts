@@ -46,8 +46,8 @@ export class HomeComponent implements OnInit {
   year = new Date().getFullYear()
   months_days=[31, ((this.year%4==0 && this.year%100!=0)|| this.year%400==0)? 29 :28, 31 , 30, 31, 30, 31, 31, 30, 31, 30, 31]
   months_names=['Gennaio','Febbraio','Marzo','Aprile','Maggio','Giugno','Luglio','Agosto','Settembre','Ottobre','Novembre','Dicembre']
-  month 
-  month_name 
+  month
+  month_name
   nome=""
   info=101010
   time = 12
@@ -78,8 +78,8 @@ export class HomeComponent implements OnInit {
   openlist = [[],[],[],[],[],[],[],]
   times =["06:00", "06:05", "06:10", "06:15", "06:20", "06:25", "06:30", "06:35", "06:40","06:45", "06:50", "06:55", "07:00", "07:05", "07:10", "07:15", "07:20", "07:25", "07:30", "07:35", "07:40", "07:45", "07:50", "07:55", "08:00", "08:05", "08:10", "08:15", "08:20", "08:25", "08:30", "08:35", "08:40", "08:45", "08:50", "08:55", "09:00", "09:05", "09:10", "09:15", "09:20", "09:25", "09:30", "09:35", "09:40", "09:45", "09:50", "09:55", "10:00", "10:05", "10:10", "10:15", "10:20", "10:25", "10:30", "10:35", "10:40", "10:45", "10:50", "10:55", "11:00", "11:05", "11:10", "11:15", "11:20", "11:25", "11:30", "11:35", "11:40", "11:45", "11:50", "11:55", "12:00", "12:05", "12:10", "12:15", "12:20", "12:25", "12:30", "12:35", "12:40", "12:45", "12:50", "12:55", "13:00", "13:05", "13:10", "13:15", "13:20", "13:25", "13:30", "13:35", "13:40", "13:45", "13:50", "13:55","14:00", "14:05", "14:10", "14:15", "14:20", "14:25", "14:30", "14:35", "14:40", "14:45", "14:50", "14:55", "15:00", "15:05", "15:10", "15:15", "15:20", "15:25", "15:30", "15:35", "15:40", "15:45", "15:50", "15:55", "16:00", "16:05", "16:10", "16:15", "16:20", "16:25", "16:30", "16:35", "16:40", "16:45", "16:50", "16:55", "17:00", "17:05", "17:10", "17:15", "17:20", "17:25", "17:30", "17:35", "17:40", "17:45", "17:50", "17:55", "18:00", "18:05", "18:10", "18:15", "18:20", "18:25", "18:30", "18:35", "18:40", "18:45", "18:50", "18:55", "19:00", "19:05", "19:10", "19:15", "19:20", "19:25", "19:30", "19:35", "19:40", "19:45", "19:50", "19:55", "20:00", "20:05", "20:10", "20:15", "20:20", "20:25", "20:30", "20:35", "20:40", "20:45", "20:50", "20:55", "21:00", "21:05", "21:10", "21:15", "21:20", "21:25", "21:30", "21:35", "21:40", "21:45", "21:50", "21:55", "22:00", "22:05", "22:10", "22:15","22:20", "22:25", "22:30", "22:35", "22:40", "22:45", "22:50", "22:55", "23:00", "23:05", "23:10", "23:15", "23:20", "23:25", "23:30", "23:35", "23:40", "23:45", "23:50", "23:55" ]
   rows = ["06:45", "07:00", "07:15", "07:30", "07:45", "08:00", "08:15", "08:30", "08:45", "09:00", "09:15", "09:30", "09:45", "10:00", "10:15", "10:30", "10:45", "11:00", "11:15", "11:30", "11:45", "12:00", "12:15", "12:30", "12:45", "13:00", "13:15", "13:30", "13:45", "14:00", "14:15", "14:30", "14:45", "15:00", "15:15", "15:30", "15:45", "16:00", "16:15", "16:30", "16:45", "17:00", "17:15", "17:30", "17:45", "18:00", "18:15", "18:30", "18:45", "19:00", "19:15", "19:30", "19:45", "20:00", "20:15", "20:30", "20:45", "21:00", "21:15", "21:30", "21:45", "22:00", "22:15", "22:30", "22:45", "23:00", "23:15", "23:30", "23:45", "24:00"]
-  columns= ["Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato","Domenica"] 
-  giorni=["Domenica","Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato"] 
+  columns= ["Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato","Domenica"]
+  giorni=["Domenica","Lunedi","Martedi","Mercoledi","Giovedi","Venerdi","Sabato"]
   oneviewDay
   // grid=[]
   new_customer_modal_top='-200px'
@@ -105,12 +105,12 @@ export class HomeComponent implements OnInit {
   to_be_payed=false
   table_line_heigth =60
   quarter_displ =true
-  
+
   five_displ =false
   table_font_size = 12
   recurring_quantity=10
   show_recurring=false
-  adons 
+  adons
   serviceadons
   adons_to_show=[]
   payed =false
@@ -137,7 +137,7 @@ async ngOnInit() {
           if(el!=null){
             el.style.display='none'
           }
-         
+
         }
       }
     }
@@ -152,7 +152,7 @@ async ngOnInit() {
     var pusher = new Pusher('45f982633227395f42a9', {
       cluster: 'eu'
     });
-  
+
     var socekt_name = store_info.store_name.replaceAll(' ','-')
     var channel = pusher.subscribe(socekt_name);
     channel.bind('become-costumer', (data)=> {
@@ -173,9 +173,9 @@ async ngOnInit() {
       Notiflix.Notify.Success("L'account di "+ client[0].client_name+" è stato collegato");
     });
   },1000)
-  
 
-  
+
+
 // dispaly the appopriate days number and months
   var now = new  Date()
   var today = now.getDay() -1
@@ -194,7 +194,7 @@ async ngOnInit() {
         }else{
           day= day +this.months_days[month-1]
         }
-   
+
       }
     }else{
       var day = day_number - today  + i - this.months_days[month]
@@ -210,7 +210,7 @@ async ngOnInit() {
       this.month_name=this.months_names[month+1]
     }
     }
-  
+
 else{
   this.month = month
   this.month_name=this.months_names[month]
@@ -219,7 +219,7 @@ else{
 // dispaly the closed hours
 this.timetables = await this.storage.getEmployeehours()
 if(this.timetables==0 || this.timetables[0].timetable.length == 0){
-  
+
   this.api.getEmployees().subscribe(async data=>{
     this.employees_list = data
     // for(let user of data){
@@ -264,12 +264,12 @@ if(x.length==0){
   if (this.timetables.length>0){
     for (let hour of this.timetables[0].timetable){
       this.openlist[hour.wkday].push(hour.start_t)
-      this.openlist[hour.wkday].push(hour.end_t)      
+      this.openlist[hour.wkday].push(hour.end_t)
     }
   }
-  
 
- 
+
+
   setTimeout(()=>{
     this.getAppoitments()
     var employees = this.storage.getEmployeehours()
@@ -281,7 +281,7 @@ if(x.length==0){
   },500)
 
   this.interval = setInterval(()=>{
-  var week 
+  var week
   if(this.OneView){
     if(this.week[6]<this.week[0]){
       if(this.today<7){
@@ -299,7 +299,7 @@ if(x.length==0){
       }else{
         week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
       }
-     
+
   }else{
     week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
   }
@@ -312,39 +312,39 @@ if(x.length==0){
       var copy_appo_list = this.appointmentlist
       for(let el of this.appointmentlist){
         just_downloaded_appo = just_downloaded_appo.filter((value, index, arr)=>{ return (value.id != el.id) })
-     
+
         }
         for(let appo of just_downloaded_appo){
           this.appointmentlist.push(appo)
         //  add one view
           this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note,appo.payed,!appo.visible )
-        
+
         }
-      
+
         for(let el of just_downloaded_copy){
           copy_appo_list = copy_appo_list.filter((value, index, arr)=>{ return (value.id != el.id) })
-       
+
           }
           for(let appo of copy_appo_list){
             var no_longer_exist = document.getElementById(appo.id);
             no_longer_exist.parentNode.removeChild(no_longer_exist);
             this.appointmentlist =this.appointmentlist.filter((value, index, arr)=>{ return (value.id != appo.id) })
             } ​
-          
+
     })
-   
-    
+
+
   },120000)
     let use_credits = JSON.parse( localStorage.getItem('shop_data'))
     this.storeUseCredits =use_credits.credits
 
   setTimeout(() => {
     this.api.getStoreClients().then((data)=>{
-      this.store_clients =data  
+      this.store_clients =data
       for(let el of this.store_clients ){
         el.client_name = el.client_name.toLowerCase()
       }
-      this.show_client = this.store_clients.slice(0, 15) 
+      this.show_client = this.store_clients.slice(0, 15)
 
     }).catch((err)=>{
       console.log(err)
@@ -353,7 +353,7 @@ if(x.length==0){
   }, 1000);
   this.adons = await this.storage.getAdons()
   this.serviceadons = await this.storage.getServiceAdons()
-  
+
 }
 
 getWeekNumber(d) {
@@ -379,7 +379,7 @@ blockPos(row, col ,ev){
   if(ev.target.id.includes('-')){
     if (this.point.disp == "none"){
       this.client=undefined
-        this.currentBlock.row = row 
+        this.currentBlock.row = row
         this.currentBlock.col =col
         document.getElementById(row+"-"+col).style.backgroundColor = '#a3d9f5'
     }
@@ -387,13 +387,13 @@ blockPos(row, col ,ev){
       document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
     }
   }
- 
+
 }
 closeModal(){
   if(document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col)!=undefined){
     document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
   }
-    
+
     this.point.disp = "none"
     this.close_contact()
 }
@@ -411,9 +411,9 @@ showCoords($event) {
     var y = $event.clientY;
   var body = document.body,
   html = document.documentElement;
-  var height = Math.max( body.scrollHeight, body.offsetHeight, 
+  var height = Math.max( body.scrollHeight, body.offsetHeight,
                         html.clientHeight, html.scrollHeight, html.offsetHeight );
-  var width = Math.max( body.scrollWidth, body.offsetWidth, 
+  var width = Math.max( body.scrollWidth, body.offsetWidth,
         html.clientWidth, html.scrollWidth, html.offsetWidth );
   if( height-y < 432){
       y =  Math.max(height-670,20)
@@ -442,7 +442,7 @@ showCoords($event) {
     }
     this.close_contact()
   }
-  
+
 }
 
 //Add a new appointment
@@ -471,8 +471,8 @@ addAppointment(payed?) {
  }
 
   }
-  
-  
+
+
   document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
   if(this.OneView){
     if (this.info == -1){
@@ -513,11 +513,11 @@ addAppointment(payed?) {
   }
 }
  }
-  
+
   }
 }
 // The next three functions allow to drag and drop the events
-  allowDrop(ev) { 
+  allowDrop(ev) {
     ev.preventDefault();
   }
   drag(ev) {
@@ -539,25 +539,25 @@ addAppointment(payed?) {
       document.getElementById( this.currentBlock.row+"-"+ this.currentBlock.col).style.backgroundColor = 'transparent'
       }
       // ev.preventDefault();
-    
+
 
       var id = ev.target.id
       var h1 = id.split('-')[0]-1
-     
-      var dur = appo[0].end_t - appo[0].start_t 
-     
-     
-     
+
+      var dur = appo[0].end_t - appo[0].start_t
+
+
+
       var h2 = h1 + dur
       var col = id.split('-')[1]
-     
-     
+
+
       if( this.times[h1] != undefined && this.times[h2] != undefined && ev.target.id != data  ){
         var hour1=this.times[h1]
         var hour2 = this.times[h2]
         if(!this.OneView){
           document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
-   
+
         }
         document.getElementById(data).ondragover=this.allowDrop
         document.getElementById(data).ondrop=this.drop
@@ -599,13 +599,13 @@ addAppointment(payed?) {
                     appointment.year+=1
                   }
                 }
-              } 
+              }
             }
             this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data})
             //  this.storage.dragUpdateAppointment(data, h1, (h1+(appointment.end-appointment.start)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note)
-           
+
             this.api.updateAppointment(data, h1, (h1+(appointment.end_t-appointment.start_t)),  this.week[col], appointment.month, appointment.year, appointment.client_name, appointment.phone, appointment.details, appointment.employee, appointment.service_n, appointment.note).subscribe(res =>{
-             
+
               this.appointmentlist.push(res)
               Notiflix.Notify.Success('Modifiche salvate con successo');
           },err =>{
@@ -616,24 +616,24 @@ addAppointment(payed?) {
         }
       }
     }else{
-      
+
      if(ev.target.id != data){
         Notiflix.Notify.Warning("Questo orario è già occupato")
      }else{
       var appo =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id == data})
       var parentId=  document.getElementById(ev.target.id).parentElement.id
-      var id :any = parentId 
+      var id :any = parentId
       var h1 = id.split('-')[0]-1
-      var dur = appo[0].end_t - appo[0].start_t 
+      var dur = appo[0].end_t - appo[0].start_t
       var h2 = h1 + dur
       var col = id.split('-')[1]
       if( this.times[h1] != undefined && this.times[h2] != undefined && parentId != data  ){
         var hour1=this.times[h1]
         var hour2 = this.times[h2]
- 
+
         if(!this.OneView){
          document.getElementById(data).getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
-        
+
         }
         document.getElementById(data).ondragover=this.allowDrop
         document.getElementById(data).ondrop=this.drop
@@ -649,7 +649,7 @@ addAppointment(payed?) {
              // this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
                this.appointmentlist.push(res)
              Notiflix.Notify.Success('Modifiche salvate con successo');
- 
+
            },err =>{
             console.log(err)
            })
@@ -661,7 +661,7 @@ addAppointment(payed?) {
              // this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
                this.appointmentlist.push(res)
              Notiflix.Notify.Success('Modifiche salvate con successo');
- 
+
            },err =>{
             console.log(err)
            })
@@ -669,8 +669,8 @@ addAppointment(payed?) {
         }
        }
      }
-     
-    }  
+
+    }
   }
 
   // paySingleAppointment(){
@@ -689,7 +689,7 @@ addAppointment(payed?) {
   //         let service = this.catalog_list.filter(val=>{
   //           return val.id ==this.info
   //         })
-         
+
   //           // var adons =[]
   //           // adons =  this.adons_to_show.filter((val)=>{ return val.selected})
   //           // var adons_price = adons.reduce((accumulator, current) => accumulator + current.price, 0);
@@ -698,8 +698,8 @@ addAppointment(payed?) {
   //         // if(new_credits>=0){
   //         //   Notiflix.Notify.Warning('Credito negativo');
   //         // }
-         
-           
+
+
   //           // setTimeout(() => {
   //           // this.api.updateClientStore(this.client.id, this.nome, this.phone,  new_credits, this.client.note, this.client.isMember).subscribe(async (res)=>{
   //           //   await this.storage.updateClient(res)
@@ -708,24 +708,24 @@ addAppointment(payed?) {
   //           //   for(let el of this.store_clients ){
   //           //     el.client_name = el.client_name.toLowerCase()
   //           //   }
-  //           //   this.show_client = this.show_client.slice(0, 15) 
+  //           //   this.show_client = this.show_client.slice(0, 15)
   //           //   this.client=undefined
   //           // })
   //           // }, 500);
-           
-          
+
+
   //      }
   //   }
   //   },
   //   err=>{
   //     Notiflix.Notify.Failure("C'è stato un problema durante il salvataggio");
- 
+
   //   })
   // }
 // Function that displays the stored appointments
 async getAppoitments(){
   this.appointmentlist=[]
-  var week 
+  var week
   if(this.OneView){
     if(this.week[6]<this.week[0]){
       if(this.today<7){
@@ -743,12 +743,12 @@ async getAppoitments(){
       }else{
         week = this.getWeekNumber(new Date(this.year, this.month-1, this.week[0]))
       }
-     
+
   }else{
     week = this.getWeekNumber(new Date(this.year, this.month, this.week[0]))
   }
   }
-  
+
   // usa un last check 10minutes per risparmiare server
   var now = + new Date()
   // if ((now - this.time_passed )>60000){
@@ -764,8 +764,8 @@ async getAppoitments(){
             for (let appo of this.appointmentlist){
               if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){
                 this.drawEmploAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year, appo.payed,!appo.visible   )
-              } 
-             
+              }
+
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               // this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
@@ -777,7 +777,7 @@ async getAppoitments(){
               // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
               // this.storage.updateAppointment(appo.id, appo.start, appo.end, appo.day , appo.month, appo.year, appo.client_name, appo.phone, appo.details,  appo.employee, appo.service_n,true, appo.note)
             }
-          } 
+          }
         }
         else{console.log('empty_data')}
       },
@@ -791,7 +791,7 @@ async getAppoitments(){
           // this.drawfadedAppointment(appo.id, appo.start, appo.end, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year )
         }
       }
-       
+
       }
     )
 }
@@ -800,7 +800,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
   if(client_name==""){
     client_name='~'
   }
-  
+
   var adons =[]
   adons =  this.adons_to_show.filter((val)=>{ return val.selected})
   adons = adons.map((val)=>{ return val.id_c})
@@ -814,14 +814,14 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
     this.api.bookAppointment( start, end, day, month, year, client_name, this.phone, details, employee, service, this.client_id, adons, this.client.id).subscribe(
       data=>{
         Notiflix.Notify.Success('Appuntamento registrato');
-       
+
         if(this.OneView){
-          if(this.to_be_payed){            
-            let new_credits = this.client.credit - data.price 
-    
+          if(this.to_be_payed){
+            let new_credits = this.client.credit - data.price
+
           if(new_credits<=0){
             Notiflix.Notify.Warning('Credito negativo');
-          }           
+          }
             setTimeout(() => {
             this.api.updateClientStore(this.client.id, this.nome, this.phone,  new_credits, this.client.note, this.client.isMember).subscribe(async (res)=>{
               await this.storage.updateClient(res)
@@ -830,7 +830,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
               for(let el of this.store_clients ){
                 el.client_name = el.client_name.toLowerCase()
               }
-              this.show_client = this.show_client.slice(0, 15) 
+              this.show_client = this.show_client.slice(0, 15)
               this.client=undefined
             })
             }, 500);
@@ -843,19 +843,19 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
             this.client_id=1
           }
         // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
-        
+
         if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1 || this.client.id==false)){
           // this.store_client(client_name,phone,0,'')
           this.client_id=1
         }
       }
         else{
-          if(this.to_be_payed){           
-              let new_credits = this.client.credit - data.price 
-      
+          if(this.to_be_payed){
+              let new_credits = this.client.credit - data.price
+
             if(new_credits<=0){
               Notiflix.Notify.Warning('Credito negativo');
-            }           
+            }
               setTimeout(() => {
               this.api.updateClientStore(this.client.id, this.nome, this.phone,  new_credits, this.client.note, this.client.isMember).subscribe(async (res)=>{
                 await this.storage.updateClient(res)
@@ -864,7 +864,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
                 for(let el of this.store_clients ){
                   el.client_name = el.client_name.toLowerCase()
                 }
-                this.show_client = this.show_client.slice(0, 15) 
+                this.show_client = this.show_client.slice(0, 15)
                 this.client=undefined
               })
               }, 500);
@@ -877,7 +877,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
             this.client_id=1
           }
           // this.storage.addAppointmet(data.id,start, end, day, month, year,client_name, phone, details, employee, service, true, '')
-        
+
           if(data.client==1 && phone!=undefined && phone!='' && client_name!='~' && client_name!='Chiuso' && (this.client == undefined ||this.client.id ==1 || this.client.id==false)){
             // this.store_client(client_name,phone,0,'')
             this.client_id=1
@@ -887,7 +887,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
           this.api.payBookingFromShop(data.id).subscribe((res)=>{
             this.client_id=1
           })
-        } 
+        }
       },
       err => {
         console.log()
@@ -896,7 +896,7 @@ setAppoitment(start, end, day, month, year, client_name, phone, details, employe
         }else{
           Notiflix.Notify.Failure('Problema di connessione ');
         }
-       
+
       }
     )
     this.client_id=1
@@ -918,14 +918,14 @@ if(this.info >0){
     if(service.id == this.info){
       new_service = service
     }
-    
-  } 
+
+  }
   if(new_service.id == +app.service_n){
     this.extra_desc = app.details
   }else{
     this.extra_desc = new_service.name
     app.end_t =app.start_t + Number(new_service.duration_book)
-    
+
   }
   var new_heigth = app.end_t- app.start_t
   if(this.quarter_displ){
@@ -941,22 +941,22 @@ if(this.info >0){
    if(this.info ==-1){
     app.end_t =app.start_t + Number(this.time)
     if(this.quarter_displ){
-      
+
       if(this.five_displ){
         var div_height = (this.time*this.table_line_heigth)+'px'
       }else{
         var div_height = (this.time*this.table_line_heigth/3)+'px'
       }
-     
+
     }else{
       var div_height = (this.time*this.table_line_heigth/6)+'px'
     }
-    new_service= {color: 6 } 
+    new_service= {color: 6 }
    }else{
     if(this.info ==-3){
       app.end_t =app.start_t + 12
       if(this.quarter_displ){
-        
+
         if(this.five_displ){
           var div_height = (12*this.table_line_heigth)+'px'
         }else{
@@ -967,14 +967,14 @@ if(this.info >0){
       }
       this.extra_desc="Chiuso"
       this.nome='~'
-      new_service= {color: 10000 } 
+      new_service= {color: 10000 }
     }else{
       if(this.info ==-2){
         app.start_t= 0
         app.end_t =204
-        
+
         if(this.quarter_displ){
-         
+
           if(this.five_displ){
             var div_height = (204*this.table_line_heigth)+'px'
           }else{
@@ -984,22 +984,22 @@ if(this.info >0){
           var div_height = (204*this.table_line_heigth/6)+'px'
         }
         this.extra_desc="Chiuso"
-        new_service= {color: 10000} 
+        new_service= {color: 10000}
         this.nome='~'
       }
     }
    }
-   
-  
+
+
  }
  if(this.client_id<=1&&this.store_client<=1 && payed){
   Notiflix.Notify.Warning('Seleziona un cliente per scalare crediti');
  }else{
- 
+
  if(!payed){
    payed = app.payed
  }
- 
+
   this.api.updateAppointmentClient(this.updateAppointmentId, app.start_t, app.end_t ,  app.day, app.month, app.year, this.nome, this.phone, this.extra_desc, app.employee , this.info,  this.appointment_notes, this.client_id,this.store_client,payed )
   .subscribe(async data =>{
     var element = document.getElementById(this.updateAppointmentId)
@@ -1017,7 +1017,7 @@ if(this.info >0){
         element.getElementsByClassName('task-duration')[0].innerHTML = `${hour1}-${hour2}`
       }
     }
-  
+
 
     element.getElementsByClassName('task-details')[0].innerHTML = `${data.details}`
 
@@ -1031,36 +1031,36 @@ if(this.info >0){
     }else{
        height = (app.end_t - app.start_t)/2
     }
-    
+
     var div_height = ((height*7)-1)+'px'
     }
     element.style.height = div_height
     // element.classList.remove(`c${app.service}`)
     const colors = new RegExp(/c[0-9]*/, 'g');
-    element.className = element.className.replace(colors, '') 
+    element.className = element.className.replace(colors, '')
     element.classList.add(`c${new_service.color}`)
-    
+
     this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != data.id})
 
     this.appointmentlist.push(data)
 
     if(payed && !app.payed){
-      
+
         if(data.client==1&&data.store_client==1 ){
           Notiflix.Notify.Warning('Seleziona un cliente per scalare crediti');
          }else{
-    
+
             var client_list = await JSON.parse( localStorage.getItem('client_list'))
             this.store_clients = client_list.list
-            
+
             if(data.client!=1){
               var client =  this.store_clients.filter((client_)=>{return client_.client ==data.client })[0]
             }else{
               var client =  this.store_clients.filter((client_)=>{return client_.id ==data.store_client })[0]
             }
-            
-            
-            let new_credits = client.credit - data.price            
+
+
+            let new_credits = client.credit - data.price
             setTimeout(() => {
             this.api.updateClientStore(client.id, client.client_name, client.phone,  new_credits, client.note, client.isMember).subscribe(async (res)=>{
               await this.storage.updateClient(res)
@@ -1069,7 +1069,7 @@ if(this.info >0){
               for(let el of this.store_clients ){
                 el.client_name = el.client_name.toLowerCase()
               }
-              this.show_client = this.show_client.slice(0, 15) 
+              this.show_client = this.show_client.slice(0, 15)
               this.client=undefined
               Notiflix.Notify.Success('Modifiche salvate e credito scalato');
             })
@@ -1085,7 +1085,7 @@ if(this.info >0){
           Notiflix.Notify.Failure("C'è stato un problema durante il salvataggio");
           console.log(err,"Siamo spiacenti. Ci sono dei problemi. Controlla la connessione")
          })
-  
+
   this.closeModal()
         }
 }
@@ -1112,16 +1112,15 @@ deleteAppointment(){
   this.closeModal()
   }
 nextWeek(){
-  
-  var now = new Date()
-  
-  if(+now-(+this.last_click)>500){
-    
-    this.last_click = new Date()
 
-  if(this.week[0]==28 && this.month ==0 ){
-    this.year=2021
-  }
+  var now = new Date()
+
+  if(+now-(+this.last_click)>500){
+
+    this.last_click = new Date()
+    if(this.week[6]<=7 &&  this.week[0]==27 && this.month ==0 ){
+      this.year=2022
+    }
   //remove last week appoitments
   if(this.OneView){
     this.oneviewDay = (this.oneviewDay+1)%7
@@ -1137,7 +1136,7 @@ nextWeek(){
         this.month=1
         this.year=+1
       }
-     
+
     }
     var last_week = this.week
     this.week=[]
@@ -1171,7 +1170,7 @@ nextWeek(){
   // }
   // console.log(this.week[6]+1,this.week[6], this.today)
     this.goToday(this.week[0]!=last_week[0])
-   
+
   } else{
   var paras = document.getElementsByClassName('task');
   while(paras[0]) {
@@ -1188,7 +1187,6 @@ nextWeek(){
       if (this.week[day] +7 > this.months_days[this.month] && this.week[6] +7 <= this.months_days[this.month]){
         if (this.month == 0){
           this.week[day] =this.week[day] +7  -this.months_days[11]
-          
         }else{
           this.week[day] =this.week[day] +7  -this.months_days[this.month-1]
         }
@@ -1196,11 +1194,12 @@ nextWeek(){
       else{
         this.week[day] =this.week[day] +7  -this.months_days[this.month]
         next_m = 1
-     
-       
+
+
       }
     }
   }
+  console.log(this.year,next_m, this.month)
   if(next_m == 1){
     if (this.month == 11){
       this.month =0
@@ -1209,7 +1208,7 @@ nextWeek(){
     else{
       this.month +=1
     }
-    
+
     next_m = 0
     this.month_name = this.months_names[this.month]
   }
@@ -1221,13 +1220,13 @@ nextWeek(){
 }, 100);
 }
 }
-}  
+}
 pastWeek(){
   var now = new Date()
   if(+now-(+this.last_click)>500){
     this.last_click = new Date()
   if(this.week[0]<=7 && this.month ==0 ){
-    this.year=2020
+    this.year=2021
   }
   this.oneviewDay = (this.oneviewDay+6)%7
 
@@ -1244,7 +1243,7 @@ pastWeek(){
         this.month=11
         this.year=-1
       }
-     
+
     }
     var last_week = this.week
     this.week=[]
@@ -1267,9 +1266,9 @@ pastWeek(){
       this.week.push(day)
     }
     this.goToday(this.week[0]!=last_week[0]) //pass true or false
-  
 
-   
+
+
   } else{
   var paras = document.getElementsByClassName('task');
   while(paras[0]) {
@@ -1302,14 +1301,14 @@ pastWeek(){
             this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
             next_m = 1
           }
-         
+
         }
         else{
           this.week[day]= this.week[day] -7 +this.months_days[this.month-1]
           // next_m = 1
         }
-       
-       
+
+
       }
     }
   }
@@ -1321,17 +1320,17 @@ pastWeek(){
     else{
       this.month -=1
     }
-   
+
     next_m = 0
     this.month_name = this.months_names[this.month]
   }
   //get appointments
   this.getAppoitments()
   }, 100);
-  
+
 }
   }
-}    
+}
 goSettings(){
   this.router.navigateByUrl('/settings')
 }
@@ -1371,14 +1370,14 @@ goNotifications(){
 // notifications
 async activetab(employee){
   var paras = document.getElementsByClassName('task');
-  
+
 
   while(paras[0]) {
-    
+
     paras[0].parentNode.removeChild(paras[0]);
   } ​
   this.selected = employee.id
-  
+
   var work_hours:any
   for (let timetable of this.timetables){
     if(timetable.id == employee.id){
@@ -1388,7 +1387,7 @@ async activetab(employee){
   this.openlist = [[],[],[],[],[],[],[],]
   for (let hour of work_hours){
     this.openlist[hour.wkday].push(hour.start_t)
-      this.openlist[hour.wkday].push(hour.end_t)      
+      this.openlist[hour.wkday].push(hour.end_t)
   }
   // console.log(this.appointmentlist)
   if (this.appointmentlist.length != 0){
@@ -1400,8 +1399,8 @@ async activetab(employee){
         }
       }
     }else{
-      for (let appo of this.appointmentlist){     
-        if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){  
+      for (let appo of this.appointmentlist){
+        if(document.getElementById(appo.id)==undefined || document.getElementById(appo.id)==null){
         this.drawAppointment(appo.id, appo.start_t, appo.end_t, appo.details, appo.client_name, appo.employee, appo.service_n, appo.day ,appo.week, appo.month, appo.year,appo.note, appo.payed )
       }
     }
@@ -1435,13 +1434,13 @@ goToday(new_week){
                 if(el!=null){
                   el.style.display='none'
                 }
-               
+
               }
             }
           }
         }else{
           for(let ind in this.times){
-            
+
             if(+ind%6!=1){
               document.getElementById(ind).style.display='none'
             }
@@ -1467,13 +1466,13 @@ goToday(new_week){
               if(el!=null){
                 el.style.display='none'
               }
-             
+
             }
           }
         }
       }else{
         for(let ind in this.times){
-          
+
           if(+ind%6!=1){
             document.getElementById(ind).style.display='none'
           }
@@ -1488,7 +1487,7 @@ goToday(new_week){
   }, 100);
   }
 
-  
+
 }
 // saveNotStored(){
 //   // var unstored = this.storage.getAppointmets(false)
@@ -1515,13 +1514,13 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
       var div_height = (height*this.table_line_heigth)+'px'
     }
   }else{
-  
+
       var div_height = (height*this.table_line_heigth/6)+'px'
-    
-    
+
+
   }
-  
-  
+
+
   var div = document.createElement('div');
   div.ondragstart = this.drag
   var has_note = false
@@ -1529,14 +1528,14 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
     has_note = true
   }
   var self = this
-  var appo 
+  var appo
   if(notvisible){
     div.style.opacity='0.3'
   }
   // console.log(client_name, day ,week, month, year )
   div.onclick = function(){
     setTimeout(async() => {
-  
+
     appo = await self.appointmentlist.filter((val, ind, arr)=>{ return val.id == id})[0]
     // console.log(id,appo.store_client)
     self.nome = appo.client_name
@@ -1557,7 +1556,7 @@ drawAppointment(id, start, end, details, client_name, employee, service, day ,we
       // c
       if(appo.store_client!=undefined&& appo.store_client!=null){
         self.client = self.store_clients.filter((val, ind, arr)=>{ return val.id == appo.store_client})[0]
-        
+
       }
     }
     setTimeout(() => {
@@ -1576,7 +1575,7 @@ if(service==-1){
   var color = 6
 }
   div.draggable =true
-  div.classList.add('task','task--primary', `c${color}`) 
+  div.classList.add('task','task--primary', `c${color}`)
   div.id= id
   div.style.height =div_height
   div.ondragover=this.allowDrop
@@ -1586,11 +1585,11 @@ if(service==-1){
   var div_resize = document.createElement('div');
   div_resize.classList.add('bot-drag')
   var m_pos;
-  var mod_div 
+  var mod_div
   let initial_h
   var res =false
   async function resize(e){
-    
+
       // var mod_div = await document.getElementById(id)
       var dy = e.y - m_pos;
       // m_pos = e.y;
@@ -1599,7 +1598,7 @@ if(service==-1){
       // if (dy%20>10){
         mod_div.style.height = initial_h +dy +'px'
       // }
-      
+
       // mod_div.style.height = initial_h +(Math.floor(dy/20)) *20 +'px'
       // mod_div.draggable =true
       // mod_div.style.zIndex = "1"
@@ -1607,7 +1606,7 @@ if(service==-1){
   }
 
   div_resize.onmousedown = async function (e) {
-    
+
     // res =true
       m_pos = e.y;
       mod_div =  document.getElementById(id)
@@ -1618,7 +1617,7 @@ if(service==-1){
       document.addEventListener("mousemove", resize, false);
   };
   div_resize.onmouseup =async function (e){
-    
+
     var target:any =e.target
     mod_div= target.parentElement
     if(mod_div!=undefined){
@@ -1638,7 +1637,7 @@ if(service==-1){
         min_5_height =(self.table_line_heigth/3)
         hour2 = self.times[self.times.indexOf(hour1)+Math.ceil(hei/min_5_height)]
       }
-     
+
     }else{
       min_5_height =self.table_line_heigth
       hour2 = self.times[self.times.indexOf(hour1)+(Math.ceil(hei/min_5_height)*6)]
@@ -1648,9 +1647,9 @@ if(service==-1){
 
 
 
-    
-     
-      
+
+
+
       if(has_note){
         if(payed){
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2} <img src='../assets/icons/info.svg'></div>
@@ -1661,7 +1660,7 @@ if(service==-1){
           <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
           <div class="task-name" id='${id}-name'>${appo.client_name}   </div>`
         }
-     
+
       }else{
         if(payed){
           mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
@@ -1672,13 +1671,13 @@ if(service==-1){
           <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${appo.details} </div>
           <div class="task-name" id='${id}-name'>${appo.client_name}  </div>`
         }
-        
+
       }
-    
+
       div.appendChild(div_resize)
       div
       start = self.times.indexOf(hour1)
-      end = self.times.indexOf(hour2) 
+      end = self.times.indexOf(hour2)
       self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
         self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
         self.appointmentlist.push(res)
@@ -1701,7 +1700,7 @@ if(service==-1){
     //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
     //       <div class="task-name" id=${id} >${client_name}  </div>`
     //     }
-     
+
     //   }else{
     //     if(payed){
     //       mod_div.innerHTML =`<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
@@ -1712,11 +1711,11 @@ if(service==-1){
     //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
     //       <div class="task-name" id=${id} >${client_name} </div>`
     //     }
-        
+
     //   }
     //   div.appendChild(div_resize)
     //   start = self.times.indexOf(hour1)
-    //   end = self.times.indexOf(hour2) 
+    //   end = self.times.indexOf(hour2)
     //   self.api.updateAppointment(id, start, end,  appo.day, appo.month, appo.year, appo.client_name, appo.phone, appo.details, appo.employee, appo.service_n, appo.note).subscribe(async res =>{
     //     self.appointmentlist =  self.appointmentlist.filter((val, ind, arr)=>{ return val.id != res.id})
     //     self.appointmentlist.push(res)
@@ -1729,8 +1728,8 @@ if(service==-1){
     // }
     // setTimeout(() => {
     //   self.point.disp = 'none'
-    // }, 1); 
-      
+    // }, 1);
+
     document.removeEventListener("mousemove", resize, false);
     div.style.zIndex='1'
   }
@@ -1745,7 +1744,7 @@ if(service==-1){
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
       <div class="task-name" id='${id}-name'>${client_name}  </div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
     }
-   
+
   }else{
     if(payed){
       div.innerHTML = `<div class="task-duration" id=${id}>${hour1}-${hour2}</div>
@@ -1756,7 +1755,7 @@ if(service==-1){
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
       <div class="task-name" id='${id}-name' >${client_name}  </div>`//60 is the height of the cell 16 is 2 times the verical padding (8px)
     }
-   
+
   }
   var to_append = undefined
   div.appendChild(div_resize)
@@ -1799,12 +1798,12 @@ if(service==-1){
     to_append.append(div)
   }
   }
-  
-  }  
+
+  }
 
   drawEmploAppointment(id, start, end, details, client_name, employee, service, day ,week, month, year,payed,notvisible? ){
     var height
-  
+
     if(this.quarter_displ){
        height = (end - start)
        if(this.five_displ){
@@ -1813,7 +1812,7 @@ if(service==-1){
     }else{
        height = (end - start)/2
     }
-    
+
     var div_height = ((height*7)-1)+'px'
     var div = document.createElement('div');
     div.style.zIndex='1'
@@ -1844,11 +1843,11 @@ if(service==-1){
         // c
         if(appo.store_client!=undefined&& appo.store_client!=null){
           self.client = self.store_clients.filter((val, ind, arr)=>{ return val.id == appo.store_client})[0]
-          
+
         }
       }
 
-   
+
     setTimeout(() => {
       self.type()
     }, 200);
@@ -1865,19 +1864,19 @@ if(service==-1){
     var color = 6
   }
     div.draggable =true
-    div.classList.add('task','task--primary', `c${color}`) 
+    div.classList.add('task','task--primary', `c${color}`)
     div.id= id
     div.style.height =div_height
     div.ondragover=this.allowDrop
     div.ondrop=this.drop
-    
+
     // div.style.top = "15px"
     var hour1=this.rows[start]
     var hour2 = this.times[this.times.indexOf(hour1)+height]
     // var div_resize = document.createElement('div');
   // div_resize.classList.add('bot-drag')
   var m_pos;
-  let mod_div 
+  let mod_div
   let initial_h
   var res =false
   // async function resize(e){
@@ -1922,7 +1921,7 @@ if(service==-1){
   //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
   //       <div class="task-name" id=${id} >${client_name}  </div>`
   //     }
-     
+
   //     div.appendChild(div_resize)
   //     start = self.rows.indexOf(hour1)
   //     end = self.rows.indexOf(hour1) + self.times.indexOf(hour2)- self.times.indexOf(hour1)
@@ -1948,7 +1947,7 @@ if(service==-1){
   //       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
   //       <div class="task-name" id=${id} >${client_name}  </div>`
   //     }
-      
+
   //     div.appendChild(div_resize)
   //     start = self.rows.indexOf(hour1)
   //     end = self.rows.indexOf(hour1) + self.times.indexOf(hour2) - self.times.indexOf(hour1)
@@ -1963,7 +1962,7 @@ if(service==-1){
   //   }
   //   // setTimeout(() => {
   //   //   self.point.disp = 'none'
-  //   // }, 1); 
+  //   // }, 1);
   //     document.removeEventListener("mousemove", resize, false);
   //     res=false
   //   }
@@ -1980,7 +1979,7 @@ if(service==-1){
       <div class="task-details"[innerHTML]="" (click)='nextWeek()'id=${id}>${details} </div>
       <div class="task-name" id='${id}-name' >${client_name}  </div>`;//60 is the height of the cell 16 is 2 times the verical padding (8px)
     }
-  
+
     // div.appendChild(div_resize)
     if(this.week[6]<this.week[0]){1
       if(day<7){
@@ -1988,17 +1987,17 @@ if(service==-1){
           document.getElementById((start+1)+"-"+employee).append(div)
           }
       }else{
-        
+
         if (this.today==day &&  this.month-1==month &&  this.year==year){
           document.getElementById((start+1)+"-"+employee).append(div)
           }
       }}
-      
+
     if (this.today==day && this.month==month &&  this.year==year){
     document.getElementById((start+1)+"-"+employee).append(div)
     }
-    
-    }   
+
+    }
 fullScreen(){
   if (screenfull.isEnabled && this.full_screen ==false) {
     screenfull.request();
@@ -2009,10 +2008,10 @@ fullScreen(){
       screenfull.exit();
     }
   }
-  
-} 
+
+}
 async displayWeek(set_week){
- 
+
   if(set_week){
     this.OneView=false
     this.display ='week'
@@ -2062,7 +2061,7 @@ async displayWeek(set_week){
             if(el!=null){
               el.style.display='none'
             }
-           
+
           }
         }
       }
@@ -2106,7 +2105,7 @@ setStoreserviceDefault(){
 //   var hour:any = now.getHours()
 //   var min:any = now.getMinutes()
 //   var day = now.getDate()
-  
+
 //   var month = now.getMonth()
 //   var year = now.getFullYear()
 //   if (min<10){
@@ -2134,7 +2133,7 @@ setStoreserviceDefault(){
 // async freeSpots(){
 //   this.spot_show = 'block'
 //   this.availableSpots=[]
-//   this.selected 
+//   this.selected
 //   var timetables = this.storage.getEmployeehours()
 //   var work_hours:any
 //   for (let timetable of timetables){
@@ -2154,34 +2153,34 @@ setStoreserviceDefault(){
 //       var self = this
 //       for(let appointment of this.appointmentlist){
 //         var start = this.times.indexOf(this.rows[appointment.start])
-//         var end = start+appointment.end -  appointment.start        
+//         var end = start+appointment.end -  appointment.start
 //         this.free_hours = this.free_hours.filter(function(value, index, arr){ return (value.time < start && appointment.employee==value.employee  )|| (value.time  >= end && appointment.employee==value.employee ) || appointment.employee!=value.employee || self.week.indexOf(appointment.day)!=value.day; })
-//       } 
+//       }
 //       var app
 //       for(let idx in this.free_hours){
-      
+
 //           let id:any = idx
 //           var length =this.free_hours.length-1
 //           if(id ==0  ||this.free_hours[id-1].time-this.free_hours[id].time<- 1 || id == length||this.free_hours[id].time<this.free_hours[id-1].time ){
 //             if (app != undefined){
 //               if(app.duration>=3){
 //                 if (this.free_hours[id].time<this.free_hours[id-1].time){
-//                   app.duration -=1 
+//                   app.duration -=1
 //                   this.availableSpots.push(app)
 //                 }else{
 //                   this.availableSpots.push(app)
 //                 }
-               
+
 //               }
-               
+
 //             }
 //             if(this.rows.indexOf(this.times[this.free_hours[id].time])!=-1){
-//               app = {start: this.free_hours[id].time, duration: 1, employee:this.free_hours[id].employee, day: this.free_hours[id].day, name:this.free_hours[id].name} 
+//               app = {start: this.free_hours[id].time, duration: 1, employee:this.free_hours[id].employee, day: this.free_hours[id].day, name:this.free_hours[id].name}
 //             }
 //           }else{
 //               app.duration +=1
 //           }
-       
+
 //         }
 //         this.availableSpots.sort(function(a, b) {
 //           return a.employee - b.employee;
@@ -2212,7 +2211,7 @@ groupBy(arr, property) {
 //           this.month=1
 //           this.year=+1
 //         }
-       
+
 //       }
 //       var last_week = this.week
 //       this.week=[]
@@ -2246,7 +2245,7 @@ groupBy(arr, property) {
 //     // }
 //     // console.log(this.week[6]+1,this.week[6], this.today)
 //       this.goToday(this.week[0]!=last_week[0])
-     
+
 //     } else{
 //     var paras = document.getElementsByClassName('task');
 //     while(paras[0]) {
@@ -2263,7 +2262,7 @@ groupBy(arr, property) {
 //         if (this.week[day] +7 > this.months_days[this.month] && this.week[6] +7 <= this.months_days[this.month]){
 //           if (this.month == 0){
 //             this.week[day] =this.week[day] +7  -this.months_days[11]
-            
+
 //           }else{
 //             this.week[day] =this.week[day] +7  -this.months_days[this.month-1]
 //           }
@@ -2271,8 +2270,8 @@ groupBy(arr, property) {
 //         else{
 //           this.week[day] =this.week[day] +7  -this.months_days[this.month]
 //           next_m = 1
-       
-         
+
+
 //         }
 //       }
 //     }
@@ -2284,7 +2283,7 @@ groupBy(arr, property) {
 //       else{
 //         this.month +=1
 //       }
-      
+
 //       next_m = 0
 //       this.month_name = this.months_names[this.month]
 //     }
@@ -2297,7 +2296,7 @@ groupBy(arr, property) {
 //       this.freeSpots()
 //     }, 800);
 //   }, 100);
-  
+
 //   }
 
 // }
@@ -2315,7 +2314,7 @@ groupBy(arr, property) {
 //         this.month=11
 //         this.year=-1
 //       }
-     
+
 //     }
 //     var last_week = this.week
 //     this.week=[]
@@ -2338,9 +2337,9 @@ groupBy(arr, property) {
 //       this.week.push(day)
 //     }
 //     this.goToday(this.week[0]!=last_week[0]) //pass true or false
-  
 
-   
+
+
 //   } else{
 //   var paras = document.getElementsByClassName('task');
 //   while(paras[0]) {
@@ -2373,14 +2372,14 @@ groupBy(arr, property) {
 //             this.week[day] = this.week[day] -7 +this.months_days[this.month-1]
 //             next_m = 1
 //           }
-         
+
 //         }
 //         else{
 //           this.week[day]= this.week[day] -7 +this.months_days[this.month-1]
 //           // next_m = 1
 //         }
-       
-       
+
+
 //       }
 //     }
 //   }
@@ -2392,7 +2391,7 @@ groupBy(arr, property) {
 //     else{
 //       this.month -=1
 //     }
-   
+
 //     next_m = 0
 //     this.month_name = this.months_names[this.month]
 //   }
@@ -2402,11 +2401,11 @@ groupBy(arr, property) {
 //       this.freeSpots()
 //     }, 800);
 //   }, 100);
-  
+
 // }
-// }    
+// }
  async setRecuringBooking(scale_credit){
- 
+
   if(this.recurring_quantity<0){
     Notiflix.Notify.Warning("Il numero di prenotazioni future deve essere positivo")
   }else{
@@ -2427,9 +2426,9 @@ groupBy(arr, property) {
           })
           var appo= await this.appointmentlist.filter((val, ind, arr)=>{ return val.id == this.updateAppointmentId})[0]
           let new_credits = this.client.credit - (appo.price*this.recurring_quantity)
-          
-          
-            
+
+
+
             this.api.updateClientStore(this.client.id, this.nome, this.phone,  new_credits, this.client.note, this.client.isMember).subscribe(async (res)=>{
               await this.storage.updateClient(res)
               var client_list = await JSON.parse( localStorage.getItem('client_list'))
@@ -2437,16 +2436,16 @@ groupBy(arr, property) {
               for(let el of this.store_clients ){
                 el.client_name = el.client_name.toLowerCase()
               }
-              this.show_client = this.show_client.slice(0, 15) 
+              this.show_client = this.show_client.slice(0, 15)
               this.client=undefined
-              
+
             },err=>{
-             
+
               Notiflix.Notify.Warning('Errore duranta lo scalo dei crediti');
             })
-            
-           
-          
+
+
+
        }
     }
     }
@@ -2459,13 +2458,13 @@ groupBy(arr, property) {
       this.already_rec_set_top= '30px'
       this.not_set_recurring_days=data.days_booked
     }
-    
+
      var new_appo =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id == this.updateAppointmentId})
      new_appo[0].recurring_id=this.updateAppointmentId
-     
+
     //  this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != this.updateAppointmentId})
     },err=> {
-  
+
       Notiflix.Notify.Warning("C'è stato un problem durante la cancellazione"),this.closeModal()})
 }
 
@@ -2474,7 +2473,7 @@ async deleteRecuringBooking(){
 
   let appo = await this.appointmentlist.filter((val, ind, arr)=>{ return val.id == this.updateAppointmentId})[0]
   console.log(appo.week,appo.year)
-  this.api.deleteRecuringBooking(this.recurring,appo.week,appo.year ).subscribe(data=>{ 
+  this.api.deleteRecuringBooking(this.recurring,appo.week,appo.year ).subscribe(data=>{
     var paras = document.getElementById(this.updateAppointmentId);
     paras.parentNode.removeChild(paras);
     this.appointmentlist =  this.appointmentlist.filter((val, ind, arr)=>{ return val.id != this.updateAppointmentId}),
@@ -2482,7 +2481,7 @@ async deleteRecuringBooking(){
      this.closeModal()}
      ,err=>{Notiflix.Notify.Warning("C'è stato un problem durante la cancellazione"),this.closeModal()})
 }
-type(){  
+type(){
   var x = this.nome.toLowerCase()
   this.show_client = this.store_clients.filter((val)=>{
     if(val.client_name.includes(x)){
@@ -2492,7 +2491,7 @@ type(){
 }
 open_contact(){
   this.client==undefined
-  this.show_client = this.store_clients.slice(0, 15) 
+  this.show_client = this.store_clients.slice(0, 15)
   this.left_contact='0vw'
 }
 close_contact(){
@@ -2521,7 +2520,7 @@ storeClient(client_name,  phone,  credit, note){
     }
 
   })
-  
+
 }
 displ_credit(credit){
   return new Intl.NumberFormat('it-IT', { style: 'currency', currency: 'EUR' }).format(credit/100)
@@ -2536,11 +2535,11 @@ async scaleCredit(){
       let service = this.catalog_list.filter(val=>{
         return val.id ==this.info
       })
-    
+
         await this.addAppointment(true)
 
-       
-      
+
+
    }
 }
 }
@@ -2554,7 +2553,7 @@ async select_serv(){
 saveClient_socket(){
   this.new_customer_modal_top='-200px'
   this.api.setClientStorebyId(this.new_customer_id).subscribe(async (res)=>{
-    
+
     await this.storage.addClient(res)
     var client_list = await JSON.parse( localStorage.getItem('client_list'))
     this.store_clients = client_list.list
