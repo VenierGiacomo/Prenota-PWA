@@ -311,44 +311,44 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
 //     hours:`Mar - Sab 9:00 - 19:00`,
 //     description:`Aparrucchieri è un esclusivo salone nella zona sud di Trieste, in via Pirano 12, dall'arredamento elegante e minimal chic che gioca sul contrasto creato dal classico black and white.<br><br>  Alan, il titolare, ha scoperto giovanissimo la passione per il mestiere. Prendendo come punto di riferimento sua mamma, che lo ha poi supportato in tutto il suo percorso formativo tecnico/artistico.<br> <br>  La qualità dei prodotti Davines e Philip Martin's contribuiscono a dare ulteriore prestigio al salone, che mira sempre alla soddisfazione del cliente su cui viene pensato un percorso di bellezza e consulenza minuziosa e personalizzata.
 // `}
-,'salone_rocco':{
-  name:'Salone Rocco',
-  html_title:'Salone Rocco: Parrucchire storico in centro Trieste.',
-  id:29,
-  campo:false,
-  keywords:'Salone Rocco, Salone Rocco Trieste, Parrucchiere a Trieste, Parrucchiere a Trieste centro, Taglio di capelli a Trieste, Taglio di capelli in centro città a Trieste',
-  og_url:'https://prenota.cc/appuntamento/salone_rocco',
-  og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-  og_description:"Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Piega, taglio e taglio capelli uomo vicino all'universita.",
-  phone: '+39 0402652079',
-  address: 'Via San Francesco 18/A',
-  zip_code:'34133',
-  bg_opacity:'#00000088',
-  img_bg:'../assets/Salone_rocco_bottom.jpg',
-  bookable_pc:true,
-  category:'Studio di parrucchieri a Trieste',
-  hours:`<p>Mar e Gio 8:30 - 12:30 &amp; 15:30 - 19:00<br>Mer e Sab 8:30 - 16:30<br>Ven 8:30 - 17:30 </p>`,
-  description:`Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Dopo venticinque anni di lavoro da dipendente, Rocco decide di iniziare la sua attività come lavoratore autonomo. Nasce così il Salone Rocco il 1 febbraio 1966. <br><br>Dopo quarat'anni d'attività fiorente, Rocco insegna il suo mestiere ad una quarantina di giovani finchè lascia nelle mani della figlia Maura, attuale titolare, l'attività rinnovata da un anno. <br><br>Il Salone Rocco, a detta della clientela, è sempre accogliente come un buon salotto cittadino. L'atmosfera del negozio risulta essere sempre familiare e, al tempo stesso, accogliente e professionale
-`}
-,'Tennis_Grignano':{
-  name:'Circolo Tennis Grignano',
-  html_title:'Circolo Tennis Grignano: Campi da tennis in terra ed erba a Trieste ',
-  id:36,
-  campo:true,
-  keywords:'tennis grignano, Circolo Tennis Grignano, Circolo Tennis Grignano Trieste, tennis trieste, tennis campo in terra trieste, circolo tennis trieste',
-    og_url:'https://prenota.cc/appuntamento/Tennis_Grignano',
-    og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-    og_description:'Prenota un taglio capelli a Trieste: i migliori parrucchieri e barbieri a Trieste. Piega, taglio e taglio capelli uomo nel quartiere di Chiarbola a Trieste.',
-  phone: '+39 040224361',
-  address: 'Via Junker 8',
-  zip_code:'34151',
-  bg_opacity:'#000000aa',
-  img_bg:'../assets/tenniss_club_grignano.jpeg',
-  bookable_pc:false,
-  category:'Campi da tennis a Trieste',
-  hours:`Lun - Dom 8:30 - 23:00`,
-  description:`Il circolo dispone di 2 campi in terra rossa e un campo in erba sintetica. Tutti tre i campi sono coperti e riscaldati nel periodo invernale mentre in estate offrono una location baciata dal sole e accarezzata dalla brezza marina. Nella struttura sono inoltre presenti ampi spogliatoi maschili e femminili, una club house dotata di tv e snack bar, una piccola palestra ad esclusivo uso dei soci, una terrazza panoramica per eventi, ping pong, macchina incordatrice, ampio parcheggio privato adiacente alla struttura e una segreteria efficiente e attenta a rispondere alle richieste dei suoi soci e dei ragazzi della Scuola Tennis.
-`}
+// ,'salone_rocco':{
+//   name:'Salone Rocco',
+//   html_title:'Salone Rocco: Parrucchire storico in centro Trieste.',
+//   id:29,
+//   campo:false,
+//   keywords:'Salone Rocco, Salone Rocco Trieste, Parrucchiere a Trieste, Parrucchiere a Trieste centro, Taglio di capelli a Trieste, Taglio di capelli in centro città a Trieste',
+//   og_url:'https://prenota.cc/appuntamento/salone_rocco',
+//   og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+//   og_description:"Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Piega, taglio e taglio capelli uomo vicino all'universita.",
+//   phone: '+39 0402652079',
+//   address: 'Via San Francesco 18/A',
+//   zip_code:'34133',
+//   bg_opacity:'#00000088',
+//   img_bg:'../assets/Salone_rocco_bottom.jpg',
+//   bookable_pc:true,
+//   category:'Studio di parrucchieri a Trieste',
+//   hours:`<p>Mar e Gio 8:30 - 12:30 &amp; 15:30 - 19:00<br>Mer e Sab 8:30 - 16:30<br>Ven 8:30 - 17:30 </p>`,
+//   description:`Salone Rocco, parrucchiere storico in centro a Trieste. Vieni a trovarci in via San Francesco 18/A. Dopo venticinque anni di lavoro da dipendente, Rocco decide di iniziare la sua attività come lavoratore autonomo. Nasce così il Salone Rocco il 1 febbraio 1966. <br><br>Dopo quarat'anni d'attività fiorente, Rocco insegna il suo mestiere ad una quarantina di giovani finchè lascia nelle mani della figlia Maura, attuale titolare, l'attività rinnovata da un anno. <br><br>Il Salone Rocco, a detta della clientela, è sempre accogliente come un buon salotto cittadino. L'atmosfera del negozio risulta essere sempre familiare e, al tempo stesso, accogliente e professionale
+// `}
+// ,'Tennis_Grignano':{
+//   name:'Circolo Tennis Grignano',
+//   html_title:'Circolo Tennis Grignano: Campi da tennis in terra ed erba a Trieste ',
+//   id:36,
+//   campo:true,
+//   keywords:'tennis grignano, Circolo Tennis Grignano, Circolo Tennis Grignano Trieste, tennis trieste, tennis campo in terra trieste, circolo tennis trieste',
+//     og_url:'https://prenota.cc/appuntamento/Tennis_Grignano',
+//     og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+//     og_description:'Prenota un taglio capelli a Trieste: i migliori parrucchieri e barbieri a Trieste. Piega, taglio e taglio capelli uomo nel quartiere di Chiarbola a Trieste.',
+//   phone: '+39 040224361',
+//   address: 'Via Junker 8',
+//   zip_code:'34151',
+//   bg_opacity:'#000000aa',
+//   img_bg:'../assets/tenniss_club_grignano.jpeg',
+//   bookable_pc:false,
+//   category:'Campi da tennis a Trieste',
+//   hours:`Lun - Dom 8:30 - 23:00`,
+//   description:`Il circolo dispone di 2 campi in terra rossa e un campo in erba sintetica. Tutti tre i campi sono coperti e riscaldati nel periodo invernale mentre in estate offrono una location baciata dal sole e accarezzata dalla brezza marina. Nella struttura sono inoltre presenti ampi spogliatoi maschili e femminili, una club house dotata di tv e snack bar, una piccola palestra ad esclusivo uso dei soci, una terrazza panoramica per eventi, ping pong, macchina incordatrice, ampio parcheggio privato adiacente alla struttura e una segreteria efficiente e attenta a rispondere alle richieste dei suoi soci e dei ragazzi della Scuola Tennis.
+// `}
 ,'dott_manfra':{
   name:'Dottor Manfra',
   html_title:'Dottor Manfra: Studio Dentistico moderno a Trieste ',
@@ -540,53 +540,54 @@ in Farmacia quando vuoi.
 
         Passa in studio e troviamo insieme il tatuaggio più adatto alle tue esigenze. Ivan e Marko ti assisteranno in tutto, dai disegni all'esecuzione.
         `}
-      ,'msnails':{
-            name:'MS Nails',
-            html_title:'MS Nails Art: Unghie ed Estetista a Trieste',
-            id:54,
-            campo:false,
-            keywords:'MS nails, nail art,unghie a trieste, permanente unghie trieste, MS, nails, estetista donna, via molino a vento, cura, trucco, make up trieste, estetista trieste, nail art trieste, san giacomo',
-            og_url:'https://prenota.cc/appuntamento/msnails',
-            og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-            og_description:'MS Nails: Trattamenti di manicure, ricostruzione unghie, smalti e pedicure. Vieni a farti coccolare',
-            phone: '380 864 5039',
-            address: 'Via Molino a Vento 26/d',
-            zip_code:'34137',
-            bg_opacity:'#00000088',
-            img_bg:'../assets/ms_bg.jpeg',
-            bookable_pc:true,
-            category:'Unghie ed Estetista a Trieste',
-            hours:`Mar - Sab 9:00 - 18:00`,
-            description:`MS Nails'
+      // ,'msnails':{
+      //       name:'MS Nails',
+      //       html_title:'MS Nails Art: Unghie ed Estetista a Trieste',
+      //       id:54,
+      //       campo:false,
+      //       keywords:'MS nails, nail art,unghie a trieste, permanente unghie trieste, MS, nails, estetista donna, via molino a vento, cura, trucco, make up trieste, estetista trieste, nail art trieste, san giacomo',
+      //       og_url:'https://prenota.cc/appuntamento/msnails',
+      //       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+      //       og_description:'MS Nails: Trattamenti di manicure, ricostruzione unghie, smalti e pedicure. Vieni a farti coccolare',
+      //       phone: '380 864 5039',
+      //       address: 'Via del Ponzanino 12/c',
+      //       zip_code:'34137',
+      //       bg_opacity:'#00000088',
+      //       img_bg:'../assets/ms_bg.jpeg',
+      //       bookable_pc:true,
+      //       category:'Unghie ed Estetista a Trieste',
+      //       hours:`Mar - Sab 9:00 - 18:00`,
+      //       description:`MS Nails'
 
-        Salone dedicato alla cura della persona.
-        Ci occupiamo di trattamenti mani e piedi, dalla semplice manicure a ricostruzioni gel e smalti semipermanenti, laminazione ciglia, extension ciglia e trattamenti viso.
-        Ti aspetta professionalità e qualità.”
+      //   Salone dedicato alla cura della persona.
+      //   Ci occupiamo di trattamenti mani e piedi, dalla semplice manicure a ricostruzioni gel e smalti semipermanenti, laminazione ciglia, extension ciglia e trattamenti viso.
+      //   Ti aspetta professionalità e qualità.”
 
-        `},
-        'deselyhairstyle':{
-              name:'Desely HairStyle and MakeUp',
-              html_title:'Desely HairStyle and MakeUp: Studio parrucchiere a Trieste ',
-              id:53,
-              campo:false,
-              keywords:'Desely, Desely Trieste, Desely HairStyle and MakeUp, Desely HairStyle and MakeUp Trieste, parrucchiere, desely, hairstyle, capelli donna, via molino a vento, makeup, trucco, taglio donna, parrucchiere trieste, salone trieste, san giacomo',
-              og_url:'https://prenota.cc/appuntamento/deselyhairstyle',
-              og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-              og_description:'Desely HairStyle and Makeup. Salone parrucchieri a Trieste contrato improntato sul benessere ed il naturale',
-              phone: '380 864 5039',
-              address: 'Via Molino a Vento 26/d',
-              zip_code:'34137',
-              bg_opacity:'#00000088',
-              img_bg:'../assets/hairdressers-accessories-vector-20213721.jpeg',
-              bookable_pc:true,
-              category:'Parrucchiere a Trieste',
-              hours:`Mar, Mer, Ven e Sab dalle 9:00 alle 14:00, Gio dalle 11:30 alle 15:30`,
-              description:`Desely HairStyle and MakeUp'
+      //   `}
+        ,
+        // 'deselyhairstyle':{
+        //       name:'Desely HairStyle and MakeUp',
+        //       html_title:'Desely HairStyle and MakeUp: Studio parrucchiere a Trieste ',
+        //       id:53,
+        //       campo:false,
+        //       keywords:'Desely, Desely Trieste, Desely HairStyle and MakeUp, Desely HairStyle and MakeUp Trieste, parrucchiere, desely, hairstyle, capelli donna, via molino a vento, makeup, trucco, taglio donna, parrucchiere trieste, salone trieste, san giacomo',
+        //       og_url:'https://prenota.cc/appuntamento/deselyhairstyle',
+        //       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
+        //       og_description:'Desely HairStyle and Makeup. Salone parrucchieri a Trieste contrato improntato sul benessere ed il naturale',
+        //       phone: '380 864 5039',
+        //       address: 'Via Molino a Vento 26/d',
+        //       zip_code:'34137',
+        //       bg_opacity:'#00000088',
+        //       img_bg:'../assets/hairdressers-accessories-vector-20213721.jpeg',
+        //       bookable_pc:true,
+        //       category:'Parrucchiere a Trieste',
+        //       hours:`Mar, Mer, Ven e Sab dalle 9:00 alle 14:00, Gio dalle 11:30 alle 15:30`,
+        //       description:`Desely HairStyle and MakeUp'
 
-          Il Salone è improntato sul benessere ed il naturale, grazie alle sue linee di prodotti Nevitaly e Milkshake.
-          La filosofia che abbiamo adottato deriva dalla nostra principale linea: “Vivere la natura, capirne i segreti, miscelare i principi attivi trasformandoli in prodotti di bellezza e benessere nel pieno rispetto dell'ambiente.”
+        //   Il Salone è improntato sul benessere ed il naturale, grazie alle sue linee di prodotti Nevitaly e Milkshake.
+        //   La filosofia che abbiamo adottato deriva dalla nostra principale linea: “Vivere la natura, capirne i segreti, miscelare i principi attivi trasformandoli in prodotti di bellezza e benessere nel pieno rispetto dell'ambiente.”
 
-          `},
+        //   `},
       //  'trifoglio':{
       //       name:'ASD Trifoglio',
       //       html_title:'ASD Trifoglio: Campo da calcetto a Trieste. Partite di calcetto a sette (7) a Trieste ',
