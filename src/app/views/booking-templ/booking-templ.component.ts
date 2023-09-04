@@ -280,7 +280,7 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
       og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
       og_description:'Prenota un massaggio rigenerante, un massaggio decontratturante o un massaggio sportivo a Trieste.',
       phone: '+39 3314665503',
-      address: 'Salita Zugnano 1',
+      address: 'Via San Lazzaro 8 (Secondo Piano)',
       zip_code:'34148',
       bg_opacity:'#00000088',
       img_bg:'../assets/massage2.jpg',
@@ -675,6 +675,9 @@ in Farmacia quando vuoi.
       this.router.navigateByUrl('/home/ricerca')
     }
     this.id = this.businesses[this.slug].id
+    if (this.id === 18) {
+      window.location.href = 'https://www.wellnessclinic.it/visite-mediche/services/'
+    }
     this.name = this.businesses[this.slug].name
     this.bookable_pc = this.businesses[this.slug].bookable_pc
     this.campo =  this.businesses[this.slug].campo
@@ -915,7 +918,13 @@ await this.getEmployees()
     }, 300);
 
   }
-  showServices(){
+  showServices() {
+
+    //per il padre di franz
+    if (this.id === 18) {
+      window.location.href = 'https://www.wellnessclinic.it/visite-mediche/services/'
+    }
+
     if(this.mobileCheck()){
       if(this.bookable_pc){
       window.location.href = 'https://mobile.prenota.cc/business/'+this.id
