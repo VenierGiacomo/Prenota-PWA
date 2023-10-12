@@ -15,7 +15,7 @@
             <div class="cards-list">
 
                 <div class="card 1" *ngFor="let shop of shops" (click)='navigate(shop)' [class.blocked]='shop.closed'>
-                    <a [routerLink]="shop.closed ? null : '/'+shop.website">  
+                    <a [routerLink]="shop.closed ? null : '/'+shop.website">
                   <div class="card_image"> <img src="{{shop.img_url}}" alt="{{shop.store_name}} Trieste {{shop.business_description}}" title="{{shop.store_name}} Trieste {{shop.business_description}}"/> </div>
                   <div class="card_title" title='{{shop.store_name}}'>
                     <h2>{{shop.store_name}}</h2>
@@ -25,25 +25,17 @@
                   </div>
                    </a>
                 </div>
-           
+
                 </div>
         </div>
     </section>
     <section class="main-block " style="background: #f3f3f3;    padding-top: 100px;    padding-bottom: 100px; ">
       <div class="container">
-          <div class="row">
-              <div class="offset-md-2 col-md-8" style="text-align: center; ">
-                  
-                      <h2 class="cat-heading">{{second_title[business_type]}}</h2>
-                      <p style="color: #666; padding-bottom: 40px;">Se vuoi accettare anche tu prenotazioni online chiamaci al numero: <a href="tel:+393404526854" style="color:#212121">+39 340 4526854</a><br>
-                      Potrai ricevere prenotazioni fuori dall' orario di lavoro, accedere al tuo calendario da ovunque ed offrire ai tuoi clienti la possibilità di prenotare come preferiscono.</p>
-                  
-              </div>
-          </div>
+
           <div class="row justify-content-center">
                   <div class="featured-btn-wrap">
-                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="mailto:business@prenota.cc">Email</a></span>              
-                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="tel:+393404526854">Chiama</a></span>              
+                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="mailto:business@prenota.cc">Email</a></span>
+                      <span style="margin: 0px 20px;"  class="btn btn--blue" ><a href="tel:+393404526854">Chiama</a></span>
               </div>
           </div>
       </div>

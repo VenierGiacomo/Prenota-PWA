@@ -931,7 +931,10 @@ await this.getEmployees()
       }else{
         Notiflix.Report.Info("Scarica l'app", "Al momento siamo prenotabili solo da app! Clicca sul tasto in alto per scaricarla.", 'OK');
       }
-    }else{
+    } else {
+      if (this.id === 18) {
+        window.location.href = 'https://www.wellnessclinic.it/visite-mediche/services/'
+      }
       if(this.bookable_pc){
         this.position_book ='fixed'
         this.booking_left= '0px'
