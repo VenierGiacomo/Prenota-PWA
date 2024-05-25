@@ -349,32 +349,7 @@ Lavorando da anni nel Digital Marketing ho potuto metter in pratica la teoria ap
 //   hours:`Lun - Dom 8:30 - 23:00`,
 //   description:`Il circolo dispone di 2 campi in terra rossa e un campo in erba sintetica. Tutti tre i campi sono coperti e riscaldati nel periodo invernale mentre in estate offrono una location baciata dal sole e accarezzata dalla brezza marina. Nella struttura sono inoltre presenti ampi spogliatoi maschili e femminili, una club house dotata di tv e snack bar, una piccola palestra ad esclusivo uso dei soci, una terrazza panoramica per eventi, ping pong, macchina incordatrice, ampio parcheggio privato adiacente alla struttura e una segreteria efficiente e attenta a rispondere alle richieste dei suoi soci e dei ragazzi della Scuola Tennis.
 // `}
-,'dott_manfra':{
-  name:'Dottor Manfra',
-  html_title:'Dottor Manfra: Studio Dentistico moderno a Trieste ',
-  id:42,
-  campo:false,
-  keywords:'Dottor Manfra, Dottor Manfra Trieste, dentista trieste, Manfra dentista, manfra trieste, studio dentistico trieste, dentisti a trieste',
-  og_url:'https://prenota.cc/appuntamento/dott_manfra',
-  og_image:'https://firebasestorage.googleapis.com/v0/b/prenota-d8fae.appspot.com/o/2.png?alt=media&token=b06ef072-51a7-432c-8f02-d38aebd47581',
-  og_description:'Antonio Manfra dentista professionale, giovane ed accessibile economicamente. Vienici a trovare',
-  phone: '+39 3534110525',
-  address: 'Via delle sette fontane 67',
-  zip_code:'34139',
-  bg_opacity:'#00000099',
-  img_bg:'../assets/Dentista_Template_Free_Vector.svg',
-  bookable_pc:true,
-  category:'Studio Dentistico a Trieste',
-  hours:`Lun - Gio 9:00 - 19:00, Ven 9:00 - 15:00, Sab 9:00 - 13:00`,
-  description:`Mi chiamo Antonio Manfra e sono un dentista specializzato nella cura dei bambini e dei ragazzi.
-<br>
-  Ho conseguito la specializzazione in odontoiatria pediatrica presso l'Università degli studi di Trieste, con il massimo dei voti, lavorando attivamente presso l'Ospedale infantile Burlo Garofalo.<br><br> La mia passione per la cura dei bambini e dei ragazzi nasce dal desiderio di vederli sempre felici e in salute, quindi voglio dedicare particolare attenzione alla PREVENZIONE e alla CURA della bocca dei più piccini.
-  è importante far vivere il dentista con serenità, un'esperienza positiva, così da poter seguire i piccoli pazienti nella loro crescita, senza ansie e traumi.. <br> <br>
 
-  Opero nello studio dentistico dr. Altin e dr. Harei, presente da più di 20 anni a Trieste.<br><br>
-
-                            Lo studio multidisciplinare esegue servizi di ogni tipo.
-`}
 ,'farmacia_cermelj':{
   name:'Farmacia Cermelj Sas',
   html_title:'Farmacia Cermelj Sas: Tamponi rapidi a Opicina, Trieste',
